@@ -1,80 +1,93 @@
 import pygame
-
+from source.pygame.screen import Screen
 class Element:
 
     def __init__(self):
-        pygame.init()
-        self.screen_width = 800
-        self.screen_height = 600
-        self.screen = pygame.display.set_mode((self.screen_width, self.screen_height))
-        pygame.display.set_caption("MyDiscord")
-        self.clock = pygame.time.Clock()
-        self.black = "#0e0f10"
-        self.white = "#ffffff"
-        self.brown = "#502c1e"
-        self.orange = "#f26b33"
-        self.beige = "#f2dec2"
-        self.yellow = "#f6be2a"
-        self.light_grey = "#f2f2f2"
-        self.grey = "#868686"
-        self.blue = "#375daa"        
-        self.green = "#488030"        
-        self.pink = "#f8a8b0"
-        self.red = "#d80001"  
+        self.screen = Screen()
 
-        self.police_c1 = pygame.font.Font(None ,60)
-        self.police_c2 = pygame.font.Font(None,30)
+        # Color
+        self.black = (0, 0, 0)
+        self.white = (255, 255, 255)
 
+        self.green = (161, 193, 129)
+        self.darkgreen = (97, 155, 138)
+
+        self.blue = (72, 149, 239)
+        self.darkgreenblue = (37, 50, 55)
+        self.darkblue = (67, 97, 238)
+        self.lightblue = (189, 224, 254)
+        self.greyblue = (92, 103, 125)
+        self.darkbluesea = (0, 40, 85)
+        self.lightbluesea = (39, 76, 119)
+
+        self.yellow = (255, 183, 3)
+        self.lightyellow = (244, 226, 133)
+        self.orange = (251, 133, 0)
+
+        self.red = (242, 106, 141)
+        self.darkred = (221, 45, 74)
+        self.brown = (75, 67, 67)
+
+        self.grey = (139, 140, 137)
+        self.darkgrey = (100,100,100)
+        self.lightgrey = (160, 160, 160)
    
 # Def text          
     
-    def texte(self, texte_size, texte_content, color, x, y):
+    def text_center(self, text_size, text_content, color, x, y):
         pygame.font.init()
-        Texte = pygame.font.Font("AirstreamNF.ttf", texte_size).render(texte_content, True, color)
-        Texte_rect = Texte.get_rect(center=(x, y))
-        self.screen.blit(Texte, Texte_rect)
+        text = pygame.font.Font(None, text_size).render(text_content, True, color)
+        text_rect = text.get_rect(center=(x, y))
+        self.screen.Window.blit(text, text_rect)
     
-    def texte_not_align(self, texte_size, texte_content, color, x, y):
-        Texte = pygame.font.Font('files/font/metrophobic.ttf', texte_size).render(texte_content, True, color)
-        Texte_rect = Texte.get_rect(topleft=(x, y))
-        self.screen.blit(Texte, Texte_rect)
-
-    def text_c1(self,text, color, x, y):
-        text_surface = self.police_c1.render(text, True, color)
-        self.screen.blit(text_surface, (x, y))
-
+    def text_not_align(self, text_size, text_content, color, x, y):
+        text = pygame.font.Font(None, text_size).render(text_content, True, color)
+        text_rect = text.get_rect(topleft=(x, y))
+        self.screen.Window.blit(text, text_rect)
 
 # Def image
         
-    def image(self,name,path,a,b,x,y):
-        name = pygame.image.load(path)
-        name = name.convert_alpha()
-        name = pygame.transform.scale(name,(a,b))        
-        self.screen.blit(name,(x,y))
+    def img_center(self, name, x, y, width, height, image_name):
+        name = pygame.image.load(f'image/{image_name}.png')
+        name = pygame.transform.scale(name, (width, height))
+        self.screen.Window.blit(name, (x - name.get_width()//2, y - name.get_height()//2))
+
+    def image_not_center(self, name, x, y, width, height, image_name):
+        name = pygame.image.load(f'image/{image_name}.png').convert_alpha()
+        name = pygame.transform.scale(name,width,height)
+        self.screen.Window.blit(name, (x,y))
         
-    def img_back(self,name,path):
-        name =  pygame.image.load(path).convert_alpha()
-        L_name, H_name = name.get_size()
-        name = pygame.transform.scale(name, (L_name,H_name))
-        x =(self.screen_width - L_name)//2
-        y = (self.screen_height - H_name)//2
-        self.screen.blit(name, (x, y))
+    def img_background(self, name, x, y, width, height, image_name):
+        name = pygame.image.load(f'image/{image_name}.png').convert()
+        name = pygame.transform.scale(name, (width, height))
+        self.screen.Window.blit(name, (x - name.get_width()//2, y - name.get_height()//2))
 
     
 # Def rectangle  
              
-    def rect_radius(self,radius,color,x1,y1,x2,y2):
-        r = radius
-        pygame.draw.rect(self.screen,color,(x1,y1,x2,y2),border_radius = r)  
-
-    def rect_full(self, color, x, y, largeur, hauteur, arrondi):
-        button = pygame.draw.rect(self.screen, color, pygame.Rect(x - largeur//2, y - hauteur//2, largeur, hauteur),0, arrondi)
+    def rect_full(self, color, x, y, width, height, radius):
+        button = pygame.draw.rect(self.screen, color, pygame.Rect(x - width//2, y - height//2, width, height),0, radius)
         return button
 
-    def rect_border(self, color, x, y, largeur, longueur, epaisseur, arrondi):
-        button = pygame.draw.rect(self.screen, color, pygame.Rect(x - largeur //2, y - longueur //2, largeur, longueur),  epaisseur, arrondi)
+    def rect_border(self, color, x, y, width, height, thickness, radius):
+        button = pygame.draw.rect(self.screen, color, pygame.Rect(x - width //2, y - height //2, width, height),  thickness, radius)
         return button
+
+# Def Hoover
     
-    def button_link(self, text):      
-        self.rect_radius(5, self.white, 640, 10, 70, 25)
-        self.text_c1(text, self.black, 650, 13)
+    def is_mouse_over_button(self, button_rect):
+        mouse_pos = pygame.mouse.get_pos()
+        return button_rect.collidepoint(mouse_pos)
+
+    def button(self, x, y, width, height, color_full, color_border, color_hoover, color_border_hoover, text, text_color,text_size, thickness, radius): 
+
+        name = pygame.Rect(x, y, width, height)
+
+        if self.is_mouse_over_button(name):
+            self.rect_full(color_hoover, x, y, width + 5, height + 5, thickness, radius)
+            self.rect_border(color_border_hoover, x, y, width + 5, height + 5, thickness, radius)  
+            self.text_center(text_size, text_color, text, x, y)
+        else:
+            self.rect_full(color_full, x, y, width, height, radius)
+            self.rect_border(color_border, x, y, width, height, thickness, radius)
+            self.text_center(text_size, text_color,text, x, y)

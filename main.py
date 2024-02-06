@@ -1,1 +1,6 @@
-# Hello World #
+##################################################
+#                Projet myDiscord                #
+#                   05/02/2024                   #
+#                                                #
+# Vanny Lamorte / Ines Lorquet / Lucas Martinie  #
+##################################################
