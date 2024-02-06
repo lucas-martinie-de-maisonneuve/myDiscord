@@ -1,13 +1,10 @@
-import mysql.connector
-
-class Discord_Manager:
+from database import Database
+class Discord_Manager(Database):
     def __init__(self):
-        self.connection = mysql.connector.connect(
-            host="localhost",
-            user="root",
-            password="", # CHANGER LE MDP
-            database="discord"
-        )
+        Database.__init__(self, 'localhost', 'root', '$~Bc4gB9', 'discord')
+        # Database.__init__(self, 'localhost', 'root', '$~Bc4gB9', 'discord')
+        # Database.__init__(self, 'localhost', 'root', '$~Bc4gB9', 'discord')
+        self.connect()
         self.cursor = self.connection.cursor()
         
     # Ajout Utilisateur
@@ -50,6 +47,7 @@ class Discord_Manager:
         sql = "SELECT * FROM category"
         self.cursor.execute(sql)
         self.categorys = self.cursor.fetchall()
+        print(self.categorys)
         return self.categorys
     
     # Ajout Channel
@@ -99,14 +97,14 @@ class Discord_Manager:
         self.connection.close()
 
 manager = Discord_Manager()
-manager.add_user("surname", "name", "pseudo", "email", "password","photo","id_role")
-manager.surname_user()
-manager.display_user()
-manager.display_role_name()
-manager.add_category("name","intro")
 manager.display_category()
-manager.add_channel("name","status","communication","id_category")
-manager.display_channel()
-manager.delete_user("id")
-manager.delete_category("id")
-manager.delete_channel("id")
+# manager.add_user("surname", "name", "pseudo", "email", "password","photo","id_role")
+# manager.surname_user()
+# manager.display_user()
+# manager.display_role_name()
+# manager.add_category("name","intro")
+# manager.add_channel("name","status","communication","id_category")
+# manager.display_channel()
+# manager.delete_user("id")
+# manager.delete_category("id")
+# manager.delete_channel("id")
