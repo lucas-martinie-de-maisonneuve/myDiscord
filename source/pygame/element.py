@@ -8,6 +8,12 @@ class Element:
         # Color
         self.black = (0, 0, 0)
         self.white = (255, 255, 255)
+        self.pink = (222, 50, 79)
+        self.dark_purple = (67, 47, 104)
+        self.dark_grey = (34, 31, 37)
+        self.yellow = (233, 164, 41)
+       
+
 
         self.green = (161, 193, 129)
         self.darkgreen = (97, 155, 138)
