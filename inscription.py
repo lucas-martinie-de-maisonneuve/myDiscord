@@ -20,7 +20,27 @@ class Inscription(Element,Screen):
         self.Window.fill(self.white)
         self.rect_full(self.grey3, 600, 355, 600, 580, 5)
         self.rect_border(self.grey2, 600, 355, 600, 580, 2, 5)
+        # Pseudo
+        self.pseudo_rect = self.rect_full(self.grey2, 600, 260, 400, 40, 5) 
+        self.button("pseudo", 600, 260, 400, 40, self.grey2, self.grey2, self.grey2, self.grey2,self.pseudo, self.font2, self.white, 15, 4, 5)
         
+        # Email
+        self.email_rect = self.rect_full(self.grey2, 600, 320, 400, 40, 5)
+        self.button("email", 600, 320, 400, 40, self.grey2, self.grey2, self.grey2, self.grey2,self.email, self.font2, self.white, 15, 4, 5)
+        
+         # Prenom
+        self.surname_rect = self.rect_full(self.grey2, 600, 380, 400, 40, 5)
+        self.button("name", 600, 380, 400, 40, self.grey2, self.grey2, self.grey2, self.grey2,self.surname, self.font2, self.white, 15, 4, 5)
+        
+        # Nom
+        self.name_rect = self.rect_full(self.grey2, 600, 440, 400, 40, 5)
+        self.button("name", 600, 440, 400, 40, self.grey2, self.grey2, self.grey2, self.grey2,self.name, self.font2, self.white, 15, 4, 5)
+        
+        # Mot De Passe
+        self.password_rect = self.rect_full(self.grey2, 600, 500, 400, 40, 5)
+        self.button("password", 600, 500, 400, 40, self.grey2, self.grey2, self.grey2, self.grey2,self.password, self.font2, self.white, 15, 4, 5)
+        
+        self.button("connexion", 600, 580, 350, 50, self.blue, self.blue, self.blue1, self.blue1,"Sign In", self.font1, self.white, 15, 4, 5)
     def profil_screen(self):
         self.img_center("profil1",380,150,90,65,"new_profil/profil1")
         self.img_center("profil2",530,150,100,80,"new_profil/profil2")
