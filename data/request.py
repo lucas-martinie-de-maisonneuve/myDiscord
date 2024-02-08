@@ -1,8 +1,8 @@
-from database import Database
+from data.database import Database
 class Discord_Manager(Database):
     def __init__(self):
-        Database.__init__(self, 'localhost', 'root', '$~Bc4gB9', 'discord')
         # Database.__init__(self, 'localhost', 'root', '$~Bc4gB9', 'discord')
+        Database.__init__(self, 'localhost', 'root', 'azerty', 'discord')
         # Database.__init__(self, 'localhost', 'root', '$~Bc4gB9', 'discord')
         self.connect()
         self.cursor = self.connection.cursor()

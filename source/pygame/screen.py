@@ -3,7 +3,7 @@ import pygame
 class Screen:
     def __init__(self):
         pygame.init()
-        self.W = 1050
+        self.W = 1200
         self.H = 700
         self.Window = pygame.display.set_mode((self.W, self.H))
         pygame.display.set_caption("MyDiscord")
@@ -13,4 +13,4 @@ class Screen:
         pygame.display.flip()
         pygame.display.update()
         self.clock.tick(60)
-        self.Window.fill((0, 0, 0))
+        # self.Window.fill((0, 0, 0))
