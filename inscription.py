@@ -7,6 +7,13 @@ class Inscription(Element,Screen):
         Screen.__init__(self)
         Element.__init__(self)
         self.inscription_running = True
+        self.pseudo = "Pseudo"
+        self.email = "Email address"
+        self.surname = "Surname"
+        self.name = "Name"
+        self.password = "Password"
+        self.entry = 0
+        self.photo = 0
         pygame.init() 
         
     def form(self):
