@@ -97,7 +97,7 @@ class Inscription(Element,Screen):
                         self.photo = 1
                     elif self.profil2_cercle.collidepoint(event.pos):
                         self.photo = 2
-                    elif self.profil3_cerclecollidepoint(event.pos):
+                    elif self.profil3_cercle.collidepoint(event.pos):
                         self.photo = 3
                     elif self.profil4_cercle.collidepoint(event.pos):
                         self.photo = 4
@@ -121,7 +121,38 @@ class Inscription(Element,Screen):
                     elif self.password_rect.collidepoint(event.pos):
                         self.password = ""
                         self.entry = 5
+                elif event.type == pygame.KEYDOWN:
+                    if self.entry == 1:
+                        if event.unicode.isalpha():
+                            self.pseudo = self.pseudo + event.unicode
+                        if event.key == pygame.K_BACKSPACE:
+                            self.pseudo = self.pseudo[:-1]
 
+                    elif self.entry == 2:
+                        if event.unicode.isalpha():
+                            self.email = self.email + event.unicode
+                        if event.key == pygame.K_BACKSPACE:
+                            self.email = self.email[:-1]
+
+                    elif self.entry == 3:
+                        if event.unicode.isalpha():
+                            self.surname = self.surname + event.unicode
+                            self.surname = self.surname.capitalize()
+                        if event.key == pygame.K_BACKSPACE:
+                            self.surname = self.surname[:-1]
+                            
+                    elif self.entry == 4:
+                        if event.unicode.isalpha():
+                            self.name = self.name + event.unicode
+                            self.name = self.name.capitalize()
+                        if event.key == pygame.K_BACKSPACE:
+                            self.name = self.name[:-1]
+                            
+                    elif self.entry == 5:
+                        if event.unicode.isalpha():
+                            self.password = self.password + event.unicode
+                        if event.key == pygame.K_BACKSPACE:
+                            self.password = self.password[:-1]
             self.screen.update()
 
 test = Inscription()
