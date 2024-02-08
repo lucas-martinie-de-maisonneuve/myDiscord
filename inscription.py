@@ -13,6 +13,13 @@ class Inscription(Element,Screen):
         self.Window.fill(self.white)
         self.rect_full(self.grey3, 600, 355, 600, 580, 5)
         self.rect_border(self.grey2, 600, 355, 600, 580, 2, 5)
+        
+    def profil_screen(self):
+        self.img_center("profil1",380,150,90,65,"new_profil/profil1")
+        self.img_center("profil2",530,150,100,80,"new_profil/profil2")
+        self.img_center("profil3",680,150,80,60,"new_profil/profil3")
+        self.img_center("profil4",830,150,100,90,"new_profil/profil4")
+    
     def profil_hoover(self):
         self.profil1_cercle = pygame.draw.circle(self.Window, self.black, (380, 150), 50)
         self.profil2_cercle = pygame.draw.circle(self.Window, self.black, (530, 150), 50)
@@ -54,6 +61,7 @@ class Inscription(Element,Screen):
         while running:
             self.form()
             self.profil_hoover()
+            self.profil_screen()
             for event in pygame.event.get():
                 if event.type == pygame.QUIT:
                     running = False
