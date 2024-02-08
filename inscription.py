@@ -92,6 +92,35 @@ class Inscription(Element,Screen):
             for event in pygame.event.get():
                 if event.type == pygame.QUIT:
                     running = False
+                elif event.type == pygame.MOUSEBUTTONDOWN:
+                    if self.profil1_cercle.collidepoint(event.pos):
+                        self.photo = 1
+                    elif self.profil2_cercle.collidepoint(event.pos):
+                        self.photo = 2
+                    elif self.profil3_cerclecollidepoint(event.pos):
+                        self.photo = 3
+                    elif self.profil4_cercle.collidepoint(event.pos):
+                        self.photo = 4
+                    
+                    elif self.pseudo_rect.collidepoint(event.pos):
+                        self.pseudo = ""
+                        self.entry = 1
+                        
+                    elif self.email_rect.collidepoint(event.pos):
+                        self.email = ""
+                        self.entry = 2
+                        
+                    elif self.surname_rect .collidepoint(event.pos):
+                        self.surname = ""
+                        self.entry = 3
+                        
+                    elif self.name_rect.collidepoint(event.pos):
+                        self.name = ""
+                        self.entry = 4
+                        
+                    elif self.password_rect.collidepoint(event.pos):
+                        self.password = ""
+                        self.entry = 5
 
             self.screen.update()
 
