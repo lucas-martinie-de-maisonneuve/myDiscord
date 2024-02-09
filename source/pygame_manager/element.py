@@ -92,11 +92,10 @@ class Element:
     
     def is_mouse_over_button(self, button_rect):
         mouse_pos = pygame.mouse.get_pos()
-        return button_rect.collidepoint(mouse_pos)
-   
+        return button_rect.collidepoint(mouse_pos)  
 
 
-    def button(self, name, x, y, width, height, color_full, color_border, color_hoover, color_border_hoover, text, font, text_color,text_size, thickness, radius): 
+    def button_hover(self, name, x, y, width, height, color_full, color_border, color_hoover, color_border_hoover, text, font, text_color,text_size, thickness, radius): 
 
         name = pygame.Rect((x - width//2), (y - height//2), width, height)
 
@@ -108,6 +107,15 @@ class Element:
             self.rect_full(color_full, x, y, width, height, radius)
             self.rect_border(color_border, x, y, width, height, thickness, radius)
             self.text_center(font, text_size, text,text_color, x, y)
+
+    def hover_image(self, name_rect, name, x, y, width, height, image_name): 
+        name_rect = pygame.Rect( x - width//2, y - height//2, width, height)        
+        if self.is_mouse_over_button(name_rect):
+            self.img_center(name, x, y, width+5, height+5, image_name)     
+        else:
+            self.img_center(name, x, y, width, height, image_name)
+          
+
 
 
     # Hover texte
