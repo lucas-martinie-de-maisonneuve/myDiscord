@@ -9,22 +9,25 @@ class Profil(Element, Screen):
         Element.__init__(self)
         pygame.init()
         self.profil_running = True
-        self.picture = 3
+        self.password_cursor, self.picture_cursor = False, False
+        # Info a recuperer de la classe User
+        self.picture = 1#
         self.theme_color = self.dark_purple
-        self.username = "Lucasssa"
-        self.email = "lucas.leplusfort@gmail.com"
-        self.password = "bananaaaaa"
-        self.password_display = "*" * len(self.password)
+        self.username = "Lucasssa"#
+        self.email = "lucas.leplusfort@gmail.com"#
+        self.password = "bananaaa"#
+        self.password_display = " *" * len(self.password)
+        self.role = "Admin"#
+        self.status = "Away"
+        self.status_color = self.green
 
     def design(self):
+        if not self.password_cursor and not self.picture_cursor:
+            self.normal_cursor()
         # Profil main rectangle
-        self.img_background("background", 600, 350, 1200, 584, "main/main1")
+        self.img_background("background", 600, 350, 1200, 700, "main/main1")
         self.rect_radius_top(self.theme_color, 750, 90, 800, 100, 10)
         self.rect_radius_bot(self.grey5, 750, 400, 800, 520, 10)
-
-        # Status circle
-        self.circle(self.grey5, 500, 230, 15)
-        self.circle(self.green, 500, 230, 9)
 
         # Username
         self.text_not_align(self.font1, 20, f"{self.username}", self.white, 550,180)
@@ -36,28 +39,49 @@ class Profil(Element, Screen):
         self.text_not_align(self.font1, 16, "E-mail",self.grey6,430, 360)
         self.text_not_align(self.font2, 16, f"{self.email}",self.white,440, 380)
         self.text_not_align(self.font1, 16, "password",self.grey6,430, 420)
-        self.text_not_align(self.font2, 16, self.password_display,self.white,480, 440)
-
+        self.text_not_align(self.font2, 16, self.password_display,self.white,440, 440)
+        self.text_not_align(self.font1, 16, "Role",self.grey6,430, 480)
+        self.text_not_align(self.font2, 16, self.role,self.white,440, 500)
+        self.text_not_align(self.font1, 16, "Status",self.grey6,430, 540)
+        self.text_not_align(self.font2, 16, self.status,self.white,440, 560)
 
     def hover_profile_picture(self):
         self.circle(self.grey5, 450, 180, 70)
 
+        # Profile picture
         profile_pict = pygame.draw.circle(self.screen.Window, self.theme_color, (450,180), 65)
         if self.is_mouse_over_button(profile_pict):
-            self.img_center("profile_picture", 450,180,100,100,f"profil{self.picture}")
+            self.picture_cursor = True
+            self.hand_cursor()
+            self.img_center("profile_picture", 450,180,100,100,f"new_profil/profil{self.picture}")
             self.circle_alpha(self.alpha_grey, 450, 180, 65)
             self.img_center("logo edit", 450,180,50,50,"logo_edit")
 
         else:
+            self.picture_cursor = False
             self.circle(self.theme_color, 450, 180, 65)
-            self.img_center("profile_picture", 450,180,100,100,f"profil{self.picture}")
+            self.img_center("profile_picture", 450,180,100,100,f"new_profil/profil{self.picture}")
+
+        # Status circle
+        if self.status == "Online":
+            self.status_color = self.green
+        elif self.status == "Away":
+            self.status_color = self.orange
+
+        self.circle(self.grey5, 500, 230, 15)
+        self.circle(self.status_color, 500, 230, 9)
 
     def password_show(self):
-        self.show = pygame.Rect(440,445,35,15)
+        self.show = pygame.Rect(450 + 10 * len(self.password),443,35,15)
         if self.is_mouse_over_button(self.show):
-            self.text_not_align(self.font2, 16, f"show",self.white,440, 440)
+            self.password_cursor = True
+            self.hand_cursor()
+            self.text_not_align(self.font2, 16, f"show",self.blue1,450 + 10 * len(self.password), 437)
         else:
-            self.text_not_align(self.font2, 16, f"show",self.grey1,440, 440)
+            self.password_cursor = False
+            self.text_not_align(self.font2, 14, f"show",self.grey1,450 + 10 * len(self.password), 438)
+
+    # def button
 
     def pygame_event(self):
         for event in pygame.event.get():
@@ -68,8 +92,7 @@ class Profil(Element, Screen):
                     self.password_display = self.password
             elif event.type == pygame.MOUSEBUTTONUP:
                 if self.show.collidepoint(event.pos):
-                     self.password_display = "*" * len(self.password)
-
+                     self.password_display = " *" * len(self.password)
 
     def profil_run(self):
         while self.profil_running :
