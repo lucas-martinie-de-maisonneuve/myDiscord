@@ -74,8 +74,23 @@ class Element:
         name = pygame.image.load(f'image/{image_name}.png').convert()
         name = pygame.transform.scale(name, (width, height))
         self.screen.Window.blit(name, (x - name.get_width()//2, y - name.get_height()//2))
+        
+    def hover_image(self, name_rect, name, x, y, width, height, image_name): 
+        name_rect = pygame.Rect( x - width//2, y - height//2, width, height)        
+        if self.is_mouse_over_button(name_rect):
+            self.img_center(name, x, y, width+5, height+5, image_name)     
+        else:
+            self.img_center(name, x, y, width, height, image_name)
+            
+    # Def Circle
+    def circle(self, color, x, y, radius):
+        pygame.draw.circle(self.screen.Window, color, (x,y), radius)
 
-    
+    def circle_alpha(self, alpha_color, x, y, radius):
+        circle_surface = pygame.Surface((self.screen.W,self.screen.H), pygame.SRCALPHA)
+        pygame.draw.circle(circle_surface,alpha_color,(x,y),radius)
+        self.screen.Window.blit(circle_surface, (0,0))
+        
     # Def rectangle  
              
     def rect_full(self, color, x, y, width, height, radius):
@@ -86,7 +101,7 @@ class Element:
         button = pygame.draw.rect(self.screen.Window, color, pygame.Rect(x - width //2, y - height //2, width, height),  thickness, radius)
         return button
 
-    # Def Hoover
+    # Def Hover
     
     def is_mouse_over_button(self, button_rect):
         mouse_pos = pygame.mouse.get_pos()
