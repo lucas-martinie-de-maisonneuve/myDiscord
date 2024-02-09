@@ -45,10 +45,12 @@ class Inscription(Element,Screen):
         
         self.sign_in = self.button("connexion", 600, 560, 350, 50, self.blue, self.blue, self.blue1, self.blue1,"Sign In", self.font1, self.white, 15, 4, 5)
         
+        self.text_center(self.font1, 12,"OR", self.blue, 600, 600)
+        
+        # White line
         pygame.draw.line(self.Window, self.grey1, (630, 600), (770, 600), 1)
         pygame.draw.line(self.Window, self.grey1, (430, 600), (564, 600), 1)
         
-
         
     def profil_screen(self):
         self.img_center("profil1",380,140,90,65,"new_profil/profil1")
