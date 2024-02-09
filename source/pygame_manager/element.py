@@ -1,5 +1,5 @@
 import pygame
-from source.pygame.screen import Screen
+from source.pygame_manager.screen import Screen
 class Element:
 
     def __init__(self):
@@ -12,11 +12,13 @@ class Element:
         self.grey1 = (240, 242, 245)   
         self.grey2 = (53, 53, 53)    
         self.grey3 = (25, 25, 25) 
+        self.grey4 = (146, 151, 153)
 
         self.green = (66, 183, 42)
         self.blue = (0, 151, 254) # login
-        self.blue1 = (0, 140, 234) # login   
-   
+        self.blue1 = (0, 140, 234) # login  
+        self.purple1 = (202, 8, 255) #linehome
+
         self.pink = (222, 50, 79)
         self.dark_purple = (67, 47, 104)
         self.dark_grey = (34, 31, 37)
@@ -49,12 +51,12 @@ class Element:
     
     def text_center(self, font, text_size, text_content, color, x, y):
         pygame.font.init()
-        text = pygame.font.Font(f"source/pygame/{font}", text_size).render(text_content, True,color)
+        text = pygame.font.Font(f"source/pygame_manager/{font}", text_size).render(text_content, True,color)
         text_rect = text.get_rect(center=(x, y))
         self.screen.Window.blit(text, text_rect)
     
     def text_not_align(self, font, text_size, text_content, color, x, y):
-        text = pygame.font.Font(f"source/pygame/{font}", text_size).render(text_content, True, color)
+        text = pygame.font.Font(f"source/pygame_manager/{font}", text_size).render(text_content, True, color)
         text_rect = text.get_rect(topleft=(x, y))
         self.screen.Window.blit(text, text_rect)
 
