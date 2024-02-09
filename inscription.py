@@ -2,13 +2,14 @@ import pygame
 from source.pygame.element import Element
 from source.pygame.screen import Screen
 from data.request import Discord_Manager
+
 class Inscription(Element, Screen):
     def __init__(self):
         Screen.__init__(self)
         Element.__init__(self)
         self.inscription_running = True
         self.manager = Discord_Manager()
-        self.pseudo = "Pseudo"
+        self.username = "Username"
         self.email = "Email address"
         self.surname = "Surname"
         self.name = "Name"
@@ -21,12 +22,12 @@ class Inscription(Element, Screen):
     def form(self):
         # Display rectangles
         self.Window.fill(self.white)
-        self.rect_full(self.grey3, 600, 355, 600, 580, 5)
-        self.rect_border(self.grey2, 600, 355, 600, 580, 2, 5)
+        self.rect_full(self.grey3, 600, 355, 600, 580, 10)
+        self.rect_border(self.grey2, 600, 355, 600, 580, 2, 10)
 
-        # Pseudo
-        self.pseudo_rect = self.rect_full(self.grey2, 600, 240, 400, 40, 5) 
-        self.button_hover("pseudo", 600, 240, 400, 40, self.grey2, self.grey2, self.grey2, self.grey2,self.pseudo, self.font2, self.white, 15, 4, 5)
+        # username
+        self.username_rect = self.rect_full(self.grey2, 600, 240, 400, 40, 5) 
+        self.button_hover("username", 600, 240, 400, 40, self.grey2, self.grey2, self.grey2, self.grey2,self.username, self.font2, self.white, 15, 4, 5)
 
         # Email
         self.email_rect = self.rect_full(self.grey2, 600, 300, 400, 40, 5)
@@ -109,7 +110,7 @@ class Inscription(Element, Screen):
             self.profil4_cercle = pygame.draw.circle(self.Window, self.black, (830, 140), 50)
             self.hover_profil4_cercle= pygame.draw.circle(self.Window, self.grey2, (830, 140), 50, width=2)
 
-    def inscription_run(self):
+    def inscription_run(self):  # sourcery skip: merge-else-if-into-elif
         self.inscription_running = True
         while self.inscription_running:
             self.form()
@@ -135,8 +136,8 @@ class Inscription(Element, Screen):
                         self.photo = 4
                         self.profil_hovered = self.profil4_cercle
 
-                    elif self.pseudo_rect.collidepoint(event.pos):
-                        self.pseudo = ""
+                    elif self.username_rect.collidepoint(event.pos):
+                        self.username = ""
                         self.entry = 1
 
                     elif self.email_rect.collidepoint(event.pos):
@@ -156,42 +157,46 @@ class Inscription(Element, Screen):
                         self.entry = 5
 
                     elif self.sign_up.collidepoint(event.pos):
-                        if self.pseudo!="Pseudo" and self.email!="Email address" and self.surname != "Surname" and self.name != "Name" and self.password != "Password" and self.photo != 0:
-                            self.manager.add_user(self.surname,self.name,self.pseudo,self.email,self.password,self.photo)
+                        if self.username!="username" and self.email!="Email address" and self.surname != "Surname" and self.name != "Name" and self.password != "Password" and self.photo != 0:
+                            self.manager.add_user(self.surname,self.name,self.username,self.email,self.password,self.photo,2)
+                            print("ajouter")
                             
                 elif event.type == pygame.KEYDOWN:
-                    if self.entry == 1:
-                        if event.unicode.isalpha():
-                            self.pseudo = self.pseudo + event.unicode
-                        if event.key == pygame.K_BACKSPACE:
-                            self.pseudo = self.pseudo[:-1]
-
-                    elif self.entry == 2:
-                        if event.unicode.isalpha():
-                            self.email = self.email + event.unicode
-                        if event.key == pygame.K_BACKSPACE:
+                    if event.key == pygame.K_BACKSPACE:
+                        if self.entry ==1:
+                            self.username = self.username[:-1]
+                        elif self.entry == 2:
                             self.email = self.email[:-1]
-
-                    elif self.entry == 3:
-                        if event.unicode.isalpha():
-                            self.surname = self.surname + event.unicode
-                            self.surname = self.surname.capitalize()
-                        if event.key == pygame.K_BACKSPACE:
+                        elif self.entry == 3:
                             self.surname = self.surname[:-1]
-
-                    elif self.entry == 4:
-                        if event.unicode.isalpha():
-                            self.name = self.name + event.unicode
-                            self.name = self.name.capitalize()
-                        if event.key == pygame.K_BACKSPACE:
+                        elif self.entry == 4:
                             self.name = self.name[:-1]
-
-                    elif self.entry == 5:
-                        if event.unicode.isalpha():
-                            self.password = self.password + event.unicode
-                        if event.key == pygame.K_BACKSPACE:
+                        elif self.entry == 5:
                             self.password = self.password[:-1]
+
+                    else:
+                        if self.entry == 1:
+                            if event.unicode.isalpha() or event.unicode.isdigit():
+                                self.username += event.unicode
                             
+                        elif self.entry == 2:
+                            if event.unicode:
+                                self.email = self.email + event.unicode
+
+                        elif self.entry == 3:
+                            if event.unicode.isalpha():
+                                self.surname = self.surname + event.unicode
+                                self.surname = self.surname.capitalize()
+
+                        elif self.entry == 4:
+                            if event.unicode.isalpha():
+                                self.name = self.name + event.unicode
+                                self.name = self.name.capitalize()
+
+                        elif self.entry == 5:
+                            if event.unicode:
+                                self.password = self.password + event.unicode
+
             if self.profil_hovered:
                 if self.profil_hovered == self.profil1_cercle:
                     self.hover_profil1_cercle = pygame.draw.circle(self.Window, self.blue, (380, 140), 50, width=2)
