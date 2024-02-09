@@ -1,13 +1,13 @@
 import pygame
+from source.pygame_manager.event_handler import Event_handler
 from source.pygame_manager.element import Element
 from source.pygame_manager.screen import Screen
-
-class Profil(Element, Screen):
+class Profil(Element, Screen, Event_handler):
     
     def __init__(self):
+        Event_handler.__init__(self)
         Screen.__init__(self)
         Element.__init__(self)
-        pygame.init()
         self.profil_running = True
         self.password_cursor, self.picture_cursor = False, False
         # Info a recuperer de la classe User
@@ -81,25 +81,20 @@ class Profil(Element, Screen):
             self.password_cursor = False
             self.text_not_align(self.font2, 14, f"show",self.grey1,450 + 10 * len(self.password), 438)
 
-    # def button
-
-    def pygame_event(self):
-        for event in pygame.event.get():
-            if event.type == pygame.QUIT:
-                    self.profil_running = False
-            if event.type == pygame.MOUSEBUTTONDOWN:
-                if self.show.collidepoint(event.pos):
-                    self.password_display = self.password
-            elif event.type == pygame.MOUSEBUTTONUP:
-                if self.show.collidepoint(event.pos):
-                     self.password_display = " *" * len(self.password)
+    def button_edit(self):
+        self.button_hover("Username", 1000,315, 80, 30, self.grey4, self.grey4, self.grey6, self.grey6, "Edit", self.font2, self.white, 17, 0, 4)
+        self.button_hover("email", 1000,375, 80, 30, self.grey4, self.grey4, self.grey6, self.grey6, "Edit", self.font2, self.white, 17, 0, 4)
+        self.button_hover("password", 1000,435, 80, 30, self.grey4, self.grey4, self.grey6, self.grey6, "Edit", self.font2, self.white, 17, 0, 4)
+        self.button_hover("role", 1000,495, 80, 30, self.grey4, self.grey4, self.grey6, self.grey6, "Edit", self.font2, self.white, 17, 0, 4)
+        self.button_hover("status", 1000,555, 80, 30, self.grey4, self.grey4, self.grey6, self.grey6, "Edit", self.font2, self.white, 17, 0, 4)
 
     def profil_run(self):
         while self.profil_running :
-            self.pygame_event()
+            self.event_profil()
             self.design()
             self.hover_profile_picture()
             self.password_show()
+            self.button_edit()
             self.update()
             
 pro = Profil()

@@ -51,6 +51,7 @@ class Element:
 
         self.font1 = "Uni Sans Heavy.otf"
         self.font2 = "gg sans Regular.ttf"
+        self.font3 = "Uni Sans Thin.otf"
       
 # Def text          
 
