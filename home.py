@@ -1,21 +1,26 @@
 import pygame
+
 from source.pygame_manager.element import Element
 from source.pygame_manager.screen import Screen
+# from data.discord_manager import Discord_Manager
 
 class Home(Element, Screen):
     
     def __init__(self):
         Screen.__init__(self)
         Element.__init__(self)
+        # Discord_Manager.__init__(self)
+    
         pygame.init()
+        self.input_email= "Email address"
+        self.input_password= "Password"       
 
     def design(self): 
         self.screen_color(self.grey)
 
     # Intro section     
 
-        self.image_not_center("Discord", 225, 0, 470, 470,"home/home2")
-
+        self.image_not_center("Discord", 83, 35, 215, 115,"home/home2")
         self.text_not_align(self.font1,45,"Dive into", self.grey4,50, 203) 
         self.text_not_align(self.font1,45,"Where Ideas Collide", self.grey4,50, 250)          
         self.text_not_align(self.font2,20,"Discord is a versatile communication platform, voice,", self.grey4,80, 295)
@@ -32,12 +37,13 @@ class Home(Element, Screen):
         self.image_not_center("Discord", 840, 65, 170, 170,"home/home1") 
 
         # Rect email
-        self.rect_full(self.grey2, 920, 260, 350, 50, 5) 
-        self.text_center(self.font2, 15,"Email address", self.white, 920, 260)
+        self.input_email_rect = self.rect_full(self.grey2, 920, 260, 350, 50, 5) 
+        self.text_center(self.font2, 15, self.input_email, self.white, 920, 260)
 
         # Rect password
-        self.rect_full(self.grey2, 920, 320, 350, 50, 5)
-        self.text_center(self.font2, 15, "Password", self.white,920,320)
+        self.input_password_rect= self.rect_full(self.grey2, 920, 320, 350, 50, 5)
+        self.text_center(self.font2, 15, self.input_password, self.white,920,320)
+        # self.text_center(self.font2, 15, self.password_text, self.white,920,320)
 
         # Rect log In
         self.button_hover("login", 920, 410, 350, 50, self.blue, self.blue, self.blue1, self.blue1,"Log In", self.font1, self.white, 15, 4, 5) 
@@ -76,13 +82,46 @@ class Home(Element, Screen):
         self.HoverSign()       
         
     def home_run(self):
+
         home_run = True
         while home_run :
             for event in pygame.event.get():
                 if event.type == pygame.QUIT:
                         home_run = False
 
-          
+                elif event.type == pygame.MOUSEBUTTONDOWN:
+                    if self.input_email_rect.collidepoint(event.pos): 
+                        self.input_email = ""
+                        self.entry = 1
+                    elif self.input_password_rect.collidepoint(event.pos): 
+                        self.input_password = ""
+                        self.entry = 2
+
+                    #  920, 410, 350, 50
+                    elif self.is_mouse_over_button(pygame.Rect(745, 385, 350, 50)): 
+                        
+                        print("ok")
+                   
+
+                elif event.type == pygame.KEYDOWN: 
+                    if event.key == pygame.K_BACKSPACE:
+                            if self.entry == 1: 
+                                self.input_email = self.input_email[:-1]
+                            elif self.entry == 2: 
+                                self.input_password = self.input_password[:-1]                        
+                    else:
+                        if self.entry == 1:
+                            if event.unicode:
+                                self.input_email= self.input_email + event.unicode             
+                     
+                        elif self.entry == 2:
+                            if event.unicode:
+                                self.input_password= self.input_password + event.unicode
+
+            
+
+                        
+                      
             self.DisplayAll()
             self.update()
             
