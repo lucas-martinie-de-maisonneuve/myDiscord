@@ -45,7 +45,8 @@ class Inscription(Element, Screen):
         self.button_hover("password", 600, 480, 400, 40, self.grey2, self.grey2, self.grey2, self.grey2,self.password, self.font2, self.white, 15, 4, 5)
         
         # Button Sign Up
-        self.sign_up = self.button_hover("connexion", 600, 560, 350, 50, self.blue, self.blue, self.blue1, self.blue1,"Sign Up", self.font1, self.white, 15, 4, 5)
+        self.sign_up = self.rect_full(self.blue, 600, 560, 350, 50,5)
+        self.button_hover("connexion", 600, 560, 350, 50, self.blue, self.blue, self.blue1, self.blue1,"Sign Up", self.font1, self.white, 15, 4, 5)
         
         # Text Or
         self.text_center(self.font1, 12,"OR", self.blue, 600, 600)
@@ -129,11 +130,11 @@ class Inscription(Element, Screen):
                     elif self.profil3_cercle.collidepoint(event.pos):
                         self.photo = 3
                         self.profil_hovered = self.profil3_cercle
-                        
+
                     elif self.profil4_cercle.collidepoint(event.pos):
                         self.photo = 4
                         self.profil_hovered = self.profil4_cercle
-                        
+
                     elif self.pseudo_rect.collidepoint(event.pos):
                         self.pseudo = ""
                         self.entry = 1
@@ -153,7 +154,11 @@ class Inscription(Element, Screen):
                     elif self.password_rect.collidepoint(event.pos):
                         self.password = ""
                         self.entry = 5
-                                                
+
+                    elif self.sign_up.collidepoint(event.pos):
+                        if self.pseudo!="Pseudo" and self.email!="Email address" and self.surname != "Surname" and self.name != "Name" and self.password != "Password" and self.photo != 0:
+                            self.manager.add_user(self.surname,self.name,self.pseudo,self.email,self.password,self.photo)
+                            
                 elif event.type == pygame.KEYDOWN:
                     if self.entry == 1:
                         if event.unicode.isalpha():
@@ -187,16 +192,6 @@ class Inscription(Element, Screen):
                         if event.key == pygame.K_BACKSPACE:
                             self.password = self.password[:-1]
                             
-                elif event.type == pygame.MOUSEBUTTONDOWN:
-                    if self.sign_up.collidepoint(event.pos) and self.pseudo!="Pseudo" and self.email!="Email address" and self.surname != "Surname" and self.name != "Name" and self.password != "Password" and self.photo != 0:
-                        print(self.pseudo)
-                        print(self.email)
-                        print(self.surname)
-                        print(self.name)
-                        print(self.password)
-                        print(self.photo)
-
-
             if self.profil_hovered:
                 if self.profil_hovered == self.profil1_cercle:
                     self.hover_profil1_cercle = pygame.draw.circle(self.Window, self.blue, (380, 140), 50, width=2)

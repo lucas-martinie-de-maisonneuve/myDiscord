@@ -47,7 +47,6 @@ class Discord_Manager(Database):
         sql = "SELECT * FROM category"
         self.cursor.execute(sql)
         self.categorys = self.cursor.fetchall()
-        print(self.categorys)
         return self.categorys
     
     # Ajout Channel
