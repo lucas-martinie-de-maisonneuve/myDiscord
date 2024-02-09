@@ -20,7 +20,7 @@ class Home(Element, Screen):
 
     # Intro section     
 
-        self.image_not_center("Discord", 83, 35, 215, 115,"home/home2")
+        self.image_not_center("Discord", 250, 170, 400, 79,"home/home2")
         self.text_not_align(self.font1,45,"Dive into", self.grey4,50, 203) 
         self.text_not_align(self.font1,45,"Where Ideas Collide", self.grey4,50, 250)          
         self.text_not_align(self.font2,20,"Discord is a versatile communication platform, voice,", self.grey4,80, 295)
@@ -97,11 +97,10 @@ class Home(Element, Screen):
                         self.input_password = ""
                         self.entry = 2
 
-                    #  920, 410, 350, 50
-                    elif self.is_mouse_over_button(pygame.Rect(745, 385, 350, 50)): 
-                        
-                        print("ok")
-                   
+                    # elif self.is_mouse_over_button(pygame.Rect(745, 385, 350, 50)):                         
+                    #     if self.input_email != "" and self.input_password != "":                  
+                    #         self.login(self.input_email, self.input_password) 
+               
 
                 elif event.type == pygame.KEYDOWN: 
                     if event.key == pygame.K_BACKSPACE:
