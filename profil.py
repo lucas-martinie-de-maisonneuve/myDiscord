@@ -1,6 +1,6 @@
 import pygame
-from source.pygame.element import Element
-from source.pygame.screen import Screen
+from source.pygame_manager.element import Element
+from source.pygame_manager.screen import Screen
 
 class Profil(Element, Screen):
     
@@ -8,6 +8,7 @@ class Profil(Element, Screen):
         Screen.__init__(self)
         Element.__init__(self)
         pygame.init()
+        self.profil_running = True
         self.picture = 3
         self.theme_color = self.dark_purple
         self.username = "Lucasssa"
@@ -17,7 +18,7 @@ class Profil(Element, Screen):
 
     def design(self):
         # Profil main rectangle
-        self.screen_color(self.grey)
+        self.img_background("background", 600, 350, 1200, 584, "main/main1")
         self.rect_radius_top(self.theme_color, 750, 90, 800, 100, 10)
         self.rect_radius_bot(self.grey5, 750, 400, 800, 520, 10)
 
@@ -61,7 +62,7 @@ class Profil(Element, Screen):
     def pygame_event(self):
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
-                    profil_run = False
+                    self.profil_running = False
             if event.type == pygame.MOUSEBUTTONDOWN:
                 if self.show.collidepoint(event.pos):
                     self.password_display = self.password
@@ -71,8 +72,7 @@ class Profil(Element, Screen):
 
 
     def profil_run(self):
-        profil_run = True
-        while profil_run :
+        while self.profil_running :
             self.pygame_event()
             self.design()
             self.hover_profile_picture()

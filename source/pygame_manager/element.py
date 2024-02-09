@@ -11,10 +11,13 @@ class Element:
         self.grey = (255, 255, 255) # backhome
         self.grey1 = (240, 242, 245)   
         self.grey2 = (53, 53, 53)    
-        self.grey3 = (25, 25, 25) 
-        self.grey4 = (146, 151, 153)
+        self.grey3 = (25, 25, 25)
+        self.grey5 = (34, 31, 37)
+        self.grey6 = (176, 186, 181)
 
         self.green = (66, 183, 42)
+        self.dark_green = (43, 147, 72) #connected bubble
+        
         self.blue = (0, 151, 254) # login
         self.blue1 = (0, 140, 234) # login  
         self.purple1 = (202, 8, 255) #linehome
@@ -87,6 +90,32 @@ class Element:
     def rect_border(self, color, x, y, width, height, thickness, radius):
         button = pygame.draw.rect(self.screen.Window, color, pygame.Rect(x - width //2, y - height //2, width, height),  thickness, radius)
         return button
+    #Rect border only on top  
+    def rect_radius_top(self, color, x, y, width, height, radius):
+        button = pygame.draw.rect(self.screen.Window, color, pygame.Rect(x - width //2, y - height //2, width, height),False,0, radius, radius)
+        return button
+
+    #Rect border only on bottom
+    def rect_radius_bot(self, color, x, y, width, height, radius):
+        button = pygame.draw.rect(self.screen.Window, color, pygame.Rect(x - width //2, y - height //2, width, height),False ,0,0,0, radius, radius)
+        return button
+
+# Def Circle
+    def circle(self, color, x, y, radius):
+        pygame.draw.circle(self.screen.Window, color, (x,y), radius)
+
+    def circle_alpha(self, alpha_color, x, y, radius):
+        circle_surface = pygame.Surface((self.screen.W,self.screen.H), pygame.SRCALPHA)
+        pygame.draw.circle(circle_surface,alpha_color,(x,y),radius)
+        self.screen.Window.blit(circle_surface, (0,0))
+
+    def circle_hover(self, name, color,alpha_color, x, y, radius): 
+        name = pygame.draw.circle(self.screen.Window, color, (x,y), radius)
+
+        if self.is_mouse_over_button(name):
+            self.circle_alpha(alpha_color, x, y, radius)
+        else:
+            self.circle(color, x, y, radius)
 
 # Def Hoover
     
