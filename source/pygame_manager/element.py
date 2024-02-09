@@ -8,13 +8,18 @@ class Element:
         # Color
         self.black = (0, 0, 0)
         self.white = (255, 255, 255)
+        self.darkgrey = (100,100,100)
         self.grey = (255, 255, 255) # backhome
         self.grey1 = (240, 242, 245)   
         self.grey2 = (53, 53, 53)    
-        self.grey3 = (25, 25, 25) 
+        self.grey3 = (25, 25, 25)
         self.grey4 = (146, 151, 153)
+        self.grey5 = (34, 31, 37)
+        self.grey6 = (176, 186, 181)
 
         self.green = (66, 183, 42)
+        self.dark_green = (43, 147, 72) #connected bubble
+
         self.blue = (0, 151, 254) # login
         self.blue1 = (0, 140, 234) # login  
         self.purple1 = (202, 8, 255) #linehome
@@ -41,14 +46,15 @@ class Element:
         self.darkred = (221, 45, 74)
         self.brown = (75, 67, 67)
 
-        
-        self.darkgrey = (100,100,100)
+        self.alpha_grey =(50,50,50,100)
+        self.alpha_none =(0,0,0,0)
 
         self.font1 = "Uni Sans Heavy.otf"
         self.font2 = "gg sans Regular.ttf"
+        self.font3 = "Uni Sans Thin.otf"
       
 # Def text          
-    
+
     def text_center(self, font, text_size, text_content, color, x, y):
         pygame.font.init()
         text = pygame.font.Font(f"source/pygame_manager/{font}", text_size).render(text_content, True,color)
@@ -76,8 +82,7 @@ class Element:
         name = pygame.image.load(f'image/{image_name}.png').convert()
         name = pygame.transform.scale(name, (width, height))
         self.screen.Window.blit(name, (x - name.get_width()//2, y - name.get_height()//2))
-
-    
+ 
 # Def rectangle  
              
     def rect_full(self, color, x, y, width, height, radius):
@@ -87,13 +92,38 @@ class Element:
     def rect_border(self, color, x, y, width, height, thickness, radius):
         button = pygame.draw.rect(self.screen.Window, color, pygame.Rect(x - width //2, y - height //2, width, height),  thickness, radius)
         return button
+    #Rect border only on top  
+    def rect_radius_top(self, color, x, y, width, height, radius):
+        button = pygame.draw.rect(self.screen.Window, color, pygame.Rect(x - width //2, y - height //2, width, height),False,0, radius, radius)
+        return button
+
+    #Rect border only on bottom
+    def rect_radius_bot(self, color, x, y, width, height, radius):
+        button = pygame.draw.rect(self.screen.Window, color, pygame.Rect(x - width //2, y - height //2, width, height),False ,0,0,0, radius, radius)
+        return button
+
+# Def Circle
+    def circle(self, color, x, y, radius):
+        pygame.draw.circle(self.screen.Window, color, (x,y), radius)
+
+    def circle_alpha(self, alpha_color, x, y, radius):
+        circle_surface = pygame.Surface((self.screen.W,self.screen.H), pygame.SRCALPHA)
+        pygame.draw.circle(circle_surface,alpha_color,(x,y),radius)
+        self.screen.Window.blit(circle_surface, (0,0))
+
+    def circle_hover(self, name, color,alpha_color, x, y, radius): 
+        name = pygame.draw.circle(self.screen.Window, color, (x,y), radius)
+
+        if self.is_mouse_over_button(name):
+            self.circle_alpha(alpha_color, x, y, radius)
+        else:
+            self.circle(color, x, y, radius)
 
 # Def Hoover
     
     def is_mouse_over_button(self, button_rect):
         mouse_pos = pygame.mouse.get_pos()
         return button_rect.collidepoint(mouse_pos)  
-
 
     def button_hover(self, name, x, y, width, height, color_full, color_border, color_hoover, color_border_hoover, text, font, text_color,text_size, thickness, radius): 
 
@@ -116,7 +146,11 @@ class Element:
             self.img_center(name, x, y, width, height, image_name)
           
 
+    def normal_cursor(self):
+        pygame.mouse.set_cursor(pygame.cursors.arrow)
 
+    def hand_cursor(self):
+        pygame.mouse.set_cursor(pygame.SYSTEM_CURSOR_HAND)
 
     # Hover texte
     # def hover(self):
