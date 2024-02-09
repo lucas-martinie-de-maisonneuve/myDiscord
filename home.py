@@ -1,17 +1,18 @@
 import pygame
 
+from source.pygame_manager.event_handler import Event_handler
 from source.pygame_manager.element import Element
 from source.pygame_manager.screen import Screen
 # from data.discord_manager import Discord_Manager
 
-class Home(Element, Screen):
+class Home(Element, Screen, Event_handler):
     
     def __init__(self):
         Screen.__init__(self)
         Element.__init__(self)
+        Event_handler.__init__(self)
         # Discord_Manager.__init__(self)
     
-        pygame.init()
         self.input_email= "Email address"
         self.input_password= "Password"       
 
@@ -83,47 +84,12 @@ class Home(Element, Screen):
         
     def home_run(self):
 
-        home_run = True
-        while home_run :
-            for event in pygame.event.get():
-                if event.type == pygame.QUIT:
-                        home_run = False
+        self.home_running = True
+        while self.home_running :
 
-                elif event.type == pygame.MOUSEBUTTONDOWN:
-                    if self.input_email_rect.collidepoint(event.pos): 
-                        self.input_email = ""
-                        self.entry = 1
-                    elif self.input_password_rect.collidepoint(event.pos): 
-                        self.input_password = ""
-                        self.entry = 2
-
-                    # elif self.is_mouse_over_button(pygame.Rect(745, 385, 350, 50)):                         
-                    #     if self.input_email != "" and self.input_password != "":                  
-                    #         self.login(self.input_email, self.input_password) 
-               
-
-                elif event.type == pygame.KEYDOWN: 
-                    if event.key == pygame.K_BACKSPACE:
-                            if self.entry == 1: 
-                                self.input_email = self.input_email[:-1]
-                            elif self.entry == 2: 
-                                self.input_password = self.input_password[:-1]                        
-                    else:
-                        if self.entry == 1:
-                            if event.unicode:
-                                self.input_email= self.input_email + event.unicode             
-                     
-                        elif self.entry == 2:
-                            if event.unicode:
-                                self.input_password= self.input_password + event.unicode
-
-            
-
-                        
-                      
+            self.event_home()      
             self.DisplayAll()
-            self.update()
-            
+            self.update()            
 
 home = Home()
 home.home_run()
