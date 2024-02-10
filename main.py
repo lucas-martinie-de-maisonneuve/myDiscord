@@ -2,5 +2,5 @@
 #                Projet myDiscord                #
 #                   05/02/2024                   #
 #                                                #
-# / Lucas Martinie / Ines Lorquet / Vanny Lamorte #
+#  Lucas Martinie / Ines Lorquet / Vanny Lamorte #
 ##################################################
