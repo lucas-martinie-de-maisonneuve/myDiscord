@@ -88,6 +88,10 @@ class Element:
     def rect_full(self, color, x, y, width, height, radius):
         button = pygame.draw.rect(self.screen.Window, color, pygame.Rect(x - width//2, y - height//2, width, height),0, radius)
         return button
+    
+    def rect_full_not_centered(self, color, x, y, width, height, radius):
+        button = pygame.draw.rect(self.screen.Window, color, pygame.Rect(x, y, width, height),0, radius)
+        return button
 
     def rect_border(self, color, x, y, width, height, thickness, radius):
         button = pygame.draw.rect(self.screen.Window, color, pygame.Rect(x - width //2, y - height //2, width, height),  thickness, radius)
@@ -123,8 +127,8 @@ class Element:
     
     def is_mouse_over_button(self, button_rect):
         mouse_pos = pygame.mouse.get_pos()
-        return button_rect.collidepoint(mouse_pos)  
-
+        return button_rect.collidepoint(mouse_pos)
+    
     def button_hover(self, name, x, y, width, height, color_full, color_border, color_hoover, color_border_hoover, text, font, text_color,text_size, thickness, radius): 
 
         name = pygame.Rect((x - width//2), (y - height//2), width, height)

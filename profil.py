@@ -9,7 +9,11 @@ class Profil(Element, Screen, Event_handler):
         Screen.__init__(self)
         Element.__init__(self)
         self.profil_running = True
-        self.password_cursor, self.picture_cursor = False, False
+        self.edit = 0
+
+        self.password_cursor, self.pass_cursor, self.picture_cursor, self.username_cursor, self.email_cursor, self.role_cursor, self.status_cursor = False, False, False, False, False, False, False
+
+        self.password_edit, self.username_edit, self.email_edit = False, False, False
         # Info a recuperer de la classe User
         self.picture = 1#
         self.theme_color = self.dark_purple
@@ -20,7 +24,14 @@ class Profil(Element, Screen, Event_handler):
         self.role = "Admin"#
         self.status = "Away"
         self.status_color = self.green
-        self.username_cursor, self.email_cursor, self.pass_cursor, self.role_cursor, self.status_cursor = False, False, False, False, False 
+        self.size_username, self.size_email ,self.size_password= 0, 0, 0
+
+        self.username_rect = pygame.Rect(960, 300, 80, 30)
+        self.email_rect = pygame.Rect(960, 360, 80, 30)
+        self.password_rect = pygame.Rect(960, 420, 80, 30)
+        self.role_rect = pygame.Rect(960, 480, 80, 30)
+        self.status_rect = pygame.Rect(960, 540, 80, 30)
+
     def design(self):
         if not (self.password_cursor or self.picture_cursor or self.username_cursor or self.email_cursor or self.pass_cursor or self.role_cursor or self.status_cursor):
             self.normal_cursor()
@@ -31,16 +42,16 @@ class Profil(Element, Screen, Event_handler):
 
         # Username
         self.text_not_align(self.font1, 20, f"{self.username}", self.white, 550,180)
+        
         # Profile info rectangle
         self.rect_full(self.grey2, 750, 445, 700, 350, 10)
         
+        #Info profil
         self.info_profil("Username", self.username, 300)
         self.info_profil("E-mail", self.email, 360)
         self.info_profil("Password", self.password_display, 420)
         self.info_profil("Role", self.role, 480)
         self.info_profil("Status", self.role, 540)
-
-
 
     def hover_profile_picture(self):
         self.circle(self.grey5, 450, 180, 70)
@@ -80,23 +91,47 @@ class Profil(Element, Screen, Event_handler):
 
     def info_profil(self, title, text_info, y):
         self.text_not_align(self.font1, 16, title, self.grey6, 430, y)
-        self.text_not_align(self.font2, 16, f"{text_info}", self.white, 440, y + 20)
         self.button_hover(title, 1000, y + 15, 80, 30, self.grey4, self.grey4, self.grey6, self.grey6, "Edit", self.font2, self.white, 17, 0, 4)
-        self.info_profil_cursor(y, title)
+        self.info_profil_cursor(title)
 
-    def info_profil_cursor(self, y, title):
-        button_rect = pygame.Rect(960, y, 80, 30)
+# White rectangle when 'Edit' is pressed
+    def info_profil_edit(self):
+        if self.username_edit:
+            self.rect_full_not_centered(self.white, 420, 320, 0 + self.size_username, 20, 10)
+            if self.size_username < 250:
+                self.size_username += 8
+            self.text_not_align(self.font2, 16, self.username, self.black, 440, 320)
+        else: 
+            self.text_not_align(self.font2, 16, self.username, self.white, 440, 320)
+
+        if self.email_edit:
+            self.rect_full_not_centered(self.white, 420, 380, 0 + self.size_email, 20, 10)
+            if self.size_email < 250:
+                self.size_email += 8
+            self.text_not_align(self.font2, 16, self.email, self.black, 440, 380)
+        else: 
+            self.text_not_align(self.font2, 16, self.email, self.white, 440, 380)
+
+        if self.password_edit:
+            self.rect_full_not_centered(self.white, 420, 440, 0 + self.size_password, 20, 10)
+            if self.size_password < 250:
+                self.size_password += 8
+            self.text_not_align(self.font2, 16, self.password, self.black, 440, 440)
+        else: 
+            self.text_not_align(self.font2, 16, self.password_display, self.white, 440, 440)
+            self.password_display = " *" * len(self.password)
+
+    def info_profil_cursor(self, title):
         if title == "Username":
-            self.username_cursor = self.is_mouse_over_button(button_rect)
+            self.username_cursor = self.is_mouse_over_button(self.username_rect)
         elif title == "E-mail":
-            self.email_cursor = self.is_mouse_over_button(button_rect)
+            self.email_cursor = self.is_mouse_over_button(self.email_rect)
         elif title == "Password":
-            self.pass_cursor = self.is_mouse_over_button(button_rect)
+            self.pass_cursor = self.is_mouse_over_button(self.password_rect)
         elif title == "Role":
-            self.role_cursor = self.is_mouse_over_button(button_rect)
+            self.role_cursor = self.is_mouse_over_button(self.role_rect)
         elif title == "Status":
-            self.status_cursor = self.is_mouse_over_button(button_rect)
-
+            self.status_cursor = self.is_mouse_over_button(self.status_rect)
         if self.username_cursor or self.email_cursor or self.pass_cursor or self.role_cursor or self.status_cursor:
             self.hand_cursor()
 
@@ -107,6 +142,7 @@ class Profil(Element, Screen, Event_handler):
             self.hover_profile_picture()
             self.password_show()
             self.status_circle()
+            self.info_profil_edit()
             self.update()
             
 pro = Profil()
