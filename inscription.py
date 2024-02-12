@@ -157,7 +157,7 @@ class Inscription(Element, Screen):
                         self.entry = 5
 
                     elif self.sign_up.collidepoint(event.pos):
-                        if self.username!="username" and self.email!="Email address" and self.surname != "Surname" and self.name != "Name" and self.password != "Password" and self.photo != 0:
+                        if self.username!="Username" and self.email!="Email address" and self.surname != "Surname" and self.name != "Name" and self.password != "Password" and self.photo != 0:
                             self.manager.add_user(self.surname,self.name,self.username,self.email,self.password,self.photo,2)
                             print("ajouter")
                             
