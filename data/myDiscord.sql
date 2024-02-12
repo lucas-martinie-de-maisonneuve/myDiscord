@@ -62,7 +62,7 @@ INSERT INTO channel(name, status, communication, id_category) VALUES
 ('About Us', True, False, 1), 
 ('Rules', True, False, 1),
 ('News', True, False, 1),
-('Logicie', True, True, 2), 
+('Logiciel', True, True, 2), 
 ('Logiciel', True, False, 2), 
 ('Artificial Intelligence 1', True, True, 2), 
 ('Artificial Intelligence 2', True, False, 2), 
