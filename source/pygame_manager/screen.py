@@ -13,11 +13,7 @@ class Screen:
         pygame.display.flip()
         pygame.display.update()
         self.clock.tick(60)
-<<<<<<< HEAD:source/pygame/screen.py
-        # self.Window.fill((0, 0, 0))
-=======
         self.Window.fill((0, 0, 0))
 
     def screen_color(self, color): 
         self.Window.fill(color)
->>>>>>> main.test:source/pygame_manager/screen.py
