@@ -3,7 +3,9 @@ from datetime import datetime
 
 class Discord_Manager(Database):
     def __init__(self):
-        super().__init__('localhost', 'root', '$~Bc4gB9', 'discord')
+        # Database.__init__(self, 'localhost', 'root', '$~Bc4gB9', 'discord')
+        # Database.__init__(self, 'localhost', 'root', 'VannyLamorte25!', 'discord')
+        Database.__init__(self, 'localhost', 'root', 'azerty', 'discord')
         self.connect()
 
     def add_user(self, surname, name, pseudo, email, password, photo, id_role):
