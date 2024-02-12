@@ -110,7 +110,7 @@ class Inscription(Element, Screen):
             self.profil4_cercle = pygame.draw.circle(self.Window, self.black, (830, 140), 50)
             self.hover_profil4_cercle= pygame.draw.circle(self.Window, self.grey2, (830, 140), 50, width=2)
 
-    def inscription_run(self):  # sourcery skip: merge-else-if-into-elif
+    def inscription_run(self):
         self.inscription_running = True
         while self.inscription_running:
             self.form()
