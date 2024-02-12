@@ -21,6 +21,7 @@ class Profil(Element, Screen, Event_handler):
         self.email = "lucas.leplusfort@gmail.com"#
         self.password = "bananaaa"#
         self.password_display = " *" * len(self.password)
+        self.show_pass = False
         self.role = "Admin"#
         self.status = "Away"
         self.status_color = self.green
@@ -43,7 +44,10 @@ class Profil(Element, Screen, Event_handler):
         self.rect_radius_top(self.theme_color, 750, 90, 800, 100, 10)
         self.rect_radius_bot(self.grey5, 750, 400, 800, 520, 10)
 
-        # Username
+        # self.rect_full(self.grey5, 195, 350, 290, 620, 10) 
+        self.rect_full(self.grey5, 195, 305, 290, 530, 10) 
+        self.rect_full(self.grey5, 195, 620, 290, 80, 10) 
+            # Username
         if self.size_profile_picture < 100:
             self.text_not_align(self.font1, 20, f"{self.username}", self.white, 550,180 + self.size_profile_picture // 2)
         else:
@@ -96,83 +100,106 @@ class Profil(Element, Screen, Event_handler):
         elif self.picture == 4:
             self.pict = [1, 2, 3]
         if self.picture_edit:
-            self.rect_full_not_centered(self.grey3, 450, 120, 0 + self.size_profile_picture, 100, 50)
             if self.size_profile_picture < 400:
                 self.size_profile_picture += 10
-            if self.size_profile_picture > 170:
-                self.picture1 = pygame.draw.circle(self.screen.Window, self.theme_color, (570,170), 45)
-                self.image_not_center("image1", 540, 140, 60, 60, f"new_profil/profil{self.pict[0]}")
-            if self.size_profile_picture > 270:
-                self.picture2 = pygame.draw.circle(self.screen.Window, self.theme_color, (670,170), 45)
-                self.image_not_center("image1", 640, 140, 60, 60, f"new_profil/profil{self.pict[1]}")
-            if self.size_profile_picture > 370:
-                self.picture3 = pygame.draw.circle(self.screen.Window, self.theme_color, (770,170), 45)
-                self.image_not_center("image1", 740, 140, 60, 60, f"new_profil/profil{self.pict[2]}")
-            self.hover_profile_picture()
-            self.status_circle()
         else:
-            self.hover_profile_picture()
-            self.status_circle()
+            if self.size_profile_picture > 0:
+                self.size_profile_picture -=10
+        self.rect_full_not_centered(self.grey3, 450, 120, 0 + self.size_profile_picture, 100, 50)
+        if self.size_profile_picture > 170:
+            self.picture1 = pygame.draw.circle(self.screen.Window, self.theme_color, (570,170), 45)
+            self.image_not_center("image1", 540, 140, 60, 60, f"new_profil/profil{self.pict[0]}")
+            if self.is_mouse_over_button(self.picture1):
+                self.picture1_cursor = True
+                self.hover_profil1 = pygame.draw.circle(self.Window, self.yellow, (570, 170), 45, 4, True, False, True, False) 
+                self.hover_profil1 = pygame.draw.circle(self.Window, self.pink, (570, 170), 45, 4, False, True, False, True) 
+                self.hand_cursor()
+            else:
+                self.picture1_cursor = False
 
-        if self.is_mouse_over_button(self.picture1):
-            self.picture1_cursor = True
-            self.hand_cursor()
-        else:
-            self.picture1_cursor = False
+        if self.size_profile_picture > 270:
+            self.picture2 = pygame.draw.circle(self.screen.Window, self.theme_color, (670,170), 45)
+            self.image_not_center("image1", 640, 140, 60, 60, f"new_profil/profil{self.pict[1]}")
+            if self.is_mouse_over_button(self.picture2):
+                self.picture2_cursor = True
+                self.hover_profil2 = pygame.draw.circle(self.Window, self.yellow, (670, 170), 45, 4, True, False, True, False) 
+                self.hover_profil2 = pygame.draw.circle(self.Window, self.pink, (670, 170), 45, 4, False, True, False, True) 
+                self.hand_cursor()
+            else:
+                self.picture2_cursor = False
 
-        if self.is_mouse_over_button(self.picture2):
-            self.picture2_cursor = True
-            self.hand_cursor()
-        else:
-            self.picture2_cursor = False
-
-        if self.is_mouse_over_button(self.picture3):
-            self.picture3_cursor = True
-            self.hand_cursor()
-        else:
-            self.picture3_cursor = False
+        if self.size_profile_picture > 370:
+            self.picture3 = pygame.draw.circle(self.screen.Window, self.theme_color, (770,170), 45)
+            self.image_not_center("image1", 740, 140, 60, 60, f"new_profil/profil{self.pict[2]}")
+            if self.is_mouse_over_button(self.picture3):
+                self.picture3_cursor = True
+                self.hover_profil3 = pygame.draw.circle(self.Window, self.yellow, (770, 170), 45, 4, True, False, True, False) 
+                self.hover_profil3 = pygame.draw.circle(self.Window, self.pink, (770, 170), 45, 4, False, True, False, True) 
+                self.hand_cursor()
+            else:
+                self.picture3_cursor = False
+        self.hover_profile_picture()
+        self.status_circle()
 
     def password_show(self):
-        self.show = pygame.Rect(450 + 10 * len(self.password),443,35,15)
-        if self.is_mouse_over_button(self.show):
-            self.password_cursor = True
-            self.hand_cursor()
-            self.text_not_align(self.font2, 16, f"show",self.blue1,450 + 10 * len(self.password), 437)
-        else:
-            self.password_cursor = False
-            self.text_not_align(self.font2, 14, f"show",self.grey1,450 + 10 * len(self.password), 438)
+        if not self.password_edit:
+            self.show = pygame.Rect(450 + 10 * len(self.password),443,35,15)
+            if self.is_mouse_over_button(self.show):
+                self.password_cursor = True
+                self.hand_cursor()
+                self.text_not_align(self.font2, 16, f"show",self.blue1,450 + 10 * len(self.password), 437)
+            else:
+                self.password_cursor = False
+                self.text_not_align(self.font2, 14, f"show",self.grey1,450 + 10 * len(self.password), 438)
 
     def info_profil(self, title, text_info, y):
         self.text_not_align(self.font1, 16, title, self.grey6, 430, y)
-        self.button_hover(title, 1000, y + 15, 80, 30, self.grey4, self.grey4, self.grey6, self.grey6, "Edit", self.font2, self.white, 17, 0, 4)
+        self.button_hover(title, 1000, y + 15, 80, 30, self.pink, self.pink, self.purple2, self.purple2, "Edit", self.font5, self.white, 17, 0, 4)
         self.info_profil_cursor(title)
 
 # White rectangle when 'Edit' is pressed
     def info_profil_edit(self):
+        # Username info 
+        self.rect_full_not_centered(self.white, 420, 320, 0 + self.size_username, 20, 10)
         if self.username_edit:
-            self.rect_full_not_centered(self.white, 420, 320, 0 + self.size_username, 20, 10)
-            if self.size_username < 250:
+            if self.size_username < 240:
                 self.size_username += 8
             self.text_not_align(self.font2, 16, self.username, self.black, 440, 320)
         else: 
-            self.text_not_align(self.font2, 16, self.username, self.white, 440, 320)
+            if self.size_username > 0:
+                self.text_not_align(self.font2, 16, self.username, self.black, 440, 320)
+                self.size_username -= 16
+            else: 
+                self.text_not_align(self.font2, 16, self.username, self.white, 440, 320)
 
+        # Email info 
+        self.rect_full_not_centered(self.white, 420, 380, 0 + self.size_email, 20, 10)
         if self.email_edit:
-            self.rect_full_not_centered(self.white, 420, 380, 0 + self.size_email, 20, 10)
-            if self.size_email < 250:
+            if self.size_email < 240:
                 self.size_email += 8
             self.text_not_align(self.font2, 16, self.email, self.black, 440, 380)
         else: 
-            self.text_not_align(self.font2, 16, self.email, self.white, 440, 380)
+            if self.size_email > 0:
+                self.text_not_align(self.font2, 16, self.email, self.black, 440, 380)
+                self.size_email -= 16
+            else: 
+                self.text_not_align(self.font2, 16, self.email, self.white, 440, 380)
 
+        # Password info 
+        self.rect_full_not_centered(self.white, 420, 440, 0 + self.size_password, 20, 10)
         if self.password_edit:
-            self.rect_full_not_centered(self.white, 420, 440, 0 + self.size_password, 20, 10)
-            if self.size_password < 250:
+            if self.size_password < 240:
                 self.size_password += 8
             self.text_not_align(self.font2, 16, self.password, self.black, 440, 440)
         else: 
-            self.text_not_align(self.font2, 16, self.password_display, self.white, 440, 440)
-            self.password_display = " *" * len(self.password)
+            if self.size_password > 0:
+                self.text_not_align(self.font2, 16, self.password, self.black, 440, 440)
+                self.size_password -= 16
+            elif not self.show_pass:
+                self.password_display = " *" * len(self.password)
+                self.text_not_align(self.font2, 16, self.password_display, self.white, 440, 440)
+            else:
+                self.text_not_align(self.font2, 16, self.password_display, self.white, 440, 440)
 
     def info_profil_cursor(self, title):
         if title == "Username":
@@ -192,8 +219,8 @@ class Profil(Element, Screen, Event_handler):
         while self.profil_running :
             self.event_profil()
             self.design()
-            self.password_show()
             self.info_profil_edit()
+            self.password_show()
             self.profile_picture_edit()
             self.update()
             

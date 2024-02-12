@@ -10,30 +10,27 @@ class Event_handler:
                     self.profil_running = False
             if event.type == pygame.MOUSEBUTTONDOWN:
                 if self.show.collidepoint(event.pos):
+                    self.show_pass = True
                     self.password_display = self.password
                 elif self.username_rect.collidepoint(event.pos):
-                    self.size_username = 0
                     if not self.username_edit:
                         self.username_edit = True
                         self.email_edit, self.password_edit = False, False
                     else :
                         self.username_edit = False
                 elif self.email_rect.collidepoint(event.pos):
-                    self.size_email = 0
                     if not self.email_edit:
                         self.email_edit = True
                         self.username_edit, self.password_edit = False, False
                     else:
                         self.email_edit = False
                 elif self.password_rect.collidepoint(event.pos):
-                    self.size_password = 0
                     if not self.password_edit:
                         self.password_edit = True
                         self.email_edit, self.username_edit = False, False
                     else:
                         self.password_edit = False
                 elif self.profile_pict.collidepoint(event.pos):
-                    self.size_profile_picture = 0
                     if not self.picture_edit:
                         self.picture_edit = True
                     else: 
@@ -47,6 +44,7 @@ class Event_handler:
 
             elif event.type == pygame.MOUSEBUTTONUP:
                 if self.show.collidepoint(event.pos):
+                     self.show_pass = False
                      self.password_display = " *" * len(self.password)
 
             elif event.type == pygame.KEYDOWN:

@@ -23,6 +23,7 @@ class Element:
         self.blue = (0, 151, 254) # login
         self.blue1 = (0, 140, 234) # login  
         self.purple1 = (202, 8, 255) #linehome
+        self.purple2 = (125, 85, 196)
 
         self.pink = (222, 50, 79)
         self.dark_purple = (67, 47, 104)
@@ -52,7 +53,9 @@ class Element:
         self.font1 = "Uni Sans Heavy.otf"
         self.font2 = "gg sans Regular.ttf"
         self.font3 = "Uni Sans Thin.otf"
-      
+        self.font4 = "gg sans Semibold.ttf"
+        self.font5 = "gg sans Bold.ttf"
+
 # Def text          
 
     def text_center(self, font, text_size, text_content, color, x, y):
