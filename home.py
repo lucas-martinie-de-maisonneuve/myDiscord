@@ -3,15 +3,16 @@ import pygame
 from source.pygame_manager.event_handler import Event_handler
 from source.pygame_manager.element import Element
 from source.pygame_manager.screen import Screen
-# from data.discord_manager import Discord_Manager
+from hashlib import sha256
+from data.discord_manager import Discord_Manager
 
-class Home(Element, Screen, Event_handler):
+class Home(Element, Screen, Event_handler, Discord_Manager):
     
     def __init__(self):
         Screen.__init__(self)
         Element.__init__(self)
         Event_handler.__init__(self)
-        # Discord_Manager.__init__(self)
+        Discord_Manager.__init__(self)
     
         self.input_email= "Email address"
         self.input_password= "Password"       
@@ -77,6 +78,17 @@ class Home(Element, Screen, Event_handler):
         else:
             self.text_center(self.font1, 11, "Sign Up", self.blue, 990, 600) 
 
+    def LoginUser (self): 
+        email = self.input_email
+        password = self.input_password
+
+        hashed_password = sha256(password.encode()).hexdigest()
+
+        if self.check_credentials(email, hashed_password):
+            print("Connexion successful!")     
+        else:
+            print("Error. Connexion failed")
+
     def DisplayAll(self): 
         self.design()
         self.HoverLostPassword() 
@@ -85,9 +97,12 @@ class Home(Element, Screen, Event_handler):
     def home_run(self):
 
         self.home_running = True
-        while self.home_running :
+        while self.home_running :        
+            self.event_home()    
+            if self.is_mouse_over_button(pygame.Rect(920, 410, 350, 50)) and pygame.mouse.get_pressed()[0]:
+                self.LoginUser()   
 
-            self.event_home()      
+
             self.DisplayAll()
             self.update()            
 

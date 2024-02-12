@@ -15,7 +15,6 @@ class Event_handler:
                 if self.show.collidepoint(event.pos):
                      self.password_display = " *" * len(self.password)
 
-
     def event_home(self): 
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
