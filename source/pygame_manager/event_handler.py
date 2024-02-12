@@ -11,27 +11,39 @@ class Event_handler:
             if event.type == pygame.MOUSEBUTTONDOWN:
                 if self.show.collidepoint(event.pos):
                     self.password_display = self.password
-                if self.username_rect.collidepoint(event.pos):
+                elif self.username_rect.collidepoint(event.pos):
                     self.size_username = 0
                     if not self.username_edit:
                         self.username_edit = True
                         self.email_edit, self.password_edit = False, False
                     else :
                         self.username_edit = False
-                if self.email_rect.collidepoint(event.pos):
+                elif self.email_rect.collidepoint(event.pos):
                     self.size_email = 0
                     if not self.email_edit:
                         self.email_edit = True
                         self.username_edit, self.password_edit = False, False
                     else:
                         self.email_edit = False
-                if self.password_rect.collidepoint(event.pos):
+                elif self.password_rect.collidepoint(event.pos):
                     self.size_password = 0
                     if not self.password_edit:
                         self.password_edit = True
                         self.email_edit, self.username_edit = False, False
                     else:
                         self.password_edit = False
+                elif self.profile_pict.collidepoint(event.pos):
+                    self.size_profile_picture = 0
+                    if not self.picture_edit:
+                        self.picture_edit = True
+                    else: 
+                        self.picture_edit = False
+                elif self.picture1.collidepoint(event.pos):
+                    self.picture = self.pict[0]
+                elif self.picture2.collidepoint(event.pos):
+                    self.picture = self.pict[1]
+                elif self.picture3.collidepoint(event.pos):
+                    self.picture = self.pict[2]
 
             elif event.type == pygame.MOUSEBUTTONUP:
                 if self.show.collidepoint(event.pos):

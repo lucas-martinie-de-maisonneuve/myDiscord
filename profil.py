@@ -11,9 +11,9 @@ class Profil(Element, Screen, Event_handler):
         self.profil_running = True
         self.edit = 0
 
-        self.password_cursor, self.pass_cursor, self.picture_cursor, self.username_cursor, self.email_cursor, self.role_cursor, self.status_cursor = False, False, False, False, False, False, False
+        self.password_cursor, self.pass_cursor, self.picture_cursor, self.username_cursor, self.email_cursor, self.role_cursor, self.status_cursor, self.picture1_cursor, self.picture2_cursor, self.picture3_cursor = False, False, False, False, False, False, False, False, False, False
 
-        self.password_edit, self.username_edit, self.email_edit = False, False, False
+        self.password_edit, self.username_edit, self.email_edit, self.picture_edit = False, False, False, False
         # Info a recuperer de la classe User
         self.picture = 1#
         self.theme_color = self.dark_purple
@@ -24,16 +24,19 @@ class Profil(Element, Screen, Event_handler):
         self.role = "Admin"#
         self.status = "Away"
         self.status_color = self.green
-        self.size_username, self.size_email ,self.size_password= 0, 0, 0
-
+        self.size_username, self.size_email ,self.size_password, self.size_profile_picture= 0, 0, 0, 0
+        self.pict = []
         self.username_rect = pygame.Rect(960, 300, 80, 30)
         self.email_rect = pygame.Rect(960, 360, 80, 30)
         self.password_rect = pygame.Rect(960, 420, 80, 30)
         self.role_rect = pygame.Rect(960, 480, 80, 30)
         self.status_rect = pygame.Rect(960, 540, 80, 30)
+        self.picture1 = pygame.Rect(0, 0, 0, 0)
+        self.picture2 = pygame.Rect(0, 0, 0, 0)
+        self.picture3 = pygame.Rect(0, 0, 0, 0)
 
     def design(self):
-        if not (self.password_cursor or self.picture_cursor or self.username_cursor or self.email_cursor or self.pass_cursor or self.role_cursor or self.status_cursor):
+        if not (self.password_cursor or self.picture_cursor or self.username_cursor or self.email_cursor or self.pass_cursor or self.role_cursor or self.status_cursor or self.picture1_cursor or self.picture2_cursor or self.picture3_cursor):
             self.normal_cursor()
         # Profil main rectangle
         self.img_background("background", 600, 350, 1200, 700, "main/main1")
@@ -41,7 +44,10 @@ class Profil(Element, Screen, Event_handler):
         self.rect_radius_bot(self.grey5, 750, 400, 800, 520, 10)
 
         # Username
-        self.text_not_align(self.font1, 20, f"{self.username}", self.white, 550,180)
+        if self.size_profile_picture < 100:
+            self.text_not_align(self.font1, 20, f"{self.username}", self.white, 550,180 + self.size_profile_picture // 2)
+        else:
+            self.text_not_align(self.font1, 20, f"{self.username}", self.white, 550,230)
         
         # Profile info rectangle
         self.rect_full(self.grey2, 750, 445, 700, 350, 10)
@@ -57,8 +63,8 @@ class Profil(Element, Screen, Event_handler):
         self.circle(self.grey5, 450, 180, 70)
 
         # Profile picture
-        profile_pict = pygame.draw.circle(self.screen.Window, self.theme_color, (450,180), 65)
-        if self.is_mouse_over_button(profile_pict):
+        self.profile_pict = pygame.draw.circle(self.screen.Window, self.theme_color, (450,180), 65)
+        if self.is_mouse_over_button(self.profile_pict):
             self.picture_cursor = True
             self.hand_cursor()
             self.img_center("profile_picture", 450,180,100,100,f"new_profil/profil{self.picture}")
@@ -70,6 +76,7 @@ class Profil(Element, Screen, Event_handler):
             self.circle(self.theme_color, 450, 180, 65)
             self.img_center("profile_picture", 450,180,100,100,f"new_profil/profil{self.picture}")
 
+
     def status_circle(self):
         if self.status == "Online":
             self.status_color = self.green
@@ -78,6 +85,52 @@ class Profil(Element, Screen, Event_handler):
 
         self.circle(self.grey5, 500, 230, 15)
         self.circle(self.status_color, 500, 230, 9)
+
+    def profile_picture_edit(self):
+        if self.picture == 1: 
+            self.pict = [2, 3, 4]
+        elif self.picture == 2:
+            self.pict = [1, 3, 4]
+        elif self.picture == 3:
+            self.pict = [1, 2, 4]
+        elif self.picture == 4:
+            self.pict = [1, 2, 3]
+        if self.picture_edit:
+            self.rect_full_not_centered(self.grey3, 450, 120, 0 + self.size_profile_picture, 100, 50)
+            if self.size_profile_picture < 400:
+                self.size_profile_picture += 10
+            if self.size_profile_picture > 170:
+                self.picture1 = pygame.draw.circle(self.screen.Window, self.theme_color, (570,170), 45)
+                self.image_not_center("image1", 540, 140, 60, 60, f"new_profil/profil{self.pict[0]}")
+            if self.size_profile_picture > 270:
+                self.picture2 = pygame.draw.circle(self.screen.Window, self.theme_color, (670,170), 45)
+                self.image_not_center("image1", 640, 140, 60, 60, f"new_profil/profil{self.pict[1]}")
+            if self.size_profile_picture > 370:
+                self.picture3 = pygame.draw.circle(self.screen.Window, self.theme_color, (770,170), 45)
+                self.image_not_center("image1", 740, 140, 60, 60, f"new_profil/profil{self.pict[2]}")
+            self.hover_profile_picture()
+            self.status_circle()
+        else:
+            self.hover_profile_picture()
+            self.status_circle()
+
+        if self.is_mouse_over_button(self.picture1):
+            self.picture1_cursor = True
+            self.hand_cursor()
+        else:
+            self.picture1_cursor = False
+
+        if self.is_mouse_over_button(self.picture2):
+            self.picture2_cursor = True
+            self.hand_cursor()
+        else:
+            self.picture2_cursor = False
+
+        if self.is_mouse_over_button(self.picture3):
+            self.picture3_cursor = True
+            self.hand_cursor()
+        else:
+            self.picture3_cursor = False
 
     def password_show(self):
         self.show = pygame.Rect(450 + 10 * len(self.password),443,35,15)
@@ -139,10 +192,9 @@ class Profil(Element, Screen, Event_handler):
         while self.profil_running :
             self.event_profil()
             self.design()
-            self.hover_profile_picture()
             self.password_show()
-            self.status_circle()
             self.info_profil_edit()
+            self.profile_picture_edit()
             self.update()
             
 pro = Profil()
