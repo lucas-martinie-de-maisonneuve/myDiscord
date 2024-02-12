@@ -49,6 +49,7 @@ class Home(Element, Screen, Event_handler, Discord_Manager):
 
         # Rect log In
         self.button_hover("login", 920, 410, 350, 50, self.blue, self.blue, self.blue1, self.blue1,"Log In", self.font1, self.white, 15, 4, 5) 
+        
         self.text_center(self.font2, 12,"Don't have an account ?", self.white, 900, 600)   
         self.text_center(self.font1, 12,"OR", self.blue, 920, 450)
       
