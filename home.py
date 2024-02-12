@@ -2,6 +2,7 @@ import pygame
 
 from source.pygame_manager.element import Element
 from source.pygame_manager.screen import Screen
+
 # from data.discord_manager import Discord_Manager
 
 class Home(Element, Screen):
@@ -70,11 +71,11 @@ class Home(Element, Screen):
             self.text_center(self.font1, 11,"Forgot password", self.blue, 1045, 360)
     
     def HoverSign(self):
-        sign = (pygame.Rect(967, 594, 45, 13))    
+        sign = (pygame.Rect(967, 594, 45, 13))
         if self.is_mouse_over_button(sign):
-            self.text_center(self.font1, 12, "Sign Up", self.blue, 990, 600)          
+            self.text_center(self.font1, 12, "Sign Up", self.blue, 990, 600)
         else:
-            self.text_center(self.font1, 11, "Sign Up", self.blue, 990, 600) 
+            self.text_center(self.font1, 11, "Sign Up", self.blue, 990, 600)
 
     def DisplayAll(self): 
         self.design()
@@ -116,9 +117,6 @@ class Home(Element, Screen):
                         elif self.entry == 2:
                             if event.unicode:
                                 self.input_password= self.input_password + event.unicode
-
-            
-
                         
                       
             self.DisplayAll()

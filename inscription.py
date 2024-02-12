@@ -3,6 +3,7 @@ from source.pygame_manager.element import Element
 from source.pygame_manager.screen import Screen
 from data.discord_manager import Discord_Manager
 from source.pygame_manager.event_handler import Event_handler
+
 class Inscription(Element, Screen,Event_handler):
     def __init__(self):
         Screen.__init__(self)
@@ -44,21 +45,21 @@ class Inscription(Element, Screen,Event_handler):
         # Password
         self.password_rect = self.rect_full(self.grey2, 600, 480, 400, 40, 5)
         self.button_hover("password", 600, 480, 400, 40, self.grey2, self.grey2, self.grey2, self.grey2,self.password, self.font2, self.white, 15, 4, 5)
-        
+
         # Button Sign Up
         self.sign_up = self.rect_full(self.blue, 600, 560, 350, 50,5)
         self.button_hover("connexion", 600, 560, 350, 50, self.blue, self.blue, self.blue1, self.blue1,"Sign Up", self.font1, self.white, 15, 4, 5)
-        
+
         # Text Or
         self.text_center(self.font1, 12,"OR", self.blue, 600, 600)
 
         # White lines
         pygame.draw.line(self.Window, self.grey1, (630, 600), (770, 600), 1)
         pygame.draw.line(self.Window, self.grey1, (430, 600), (564, 600), 1)
-        
+
         # Text hover Log In
-        sign = (pygame.Rect(580, 620, 45, 13))    
-        if self.is_mouse_over_button(sign):
+        sign_log = (pygame.Rect(580, 620, 45, 13))    
+        if self.is_mouse_over_button(sign_log):
             self.text_center(self.font1, 13, "Log In", self.white, 600, 625)          
         else:
             self.text_center(self.font1, 12, "Log In ", self.white, 600, 625)

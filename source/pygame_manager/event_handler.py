@@ -1,6 +1,6 @@
 import pygame
 
-class Event_handler:
+class Event_handler():
     def __init__(self):
         pygame.init()
 
@@ -20,7 +20,9 @@ class Event_handler:
                 if event.type == pygame.QUIT:
                     self.inscription_running = False
                 elif event.type == pygame.MOUSEBUTTONDOWN:
-                    if self.profil1_cercle.collidepoint(event.pos):
+                    if self.sign_log.collidepoint(event.pos):
+                        self.inscription_running = False
+                    elif self.profil1_cercle.collidepoint(event.pos):
                         self.photo = 1
                         self.profil_hovered = self.profil1_cercle
 
