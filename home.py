@@ -20,7 +20,6 @@ class Home(Element, Screen, Event_handler, Discord_Manager):
     def design(self): 
         self.screen_color(self.grey)
 
-
     # Intro section     
 
         self.image_not_center("Discord", 250, 380, 400, 79,"home/home2")
@@ -30,11 +29,11 @@ class Home(Element, Screen, Event_handler, Discord_Manager):
         self.text_not_align(self.font2,20,"and video chat features, fostering real-time interaction", self.grey4,80, 530)
         self.text_not_align(self.font2,20,"and collaboration across diverse interests.", self.grey4,80, 555)
 
-        # images 
-        # self.image_not_center("0wl", 170, 20, 370, 370,"home/home9") 
-        # self.image_not_center("Cheetah", 210, 50, 300, 300,"home/home8") 
-        # self.image_not_center("Lion", 170, 20, 370, 370,"home/home7") 
-        # self.image_not_center("Wolf", 160, 0, 370, 370,"home/home6") 
+        # Images animated
+        self.image_not_center("0wl", 170, 20, 370, 370,"home/home9") 
+        self.image_not_center("Cheetah", 210, 50, 300, 300,"home/home8") 
+        self.image_not_center("Lion", 170, 20, 370, 370,"home/home7") 
+        self.image_not_center("Wolf", 160, 0, 370, 370,"home/home6") 
         self.image_not_center("Logo Discord", 270, 140, 170, 170,"home/home10")  
 
     # Connexion section       
@@ -72,10 +71,6 @@ class Home(Element, Screen, Event_handler, Discord_Manager):
         self.hover_image("Instagram", "Instagram", 925, 520, 30, 30,"home/home4")   # Instagram
         self.hover_image("Google", "Google",  970, 520, 30, 30, "home/home5")       # Google  
 
-
-        
-  
-    
     def HoverLostPassword(self): 
         # self.rect_full(self.green, 1045, 360, 105, 10, 5)
         forgot_p = (pygame.Rect(992, 355, 115, 15))    
@@ -114,7 +109,6 @@ class Home(Element, Screen, Event_handler, Discord_Manager):
             self.event_home()    
             if self.is_mouse_over_button(pygame.Rect(920, 410, 350, 50)) and pygame.mouse.get_pressed()[0]:
                 self.LoginUser()   
-
 
             self.DisplayAll()
             self.update()            
