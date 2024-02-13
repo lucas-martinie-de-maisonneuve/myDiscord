@@ -41,7 +41,7 @@ class Profil(Element, Screen, Event_handler):
             self.normal_cursor()
 
         # Profil main rectangle
-        self.img_background("background", 600, 350, 1200, 700, "main/main1")
+        self.img_background("background", 600, 350, 1200, 700, "main_page/main1")
         self.rect_radius_top(self.theme_color, 750, 90, 800, 100, 10)
         self.rect_radius_bot(self.grey5, 750, 400, 800, 520, 10)
         

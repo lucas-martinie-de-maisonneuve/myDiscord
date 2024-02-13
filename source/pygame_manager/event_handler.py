@@ -62,6 +62,26 @@ class Event_handler:
                      self.show_pass = False
                      self.password_display = " *" * len(self.password)
 
+            elif event.type == pygame.KEYDOWN:
+                if event.key == pygame.K_BACKSPACE:
+                    if self.username_edit:
+                        self.username = self.username[:-1]
+                    if self.email_edit:
+                        self.email = self.email[:-1]
+                    if self.password_edit:
+                        self.password = self.password[:-1]
+                else:
+                    if self.username_edit:
+                        if event.unicode:
+                            self.username += event.unicode
+                    elif self.email_edit:
+                            if event.unicode:
+                                self.email += event.unicode
+                    elif self.password_edit:
+                            if event.unicode:
+                                self.password += event.unicode
+                          
+
     def event_home(self): 
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
@@ -94,7 +114,6 @@ class Event_handler:
                         if event.unicode:
                             self.input_password= self.input_password + event.unicode
 
-        
 
             elif event.type == pygame.KEYDOWN:
                 if event.key == pygame.K_BACKSPACE:
