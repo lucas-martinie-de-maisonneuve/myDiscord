@@ -2,16 +2,16 @@ import pygame
 from source.pygame_manager.event_handler import Event_handler
 from source.pygame_manager.element import Element
 from source.pygame_manager.screen import Screen
-class Profil(Element, Screen, Event_handler):
+from source.pygame_manager.cursor import Cursor
+class Profil(Element, Screen, Event_handler, Cursor):
     
     def __init__(self):
         Event_handler.__init__(self)
         Screen.__init__(self)
         Element.__init__(self)
+        Cursor.__init__(self)
         self.profil_running = True
         self.edit = 0
-
-        self.password_cursor, self.pass_cursor, self.picture_cursor, self.username_cursor, self.email_cursor, self.role_cursor, self.status_cursor, self.picture1_cursor, self.picture2_cursor, self.picture3_cursor, self.disconnect_cursor, self.status_edit_cursor, self.status_active_cursor = False, False, False, False, False, False, False, False, False, False, False, False, False
 
         self.password_edit, self.username_edit, self.email_edit, self.picture_edit, self.status_edit = False, False, False, False, False
         # Info a recuperer de la classe User
@@ -27,19 +27,8 @@ class Profil(Element, Screen, Event_handler):
         self.status_color = self.green
         self.size_username, self.size_email ,self.size_password, self.size_profile_picture= 0, 0, 0, 0
         self.pict = []
-        self.username_rect = pygame.Rect(960, 300, 80, 30)
-        self.email_rect = pygame.Rect(960, 360, 80, 30)
-        self.password_rect = pygame.Rect(960, 420, 80, 30)
-        self.role_rect = pygame.Rect(960, 480, 80, 30)
-        self.status_rect = pygame.Rect(960, 540, 80, 30)
-        self.picture1 = pygame.Rect(0, 0, 0, 0)
-        self.picture2 = pygame.Rect(0, 0, 0, 0)
-        self.picture3 = pygame.Rect(0, 0, 0, 0)
 
     def design(self):
-        if not (self.password_cursor or self.picture_cursor or self.username_cursor or self.email_cursor or self.pass_cursor or self.role_cursor or self.status_cursor or self.picture1_cursor or self.picture2_cursor or self.picture3_cursor or self.disconnect_cursor or self.status_edit_cursor or self.status_active_cursor):
-            self.normal_cursor()
-
         # Profil main rectangle
         self.img_background("background", 600, 350, 1200, 700, "main_page/main1")
         self.rect_radius_top(self.theme_color, 750, 90, 800, 100, 10)
@@ -66,14 +55,11 @@ class Profil(Element, Screen, Event_handler):
         self.info_profil("Status", self.role, 540)
 
         #Disconnect button
-        disconnect_button = pygame.Rect(95, 590, 200, 57)
-        if self.is_mouse_over_button(disconnect_button):
-            self.disconnect_cursor = True
-            self.hand_cursor()
+        self.disconnect_button = pygame.Rect(95, 590, 200, 57)
+        if self.is_mouse_over_button(self.disconnect_button):
             self.img_center("disconnect", 195, 620, 220, 63, "profil/disconnect_hover")
         else:
             self.img_center("disconnect", 195, 620, 200, 57, "profil/disconnect")
-            self.disconnect_cursor = False
 
     def hover_profile_picture(self):
         self.circle(self.grey5, 450, 180, 70)
@@ -81,8 +67,6 @@ class Profil(Element, Screen, Event_handler):
         # Profile picture
         self.profile_pict = pygame.draw.circle(self.screen.Window, self.theme_color, (450,180), 65)
         if self.is_mouse_over_button(self.profile_pict):
-            self.picture_cursor = True
-            self.hand_cursor()
             self.img_center("profile_picture", 450,180,100,100,f"profil/profil{self.picture}")
             self.circle_alpha(self.alpha_grey, 450, 180, 65)
             self.img_center("logo edit", 450,180,50,50,"logo_edit")
@@ -103,17 +87,6 @@ class Profil(Element, Screen, Event_handler):
             self.status_change = self.rect_full(self.grey6, x + 125, y, 80, 20, 8)
             self.text_center(self.font2, 15, texte2, self.black, x + 135, y)
             self.circle(color2, x +100, y, 8)
-
-            if self.is_mouse_over_button(self.status_edit_rect):
-                self.status_edit_cursor = True
-                self.hand_cursor()
-            else:
-                self.status_edit_cursor = False
-            if self.is_mouse_over_button(self.status_active_rect):
-                self.status_active_cursor = True
-                self.hand_cursor()
-            else:
-                self.status_active_cursor = False
 
     def status_circle(self):
         if self.status == "Online":
@@ -147,34 +120,24 @@ class Profil(Element, Screen, Event_handler):
             self.picture1 = pygame.draw.circle(self.screen.Window, self.theme_color, (570,170), 45)
             self.image_not_center("image1", 540, 140, 60, 60, f"profil/profil{self.pict[0]}")
             if self.is_mouse_over_button(self.picture1):
-                self.picture1_cursor = True
                 self.hover_profil1 = pygame.draw.circle(self.Window, self.yellow, (570, 170), 45, 4, True, False, True, False) 
                 self.hover_profil1 = pygame.draw.circle(self.Window, self.pink, (570, 170), 45, 4, False, True, False, True) 
-                self.hand_cursor()
-            else:
-                self.picture1_cursor = False
 
         if self.size_profile_picture > 270:
             self.picture2 = pygame.draw.circle(self.screen.Window, self.theme_color, (670,170), 45)
             self.image_not_center("image1", 640, 140, 60, 60, f"profil/profil{self.pict[1]}")
             if self.is_mouse_over_button(self.picture2):
-                self.picture2_cursor = True
                 self.hover_profil2 = pygame.draw.circle(self.Window, self.yellow, (670, 170), 45, 4, True, False, True, False) 
                 self.hover_profil2 = pygame.draw.circle(self.Window, self.pink, (670, 170), 45, 4, False, True, False, True) 
-                self.hand_cursor()
-            else:
-                self.picture2_cursor = False
+
 
         if self.size_profile_picture > 370:
             self.picture3 = pygame.draw.circle(self.screen.Window, self.theme_color, (770,170), 45)
             self.image_not_center("image1", 740, 140, 60, 60, f"profil/profil{self.pict[2]}")
             if self.is_mouse_over_button(self.picture3):
-                self.picture3_cursor = True
                 self.hover_profil3 = pygame.draw.circle(self.Window, self.yellow, (770, 170), 45, 4, True, False, True, False) 
                 self.hover_profil3 = pygame.draw.circle(self.Window, self.pink, (770, 170), 45, 4, False, True, False, True) 
-                self.hand_cursor()
-            else:
-                self.picture3_cursor = False
+
         self.hover_profile_picture()
         self.status_circle()
 
@@ -182,11 +145,8 @@ class Profil(Element, Screen, Event_handler):
         if not self.password_edit:
             self.show = pygame.Rect(450 + 10 * len(self.password),443,35,15)
             if self.is_mouse_over_button(self.show):
-                self.password_cursor = True
-                self.hand_cursor()
                 self.text_not_align(self.font2, 16, f"show",self.blue1,450 + 10 * len(self.password), 437)
             else:
-                self.password_cursor = False
                 self.text_not_align(self.font2, 14, f"show",self.grey1,450 + 10 * len(self.password), 438)
 
     def info_profil(self, title, text_info, y):
@@ -246,22 +206,9 @@ class Profil(Element, Screen, Event_handler):
             else:
                 self.text_not_align(self.font2, 16, self.password, self.black, 440, 440)
 
-    def info_profil_cursor(self, title):
-        if title == "Username":
-            self.username_cursor = self.is_mouse_over_button(self.username_rect)
-        elif title == "E-mail":
-            self.email_cursor = self.is_mouse_over_button(self.email_rect)
-        elif title == "Password":
-            self.pass_cursor = self.is_mouse_over_button(self.password_rect)
-        elif title == "Role":
-            self.role_cursor = self.is_mouse_over_button(self.role_rect)
-        elif title == "Status":
-            self.status_cursor = self.is_mouse_over_button(self.status_rect)
-        if self.username_cursor or self.email_cursor or self.pass_cursor or self.role_cursor or self.status_cursor:
-            self.hand_cursor()
-
     def profil_run(self):
         while self.profil_running :
+            self.profil_page_cursor()
             self.event_profil()
             self.design()
             self.info_profil_edit()
