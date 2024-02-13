@@ -1,17 +1,19 @@
 import pygame
 
+from source.pygame_manager.event_handler import Event_handler
 from source.pygame_manager.element import Element
 from source.pygame_manager.screen import Screen
-# from data.discord_manager import Discord_Manager
+from hashlib import sha256
+from data.discord_manager import Discord_Manager
 
-class Home(Element, Screen):
+class Home(Element, Screen, Event_handler, Discord_Manager):
     
     def __init__(self):
         Screen.__init__(self)
         Element.__init__(self)
-        # Discord_Manager.__init__(self)
+        Event_handler.__init__(self)
+        Discord_Manager.__init__(self)
     
-        pygame.init()
         self.input_email= "Email address"
         self.input_password= "Password"       
 
@@ -20,12 +22,19 @@ class Home(Element, Screen):
 
     # Intro section     
 
-        self.image_not_center("Discord", 250, 170, 400, 79,"home/home2")
-        self.text_not_align(self.font1,45,"Dive into", self.grey4,50, 203) 
-        self.text_not_align(self.font1,45,"Where Ideas Collide", self.grey4,50, 250)          
-        self.text_not_align(self.font2,20,"Discord is a versatile communication platform, voice,", self.grey4,80, 295)
-        self.text_not_align(self.font2,20,"and video chat features, fostering real-time interaction", self.grey4,80, 320)
-        self.text_not_align(self.font2,20,"and collaboration across diverse interests.", self.grey4,80, 345)
+        self.image_not_center("Discord", 250, 380, 400, 79,"home/home2")
+        self.text_not_align(self.font1,45,"Dive into", self.grey4,50, 413) 
+        self.text_not_align(self.font1,45,"Where Ideas Collide", self.grey4,50, 460)          
+        self.text_not_align(self.font2,20,"Discord is a versatile communication platform, voice,", self.grey4,80, 505)
+        self.text_not_align(self.font2,20,"and video chat features, fostering real-time interaction", self.grey4,80, 530)
+        self.text_not_align(self.font2,20,"and collaboration across diverse interests.", self.grey4,80, 555)
+
+        # Images animated
+        self.image_not_center("0wl", 170, 20, 370, 370,"home/home9") 
+        self.image_not_center("Cheetah", 210, 50, 300, 300,"home/home8") 
+        self.image_not_center("Lion", 170, 20, 370, 370,"home/home7") 
+        self.image_not_center("Wolf", 160, 0, 370, 370,"home/home6") 
+        self.image_not_center("Logo Discord", 270, 140, 170, 170,"home/home10")  
 
     # Connexion section       
 
@@ -47,6 +56,7 @@ class Home(Element, Screen):
 
         # Rect log In
         self.button_hover("login", 920, 410, 350, 50, self.blue, self.blue, self.blue1, self.blue1,"Log In", self.font1, self.white, 15, 4, 5) 
+        
         self.text_center(self.font2, 12,"Don't have an account ?", self.white, 900, 600)   
         self.text_center(self.font1, 12,"OR", self.blue, 920, 450)
       
@@ -59,8 +69,8 @@ class Home(Element, Screen):
         self.text_center(self.font2, 12,"Sign In with", self.white, 925, 475)   
         self.hover_image("Facebook", "Facebook", 880, 520, 30, 30, "home/home3")    # Facebook
         self.hover_image("Instagram", "Instagram", 925, 520, 30, 30,"home/home4")   # Instagram
-        self.hover_image("Google", "Google",  970, 520, 30, 30, "home/home5")       # Google    
-    
+        self.hover_image("Google", "Google",  970, 520, 30, 30, "home/home5")       # Google  
+
     def HoverLostPassword(self): 
         # self.rect_full(self.green, 1045, 360, 105, 10, 5)
         forgot_p = (pygame.Rect(992, 355, 115, 15))    
@@ -76,6 +86,17 @@ class Home(Element, Screen):
         else:
             self.text_center(self.font1, 11, "Sign Up", self.blue, 990, 600) 
 
+    def LoginUser (self): 
+        email = self.input_email
+        password = self.input_password
+
+        hashed_password = sha256(password.encode()).hexdigest()
+
+        if self.check_credentials(email, hashed_password):
+            print("Connexion successful!")     
+        else:
+            print("Error. Connexion failed")
+
     def DisplayAll(self): 
         self.design()
         self.HoverLostPassword() 
@@ -83,47 +104,14 @@ class Home(Element, Screen):
         
     def home_run(self):
 
-        home_run = True
-        while home_run :
-            for event in pygame.event.get():
-                if event.type == pygame.QUIT:
-                        home_run = False
+        self.home_running = True
+        while self.home_running :        
+            self.event_home()    
+            if self.is_mouse_over_button(pygame.Rect(920, 410, 350, 50)) and pygame.mouse.get_pressed()[0]:
+                self.LoginUser()   
 
-                elif event.type == pygame.MOUSEBUTTONDOWN:
-                    if self.input_email_rect.collidepoint(event.pos): 
-                        self.input_email = ""
-                        self.entry = 1
-                    elif self.input_password_rect.collidepoint(event.pos): 
-                        self.input_password = ""
-                        self.entry = 2
-
-                    # elif self.is_mouse_over_button(pygame.Rect(745, 385, 350, 50)):                         
-                    #     if self.input_email != "" and self.input_password != "":                  
-                    #         self.login(self.input_email, self.input_password) 
-               
-
-                elif event.type == pygame.KEYDOWN: 
-                    if event.key == pygame.K_BACKSPACE:
-                            if self.entry == 1: 
-                                self.input_email = self.input_email[:-1]
-                            elif self.entry == 2: 
-                                self.input_password = self.input_password[:-1]                        
-                    else:
-                        if self.entry == 1:
-                            if event.unicode:
-                                self.input_email= self.input_email + event.unicode             
-                     
-                        elif self.entry == 2:
-                            if event.unicode:
-                                self.input_password= self.input_password + event.unicode
-
-            
-
-                        
-                      
             self.DisplayAll()
-            self.update()
-            
+            self.update()            
 
 home = Home()
 home.home_run()

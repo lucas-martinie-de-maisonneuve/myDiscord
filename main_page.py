@@ -1,19 +1,24 @@
 import pygame
+
+from source.pygame_manager.event_handler import Event_handler
 from source.pygame_manager.element import Element
 from source.pygame_manager.screen import Screen
 from data.discord_manager import Discord_Manager
 
-class Main_page(Element, Screen,Discord_Manager):
+class Main_page(Element, Screen, Event_handler, Discord_Manager):
+    
     def __init__(self):
         Screen.__init__(self)
         Element.__init__(self)
+        Event_handler.__init__(self)
         Discord_Manager.__init__(self)
         pygame.init()
 
     def banner(self):
-        self.rect_full(self.grey4, 645, 35, 1110, 70, 0)
+        self.rect_full(self.grey8, 645, 35, 1110, 70, 0)   
 
     def FirstSection(self):
+
         # First section background color
         self.rect_full(self.grey7, 45, 350, 90, 700, 0)
 
