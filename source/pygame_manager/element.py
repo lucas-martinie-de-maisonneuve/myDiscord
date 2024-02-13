@@ -17,6 +17,8 @@ class Element:
         self.grey5 = (34, 31, 37)
         self.grey6 = (176, 186, 181)
         self.grey7 = (32, 34, 38) # First section principal page
+        self.grey8 = (51, 55, 62) # Cercle serveur
+       
 
         self.green = (66, 183, 42)
         self.dark_green = (43, 147, 72) #connected bubble

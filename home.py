@@ -20,14 +20,22 @@ class Home(Element, Screen, Event_handler, Discord_Manager):
     def design(self): 
         self.screen_color(self.grey)
 
+
     # Intro section     
 
-        self.image_not_center("Discord", 250, 170, 400, 79,"home/home2")
-        self.text_not_align(self.font1,45,"Dive into", self.grey4,50, 203) 
-        self.text_not_align(self.font1,45,"Where Ideas Collide", self.grey4,50, 250)          
-        self.text_not_align(self.font2,20,"Discord is a versatile communication platform, voice,", self.grey4,80, 295)
-        self.text_not_align(self.font2,20,"and video chat features, fostering real-time interaction", self.grey4,80, 320)
-        self.text_not_align(self.font2,20,"and collaboration across diverse interests.", self.grey4,80, 345)
+        self.image_not_center("Discord", 250, 320, 400, 79,"home/home2")
+        self.text_not_align(self.font1,45,"Dive into", self.grey4,50, 353) 
+        self.text_not_align(self.font1,45,"Where Ideas Collide", self.grey4,50, 400)          
+        self.text_not_align(self.font2,20,"Discord is a versatile communication platform, voice,", self.grey4,80, 445)
+        self.text_not_align(self.font2,20,"and video chat features, fostering real-time interaction", self.grey4,80, 470)
+        self.text_not_align(self.font2,20,"and collaboration across diverse interests.", self.grey4,80, 495)
+
+        # images 
+        self.image_not_center("Logo Discord", 350, 65, 70, 70,"home/home10") 
+        self.image_not_center("owls", 10, 65, 70, 70,"home/home9") 
+        self.image_not_center("Cheetah", 10, 65, 70, 70,"home/home8") 
+        self.image_not_center("Tigre", 10, 65, 70, 70,"home/home7")
+        self.image_not_center("Wolf", 10, 65, 70, 70,"home/home6")  
 
     # Connexion section       
 
@@ -62,7 +70,11 @@ class Home(Element, Screen, Event_handler, Discord_Manager):
         self.text_center(self.font2, 12,"Sign In with", self.white, 925, 475)   
         self.hover_image("Facebook", "Facebook", 880, 520, 30, 30, "home/home3")    # Facebook
         self.hover_image("Instagram", "Instagram", 925, 520, 30, 30,"home/home4")   # Instagram
-        self.hover_image("Google", "Google",  970, 520, 30, 30, "home/home5")       # Google    
+        self.hover_image("Google", "Google",  970, 520, 30, 30, "home/home5")       # Google  
+
+
+        
+  
     
     def HoverLostPassword(self): 
         # self.rect_full(self.green, 1045, 360, 105, 10, 5)
