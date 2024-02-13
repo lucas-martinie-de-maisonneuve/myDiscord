@@ -13,7 +13,10 @@ class Element:
         self.grey2 = (53, 53, 53)    
         self.grey3 = (25, 25, 25) 
         self.grey4 = (146, 151, 153)
-
+        self.grey5 = (46, 47, 52)
+        self.grey6 = (54,57,62)
+        self.grey7 = (46,48,53)
+        self.grey8 = (29, 32, 36)
         self.green = (66, 183, 42)
         self.blue = (0, 151, 254) # login
         self.blue1 = (0, 140, 234) # login  
