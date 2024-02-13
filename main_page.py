@@ -14,9 +14,12 @@ class Main_page(Element, Screen, Event_handler, Discord_Manager):
         Discord_Manager.__init__(self)
         pygame.init()
 
+        self.search_text = ""
+
     def banner(self):
-        self.rect_full(self.grey8, 645, 35, 1110, 70, 0)   
-        self.img_center("Names", 980, 35, 425, 60,"main_page/main_page6")
+        self.rect_full(self.grey8, 645, 35, 1110, 70, 0)
+
+        # self.text_not_align(self.font2, 40, "self.search_text", self.white, 10, 5)
 
     def FirstSection(self):
 
@@ -24,25 +27,27 @@ class Main_page(Element, Screen, Event_handler, Discord_Manager):
         self.rect_full(self.grey8, 45, 350, 90, 700, 0)
 
         # Main Logo    
-        self.image_not_center("Logo prinicpal", 2, 0, 90, 90,"main_page/main_page3")       
+        self.image_not_center("Logo prinicpal", 5, 10, 80, 80,"main_page/main_page1")   
+        self.img_center("Logo prinicpal", 44, 55, 105, 105,"main_page/main_page4")    
 
         # Hover server
-        self.cercle1 = pygame.draw.circle(self.Window, self.grey8, (44, 120), 35)     
+        self.cercle1 = pygame.draw.circle(self.Window, self.grey8, (44, 150), 35)     
         if self.is_mouse_over_button(self.cercle1):      
-            self.img_center("Logo prinicpal", 44, 120, 75, 75,"main_page/main_page2")
-            self.img_center("Logo prinicpal", 44, 120, 115, 115,"main_page/main_page4")
+            self.img_center("Logo prinicpal", 44, 150, 70, 70,"main_page/main_page2")
+            self.img_center("Logo prinicpal", 44, 150, 115, 115,"main_page/main_page4")
         else:          
-            self.img_center("Logo prinicpal", 44, 120, 85, 85,"main_page/main_page2")
-        
+            self.img_center("Logo prinicpal", 44, 150, 70, 70,"main_page/main_page2")
+            self.img_center("Logo prinicpal", 44, 150, 110, 110,"main_page/main_page4")
+          
         # Hover settings
-        self.cercle2 = pygame.draw.circle(self.Window, self.grey8, (45, 655), 35)
+        self.cercle2 = pygame.draw.circle(self.Window, self.grey8, (45, 640), 35)
         if self.is_mouse_over_button(self.cercle2):           
-            self.img_center("Logo prinicpal", 44, 640, 115, 115,"main_page/main_page4")   
-            self.img_center("settings", 44, 635, 85, 85,"main_page/main_page5")
-            self.img_center("settings", 55, 665, 30, 30,"main_page/main_page5")
+            self.img_center("neon server", 44, 640, 85, 85,"main_page/main_page5")
+            self.img_center("neon circle", 44, 640, 115, 115,"main_page/main_page4")   
         else:      
-            self.img_center("settings", 44, 635, 90, 90,"main_page/main_page5")
-            self.img_center("settings", 55, 665, 35, 35,"main_page/main_page5")
+            self.img_center("neon server", 44, 640, 85, 85,"main_page/main_page5")
+            self.img_center("neon circle", 44, 640, 110, 110,"main_page/main_page4") 
+     
 
     def SecondSection(self):
         self.rect_full(self.grey9, 220, 385, 260, 630, 0)
@@ -105,6 +110,17 @@ class Main_page(Element, Screen, Event_handler, Discord_Manager):
             for event in pygame.event.get():
                 if event.type == pygame.QUIT:
                         self.main_page_running = False
+
+                elif event.type == pygame.KEYDOWN:
+                    if event.key == pygame.K_RETURN:
+                        print("Recherche: " + search_text)
+                        # Faites quelque chose avec le texte saisi, par exemple une recherche en ligne
+                        search_text = ""
+                    elif event.key == pygame.K_BACKSPACE:
+                        search_text = search_text[:-1]
+                    else:
+                        search_text += event.unicode
+
 
             self.DisplayAll()
             self.update()
