@@ -30,6 +30,21 @@ class Event_handler:
                         self.email_edit, self.username_edit = False, False
                     else:
                         self.password_edit = False
+                elif self.status_rect.collidepoint(event.pos):
+                    if not self.status_edit:
+                        self.status_edit = True
+                    else:
+                        self.status_edit = False
+                elif self.status_edit_rect.collidepoint(event.pos):
+                    if self.status_edit:
+                        if self.status == "Away":
+                            self.status = "Online"
+                        else:
+                            self.status = "Away"
+                        self.status_edit = False
+                        self.status_edit_cursor = False
+                        self.status_active_cursor = False
+                            
                 elif self.profile_pict.collidepoint(event.pos):
                     if not self.picture_edit:
                         self.picture_edit = True

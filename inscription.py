@@ -65,10 +65,10 @@ class Inscription(Element, Screen,Event_handler):
             
     def profil_screen(self):
         # Profile pictures
-        self.img_center("profil1",380,140,65,65,"new_profil/profil1")
-        self.img_center("profil2",530,140,65,65,"new_profil/profil2")
-        self.img_center("profil3",680,140,65,65,"new_profil/profil3")
-        self.img_center("profil4",830,140,65,65,"new_profil/profil4")
+        self.img_center("profil1",380,140,65,65,"profil/profil1")
+        self.img_center("profil2",530,140,65,65,"profil/profil2")
+        self.img_center("profil3",680,140,65,65,"profil/profil3")
+        self.img_center("profil4",830,140,65,65,"profil/profil4")
         
     def profil_hover(self):
          # Cercle profile
