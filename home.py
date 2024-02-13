@@ -23,19 +23,19 @@ class Home(Element, Screen, Event_handler, Discord_Manager):
 
     # Intro section     
 
-        self.image_not_center("Discord", 250, 320, 400, 79,"home/home2")
-        self.text_not_align(self.font1,45,"Dive into", self.grey4,50, 353) 
-        self.text_not_align(self.font1,45,"Where Ideas Collide", self.grey4,50, 400)          
-        self.text_not_align(self.font2,20,"Discord is a versatile communication platform, voice,", self.grey4,80, 445)
-        self.text_not_align(self.font2,20,"and video chat features, fostering real-time interaction", self.grey4,80, 470)
-        self.text_not_align(self.font2,20,"and collaboration across diverse interests.", self.grey4,80, 495)
+        self.image_not_center("Discord", 250, 380, 400, 79,"home/home2")
+        self.text_not_align(self.font1,45,"Dive into", self.grey4,50, 413) 
+        self.text_not_align(self.font1,45,"Where Ideas Collide", self.grey4,50, 460)          
+        self.text_not_align(self.font2,20,"Discord is a versatile communication platform, voice,", self.grey4,80, 505)
+        self.text_not_align(self.font2,20,"and video chat features, fostering real-time interaction", self.grey4,80, 530)
+        self.text_not_align(self.font2,20,"and collaboration across diverse interests.", self.grey4,80, 555)
 
         # images 
-        self.image_not_center("Logo Discord", 350, 65, 70, 70,"home/home10") 
-        self.image_not_center("owls", 10, 65, 70, 70,"home/home9") 
-        self.image_not_center("Cheetah", 10, 65, 70, 70,"home/home8") 
-        self.image_not_center("Tigre", 10, 65, 70, 70,"home/home7")
-        self.image_not_center("Wolf", 10, 65, 70, 70,"home/home6")  
+        # self.image_not_center("0wl", 170, 20, 370, 370,"home/home9") 
+        # self.image_not_center("Cheetah", 210, 50, 300, 300,"home/home8") 
+        # self.image_not_center("Lion", 170, 20, 370, 370,"home/home7") 
+        # self.image_not_center("Wolf", 160, 0, 370, 370,"home/home6") 
+        self.image_not_center("Logo Discord", 270, 140, 170, 170,"home/home10")  
 
     # Connexion section       
 
