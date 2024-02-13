@@ -16,33 +16,29 @@ class Main_page(Element, Screen, Event_handler, Discord_Manager):
 
     def banner(self):
         self.rect_full(self.pink, 645, 35, 1110, 70, 0)
-
     
     def profil_hover(self):
 
         # Position hover
-        self.cercle1 = pygame.draw.circle(self.Window, self.black, (45, 120), 35)
+        self.cercle1 = pygame.draw.circle(self.Window, self.black, (44, 120), 35)
         self.cercle2 = pygame.draw.circle(self.Window, self.black, (45, 655), 35)
 
         # Hover cercle     
-        if self.is_mouse_over_button(self.cercle1):
-            pygame.draw.circle(self.Window, self.grey8, (45, 120), 35)
-            pygame.draw.circle(self.Window, self.red, (45, 120), 35, width=2)  
-            # self.image_not_center("Logo prinicpal", 0, 60, 90, 90,"main_page/main_page3")
-        else:
-            pygame.draw.circle(self.Window, self.grey8, (45, 120), 35)
-            pygame.draw.circle(self.Window, self.grey8, (45, 120), 35, width=2)
-            # self.image_not_center("Logo prinicpal", 0, 60, 90, 90,"main_page/main_page3")
+        if self.is_mouse_over_button(self.cercle1):      
+            self.img_center("Logo prinicpal", 44, 120, 70, 70,"main_page/main_page2")
+            self.img_center("Logo prinicpal", 44, 120, 115, 115,"main_page/main_page4")
+        else:          
+            self.img_center("Logo prinicpal", 44, 120, 70, 70,"main_page/main_page2")
+            
         
         if self.is_mouse_over_button(self.cercle2):
             pygame.draw.circle(self.Window, self.grey8, (45, 655), 35)
             pygame.draw.circle(self.Window, self.red, (45, 655), 35, width=2) 
-            self.image_not_center("Logo prinicpal", 0, 120, 90, 90,"main_page/main_page3") 
+            # self.image_not_center("Logo prinicpal", 0, 120, 90, 90,"main_page/main_page2") 
         else:
             pygame.draw.circle(self.Window, self.grey8, (45, 655), 35)
             pygame.draw.circle(self.Window, self.grey8, (45, 655), 35, width=2)
-            self.image_not_center("Logo prinicpal", 12, 615, 70, 70,"main_page/main_page3")
-
+            # self.image_not_center("Logo prinicpal", 5,515, 80, 80,"main_page/main_page2")
 
     
     def FirstSection(self): 
