@@ -28,21 +28,80 @@ class Discord_Manager(Database):
     def add_category(self, name, intro):
         sql = "INSERT INTO category (name, intro) VALUES (%s, %s)"
         values = (name, intro)
-        self.executeQuery(sql, values)
+        self.cursor.execute(sql, values)
+        self.connection.commit()
 
+    # Toutes Categories
     def display_category(self):
         sql = "SELECT * FROM category"
-        return self.fetch(sql)
+        self.cursor.execute(sql)
+        self.categorys = self.cursor.fetchall()
+        return self.categorys
+    
+    def count_category(self):
+        sql = "SELECT COUNT(*) AS nb FROM category"
+        self.cursor.execute(sql)
+        nb = self.cursor.fetchone()
+        return nb
+    
+    def id_category(self):
+        sql = "SELECT id FROM category"
+        self.cursor.execute(sql)
+        self.categorys = self.cursor.fetchall()
+        return self.categorys
 
-    def add_channel(self, name, status, communication, id_category):
-        sql = "INSERT INTO channel (name, status, communication, id_category) VALUES (%s, %s, %s, %s)"
-        values = (name, status, communication, id_category)
-        self.executeQuery(sql, values)
+    def name_category(self):
+        sql = "SELECT name FROM category"
+        self.cursor.execute(sql)
+        self.categorys = self.cursor.fetchall()
+        return self.categorys
+
+    # Ajout Channel
+    def add_channel(self,name,status,communication,id_category):
+        sql = "INSERT INTO channel (name,status,communication,id_category) VALUES (%s, %s,%s, %s)"
+        values = (name,status,communication,id_category)
+        self.cursor.execute(sql, values)
+        self.connection.commit()
 
     def display_channel(self):
         sql = "SELECT * FROM channel"
-        return self.fetch(sql)
+        self.cursor.execute(sql)
+        self.channels = self.cursor.fetchall()
+        return self.channels
 
+    def name_channel(self,id):
+        sql = "SELECT name FROM channel WHERE id_category = %s"
+        values = (id,)
+        self.cursor.execute(sql,values)
+        self.channels = self.cursor.fetchall()
+        return self.channels
+    
+    def count_channel(self):
+        sql = "SELECT COUNT(*) AS nb FROM channel"
+        self.cursor.execute(sql)
+        nb = self.cursor.fetchone()
+        return nb
+    
+    def count_channel(self,id):
+        sql = "SELECT COUNT(*) AS nb FROM channel WHERE id_category = %s"
+        values = (id,)
+        self.cursor.execute(sql,values)
+        nb = self.cursor.fetchone()
+        return nb
+    
+    def id_channel(self):
+        sql = "SELECT id_category FROM channel"
+        self.cursor.execute(sql)
+        self.channels = self.cursor.fetchall()
+        return self.channels
+
+    def communication_channel(self):
+        sql = "SELECT communication FROM channel"
+        self.cursor.execute(sql)
+        self.channels = self.cursor.fetchall()
+        return self.channels 
+
+    # Supprimer User
     def delete_user(self, id):
         sql = "DELETE FROM user WHERE id = %s"
         values = (id,)
@@ -85,7 +144,7 @@ class Discord_Manager(Database):
     #     self.connection.commit()
     
 manager = Discord_Manager()
-manager.display_category()
+# manager.display_category()
 # manager.add_user("surname", "name", "pseudo", "email", "password","photo","id_role")
 # manager.surname_user()
 # manager.display_user()
@@ -96,3 +155,5 @@ manager.display_category()
 # manager.delete_user("id")
 # manager.delete_category("id")
 # manager.delete_channel("id")
+# manager.name_channel()
+
