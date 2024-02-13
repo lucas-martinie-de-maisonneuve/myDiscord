@@ -157,41 +157,41 @@ class Profil(Element, Screen, Event_handler, Cursor):
 # White rectangle when 'Edit' is pressed
     def info_profil_edit(self):
         # Username info 
-        self.rect_full_not_centered(self.white, 420, 320, 0 + self.size_username, 20, 10)
+        self.rect_full_not_centered(self.white, 420, 322, 0 + self.size_username, 20, 12)
         if self.username_edit:
             if self.size_username < 240:
                 self.size_username += 15
-            self.text_not_align(self.font2, 16, self.username, self.black, 440, 320)
+            self.text_not_align(self.font2, 16, self.username, self.black, 440, 322)
         else:
             if self.size_username < 15:
                 self.size_username = 0
             if self.size_username > 0:
-                self.text_not_align(self.font2, 16, self.username, self.black, 440, 320)
+                self.text_not_align(self.font2, 16, self.username, self.black, 440, 322)
                 self.size_username -= 20
             else: 
-                self.text_not_align(self.font2, 16, self.username, self.white, 440, 320)
+                self.text_not_align(self.font2, 16, self.username, self.white, 440, 322)
 
         # Email info 
-        self.rect_full_not_centered(self.white, 420, 380, 0 + self.size_email, 20, 10)
+        self.rect_full_not_centered(self.white, 420, 382, 0 + self.size_email, 20, 12)
         if self.email_edit:
             if self.size_email < 240:
                 self.size_email += 15
-            self.text_not_align(self.font2, 16, self.email, self.black, 440, 380)
+            self.text_not_align(self.font2, 16, self.email, self.black, 440, 382)
         else:
             if self.size_email < 15:
                 self.size_email = 0
             if self.size_email > 0:
-                self.text_not_align(self.font2, 16, self.email, self.black, 440, 380)
+                self.text_not_align(self.font2, 16, self.email, self.black, 440, 382)
                 self.size_email -= 20
             else: 
-                self.text_not_align(self.font2, 16, self.email, self.white, 440, 380)
+                self.text_not_align(self.font2, 16, self.email, self.white, 440, 382)
 
         # Password info 
-        self.rect_full_not_centered(self.white, 420, 440, 0 + self.size_password, 20, 10)
+        self.rect_full_not_centered(self.white, 420, 442, 0 + self.size_password, 20, 12)
         if self.password_edit:
             if self.size_password < 240:
                 self.size_password += 15
-            self.text_not_align(self.font2, 16, self.password, self.black, 440, 440)
+            self.text_not_align(self.font2, 16, self.password, self.black, 440, 442)
         else:
             if self.size_password < 15:
                 self.size_password = 0
@@ -199,12 +199,12 @@ class Profil(Element, Screen, Event_handler, Cursor):
                 self.size_password -= 20
             if self.size_password < 100:
                 if self.show_pass:
-                    self.text_not_align(self.font2, 16, self.password, self.white, 440, 440)
+                    self.text_not_align(self.font2, 16, self.password, self.white, 440, 442)
                 else:
                     self.password_display = " *" * len(self.password)
-                    self.text_not_align(self.font2, 16, self.password_display, self.white, 440, 440)
+                    self.text_not_align(self.font2, 16, self.password_display, self.white, 440, 442)
             else:
-                self.text_not_align(self.font2, 16, self.password, self.black, 440, 440)
+                self.text_not_align(self.font2, 16, self.password, self.black, 440, 442)
 
     def profil_run(self):
         while self.profil_running :

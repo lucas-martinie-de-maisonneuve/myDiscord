@@ -1,6 +1,7 @@
 import pygame
 class Cursor:
     def __init__(self):
+        # Profile page __init__
         self.username_rect = pygame.Rect(960, 300, 80, 30)
         self.email_rect = pygame.Rect(960, 360, 80, 30)
         self.password_rect = pygame.Rect(960, 420, 80, 30)
@@ -11,6 +12,8 @@ class Cursor:
         self.picture3 = pygame.Rect(0, 0, 0, 0)
 
         self.password_cursor, self.pass_cursor, self.picture_cursor, self.username_cursor, self.email_cursor, self.role_cursor, self.status_cursor, self.picture1_cursor, self.picture2_cursor, self.picture3_cursor, self.disconnect_cursor, self.status_edit_cursor, self.status_active_cursor = False, False, False, False, False, False, False, False, False, False, False, False, False
+
+
 
     def profil_page_cursor(self):
 
