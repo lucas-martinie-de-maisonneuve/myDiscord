@@ -4,14 +4,16 @@ from source.pygame_manager.event_handler import Event_handler
 from source.pygame_manager.element import Element
 from source.pygame_manager.screen import Screen
 from source.pygame_manager.animation import Animation
+from source.pygame_manager.cursor import Cursor
 from hashlib import sha256
 from data.discord_manager import Discord_Manager
 
-class Home(Screen, Event_handler, Discord_Manager, Animation, Element):
+class Home(Screen, Event_handler, Discord_Manager, Animation, Element, Cursor):
     
     def __init__(self):
         Screen.__init__(self)
         Element.__init__(self)
+        Cursor.__init__(self)
         Event_handler.__init__(self)
         Discord_Manager.__init__(self)
         Animation.__init__(self)
@@ -103,7 +105,8 @@ class Home(Screen, Event_handler, Discord_Manager, Animation, Element):
     def home_run(self):
 
         while self.home_running :        
-            self.event_home()    
+            self.event_home()
+            self.home_page_cursor()
             if self.is_mouse_over_button(pygame.Rect(920, 410, 350, 50)) and pygame.mouse.get_pressed()[0]:
                 self.LoginUser()   
 

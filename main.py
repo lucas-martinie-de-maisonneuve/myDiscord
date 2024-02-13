@@ -17,6 +17,7 @@ class Display_test(Element, Screen):
     def __init__(self):
         Element.__init__(self)
         Screen.__init__(self)
+        self.main_running = True
         self.connexion = Home()
         self.profil = Profil()
         self.register = Register()
@@ -27,10 +28,10 @@ class Display_test(Element, Screen):
         self.main_page.main_page_running = False
 
     def test(self):
-        while True :
+        while self.main_running:
             for event in pygame.event.get():
                 if event.type == pygame.QUIT:
-                        self.main_page_running = False
+                    self.main_running = False
                 elif event.type == pygame.MOUSEBUTTONDOWN:
                     self.main_page.main_page_running = True
                     if self.princi.collidepoint(event.pos):

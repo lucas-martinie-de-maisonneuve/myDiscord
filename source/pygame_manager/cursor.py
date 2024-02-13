@@ -1,7 +1,12 @@
 import pygame
 class Cursor:
     def __init__(self):
-        # Profile page __init__
+        self.password_cursor, self.pass_cursor, self.picture_cursor, self.username_cursor, self.email_cursor, self.role_cursor, self.status_cursor, self.picture1_cursor, self.picture2_cursor, self.picture3_cursor, self.disconnect_cursor, self.status_edit_cursor, self.status_active_cursor = False, False, False, False, False, False, False, False, False, False, False, False, False
+        
+        self.login_cursor = False
+
+# Cursor on profil page
+    def profil_page_cursor(self):
         self.username_rect = pygame.Rect(960, 300, 80, 30)
         self.email_rect = pygame.Rect(960, 360, 80, 30)
         self.password_rect = pygame.Rect(960, 420, 80, 30)
@@ -11,11 +16,6 @@ class Cursor:
         self.picture2 = pygame.Rect(0, 0, 0, 0)
         self.picture3 = pygame.Rect(0, 0, 0, 0)
 
-        self.password_cursor, self.pass_cursor, self.picture_cursor, self.username_cursor, self.email_cursor, self.role_cursor, self.status_cursor, self.picture1_cursor, self.picture2_cursor, self.picture3_cursor, self.disconnect_cursor, self.status_edit_cursor, self.status_active_cursor = False, False, False, False, False, False, False, False, False, False, False, False, False
-
-
-
-    def profil_page_cursor(self):
 
         if not (self.password_cursor or self.picture_cursor or self.username_cursor or self.email_cursor or self.pass_cursor or self.role_cursor or self.status_cursor or self.picture1_cursor or self.picture2_cursor or self.picture3_cursor or self.disconnect_cursor or self.status_edit_cursor or self.status_active_cursor):
             self.normal_cursor()
@@ -25,9 +25,7 @@ class Cursor:
         if self.is_mouse_over_button(self.disconnect_button):
             self.disconnect_cursor = True
             self.hand_cursor()
-            self.img_center("disconnect", 195, 620, 220, 63, "profil/disconnect_hover")
         else:
-            self.img_center("disconnect", 195, 620, 200, 57, "profil/disconnect")
             self.disconnect_cursor = False
 
 # Cursor for profile picture
@@ -102,3 +100,14 @@ class Cursor:
         if self.username_cursor or self.email_cursor or self.pass_cursor or self.role_cursor or self.status_cursor:
             self.hand_cursor()
 
+# Cursor on log in page
+    def home_page_cursor(self):
+        if not self.login_cursor:
+            self.normal_cursor()
+
+        self.login_rect = pygame.Rect(745, 385, 350, 50)
+        if self.is_mouse_over_button(self.login_rect):
+            self.login_cursor = True
+            self.hand_cursor()
+        else:
+            self.login_cursor = False
