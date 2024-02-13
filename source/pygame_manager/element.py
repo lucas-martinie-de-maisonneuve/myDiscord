@@ -16,8 +16,8 @@ class Element:
         self.grey4 = (146, 151, 153)
         self.grey5 = (34, 31, 37)
         self.grey6 = (176, 186, 181)
-        self.grey7 = (32, 34, 38) # First section principal page
-        self.grey8 = (51, 55, 62) # Cercle serveur
+        self.grey7 = (30, 33, 35) # First section principal page
+        self.grey8 = (51, 55, 62) # Banner principal page
        
 
         self.green = (66, 183, 42)

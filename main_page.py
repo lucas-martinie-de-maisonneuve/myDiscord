@@ -15,40 +15,33 @@ class Main_page(Element, Screen, Event_handler, Discord_Manager):
         pygame.init()
 
     def banner(self):
-        self.rect_full(self.pink, 645, 35, 1110, 70, 0)
-    
-    def profil_hover(self):
+        self.rect_full(self.grey8, 645, 35, 1110, 70, 0)   
 
-        # Position hover
-        self.cercle1 = pygame.draw.circle(self.Window, self.black, (44, 120), 35)
-        self.cercle2 = pygame.draw.circle(self.Window, self.black, (45, 655), 35)
+    def FirstSection(self):
 
-        # Hover cercle     
+        # First section background color
+        self.rect_full(self.grey7, 45, 350, 90, 700, 0)
+
+        # Main Logo    
+        self.image_not_center("Logo prinicpal", 2, 0, 90, 90,"main_page/main_page3")       
+
+        # Hover server
+        self.cercle1 = pygame.draw.circle(self.Window, self.grey7, (44, 120), 35)     
         if self.is_mouse_over_button(self.cercle1):      
-            self.img_center("Logo prinicpal", 44, 120, 70, 70,"main_page/main_page2")
+            self.img_center("Logo prinicpal", 44, 120, 75, 75,"main_page/main_page2")
             self.img_center("Logo prinicpal", 44, 120, 115, 115,"main_page/main_page4")
         else:          
-            self.img_center("Logo prinicpal", 44, 120, 70, 70,"main_page/main_page2")
-            
+            self.img_center("Logo prinicpal", 44, 120, 85, 85,"main_page/main_page2")
         
-        if self.is_mouse_over_button(self.cercle2):
-            pygame.draw.circle(self.Window, self.grey8, (45, 655), 35)
-            pygame.draw.circle(self.Window, self.red, (45, 655), 35, width=2) 
-            # self.image_not_center("Logo prinicpal", 0, 120, 90, 90,"main_page/main_page2") 
-        else:
-            pygame.draw.circle(self.Window, self.grey8, (45, 655), 35)
-            pygame.draw.circle(self.Window, self.grey8, (45, 655), 35, width=2)
-            # self.image_not_center("Logo prinicpal", 5,515, 80, 80,"main_page/main_page2")
-
-    
-    def FirstSection(self): 
-        self.image_not_center("Logo prinicpal", 5, 4, 80, 80,"main_page/main_page1")
-       
-
-        # Images
-        
-
-
+        # Hover settings
+        self.cercle2 = pygame.draw.circle(self.Window, self.grey7, (45, 655), 35)
+        if self.is_mouse_over_button(self.cercle2):           
+            self.img_center("Logo prinicpal", 44, 640, 115, 115,"main_page/main_page4")   
+            self.img_center("settings", 44, 635, 85, 85,"main_page/main_page5")
+            self.img_center("settings", 55, 665, 30, 30,"main_page/main_page5")
+        else:      
+            self.img_center("settings", 44, 635, 90, 90,"main_page/main_page5")
+            self.img_center("settings", 55, 665, 35, 35,"main_page/main_page5")
 
     def SecondSection(self): 
         self.rect_full(self.green, 220, 385, 260, 630, 0)
@@ -62,7 +55,7 @@ class Main_page(Element, Screen, Event_handler, Discord_Manager):
         self.SecondSection()
         self.ThirdSection()
         self.banner()
-        self.profil_hover()
+        # self.profil_hover()
 
     def event_main_page(self):
         main_page_running = True
