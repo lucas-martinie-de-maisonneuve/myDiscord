@@ -85,8 +85,7 @@ class Event_handler:
     def event_home(self): 
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
-                self.home_running = False
-
+                self.home_running = False                
             elif event.type == pygame.MOUSEBUTTONDOWN:
                 if self.input_email_rect.collidepoint(event.pos): 
                     self.input_email = ""
@@ -134,10 +133,10 @@ class Event_handler:
                             if event.unicode:
                                 self.password += event.unicode
                      
-    def event_inscription(self):
+    def event_register(self):
         for event in pygame.event.get():
                 if event.type == pygame.QUIT:
-                    self.inscription_running = False
+                    self.register_running = False
                 elif event.type == pygame.MOUSEBUTTONDOWN:
                     if self.profil1_cercle.collidepoint(event.pos):
                         self.photo = 1

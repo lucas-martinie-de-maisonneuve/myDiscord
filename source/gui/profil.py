@@ -10,7 +10,7 @@ class Profil(Element, Screen, Event_handler, Cursor):
         Screen.__init__(self)
         Element.__init__(self)
         Cursor.__init__(self)
-        self.profil_running = True
+        self.profil_running = False
         self.edit = 0
 
         self.password_edit, self.username_edit, self.email_edit, self.picture_edit, self.status_edit = False, False, False, False, False
@@ -216,5 +216,3 @@ class Profil(Element, Screen, Event_handler, Cursor):
             self.profile_picture_edit()
             self.update()
             
-pro = Profil()
-pro.profil_run()

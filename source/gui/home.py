@@ -19,7 +19,8 @@ class Home(Screen, Event_handler, Discord_Manager, Animation, Element):
         self.input_email= "Email address"
         self.input_password= "Password"
         self.entry = 0
-
+        self.home_running = False
+        
     def design(self): 
         self.screen_color(self.grey)
 
@@ -101,7 +102,6 @@ class Home(Screen, Event_handler, Discord_Manager, Animation, Element):
         
     def home_run(self):
 
-        self.home_running = True
         while self.home_running :        
             self.event_home()    
             if self.is_mouse_over_button(pygame.Rect(920, 410, 350, 50)) and pygame.mouse.get_pressed()[0]:
@@ -109,6 +109,3 @@ class Home(Screen, Event_handler, Discord_Manager, Animation, Element):
 
             self.DisplayAll()
             self.update()            
-
-home = Home()
-home.home_run()

@@ -3,11 +3,13 @@ from source.pygame_manager.element import Element
 from source.pygame_manager.screen import Screen
 from data.discord_manager import Discord_Manager
 from source.pygame_manager.event_handler import Event_handler
-class Inscription(Element, Screen,Event_handler):
+
+class Register(Element, Screen,Event_handler):
     def __init__(self):
         Screen.__init__(self)
         Element.__init__(self)
-        self.inscription_running = True
+        
+        self.register_running = False
         self.manager = Discord_Manager()
         self.username = "Username"
         self.email = "Email address"
@@ -110,15 +112,10 @@ class Inscription(Element, Screen,Event_handler):
             self.profil4_cercle = pygame.draw.circle(self.Window, self.black, (830, 140), 50)
             self.hover_profil4_cercle= pygame.draw.circle(self.Window, self.grey2, (830, 140), 50, width=2)
 
-    def inscription_run(self):
-        self.inscription_running = True
-        while self.inscription_running:
+    def register_run(self):
+        while self.register_running:
             self.form()
             self.profil_hover()
             self.profil_screen()
-            self.event_inscription()
-
+            self.event_register()
             self.screen.update()
-
-test = Inscription()
-test.inscription_run()
