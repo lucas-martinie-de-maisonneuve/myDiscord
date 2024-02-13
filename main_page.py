@@ -9,7 +9,7 @@ class Main_page(Element, Screen,Discord_Manager):
         Element.__init__(self)
         Discord_Manager.__init__(self)
         pygame.init()
-        
+
     def banner(self):
         self.rect_full(self.grey4, 645, 35, 1110, 70, 0)
 
@@ -43,7 +43,11 @@ class Main_page(Element, Screen,Discord_Manager):
                         self.text_center(self.font2, 15, self.name_channel1, self.grey1, 200, (20*i)+320)
                     elif a==2:
                         self.text_center(self.font2, 15, self.name_channel1, self.grey1, 200, (20*i)+520)
-                
+                        
+        pygame.draw.line(self.Window, self.grey4, (100, 80), (300, 80), 3)
+        pygame.draw.line(self.Window, self.grey4, (100, 270), (300, 270), 3)
+        pygame.draw.line(self.Window, self.grey4, (100, 460), (300, 460), 3)
+
         # nb_categories = self.count_category()[0]
 
         # for a in range(nb_categories):
