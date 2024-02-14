@@ -68,10 +68,10 @@ class Register(Element, Screen,Event_handler):
     def profil_screen(self):
 
         # Profil pictures
-        self.img_center("profil1",380,140,90,65,"new_profil/profil1")
-        self.img_center("profil2",530,140,100,80,"new_profil/profil2")
-        self.img_center("profil3",680,140,80,60,"new_profil/profil3")
-        self.img_center("profil4",830,140,100,90,"new_profil/profil4")
+        self.img_center("profil1",380,140,90,65,"profil/profil1")
+        self.img_center("profil2",530,140,100,80,"profil/profil2")
+        self.img_center("profil3",680,140,80,60,"profil/profil3")
+        self.img_center("profil4",830,140,100,90,"profil/profil4")
         
     def profil_hover(self):
          # Cercle profil
@@ -118,22 +118,22 @@ class Register(Element, Screen,Event_handler):
        
        if self.profil_hovered:
                 if self.profil_hovered == self.profil1_cercle:
-                    self.img_center("neon circle", 380, 140, 140, 140,"new_profil/profil5")
+                    self.img_center("neon circle", 380, 140, 140, 140,"main_page/main_page4")
                     
                 elif self.profil_hovered == self.profil2_cercle:
-                    self.img_center("neon circle", 530, 140, 140, 140,"new_profil/profil5")
+                    self.img_center("neon circle", 530, 140, 140, 140,"main_page/main_page4")
                     
                 elif self.profil_hovered == self.profil3_cercle:
-                    self.img_center("neon circle", 680, 140, 140, 140,"new_profil/profil5")
+                    self.img_center("neon circle", 680, 140, 140, 140,"main_page/main_page4")
                     
                 elif self.profil_hovered == self.profil4_cercle:
-                    self.img_center("neon circle", 830, 140, 140, 140,"new_profil/profil5")
+                    self.img_center("neon circle", 830, 140, 140, 140,"main_page/main_page4")
 
     def register_run(self):
         while self.register_running:
             self.form()
             self.profil_hover()
             self.profil_screen()
-            self.event_inscription()
+            self.event_register()
             self.ProfilHovered()
-
+            self.update()

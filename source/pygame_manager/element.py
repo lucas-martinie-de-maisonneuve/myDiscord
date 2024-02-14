@@ -142,12 +142,11 @@ class Element:
 
         if self.is_mouse_over_button(name):
             self.rect_full(color_hoover, x, y, width + 5, height + 5, radius)
-            self.rect_border(color_border_hoover, x, y, width + 5, height + 5, thickness, radius)  
-            self.text_center(font, text_size, text, text_color,  x, y)
+            self.rect_border(color_border_hoover, x, y, width + 5, height + 5, thickness, radius)
         else:
             self.rect_full(color_full, x, y, width, height, radius)
             self.rect_border(color_border, x, y, width, height, thickness, radius)
-            self.text_center(font, text_size, text,text_color, x, y)
+        self.text_center(font, text_size, text, text_color,  x, y)
 
     def hover_image(self, name_rect, name, x, y, width, height, image_name): 
         name_rect = pygame.Rect( x - width//2, y - height//2, width, height)        
