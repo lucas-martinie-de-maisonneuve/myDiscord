@@ -111,6 +111,21 @@ class Inscription(Element, Screen,Event_handler):
             self.profil4_cercle = pygame.draw.circle(self.Window, self.black, (830, 140), 50)
             self.hover_profil4_cercle= pygame.draw.circle(self.Window, self.grey2, (830, 140), 50, width=2)
 
+    def ProfilHovered(self): 
+       
+       if self.profil_hovered:
+                if self.profil_hovered == self.profil1_cercle:
+                    self.img_center("neon circle", 380, 140, 140, 140,"new_profil/profil5")
+                    
+                elif self.profil_hovered == self.profil2_cercle:
+                    self.img_center("neon circle", 530, 140, 140, 140,"new_profil/profil5")
+                    
+                elif self.profil_hovered == self.profil3_cercle:
+                    self.img_center("neon circle", 680, 140, 140, 140,"new_profil/profil5")
+                    
+                elif self.profil_hovered == self.profil4_cercle:
+                    self.img_center("neon circle", 830, 140, 140, 140,"new_profil/profil5")
+
     def inscription_run(self):
         self.inscription_running = True
         while self.inscription_running:
@@ -118,6 +133,10 @@ class Inscription(Element, Screen,Event_handler):
             self.profil_hover()
             self.profil_screen()
             self.event_inscription()
+            self.ProfilHovered()
+            
+     
+  
 
             self.screen.update()
 
