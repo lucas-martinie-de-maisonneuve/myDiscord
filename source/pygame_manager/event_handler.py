@@ -20,7 +20,7 @@ class Event_handler():
                 if event.type == pygame.QUIT:
                     self.inscription_running = False
                 elif event.type == pygame.MOUSEBUTTONDOWN:
-                    if self.sign_log.collidepoint(event.pos):
+                    if self.sign_up.collidepoint(event.pos):
                         self.inscription_running = False
                     elif self.profil1_cercle.collidepoint(event.pos):
                         self.photo = 1
@@ -98,16 +98,3 @@ class Event_handler():
                         elif self.entry == 5:
                             if event.unicode:
                                 self.password = self.password + event.unicode
-
-        if self.profil_hovered:
-            if self.profil_hovered == self.profil1_cercle:
-                self.hover_profil1_cercle = pygame.draw.circle(self.Window, self.blue, (380, 140), 50, width=2)
-                
-            elif self.profil_hovered == self.profil2_cercle:
-                self.hover_profil2_cercle = pygame.draw.circle(self.Window, self.blue, (530, 140), 50, width=2)
-                
-            elif self.profil_hovered == self.profil3_cercle:
-                self.hover_profil3_cercle = pygame.draw.circle(self.Window, self.blue, (680, 140), 50, width=2)
-                
-            elif self.profil_hovered == self.profil4_cercle:
-                self.hover_profil4_cercle = pygame.draw.circle(self.Window, self.blue, (830, 140), 50, width=2)
