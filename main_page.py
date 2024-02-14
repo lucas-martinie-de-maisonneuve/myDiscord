@@ -64,7 +64,7 @@ class Main_page(Element, Screen, Event_handler, Discord_Manager):
             self.name_category1 = self.name_category()
             self.str_name2 = self.name_category1[a][0]
             self.name_category1 = f'{self.str_name2} '
-            self.text_not_align(self.font1, 18, self.name_category1, self.grey1, 160, (190*a) +100)
+            self.text_not_align(self.font1, 18, self.name_category1, self.grey1, 200, (190*a) +100)
 
             for i in range(self.nb_channels):
                 self.name_channel1 = self.name_channel(a+1)
@@ -73,17 +73,17 @@ class Main_page(Element, Screen, Event_handler, Discord_Manager):
                 
                 for _ in range(self.nb_channels):
                     if a==0:
-                        self.text_not_align(self.font2, 15, self.name_channel1, self.grey1, 160, (20*i)+120)
+                        self.text_not_align(self.font2, 15, self.name_channel1, self.grey1, 200, (20*i)+120)
                     elif a==1:
-                        self.text_not_align(self.font2, 15, self.name_channel1, self.grey1, 160, (20*i)+320)
+                        self.text_not_align(self.font2, 15, self.name_channel1, self.grey1, 200, (20*i)+320)
                     elif a==2:
-                        self.text_not_align(self.font2, 15, self.name_channel1, self.grey1, 160, (20*i)+520)
+                        self.text_not_align(self.font2, 15, self.name_channel1, self.grey1, 200, (20*i)+520)
                         
 
         # Neon light blue
-        self.img_center("Logo prinicpal", 260, 230, 120, 105,"main_page/main_page7")
-        self.img_center("Logo prinicpal", 260, 430, 120, 105,"main_page/main_page7")
-        self.img_center("Logo prinicpal", 260, 630, 120, 105,"main_page/main_page7")     
+        self.img_center("Neon light", 260, 230, 140, 105,"main_page/main_page7")
+        self.img_center("Neon light", 260, 430, 140, 105,"main_page/main_page7")
+        self.img_center("Neon Light", 260, 630, 140, 105,"main_page/main_page7")     
 
     def ThirdSection(self):
         self.rect_full(self.grey6, 795, 385, 775, 610, 10)
