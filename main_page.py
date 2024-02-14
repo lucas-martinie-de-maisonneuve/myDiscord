@@ -51,7 +51,6 @@ class Main_page(Element, Screen, Event_handler, Discord_Manager):
             self.img_center("neon server", 44, 640, 85, 85,"main_page/main_page5")
             self.img_center("neon circle", 44, 640, 110, 110,"main_page/main_page4") 
      
-
     def SecondSection(self):
         self.rect_full(self.grey9, 220, 385, 260, 630, 0)
 
@@ -80,7 +79,6 @@ class Main_page(Element, Screen, Event_handler, Discord_Manager):
                     elif a==2:
                         self.text_not_align(self.font2, 15, self.name_channel1, self.grey1, 120, (20*i)+520)                       
 
-
         # Neon light blue
         self.img_center("Logo prinicpal", 215, 230, 120, 105,"main_page/main_page7")
         self.img_center("Logo prinicpal", 215, 430, 120, 105,"main_page/main_page7")
@@ -94,8 +92,7 @@ class Main_page(Element, Screen, Event_handler, Discord_Manager):
         self.banner()
         self.FirstSection()
         self.SecondSection()
-        self.ThirdSection()  
-   
+        self.ThirdSection()            
 
     def event_main_page(self):
         self.main_page_running = True
