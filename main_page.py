@@ -77,9 +77,9 @@ class Main_page(Element, Screen, Event_handler, Discord_Manager):
                     elif a==2:
                         self.text_center(self.font2, 15, self.name_channel1, self.grey1, 200, (20*i)+520)
                         
-        pygame.draw.line(self.Window, self.grey4, (100, 80), (300, 80), 3)
-        pygame.draw.line(self.Window, self.grey4, (100, 270), (300, 270), 3)
-        pygame.draw.line(self.Window, self.grey4, (100, 460), (300, 460), 3)
+        # pygame.draw.line(self.Window, self.grey4, (100, 80), (300, 80), 3)
+        # pygame.draw.line(self.Window, self.grey4, (100, 270), (300, 270), 3)
+        # pygame.draw.line(self.Window, self.grey4, (100, 460), (300, 460), 3)
 
         # nb_categories = self.count_category()[0]
 
@@ -94,15 +94,22 @@ class Main_page(Element, Screen, Event_handler, Discord_Manager):
         #         position = (20 * i) + (120 if a == 0 else 320 if a == 1 else 520)
         #         self.text_center(self.font1, 15, name_channel_item, self.grey1, 200, position)
 
+
+        # Neon light blue
+        self.img_center("Logo prinicpal", 215, 230, 120, 105,"main_page/main_page7")
+        self.img_center("Logo prinicpal", 215, 430, 120, 105,"main_page/main_page7")
+        self.img_center("Logo prinicpal", 215, 630, 120, 105,"main_page/main_page7")
+     
+
     def ThirdSection(self):
         self.rect_full(self.grey6, 775, 385, 850, 630, 0)
-        self.img_background("background", 775, 385, 850, 630, "main_page/main4")
+        self.img_background("background", 775, 385, 850, 630, "main_page/main_page6")
 
     def DisplayAll(self): 
+        self.banner()
         self.FirstSection()
         self.SecondSection()
-        self.ThirdSection()
-        self.banner()
+        self.ThirdSection()   
 
     def event_main_page(self):
         self.main_page_running = True
@@ -120,7 +127,6 @@ class Main_page(Element, Screen, Event_handler, Discord_Manager):
                         search_text = search_text[:-1]
                     else:
                         search_text += event.unicode
-
 
             self.DisplayAll()
             self.update()
