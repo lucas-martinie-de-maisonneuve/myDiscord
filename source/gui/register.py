@@ -6,7 +6,7 @@ from source.pygame_manager.event_handler import Event_handler
 from source.pygame_manager.cursor import Cursor
 from source.pygame_manager.animation import Animation
 
-class Register(Element, Screen,Event_handler, Cursor, Animation):
+class Register(Element, Screen, Event_handler, Cursor, Animation):
     def __init__(self):
         Screen.__init__(self)
         Element.__init__(self)
@@ -29,7 +29,6 @@ class Register(Element, Screen,Event_handler, Cursor, Animation):
     def form(self):
 
         # Display rectangles
-        # self.Window.fill(self.white)
         self.img_background("Background", 600,350,1200,700,"register/background_register")
         self.logo_home(150, 127, 260, 140, 105)
         self.screen_alpha(self.alpha_grey2)
