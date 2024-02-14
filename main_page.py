@@ -20,7 +20,7 @@ class Main_page(Element, Screen, Event_handler, Discord_Manager):
         self.img_background("background", 600, 350, 1200, 800, "main_page/main_page8")
         
     def banner(self):
-        self.rect_full(self.grey8, 658, 40, 1055, 60, 10)
+        self.rect_full(self.grey8, 655, 40, 1055, 60, 10)
 
         # self.text_not_align(self.font2, 40, "self.search_text", self.white, 10, 5)
 
@@ -31,7 +31,7 @@ class Main_page(Element, Screen, Event_handler, Discord_Manager):
 
         # Main Logo    
         self.image_not_center("Logo prinicpal", 25, 10, 80, 80,"main_page/main_page1")   
-        self.img_center("Logo prinicpal", 64, 55, 105, 105,"main_page/main_page4")    
+        # self.img_center("Logo prinicpal", 64, 55, 105, 105,"main_page/main_page4")    
 
         # Hover server
         self.cercle1 = pygame.draw.circle(self.Window, self.grey8, (64, 150), 35)     
@@ -53,7 +53,7 @@ class Main_page(Element, Screen, Event_handler, Discord_Manager):
      
 
     def SecondSection(self):
-        self.rect_full(self.grey9, 260, 385, 260, 610, 10)
+        self.rect_full(self.grey9, 257, 385, 260, 610, 10)
 
         self.nb_category = self.count_category()
         self.nb_category = self.nb_category[0]
@@ -65,7 +65,7 @@ class Main_page(Element, Screen, Event_handler, Discord_Manager):
             self.name_category1 = self.name_category()
             self.str_name2 = self.name_category1[a][0]
             self.name_category1 = f'{self.str_name2} '
-            self.text_not_align(self.font1, 18, self.name_category1, self.grey1, 140, (190*a) +100)
+            self.text_not_align(self.font1, 18, self.name_category1, self.grey1, 160, (190*a) +100)
 
             for i in range(self.nb_channels):
                 self.name_channel1 = self.name_channel(a+1)
@@ -74,11 +74,11 @@ class Main_page(Element, Screen, Event_handler, Discord_Manager):
                 
                 for _ in range(self.nb_channels):
                     if a==0:
-                        self.text_not_align(self.font2, 15, self.name_channel1, self.grey1, 140, (20*i)+120)
+                        self.text_not_align(self.font2, 15, self.name_channel1, self.grey1, 160, (20*i)+120)
                     elif a==1:
-                        self.text_not_align(self.font2, 15, self.name_channel1, self.grey1, 140, (20*i)+320)
+                        self.text_not_align(self.font2, 15, self.name_channel1, self.grey1, 160, (20*i)+320)
                     elif a==2:
-                        self.text_not_align(self.font2, 15, self.name_channel1, self.grey1, 140, (20*i)+520)
+                        self.text_not_align(self.font2, 15, self.name_channel1, self.grey1, 160, (20*i)+520)
                         
 
 
@@ -88,7 +88,7 @@ class Main_page(Element, Screen, Event_handler, Discord_Manager):
         self.img_center("Logo prinicpal", 215, 630, 120, 105,"main_page/main_page7")     
 
     def ThirdSection(self):
-        self.rect_full(self.grey6, 795, 385, 780, 610, 10)
+        self.rect_full(self.grey6, 795, 385, 775, 610, 10)
         # self.img_background("background", 775, 385, 850, 630, "main_page/main_page6")
 
     def DisplayAll(self): 
