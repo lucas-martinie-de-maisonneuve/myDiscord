@@ -20,14 +20,14 @@ class Main_page(Element, Screen, Event_handler, Discord_Manager):
         self.img_background("background", 600, 350, 1200, 800, "main_page/main_page8")
         
     def banner(self):
-        self.rect_full(self.grey8, 655, 40, 1055, 60, 10)
+        self.rect_full(self.grey10, 655, 40, 1055, 60, 10)
 
         # self.text_not_align(self.font2, 40, "self.search_text", self.white, 10, 5)
 
     def FirstSection(self):
 
         # First section background color
-        self.rect_full(self.grey8, 65, 350, 90, 680, 10)
+        self.rect_full(self.grey10, 65, 350, 90, 680, 10)
 
         # Main Logo    
         self.image_not_center("Logo prinicpal", 20, 25, 95, 95,"main_page/main_page1")   
@@ -62,7 +62,7 @@ class Main_page(Element, Screen, Event_handler, Discord_Manager):
    
      
     def SecondSection(self):
-        self.rect_full(self.grey9, 257, 385, 260, 610, 10)
+        self.rect_full(self.grey10, 257, 385, 260, 610, 10)
 
         self.nb_category = self.count_category()
         self.nb_category = self.nb_category[0]
@@ -74,7 +74,7 @@ class Main_page(Element, Screen, Event_handler, Discord_Manager):
             self.name_category1 = self.name_category()
             self.str_name2 = self.name_category1[a][0]
             self.name_category1 = f'{self.str_name2} '
-            self.text_not_align(self.font1, 18, self.name_category1, self.grey1, 160, (190*a) +100)
+            self.text_not_align(self.font1, 18, self.name_category1, self.grey1, 200, (190*a) +100)
 
             for i in range(self.nb_channels):
                 self.name_channel1 = self.name_channel(a+1)
@@ -83,17 +83,16 @@ class Main_page(Element, Screen, Event_handler, Discord_Manager):
                 
                 for _ in range(self.nb_channels):
                     if a==0:
-                        self.text_not_align(self.font2, 15, self.name_channel1, self.grey1, 160, (20*i)+120)
+                        self.text_not_align(self.font2, 15, self.name_channel1, self.grey1, 200, (20*i)+120)
                     elif a==1:
-                        self.text_not_align(self.font2, 15, self.name_channel1, self.grey1, 160, (20*i)+320)
+                        self.text_not_align(self.font2, 15, self.name_channel1, self.grey1, 200, (20*i)+320)
                     elif a==2:
-                        self.text_not_align(self.font2, 15, self.name_channel1, self.grey1, 160, (20*i)+520)
+                        self.text_not_align(self.font2, 15, self.name_channel1, self.grey1, 200, (20*i)+520)
                         
-
         # Neon light blue
-        self.img_center("Logo prinicpal", 260, 230, 120, 105,"main_page/main_page7")
-        self.img_center("Logo prinicpal", 260, 430, 120, 105,"main_page/main_page7")
-        self.img_center("Logo prinicpal", 260, 630, 120, 105,"main_page/main_page7")    
+        self.img_center("Neon light", 260, 230, 140, 105,"main_page/main_page7")
+        self.img_center("Neon light", 260, 430, 140, 105,"main_page/main_page7")
+        self.img_center("Neon Light", 260, 630, 140, 105,"main_page/main_page7")    
 
         # Images neon
         self.img_center("Volume logo ia", 165, 350, 35, 35,"main_page/main_page10")
@@ -104,8 +103,8 @@ class Main_page(Element, Screen, Event_handler, Discord_Manager):
 
 
     def ThirdSection(self):
-        self.rect_full(self.grey6, 795, 385, 775, 610, 10)
-        # self.img_background("background", 775, 385, 850, 630, "main_page/main_page6")
+        self.rect_full(self.grey10, 795, 385, 775, 610, 10)
+        self.rect_full(self.grey1, 795, 650, 650, 60, 10)
 
     def DisplayAll(self): 
         self.background() 
