@@ -62,7 +62,7 @@ class Main_page(Element, Screen, Event_handler, Discord_Manager):
             self.name_category1 = self.name_category()
             self.str_name2 = self.name_category1[a][0]
             self.name_category1 = f'{self.str_name2} '
-            self.text_center(self.font1, 18, self.name_category1, self.grey1, 170, (190*a) +100)
+            self.text_not_align(self.font1, 18, self.name_category1, self.grey1, 120, (190*a) +100)
 
             for i in range(self.nb_channels):
                 self.name_channel1 = self.name_channel(a+1)
@@ -71,28 +71,12 @@ class Main_page(Element, Screen, Event_handler, Discord_Manager):
                 
                 for _ in range(self.nb_channels):
                     if a==0:
-                        self.text_center(self.font2, 15, self.name_channel1, self.grey1, 200, (20*i)+120)
+                        self.text_not_align(self.font2, 15, self.name_channel1, self.grey1, 120, (20*i)+120)
                     elif a==1:
-                        self.text_center(self.font2, 15, self.name_channel1, self.grey1, 200, (20*i)+320)
+                        self.text_not_align(self.font2, 15, self.name_channel1, self.grey1, 120, (20*i)+320)
                     elif a==2:
-                        self.text_center(self.font2, 15, self.name_channel1, self.grey1, 200, (20*i)+520)
+                        self.text_not_align(self.font2, 15, self.name_channel1, self.grey1, 120, (20*i)+520)
                         
-        # pygame.draw.line(self.Window, self.grey4, (100, 80), (300, 80), 3)
-        # pygame.draw.line(self.Window, self.grey4, (100, 270), (300, 270), 3)
-        # pygame.draw.line(self.Window, self.grey4, (100, 460), (300, 460), 3)
-
-        # nb_categories = self.count_category()[0]
-
-        # for a in range(nb_categories):
-        #     nb_channels = self.count_channel(a + 1)[0]
-
-        #     name_category_item = f'{self.name_category()[a][0]} '
-        #     self.text_center(self.font1, 18, name_category_item, self.grey1, 170, (190 * a) + 100)
-
-        #     for i in range(nb_channels):
-        #         name_channel_item = f'{self.name_channel(a + 1)[i][0]} '
-        #         position = (20 * i) + (120 if a == 0 else 320 if a == 1 else 520)
-        #         self.text_center(self.font1, 15, name_channel_item, self.grey1, 200, position)
 
 
         # Neon light blue
