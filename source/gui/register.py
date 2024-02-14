@@ -4,11 +4,12 @@ from source.pygame_manager.screen import Screen
 from data.discord_manager import Discord_Manager
 from source.pygame_manager.event_handler import Event_handler
 
-class Inscription(Element, Screen,Event_handler):
+class Register(Element, Screen,Event_handler):
     def __init__(self):
         Screen.__init__(self)
         Element.__init__(self)
-        self.inscription_running = True
+        
+        self.register_running = False
         self.manager = Discord_Manager()
         self.username = "Username"
         self.email = "Email address"
@@ -128,15 +129,11 @@ class Inscription(Element, Screen,Event_handler):
                 elif self.profil_hovered == self.profil4_cercle:
                     self.img_center("neon circle", 830, 140, 140, 140,"new_profil/profil5")
 
-    def inscription_run(self):
-        self.inscription_running = True
-        while self.inscription_running:
+    def register_run(self):
+        while self.register_running:
             self.form()
             self.profil_hover()
             self.profil_screen()
             self.event_inscription()
             self.ProfilHovered()
-            self.screen.update()
 
-test = Inscription()
-test.inscription_run()

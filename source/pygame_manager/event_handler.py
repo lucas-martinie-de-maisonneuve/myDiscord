@@ -10,15 +10,133 @@ class Event_handler():
                     self.profil_running = False
             if event.type == pygame.MOUSEBUTTONDOWN:
                 if self.show.collidepoint(event.pos):
+                    self.show_pass = True
                     self.password_display = self.password
+                elif self.username_rect.collidepoint(event.pos):
+                    if not self.username_edit:
+                        self.username_edit = True
+                        self.email_edit, self.password_edit = False, False
+                    else :
+                        self.username_edit = False
+                elif self.email_rect.collidepoint(event.pos):
+                    if not self.email_edit:
+                        self.email_edit = True
+                        self.username_edit, self.password_edit = False, False
+                    else:
+                        self.email_edit = False
+                elif self.password_rect.collidepoint(event.pos):
+                    if not self.password_edit:
+                        self.password_edit = True
+                        self.email_edit, self.username_edit = False, False
+                    else:
+                        self.password_edit = False
+                elif self.status_rect.collidepoint(event.pos):
+                    if not self.status_edit:
+                        self.status_edit = True
+                    else:
+                        self.status_edit = False
+                elif self.status_edit_rect.collidepoint(event.pos):
+                    if self.status_edit:
+                        if self.status == "Away":
+                            self.status = "Online"
+                        else:
+                            self.status = "Away"
+                        self.status_edit = False
+                        self.status_edit_cursor = False
+                        self.status_active_cursor = False
+                            
+                elif self.profile_pict.collidepoint(event.pos):
+                    if not self.picture_edit:
+                        self.picture_edit = True
+                    else: 
+                        self.picture_edit = False
+                elif self.picture1.collidepoint(event.pos):
+                    self.picture = self.pict[0]
+                elif self.picture2.collidepoint(event.pos):
+                    self.picture = self.pict[1]
+                elif self.picture3.collidepoint(event.pos):
+                    self.picture = self.pict[2]
+
             elif event.type == pygame.MOUSEBUTTONUP:
                 if self.show.collidepoint(event.pos):
+                     self.show_pass = False
                      self.password_display = " *" * len(self.password)
+
+            elif event.type == pygame.KEYDOWN:
+                if event.key == pygame.K_BACKSPACE:
+                    if self.username_edit:
+                        self.username = self.username[:-1]
+                    if self.email_edit:
+                        self.email = self.email[:-1]
+                    if self.password_edit:
+                        self.password = self.password[:-1]
+                else:
+                    if self.username_edit:
+                        if event.unicode:
+                            self.username += event.unicode
+                    elif self.email_edit:
+                            if event.unicode:
+                                self.email += event.unicode
+                    elif self.password_edit:
+                            if event.unicode:
+                                self.password += event.unicode
+                          
+
+    def event_home(self): 
+        for event in pygame.event.get():
+            if event.type == pygame.QUIT:
+                self.home_running = False                
+            elif event.type == pygame.MOUSEBUTTONDOWN:
+                if self.input_email_rect.collidepoint(event.pos): 
+                    self.input_email = ""
+                    self.entry = 1
+                elif self.input_password_rect.collidepoint(event.pos): 
+                    self.input_password = ""
+                    self.entry = 2
+
+                # elif self.is_mouse_over_button(pygame.Rect(745, 385, 350, 50)):                         
+                #     if self.input_email != "" and self.input_password != "":                  
+                #         self.login(self.input_email, self.input_password)
+
+            elif event.type == pygame.KEYDOWN: 
+                if event.key == pygame.K_BACKSPACE:
+                        if self.entry == 1: 
+                            self.input_email = self.input_email[:-1]
+                        elif self.entry == 2: 
+                            self.input_password = self.input_password[:-1]                        
+                else:
+                    if self.entry == 1:
+                        if event.unicode:
+                            self.input_email= self.input_email + event.unicode             
+                    
+                    elif self.entry == 2:
+                        if event.unicode:
+                            self.input_password= self.input_password + event.unicode
+
+
+            elif event.type == pygame.KEYDOWN:
+                if event.key == pygame.K_BACKSPACE:
+                    if self.username_edit:
+                        self.username = self.username[:-1]
+                    if self.email_edit:
+                        self.email = self.email[:-1]
+                    if self.password_edit:
+                        self.password = self.password[:-1]
+                else:
+                    if self.username_edit:
+                        if event.unicode:
+                            self.username += event.unicode
+                    elif self.email_edit:
+                            if event.unicode:
+                                self.email += event.unicode
+                    elif self.password_edit:
+                            if event.unicode:
+                                self.password += event.unicode
                      
-    def event_inscription(self):
+    def event_register(self):
         for event in pygame.event.get():
                 if event.type == pygame.QUIT:
-                    self.inscription_running = False
+                    self.register_running = False
                 elif event.type == pygame.MOUSEBUTTONDOWN:
                     if self.sign_up.collidepoint(event.pos):
                         self.inscription_running = False
