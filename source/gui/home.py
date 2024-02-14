@@ -3,20 +3,26 @@ import pygame
 from source.pygame_manager.event_handler import Event_handler
 from source.pygame_manager.element import Element
 from source.pygame_manager.screen import Screen
+from source.pygame_manager.animation import Animation
+from source.pygame_manager.cursor import Cursor
 from hashlib import sha256
 from data.discord_manager import Discord_Manager
 
-class Home(Element, Screen, Event_handler, Discord_Manager):
+class Home(Screen, Event_handler, Discord_Manager, Animation, Element, Cursor):
     
     def __init__(self):
         Screen.__init__(self)
         Element.__init__(self)
+        Cursor.__init__(self)
         Event_handler.__init__(self)
         Discord_Manager.__init__(self)
+        Animation.__init__(self)
     
         self.input_email= "Email address"
-        self.input_password= "Password"       
-
+        self.input_password= "Password"
+        self.entry = 0
+        self.home_running = False
+        
     def design(self): 
         self.screen_color(self.grey)
 
@@ -28,13 +34,6 @@ class Home(Element, Screen, Event_handler, Discord_Manager):
         self.text_not_align(self.font2,20,"Discord is a versatile communication platform, voice,", self.grey4,80, 505)
         self.text_not_align(self.font2,20,"and video chat features, fostering real-time interaction", self.grey4,80, 530)
         self.text_not_align(self.font2,20,"and collaboration across diverse interests.", self.grey4,80, 555)
-
-        # Images animated
-        self.image_not_center("0wl", 170, 20, 370, 370,"home/home9") 
-        self.image_not_center("Cheetah", 210, 50, 300, 300,"home/home8") 
-        self.image_not_center("Lion", 170, 20, 370, 370,"home/home7") 
-        self.image_not_center("Wolf", 160, 0, 370, 370,"home/home6") 
-        self.image_not_center("Logo Discord", 270, 140, 170, 170,"home/home10")  
 
     # Connexion section       
 
@@ -80,11 +79,11 @@ class Home(Element, Screen, Event_handler, Discord_Manager):
             self.text_center(self.font1, 11,"Forgot password", self.blue, 1045, 360)
     
     def HoverSign(self):
-        sign = (pygame.Rect(967, 594, 45, 13))    
+        sign = (pygame.Rect(967, 594, 45, 13))
         if self.is_mouse_over_button(sign):
-            self.text_center(self.font1, 12, "Sign Up", self.blue, 990, 600)          
+            self.text_center(self.font1, 12, "Sign Up", self.blue, 990, 600)
         else:
-            self.text_center(self.font1, 11, "Sign Up", self.blue, 990, 600) 
+            self.text_center(self.font1, 11, "Sign Up", self.blue, 990, 600)
 
     def LoginUser (self): 
         email = self.input_email
@@ -101,17 +100,15 @@ class Home(Element, Screen, Event_handler, Discord_Manager):
         self.design()
         self.HoverLostPassword() 
         self.HoverSign()       
+        self.logo_home()  #Images animated
         
     def home_run(self):
 
-        self.home_running = True
         while self.home_running :        
-            self.event_home()    
+            self.event_home()
+            self.home_page_cursor()
             if self.is_mouse_over_button(pygame.Rect(920, 410, 350, 50)) and pygame.mouse.get_pressed()[0]:
                 self.LoginUser()   
 
             self.DisplayAll()
             self.update()            
-
-home = Home()
-home.home_run()

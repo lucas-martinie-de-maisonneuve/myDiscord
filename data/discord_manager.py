@@ -135,6 +135,22 @@ class Discord_Manager(Database):
         sql = "SELECT * FROM message"
         return self.fetch(sql)
 
+    def name_message(self):
+        sql = "SELECT name FROM message"
+        return self.fetch(sql)
+    
+    def time_message(self):
+        sql = "SELECT time FROM message"
+        return self.fetch(sql)
+
+    def message_message(self):
+        sql = "SELECT message FROM message"
+        return self.fetch(sql)
+
+    def id_channel_message(self):
+        sql = "SELECT id_channel FROM message"
+        return self.fetch(sql)
+
     def close_connection(self):
         self.disconnect()
 
