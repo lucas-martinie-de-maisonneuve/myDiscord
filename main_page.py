@@ -30,8 +30,8 @@ class Main_page(Element, Screen, Event_handler, Discord_Manager):
         self.rect_full(self.grey8, 65, 350, 90, 680, 10)
 
         # Main Logo    
-        self.image_not_center("Logo prinicpal", 25, 10, 80, 80,"main_page/main_page1")   
-        # self.img_center("Logo prinicpal", 64, 55, 105, 105,"main_page/main_page4")    
+        self.image_not_center("Logo prinicpal", 25, 10, 90, 90,"main_page/main_page1")   
+        # self.img_center("neon cercle", 64, 55, 105, 105,"main_page/main_page4")    
 
         # Hover server
         self.cercle1 = pygame.draw.circle(self.Window, self.grey8, (64, 150), 35)     
@@ -40,7 +40,7 @@ class Main_page(Element, Screen, Event_handler, Discord_Manager):
             self.img_center("Logo prinicpal", 64, 150, 115, 115,"main_page/main_page4")
         else:          
             self.img_center("Logo prinicpal", 64, 150, 70, 70,"main_page/main_page2")
-            self.img_center("Logo prinicpal", 64, 150, 110, 110,"main_page/main_page4")
+            self.img_center("neon cercle", 64, 150, 110, 110,"main_page/main_page4")
           
         # Hover settings
         self.cercle2 = pygame.draw.circle(self.Window, self.grey8, (64, 640), 35)
@@ -81,9 +81,9 @@ class Main_page(Element, Screen, Event_handler, Discord_Manager):
                         
 
         # Neon light blue
-        self.img_center("Logo prinicpal", 215, 230, 120, 105,"main_page/main_page7")
-        self.img_center("Logo prinicpal", 215, 430, 120, 105,"main_page/main_page7")
-        self.img_center("Logo prinicpal", 215, 630, 120, 105,"main_page/main_page7")     
+        self.img_center("Logo prinicpal", 260, 230, 120, 105,"main_page/main_page7")
+        self.img_center("Logo prinicpal", 260, 430, 120, 105,"main_page/main_page7")
+        self.img_center("Logo prinicpal", 260, 630, 120, 105,"main_page/main_page7")     
 
     def ThirdSection(self):
         self.rect_full(self.grey6, 795, 385, 775, 610, 10)
