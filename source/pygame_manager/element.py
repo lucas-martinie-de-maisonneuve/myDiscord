@@ -16,10 +16,11 @@ class Element(Screen):
         self.grey4 = (146, 151, 153)
         self.grey5 = (34, 31, 37)
         self.grey6 = (176, 186, 181)
+        self.grey10 = (29,30,33)
         self.grey7 = (30, 33, 35) # First section principal page
         self.grey8 = (51, 55, 62) # Banner principal page
         self.grey9 = (45, 49, 53) # 2 section principal page
-        self.grey10 = (29,30,33)
+        self.grey10 = (29,30,33) # Rectangle principal page
 
         self.green = (66, 183, 42)
         self.dark_green = (43, 147, 72) #connected bubble
@@ -151,12 +152,11 @@ class Element(Screen):
 
         if self.is_mouse_over_button(name):
             self.rect_full(color_hoover, x, y, width + 5, height + 5, radius)
-            self.rect_border(color_border_hoover, x, y, width + 5, height + 5, thickness, radius)  
-            self.text_center(font, text_size, text, text_color,  x, y)
+            self.rect_border(color_border_hoover, x, y, width + 5, height + 5, thickness, radius)
         else:
             self.rect_full(color_full, x, y, width, height, radius)
             self.rect_border(color_border, x, y, width, height, thickness, radius)
-            self.text_center(font, text_size, text,text_color, x, y)
+        self.text_center(font, text_size, text, text_color,  x, y)
 
         return name
     

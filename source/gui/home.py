@@ -83,7 +83,7 @@ class Home(Event_handler, Discord_Manager, Animation, Element, Cursor):
         if self.is_mouse_over_button(self.sign):
             self.text_center(self.font1, 12, "Sign Up", self.blue, 990, 600)          
         else:
-            self.text_center(self.font1, 11, "Sign Up", self.blue, 990, 600) 
+            self.text_center(self.font1, 11, "Sign Up", self.blue, 990, 600)
 
     def LoginUser (self): 
         email = self.input_email
