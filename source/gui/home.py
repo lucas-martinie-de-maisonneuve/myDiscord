@@ -18,8 +18,8 @@ class Home(Screen, Event_handler, Discord_Manager, Animation, Element, Cursor):
         Discord_Manager.__init__(self)
         Animation.__init__(self)
     
-        self.input_email= "Email address"
-        self.input_password= "Password"
+        self.input_email = ""
+        self.input_password = ""
         self.entry = 0
         self.home_running = False
         
@@ -45,12 +45,14 @@ class Home(Screen, Event_handler, Discord_Manager, Animation, Element, Cursor):
         self.image_not_center("Discord", 840, 65, 170, 170,"home/home1") 
 
         # Rect email
-        self.input_email_rect = self.rect_full(self.grey2, 920, 260, 350, 50, 5) 
-        self.text_center(self.font2, 15, self.input_email, self.white, 920, 260)
+        self.input_email_rect = self.button_hover("Email", 920, 260, 350, 50, self.grey2, self.grey2, self.grey2, self.grey2,self.input_email, self.font2, self.white, 15, 4, 5)
+        if self.entry != 1 and self.input_email == "":
+            self.text_center(self.font2, 15, "Email address", self.white, 920, 260)
 
         # Rect password
-        self.input_password_rect= self.rect_full(self.grey2, 920, 320, 350, 50, 5)
-        self.text_center(self.font2, 15, self.input_password, self.white,920,320)
+        self.input_password_rect = self.button_hover("password", 920, 320, 350, 50, self.grey2, self.grey2, self.grey2, self.grey2,self.input_password, self.font2, self.white, 15, 4, 5)
+        if self.entry != 2 and self.input_password == "":
+            self.text_center(self.font2, 15, "Password", self.white, 920, 320)
         # self.text_center(self.font2, 15, self.password_text, self.white,920,320)
 
         # Rect log In
@@ -100,11 +102,11 @@ class Home(Screen, Event_handler, Discord_Manager, Animation, Element, Cursor):
         self.design()
         self.HoverLostPassword() 
         self.HoverSign()       
-        self.logo_home()  #Images animated
+        self.logo_home(355, 180, 370, 200, 150)
         
     def home_run(self):
 
-        while self.home_running :        
+        while self.home_running :
             if self.is_mouse_over_button(pygame.Rect(920, 410, 350, 50)) and pygame.mouse.get_pressed()[0]:
                 self.LoginUser()   
 

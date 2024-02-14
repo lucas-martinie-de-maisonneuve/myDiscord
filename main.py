@@ -46,9 +46,6 @@ class Display_test(Element, Screen):
                         self.profil.profil_running = True
                         self.profil.profil_run()
 
-            # if not self.profil.profil_running and not self.connexion.home_running:
-            #     self.update()
-
             self.princi = self.rect_full(self.white, self.W//3, self. H//3, 300, 70, 10)
             self.text_center(self.font1, 25, "Principal", self.black, self.W//3, self. H//3)
 

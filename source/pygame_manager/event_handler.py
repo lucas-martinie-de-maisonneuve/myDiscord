@@ -88,12 +88,11 @@ class Event_handler:
                 self.home_running = False                
             elif event.type == pygame.MOUSEBUTTONDOWN:
                 if self.input_email_rect.collidepoint(event.pos): 
-                    self.input_email = ""
                     self.entry = 1
                 elif self.input_password_rect.collidepoint(event.pos): 
-                    self.input_password = ""
                     self.entry = 2
-
+                else:
+                    self.entry = 0
                 # elif self.is_mouse_over_button(pygame.Rect(745, 385, 350, 50)):                         
                 #     if self.input_email != "" and self.input_password != "":                  
                 #         self.login(self.input_email, self.input_password)
@@ -155,19 +154,15 @@ class Event_handler:
                         self.profil_hovered = self.profil4_cercle
 
                     elif self.username_rect.collidepoint(event.pos):
-                        self.username = ""
                         self.entry = 1
 
                     elif self.email_rect.collidepoint(event.pos):
-                        self.email = ""
                         self.entry = 2
 
                     elif self.surname_rect .collidepoint(event.pos):
-                        self.surname = ""
                         self.entry = 3
 
                     elif self.name_rect.collidepoint(event.pos):
-                        self.name = ""
                         self.entry = 4
 
                     elif self.password_rect.collidepoint(event.pos):
