@@ -16,7 +16,8 @@ class Element:
         self.grey4 = (146, 151, 153)
         self.grey5 = (34, 31, 37)
         self.grey6 = (176, 186, 181)
-
+        self.grey10 = (29,30,33)
+        
         self.green = (66, 183, 42)
         self.dark_green = (43, 147, 72) #connected bubble
 
