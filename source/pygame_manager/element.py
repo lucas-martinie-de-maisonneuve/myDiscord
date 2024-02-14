@@ -18,6 +18,8 @@ class Element(Screen):
         self.grey6 = (176, 186, 181)
         self.grey7 = (30, 33, 35) # First section principal page
         self.grey8 = (51, 55, 62) # Banner principal page
+        self.grey9 = (45, 49, 53) # 2 section principal page
+        self.grey10 = (29,30,33)
 
         self.green = (66, 183, 42)
         self.dark_green = (43, 147, 72) #connected bubble
