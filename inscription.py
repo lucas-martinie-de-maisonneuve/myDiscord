@@ -36,7 +36,7 @@ class Inscription(Element, Screen,Event_handler):
 
         # Surname
         self.surname_rect = self.rect_full(self.grey2, 600, 360, 400, 40, 5)
-        self.button_hover("name", 600, 360, 400, 40, self.grey2, self.grey2, self.grey2, self.grey2,self.surname, self.font2, self.white, 15, 4, 5)
+        self.button_hover("surname", 600, 360, 400, 40, self.grey2, self.grey2, self.grey2, self.grey2,self.surname, self.font2, self.white, 15, 4, 5)
 
         # Name
         self.name_rect = self.rect_full(self.grey2, 600, 420, 400, 40, 5)
@@ -65,20 +65,21 @@ class Inscription(Element, Screen,Event_handler):
             self.text_center(self.font1, 12, "Log In ", self.white, 600, 625)
             
     def profil_screen(self):
-        # Profile pictures
+
+        # Profil pictures
         self.img_center("profil1",380,140,90,65,"new_profil/profil1")
         self.img_center("profil2",530,140,100,80,"new_profil/profil2")
         self.img_center("profil3",680,140,80,60,"new_profil/profil3")
         self.img_center("profil4",830,140,100,90,"new_profil/profil4")
         
     def profil_hover(self):
-         # Cercle profile
+         # Cercle profil
         self.profil1_cercle = pygame.draw.circle(self.Window, self.black, (380, 140), 50)
         self.profil2_cercle = pygame.draw.circle(self.Window, self.black, (530, 140), 50)
         self.profil3_cercle = pygame.draw.circle(self.Window, self.black, (680, 140), 50)
         self.profil4_cercle = pygame.draw.circle(self.Window, self.black, (830, 140), 50)
 
-        # Hover cercle profile
+        # Hover cercle profil
         self.p_profil1 = self.profil1_cercle
         if self.is_mouse_over_button(self.p_profil1):
             self.profil1_cercle = pygame.draw.circle(self.Window, self.black, (380, 140), 50)
@@ -112,6 +113,7 @@ class Inscription(Element, Screen,Event_handler):
             self.hover_profil4_cercle= pygame.draw.circle(self.Window, self.grey2, (830, 140), 50, width=2)
 
     def ProfilHovered(self): 
+       # Display neon circle
        
        if self.profil_hovered:
                 if self.profil_hovered == self.profil1_cercle:
@@ -134,10 +136,6 @@ class Inscription(Element, Screen,Event_handler):
             self.profil_screen()
             self.event_inscription()
             self.ProfilHovered()
-            
-     
-  
-
             self.screen.update()
 
 test = Inscription()
