@@ -33,7 +33,7 @@ class Main_page(Element, Event_handler, Discord_Manager):
         # self.img_center("neon cercle", 64, 55, 105, 105,"main_page/main_page4")    
 
         # Hover server
-        self.cercle1 = pygame.draw.circle(self.Window, self.grey8, (64, 150), 35)     
+        self.cercle1 = pygame.draw.circle(self.Window, self.grey10, (64, 170), 35)     
         if self.is_mouse_over_button(self.cercle1):      
             self.img_center("Logo prinicpal", 64, 170, 70, 70,"main_page/main_page2")
             self.img_center("Logo prinicpal", 64, 170, 115, 115,"main_page/main_page4")
@@ -42,7 +42,7 @@ class Main_page(Element, Event_handler, Discord_Manager):
             self.img_center("neon cercle", 64, 170, 110, 110,"main_page/main_page4")
                
         # Hover settings
-        self.cercle2 = pygame.draw.circle(self.Window, self.grey8, (64, 540), 35)
+        self.cercle2 = pygame.draw.circle(self.Window, self.grey10, (64, 540), 35)
         if self.is_mouse_over_button(self.cercle2):           
             self.img_center("neon server", 64, 540, 85, 85,"main_page/main_page5")
             self.img_center("neon circle", 64, 540, 115, 115,"main_page/main_page4")   
@@ -51,7 +51,7 @@ class Main_page(Element, Event_handler, Discord_Manager):
             self.img_center("neon circle", 64, 540, 110, 110,"main_page/main_page4") 
 
         # Hover Power Off
-        self.cercle2 = pygame.draw.circle(self.Window, self.grey8, (64, 635), 35)
+        self.cercle2 = pygame.draw.circle(self.Window, self.grey10, (64, 635), 35)
         if self.is_mouse_over_button(self.cercle2):           
             self.img_center("Power Off", 64, 635, 60, 60,"main_page/main_page9")
             self.img_center("neon circle", 64, 635, 115, 115,"main_page/main_page4")   
@@ -122,13 +122,13 @@ class Main_page(Element, Event_handler, Discord_Manager):
 
                 elif event.type == pygame.KEYDOWN:
                     if event.key == pygame.K_RETURN:
-                        print("Recherche: " + search_text)
+                        print("Recherche: " + self.search_text)
                         # Faites quelque chose avec le texte saisi, par exemple une recherche en ligne
-                        search_text = ""
+                        self.search_text = ""
                     elif event.key == pygame.K_BACKSPACE:
-                        search_text = search_text[:-1]
+                        self.search_text = self.search_text[:-1]
                     else:
-                        search_text += event.unicode
+                        self.search_text += event.unicode
 
             self.DisplayAll()
             self.update()
