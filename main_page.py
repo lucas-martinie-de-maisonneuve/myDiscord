@@ -30,26 +30,36 @@ class Main_page(Element, Screen, Event_handler, Discord_Manager):
         self.rect_full(self.grey8, 65, 350, 90, 680, 10)
 
         # Main Logo    
-        self.image_not_center("Logo prinicpal", 25, 10, 90, 90,"main_page/main_page1")   
+        self.image_not_center("Logo prinicpal", 20, 25, 95, 95,"main_page/main_page1")   
         # self.img_center("neon cercle", 64, 55, 105, 105,"main_page/main_page4")    
 
         # Hover server
         self.cercle1 = pygame.draw.circle(self.Window, self.grey8, (64, 150), 35)     
         if self.is_mouse_over_button(self.cercle1):      
-            self.img_center("Logo prinicpal", 64, 150, 70, 70,"main_page/main_page2")
-            self.img_center("Logo prinicpal", 64, 150, 115, 115,"main_page/main_page4")
+            self.img_center("Logo prinicpal", 64, 170, 70, 70,"main_page/main_page2")
+            self.img_center("Logo prinicpal", 64, 170, 115, 115,"main_page/main_page4")
         else:          
-            self.img_center("Logo prinicpal", 64, 150, 70, 70,"main_page/main_page2")
-            self.img_center("neon cercle", 64, 150, 110, 110,"main_page/main_page4")
-          
+            self.img_center("Logo prinicpal", 64, 170, 70, 70,"main_page/main_page2")
+            self.img_center("neon cercle", 64, 170, 110, 110,"main_page/main_page4")
+               
         # Hover settings
-        self.cercle2 = pygame.draw.circle(self.Window, self.grey8, (64, 640), 35)
+        self.cercle2 = pygame.draw.circle(self.Window, self.grey8, (64, 540), 35)
         if self.is_mouse_over_button(self.cercle2):           
-            self.img_center("neon server", 64, 640, 85, 85,"main_page/main_page5")
-            self.img_center("neon circle", 64, 640, 115, 115,"main_page/main_page4")   
+            self.img_center("neon server", 64, 540, 85, 85,"main_page/main_page5")
+            self.img_center("neon circle", 64, 540, 115, 115,"main_page/main_page4")   
         else:      
-            self.img_center("neon server", 64, 640, 85, 85,"main_page/main_page5")
-            self.img_center("neon circle", 64, 640, 110, 110,"main_page/main_page4") 
+            self.img_center("neon server", 64, 540, 85, 85,"main_page/main_page5")
+            self.img_center("neon circle", 64, 540, 110, 110,"main_page/main_page4") 
+
+        # Hover Power Off
+        self.cercle2 = pygame.draw.circle(self.Window, self.grey8, (64, 635), 35)
+        if self.is_mouse_over_button(self.cercle2):           
+            self.img_center("Power Off", 64, 635, 60, 60,"main_page/main_page9")
+            self.img_center("neon circle", 64, 635, 115, 115,"main_page/main_page4")   
+        else:      
+            self.img_center("Power Off", 64, 635, 60, 60,"main_page/main_page9")
+            self.img_center("neon circle", 64, 635, 110, 110,"main_page/main_page4") 
+   
      
     def SecondSection(self):
         self.rect_full(self.grey9, 257, 385, 260, 610, 10)
@@ -83,7 +93,15 @@ class Main_page(Element, Screen, Event_handler, Discord_Manager):
         # Neon light blue
         self.img_center("Logo prinicpal", 260, 230, 120, 105,"main_page/main_page7")
         self.img_center("Logo prinicpal", 260, 430, 120, 105,"main_page/main_page7")
-        self.img_center("Logo prinicpal", 260, 630, 120, 105,"main_page/main_page7")     
+        self.img_center("Logo prinicpal", 260, 630, 120, 105,"main_page/main_page7")    
+
+        # Images neon
+        self.img_center("Volume logo ia", 165, 350, 35, 35,"main_page/main_page10")
+        self.img_center("Volume logo logiciel", 165, 400, 35, 35,"main_page/main_page10")
+        self.img_center("Volume logo light side", 165, 550, 35, 35,"main_page/main_page10")
+        self.img_center("Lock logo", 165, 550, 35, 35,"main_page/main_page11")
+        self.img_center("Book", 165, 500, 35, 35,"main_page/main_page12")
+
 
     def ThirdSection(self):
         self.rect_full(self.grey6, 795, 385, 775, 610, 10)
