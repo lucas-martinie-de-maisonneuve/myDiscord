@@ -3,11 +3,13 @@ from source.pygame_manager.element import Element
 from source.pygame_manager.screen import Screen
 from data.discord_manager import Discord_Manager
 from source.pygame_manager.event_handler import Event_handler
+from source.pygame_manager.cursor import Cursor
 
-class Register(Element, Screen,Event_handler):
+class Register(Element, Screen,Event_handler, Cursor):
     def __init__(self):
         Screen.__init__(self)
         Element.__init__(self)
+        Cursor.__init__(self)
         
         self.register_running = False
         self.manager = Discord_Manager()
@@ -59,8 +61,8 @@ class Register(Element, Screen,Event_handler):
         pygame.draw.line(self.Window, self.grey1, (430, 600), (564, 600), 1)
         
         # Text hover Log In
-        sign = (pygame.Rect(580, 620, 45, 13))    
-        if self.is_mouse_over_button(sign):
+        self.sign = (pygame.Rect(580, 620, 45, 13))    
+        if self.is_mouse_over_button(self.sign):
             self.text_center(self.font1, 13, "Log In", self.white, 600, 625)          
         else:
             self.text_center(self.font1, 12, "Log In ", self.white, 600, 625)
@@ -118,4 +120,5 @@ class Register(Element, Screen,Event_handler):
             self.profil_hover()
             self.profil_screen()
             self.event_register()
+            self.register_cursor()
             self.screen.update()

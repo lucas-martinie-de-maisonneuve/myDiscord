@@ -27,6 +27,9 @@ class Profil(Element, Screen, Event_handler, Cursor):
         self.status_color = self.green
         self.size_username, self.size_email ,self.size_password, self.size_profile_picture= 0, 0, 0, 0
         self.pict = []
+        self.picture1 = pygame.Rect(0, 0, 0, 0)
+        self.picture2 = pygame.Rect(0, 0, 0, 0)
+        self.picture3 = pygame.Rect(0, 0, 0, 0)
 
     def design(self):
         # Profil main rectangle
@@ -152,7 +155,7 @@ class Profil(Element, Screen, Event_handler, Cursor):
     def info_profil(self, title, text_info, y):
         self.text_not_align(self.font1, 16, title, self.grey6, 430, y)
         self.button_hover(title, 1000, y + 15, 80, 30, self.pink, self.pink, self.purple2, self.purple2, "Edit", self.font5, self.white, 17, 0, 4)
-        self.info_profil_cursor(title)
+        # self.info_profil_cursor(title)    
 
 # White rectangle when 'Edit' is pressed
     def info_profil_edit(self):
@@ -208,11 +211,11 @@ class Profil(Element, Screen, Event_handler, Cursor):
 
     def profil_run(self):
         while self.profil_running :
-            self.profil_page_cursor()
-            self.event_profil()
             self.design()
+            self.profile_picture_edit()
             self.info_profil_edit()
             self.password_show()
-            self.profile_picture_edit()
+            self.event_profil()
+            self.profil_page_cursor()
             self.update()
             
