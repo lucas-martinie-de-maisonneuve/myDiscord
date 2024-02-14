@@ -5,10 +5,9 @@ from source.pygame_manager.element import Element
 from source.pygame_manager.screen import Screen
 from data.discord_manager import Discord_Manager
 
-class Main_page(Element, Screen, Event_handler, Discord_Manager):
+class Main_page(Element, Event_handler, Discord_Manager):
     
     def __init__(self):
-        Screen.__init__(self)
         Element.__init__(self)
         Event_handler.__init__(self)
         Discord_Manager.__init__(self)

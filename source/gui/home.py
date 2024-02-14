@@ -2,16 +2,14 @@ import pygame
 
 from source.pygame_manager.event_handler import Event_handler
 from source.pygame_manager.element import Element
-from source.pygame_manager.screen import Screen
 from source.pygame_manager.animation import Animation
 from source.pygame_manager.cursor import Cursor
 from hashlib import sha256
 from data.discord_manager import Discord_Manager
 
-class Home(Screen, Event_handler, Discord_Manager, Animation, Element, Cursor):
+class Home(Event_handler, Discord_Manager, Animation, Element, Cursor):
     
     def __init__(self):
-        Screen.__init__(self)
         Element.__init__(self)
         Cursor.__init__(self)
         Event_handler.__init__(self)

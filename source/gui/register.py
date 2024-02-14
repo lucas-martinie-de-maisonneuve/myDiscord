@@ -31,6 +31,8 @@ class Register(Element, Screen,Event_handler, Cursor, Animation):
         # Display rectangles
         # self.Window.fill(self.white)
         self.img_background("Background", 600,350,1200,700,"register/background_register")
+        self.logo_home(150, 127, 260, 140, 105)
+        self.screen_alpha(self.alpha_grey2)
         self.rect_full(self.grey3, 600, 355, 600, 580, 10)
         self.rect_border(self.grey2, 600, 355, 600, 580, 2, 10)
 
@@ -137,5 +139,4 @@ class Register(Element, Screen,Event_handler, Cursor, Animation):
             self.profil_screen()
             self.event_register()
             self.register_cursor()
-            self.logo_home(150, 127, 260, 140, 105)
-            self.screen.update()
+            self.update()
