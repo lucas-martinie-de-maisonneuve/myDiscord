@@ -20,14 +20,14 @@ class Main_page(Element, Screen, Event_handler, Discord_Manager):
         self.img_background("background", 600, 350, 1200, 800, "main_page/main_page8")
         
     def banner(self):
-        self.rect_full(self.grey8, 655, 40, 1055, 60, 10)
+        self.rect_full(self.grey10, 655, 40, 1055, 60, 10)
 
         # self.text_not_align(self.font2, 40, "self.search_text", self.white, 10, 5)
 
     def FirstSection(self):
 
         # First section background color
-        self.rect_full(self.grey8, 65, 350, 90, 680, 10)
+        self.rect_full(self.grey10, 65, 350, 90, 680, 10)
 
         # Main Logo    
         self.image_not_center("Logo prinicpal", 25, 10, 90, 90,"main_page/main_page1")   
@@ -52,7 +52,7 @@ class Main_page(Element, Screen, Event_handler, Discord_Manager):
             self.img_center("neon circle", 64, 640, 110, 110,"main_page/main_page4") 
      
     def SecondSection(self):
-        self.rect_full(self.grey9, 257, 385, 260, 610, 10)
+        self.rect_full(self.grey10, 257, 385, 260, 610, 10)
 
         self.nb_category = self.count_category()
         self.nb_category = self.nb_category[0]
@@ -79,15 +79,14 @@ class Main_page(Element, Screen, Event_handler, Discord_Manager):
                     elif a==2:
                         self.text_not_align(self.font2, 15, self.name_channel1, self.grey1, 200, (20*i)+520)
                         
-
         # Neon light blue
         self.img_center("Neon light", 260, 230, 140, 105,"main_page/main_page7")
         self.img_center("Neon light", 260, 430, 140, 105,"main_page/main_page7")
         self.img_center("Neon Light", 260, 630, 140, 105,"main_page/main_page7")     
 
     def ThirdSection(self):
-        self.rect_full(self.grey6, 795, 385, 775, 610, 10)
-        # self.img_background("background", 775, 385, 850, 630, "main_page/main_page6")
+        self.rect_full(self.grey10, 795, 385, 775, 610, 10)
+        self.rect_full(self.grey1, 795, 650, 650, 60, 10)
 
     def DisplayAll(self): 
         self.background() 
