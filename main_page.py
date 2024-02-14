@@ -16,6 +16,9 @@ class Main_page(Element, Screen, Event_handler, Discord_Manager):
 
         self.search_text = ""
 
+    def background(self): 
+        self.img_background("background", 600, 350, 1200, 800, "main_page/main_page8")
+        
     def banner(self):
         self.rect_full(self.grey8, 645, 35, 1110, 70, 0)
 
@@ -75,25 +78,24 @@ class Main_page(Element, Screen, Event_handler, Discord_Manager):
                     elif a==1:
                         self.text_not_align(self.font2, 15, self.name_channel1, self.grey1, 120, (20*i)+320)
                     elif a==2:
-                        self.text_not_align(self.font2, 15, self.name_channel1, self.grey1, 120, (20*i)+520)
-                        
+                        self.text_not_align(self.font2, 15, self.name_channel1, self.grey1, 120, (20*i)+520)                       
 
 
         # Neon light blue
         self.img_center("Logo prinicpal", 215, 230, 120, 105,"main_page/main_page7")
         self.img_center("Logo prinicpal", 215, 430, 120, 105,"main_page/main_page7")
-        self.img_center("Logo prinicpal", 215, 630, 120, 105,"main_page/main_page7")
-     
+        self.img_center("Logo prinicpal", 215, 630, 120, 105,"main_page/main_page7")     
 
     def ThirdSection(self):
         self.rect_full(self.grey6, 775, 385, 850, 630, 0)
-        self.img_background("background", 775, 385, 850, 630, "main_page/main_page6")
 
     def DisplayAll(self): 
+        self.background() 
         self.banner()
         self.FirstSection()
         self.SecondSection()
-        self.ThirdSection()   
+        self.ThirdSection()  
+   
 
     def event_main_page(self):
         self.main_page_running = True
