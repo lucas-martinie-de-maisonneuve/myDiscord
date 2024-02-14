@@ -94,11 +94,12 @@ class Main_page(Element, Event_handler, Discord_Manager):
         self.img_center("Neon Light", 260, 630, 140, 105,"main_page/main_page7")    
 
         # Images neon
-        self.img_center("Volume logo ia", 165, 350, 35, 35,"main_page/main_page10")
-        self.img_center("Volume logo logiciel", 165, 400, 35, 35,"main_page/main_page10")
-        self.img_center("Volume logo light side", 165, 550, 35, 35,"main_page/main_page10")
-        self.img_center("Lock logo", 165, 550, 35, 35,"main_page/main_page11")
-        self.img_center("Book", 165, 500, 35, 35,"main_page/main_page12")
+        self.img_center("Volume logo logiciel", 165, 330, 35, 35,"main_page/main_page10")
+        self.img_center("Volume logo logiciel", 165, 330, 35, 35,"main_page/main_page10")
+        # self.img_center("Volume logo ia", 165, 350, 35, 35,"main_page/main_page10")
+        # self.img_center("Volume logo light side", 165, 550, 25, 25,"main_page/main_page10")
+        # self.img_center("Lock logo", 165, 550, 35, 35,"main_page/main_page11")
+        # self.img_center("Book", 165, 500, 35, 35,"main_page/main_page12")
 
 
     def ThirdSection(self):
