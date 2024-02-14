@@ -77,22 +77,6 @@ class Main_page(Element, Screen, Event_handler, Discord_Manager):
                     elif a==2:
                         self.text_not_align(self.font2, 15, self.name_channel1, self.grey1, 120, (20*i)+520)
                         
-        pygame.draw.line(self.Window, self.grey4, (100, 80), (300, 80), 3)
-        pygame.draw.line(self.Window, self.grey4, (100, 270), (300, 270), 3)
-        pygame.draw.line(self.Window, self.grey4, (100, 460), (300, 460), 3)
-
-        # nb_categories = self.count_category()[0]
-
-        # for a in range(nb_categories):
-        #     nb_channels = self.count_channel(a + 1)[0]
-
-        #     name_category_item = f'{self.name_category()[a][0]} '
-        #     self.text_center(self.font1, 18, name_category_item, self.grey1, 170, (190 * a) + 100)
-
-        #     for i in range(nb_channels):
-        #         name_channel_item = f'{self.name_channel(a + 1)[i][0]} '
-        #         position = (20 * i) + (120 if a == 0 else 320 if a == 1 else 520)
-        #         self.text_center(self.font1, 15, name_channel_item, self.grey1, 200, position)
 
     def ThirdSection(self):
         self.rect_full(self.grey6, 775, 385, 850, 630, 0)
