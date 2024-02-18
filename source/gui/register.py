@@ -40,33 +40,30 @@ class Register(Element, Screen,Event_handler, Cursor, Animation):
         # username
         self.username_rect = self.rect_full(self.grey2, 600, 240, 400, 40, 5)
         self.button_hover("username", 600, 240, 400, 40, self.grey2, self.grey2, self.grey2, self.grey2,self.username, self.font2, self.white, 15, 4, 5)
-        if self.entry != 1 and self.username == "":
-            self.text_center(self.font2, 15, "Username", self.white, 600, 240)
+        self.text_input(self.username_rect, self.username, "Username", 600, 240, 400, 40, id="username")
 
         # Email
         self.email_rect = self.rect_full(self.grey2, 600, 300, 400, 40, 5)
         self.button_hover("email", 600, 300, 400, 40, self.grey2, self.grey2, self.grey2, self.grey2,self.email, self.font2, self.white, 15, 4, 5)
-        if self.entry != 2 and self.email == "":
-            self.text_center(self.font2, 15, "Email address", self.white, 600, 300)
+        self.text_input(self.email_rect, self.email, "Email address", 600, 300, 400, 40, id="email")
+
 
         # Surname
         self.surname_rect = self.rect_full(self.grey2, 600, 360, 400, 40, 5)
         self.button_hover("name", 600, 360, 400, 40, self.grey2, self.grey2, self.grey2, self.grey2,self.surname, self.font2, self.white, 15, 4, 5)
-        if self.entry != 3 and self.surname == "":
-            self.text_center(self.font2, 15, "Surname", self.white, 600, 360)
+        self.text_input(self.surname_rect, self.surname, "Surname", 600, 360, 400, 40, id="surname")
 
         # Name
         self.name_rect = self.rect_full(self.grey2, 600, 420, 400, 40, 5)
         self.button_hover("name", 600, 420, 400, 40, self.grey2, self.grey2, self.grey2, self.grey2,self.name, self.font2, self.white, 15, 4, 5)
-        if self.entry != 4 and self.name == "":
-            self.text_center(self.font2, 15, "Name", self.white, 600, 420)
+        self.text_input(self.name_rect, self.username, "Name", 600, 420, 400, 40, id="name")
+
 
         # Password
         self.password_rect = self.rect_full(self.grey2, 600, 480, 400, 40, 5)
         self.button_hover("password", 600, 480, 400, 40, self.grey2, self.grey2, self.grey2, self.grey2,self.password, self.font2, self.white, 15, 4, 5)
-        if self.entry != 5 and self.password == "":
-            self.text_center(self.font2, 15, "Password", self.white, 600, 480)
-        
+        self.text_input(self.password_rect, self.password, "Password", 600, 480, 400, 40, id="password")
+
         # Button Sign Up
         self.sign_up = self.rect_full(self.blue, 600, 560, 350, 50,5)
         self.button_hover("connexion", 600, 560, 350, 50, self.blue, self.blue, self.blue1, self.blue1,"Sign Up", self.font1, self.white, 15, 4, 5)

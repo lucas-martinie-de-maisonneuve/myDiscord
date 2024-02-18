@@ -8,7 +8,10 @@ class Animation():
 
         self.anim_field = {
             "email": {"new_y": 0, "new_x": 0, "new_height": 0, "new_width": 0, "text_size": 0, "radius": 0},
-            "password": { "new_y": 0, "new_x": 0, "new_height": 0, "new_width": 0, "text_size": 0, "radius": 0}
+            "password": { "new_y": 0, "new_x": 0, "new_height": 0, "new_width": 0, "text_size": 0, "radius": 0},
+            "name": { "new_y": 0, "new_x": 0, "new_height": 0, "new_width": 0, "text_size": 0, "radius": 0},
+            "surname": { "new_y": 0, "new_x": 0, "new_height": 0, "new_width": 0, "text_size": 0, "radius": 0},
+            "username": { "new_y": 0, "new_x": 0, "new_height": 0, "new_width": 0, "text_size": 0, "radius": 0}
         }
         
 # Animated pictures on home page
@@ -44,11 +47,11 @@ class Animation():
 
     def text_input(self, rect, input, text, x, y, width, height, id):
         if self.is_mouse_over_button(rect) or input != "":
-            if self.anim_field[id]["new_y"] < 25:
-                self.anim_field[id]["new_y"] += 5
-                self.anim_field[id]["new_x"] += 24
-                self.anim_field[id]["new_height"] += 5
-                self.anim_field[id]["new_width"] += 50
+            if self.anim_field[id]["new_y"] < height / 2:
+                self.anim_field[id]["new_x"] += ((width * 70 / 100 ) / 10)
+                self.anim_field[id]["new_y"] +=  height / 10
+                self.anim_field[id]["new_width"] += width / 7
+                self.anim_field[id]["new_height"] += height / 10
                 self.anim_field[id]["text_size"] += 1
                 self.anim_field[id]["radius"] += 1
             self.rect_full(self.grey2, (x - self.anim_field[id]["new_x"]), y - self.anim_field[id]["new_y"], width - self.anim_field[id]["new_width"], height - self.anim_field[id]["new_height"], self.anim_field[id]["radius"])
@@ -56,10 +59,10 @@ class Animation():
             self.text_center(self.font2, 15 - self.anim_field[id]["text_size"], text, self.white, (x - self.anim_field[id]["new_x"]), y - self.anim_field[id]["new_y"])
         else:
             if self.anim_field[id]["new_y"] > 0:
-                self.anim_field[id]["new_y"] -= 5
-                self.anim_field[id]["new_x"] -= 24
-                self.anim_field[id]["new_height"] -= 5
-                self.anim_field[id]["new_width"] -= 50
+                self.anim_field[id]["new_x"] -= ((width * 70 / 100 ) / 10)
+                self.anim_field[id]["new_y"] -= height / 10
+                self.anim_field[id]["new_width"] -= width / 7
+                self.anim_field[id]["new_height"] -= height / 10
                 self.anim_field[id]["text_size"] -= 1
                 self.anim_field[id]["radius"] -= 1
                 self.rect_border(self.black, (x - self.anim_field[id]["new_x"]), y - self.anim_field[id]["new_y"], width - self.anim_field[id]["new_width"], height - self.anim_field[id]["new_height"], 2, self.anim_field[id]["radius"])
