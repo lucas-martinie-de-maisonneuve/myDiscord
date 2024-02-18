@@ -28,7 +28,11 @@ class Profil(Element, Event_handler, Cursor):
         self.picture1 = pygame.Rect(0, 0, 0, 0)
         self.picture2 = pygame.Rect(0, 0, 0, 0)
         self.picture3 = pygame.Rect(0, 0, 0, 0)
-
+        self.username_rect = pygame.Rect(960, 300, 80, 30)
+        self.email_rect = pygame.Rect(960, 360, 80, 30)
+        self.password_rect = pygame.Rect(960, 420, 80, 30)
+        self.role_rect = pygame.Rect(960, 480, 80, 30)
+        self.status_rect = pygame.Rect(960, 540, 80, 30)
     def design(self):
         # Profil main rectangle
         self.img_background("background", 600, 350, 1200, 700, "main_page/main_page8")

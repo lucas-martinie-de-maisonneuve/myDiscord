@@ -9,6 +9,8 @@ class Cursor:
         self.email_cursor = False
         self.role_cursor = False
         self.status_cursor = False
+        self.surname_cursor = False
+        self.name_cursor = False
         self.picture1_cursor = False
         self.picture2_cursor = False
         self.picture3_cursor = False
@@ -47,16 +49,11 @@ class Cursor:
             self.picture3_cursor, self.disconnect_cursor, self.status_edit_cursor,
             self.status_active_cursor, self.login_cursor, self.google_cursor,
             self.facebook_cursor, self.instagram_cursor, self.forgot_p_cursor, self.sign_cursor,
-            self.profil1_cursor, self.profil2_cursor, self.profil3_cursor, self.profil4_cursor
+            self.profil1_cursor, self.profil2_cursor, self.profil3_cursor, self.profil4_cursor,
+            self.surname_cursor, self.name_cursor
         ])
 
     def profil_page_cursor(self):
-        self.username_rect = pygame.Rect(960, 300, 80, 30)
-        self.email_rect = pygame.Rect(960, 360, 80, 30)
-        self.password_rect = pygame.Rect(960, 420, 80, 30)
-        self.role_rect = pygame.Rect(960, 480, 80, 30)
-        self.status_rect = pygame.Rect(960, 540, 80, 30)
-
         self.username_cursor = self.set_cursor(self.username_rect, self.username_cursor)
         self.email_cursor = self.set_cursor(self.email_rect, self.email_cursor)
         self.pass_cursor = self.set_cursor(self.password_rect, self.pass_cursor)
@@ -78,6 +75,8 @@ class Cursor:
         self.google_cursor = self.set_cursor(self.google, self.google_cursor)
         self.sign_cursor = self.set_cursor(self.sign, self.sign_cursor)
         self.forgot_p_cursor = self.set_cursor(self.forgot_p, self.forgot_p_cursor)
+        self.email_cursor = self.set_cursor(self.input_email_rect, self.email_cursor)
+        self.password_cursor = self.set_cursor(self.input_password_rect, self.password_cursor)
 
     def register_cursor(self):
         self.profil1_cursor = self.set_cursor(self.p_profil1, self.profil1_cursor)
@@ -86,3 +85,8 @@ class Cursor:
         self.profil4_cursor = self.set_cursor(self.p_profil4, self.profil4_cursor)
         self.login_cursor = self.set_cursor(self.sign_up, self.login_cursor)
         self.sign_cursor = self.set_cursor(self.sign, self.sign_cursor)
+        self.username_cursor = self.set_cursor(self.username_rect, self.username_cursor)
+        self.email_cursor = self.set_cursor(self.email_rect, self.email_cursor)
+        self.surname_cursor = self.set_cursor(self.surname_rect, self.surname_cursor)
+        self.name_cursor = self.set_cursor(self.name_rect, self.name_cursor)
+        self.password_cursor = self.set_cursor(self.password_rect, self.password_cursor)
