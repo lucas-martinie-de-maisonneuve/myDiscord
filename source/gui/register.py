@@ -55,7 +55,7 @@ class Register(Element, Screen, Event_handler, Cursor, Animation):
         # Name
         self.name_rect = self.rect_full(self.grey2, 600, 420, 400, 40, 5)
         self.button_hover("name", 600, 420, 400, 40, self.grey2, self.grey2, self.grey2, self.grey2,self.name, self.font2, self.white, 15, 4, 5)
-        self.text_input(self.name_rect, self.username, "Name", 600, 420, 400, 40, id="name")
+        self.text_input(self.name_rect, self.name, "Name", 600, 420, 400, 40, id="name")
 
 
         # Password
