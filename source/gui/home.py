@@ -6,6 +6,7 @@ from source.pygame_manager.animation import Animation
 from source.pygame_manager.cursor import Cursor
 from hashlib import sha256
 from data.discord_manager import Discord_Manager
+from source.gui.register import Register
 
 class Home(Event_handler, Discord_Manager, Animation, Element, Cursor):
     
@@ -15,7 +16,7 @@ class Home(Event_handler, Discord_Manager, Animation, Element, Cursor):
         Event_handler.__init__(self)
         Discord_Manager.__init__(self)
         Animation.__init__(self)
-    
+        self.register = Register()
         self.input_email = ""
         self.input_password = ""
         self.entry = 0
