@@ -2,7 +2,6 @@ import pygame
 
 from source.pygame_manager.event_handler import Event_handler
 from source.pygame_manager.element import Element
-from source.pygame_manager.screen import Screen
 from data.discord_manager import Discord_Manager
 
 class Main_page(Element, Event_handler, Discord_Manager):
