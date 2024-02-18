@@ -84,10 +84,10 @@ class Register(Element, Screen, Event_handler, Cursor, Animation):
     def profil_screen(self):
 
         # Profil pictures
-        self.img_center("profil1",380,140,90,65,"profil/profil1")
-        self.img_center("profil2",530,140,100,80,"profil/profil2")
-        self.img_center("profil3",680,140,80,60,"profil/profil3")
-        self.img_center("profil4",830,140,100,90,"profil/profil4")
+        self.img_center("profil1",380,140,100,100,"profil/profil1")
+        self.img_center("profil2",530,140,100,100,"profil/profil2")
+        self.img_center("profil3",680,140,100,100,"profil/profil3")
+        self.img_center("profil4",830,140,100,100,"profil/profil4")
         
     def profil_hover(self):
          # Cercle profil
