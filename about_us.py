@@ -30,9 +30,8 @@ Our rules:
 NEWS
 
 • Open house day in Cannes: 20 march from 14:00 to 17:00
-• 
-
-
-
+• Delayed start for Bachelor IT students on March 11th 2021
+• Tech Tuesday: Every Tuesday, there is a conference on a topic in computer science. See you in the main hall of the school.
+• The inclusive digital school, La Plateforme, will expand to achieve a goal of training 3,000 students per year by 2026. To this end, the creation of an urban campus spanning 25,000 square meters will take place within the designated Euromed 2 perimeter of the public development establishment Euroméditerranée.
 
 """

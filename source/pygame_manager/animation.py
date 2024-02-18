@@ -30,10 +30,10 @@ class Animation():
         if self.change_img == 1:
             self.img_center("0wl", 355, 180, 370, self.anim_y,"home/home9")
         elif self.change_img == 2:
-            self.img_center("Wolf", 355, 180, 370, self.anim_y,"home/home6")         
+            self.img_center("Butterfly", 355, 180, 370, self.anim_y,"home/home6")         
         elif self.change_img == 3:
-            self.img_center("Cheetah", 355, 180, 370, self.anim_y,"home/home8") 
+            self.img_center("Bat", 355, 180, 370, self.anim_y,"home/home7") 
         elif self.change_img == 4:
-            self.img_center("Lion", 355, 180, 370, self.anim_y,"home/home7") 
+            self.img_center("Manta Ray", 355, 180, 370, self.anim_y,"home/home8") 
         
         self.img_center("Logo Discord", 355, 200, 150, 150,"home/home10")
