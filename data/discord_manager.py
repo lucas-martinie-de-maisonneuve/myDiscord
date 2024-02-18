@@ -95,11 +95,13 @@ class Discord_Manager(Database):
         self.channels = self.cursor.fetchall()
         return self.channels
 
-    def communication_channel(self):
-        sql = "SELECT communication FROM channel"
-        self.cursor.execute(sql)
+    def communication_channel(self, id_category):
+        sql = "SELECT communication FROM channel WHERE id_category = %s"
+        values = (id_category,)
+        self.cursor.execute(sql, values)
         self.channels = self.cursor.fetchall()
         return self.channels 
+    
 
     # Supprimer User
     def delete_user(self, id):
@@ -131,6 +133,22 @@ class Discord_Manager(Database):
 
     def get_message(self):
         sql = "SELECT * FROM message"
+        return self.fetch(sql)
+
+    def name_message(self):
+        sql = "SELECT name FROM message"
+        return self.fetch(sql)
+    
+    def time_message(self):
+        sql = "SELECT time FROM message"
+        return self.fetch(sql)
+
+    def message_message(self):
+        sql = "SELECT message FROM message"
+        return self.fetch(sql)
+
+    def id_channel_message(self):
+        sql = "SELECT id_channel FROM message"
         return self.fetch(sql)
 
     def close_connection(self):

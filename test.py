@@ -1,42 +1,52 @@
 import pygame
-import sys
+from source.pygame_manager.element import Element
+from source.pygame_manager.screen import Screen
+from data.discord_manager import Discord_Manager
+from source.pygame_manager.event_handler import Event_handler
 
-# Initialize Pygame
-pygame.init()
+class Inscription(Element, Screen,Event_handler):
+    def __init__(self):
+        Screen.__init__(self)
+        Element.__init__(self)
+        self.inscription_running = True
+        self.manager = Discord_Manager()
+        self.username = "Username"
+        self.email = "Email address"
+        self.surname = "Surname"
+        self.name = "Name"
+        self.password = "Password"
+        self.entry = 0
+        self.photo = 0
+        self.profil_hovered = None
+        pygame.init()
 
-# Set up the display
-width, height = 800, 600
-screen = pygame.display.set_mode((width, height))
-pygame.display.set_caption("Horizontal Gradient Rectangle")
+    def form(self):
+        self.rect_full(self.grey10, 500, 300, 500, 100, 10)
 
-# Define the gradient colors
-start_color = (221, 7, 99) # Starting color (red)
-end_color = (25, 14, 93)     # Ending color (blue)
+        self.message_name = self.manager.name_message()
+        self.str_name1 = self.message_name[0][0]
+        self.message_name = f'{self.str_name1} '
+        self.text_not_align(self.font1, 18, self.message_name, self.grey1, 500, 300)
+        
+        self.message_1 = self.manager.message_message()
+        self.str_name2 = self.message_1[0][0]
+        self.message_1 = f'{self.str_name2} '
+        self.text_not_align(self.font1, 12, self.message_1, self.grey1, 500, 300)
+            
+    def profil_screen(self):
+        pass
+        
+    def profil_hover(self):
+        pass
+    def inscription_run(self):
+        self.inscription_running = True
+        while self.inscription_running:
+            self.form()
+            self.profil_hover()
+            self.profil_screen()
+            self.event_inscription()
 
-# Define the rectangle position and size
-rect_x, rect_y = 100, 100
-rect_width, rect_height = 400, 200
+            self.screen.update()
 
-# Main loop
-running = True
-while running:
-    for event in pygame.event.get():
-        if event.type == pygame.QUIT:
-            running = False
-
-    # Clear the screen
-    screen.fill((0, 0, 0))
-
-    # Draw the gradient rectangle
-    for x in range(rect_width):
-        # Calculate the color at this column using linear interpolation
-        t = x / rect_width
-        color = [int(start_color[c] * (1 - t) + end_color[c] * t) for c in range(3)]
-        pygame.draw.rect(screen, color, (rect_x + x, rect_y, 1, rect_height))
-
-    # Update the display
-    pygame.display.flip()
-
-# Quit Pygame
-pygame.quit()
-sys.exit()
+test = Inscription()
+test.inscription_run()

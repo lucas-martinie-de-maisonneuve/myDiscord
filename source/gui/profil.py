@@ -31,13 +31,12 @@ class Profil(Element, Event_handler, Cursor):
 
     def design(self):
         # Profil main rectangle
-        self.img_background("background", 600, 350, 1200, 700, "main_page/main1")
+        self.img_background("background", 600, 350, 1200, 700, "main_page/main_page8")
         self.rect_radius_top(self.theme_color, 750, 90, 800, 100, 10)
         self.rect_radius_bot(self.grey5, 750, 400, 800, 520, 10)
         
-        # Left rectangle and disconnect
-        self.rect_full(self.grey5, 195, 305, 290, 530, 10) 
-        self.rect_full(self.grey5, 195, 620, 290, 80, 10) 
+        # Left rectangle
+        self.rect_full(self.grey5, 195, 350, 290, 610, 10) 
         
         # Username
         if self.size_profile_picture < 100:
@@ -56,22 +55,28 @@ class Profil(Element, Event_handler, Cursor):
         self.info_profil("Status", self.role, 540)
 
         #Disconnect button
-        self.disconnect_button = pygame.Rect(95, 590, 200, 57)
-        if self.is_mouse_over_button(self.disconnect_button):
-            self.img_center("disconnect", 195, 620, 220, 63, "profil/disconnect_hover")
+        self.disconnect_button = self.lateral_menu_display(575, "main_page9", "disconnect_hover", "disconnect")
+
+    def lateral_menu_display(self, y, logo, image_neon_hover, image_neon):
+        button = pygame.Rect(55, y, 300, 60)
+        if self.is_mouse_over_button(button):
+            self.img_center("Logo prinicpal", 90, y + 30, 45, 45, f"main_page/{logo}")
+            self.img_center("Logo prinicpal", 90, y + 30, 65, 65, "main_page/main_page4")
+            self.img_center("disconnect", 220, y + 30, 220, 63, f"profil/{image_neon_hover}")
         else:
-            self.img_center("disconnect", 195, 620, 200, 57, "profil/disconnect")
+            self.img_center("Logo prinicpal", 90, y + 30, 45, 45, f"main_page/{logo}")
+            self.img_center("neon cercle", 90, y + 30, 60, 60, "main_page/main_page4")
+            self.img_center("disconnect", 220, y + 30, 200, 57, f"profil/{image_neon}")
+        return button
 
     def hover_profile_picture(self):
         self.circle(self.grey5, 450, 180, 70)
-
         # Profile picture
         self.profile_pict = pygame.draw.circle(self.Window, self.theme_color, (450,180), 65)
         if self.is_mouse_over_button(self.profile_pict):
             self.img_center("profile_picture", 450,180,100,100,f"profil/profil{self.picture}")
             self.circle_alpha(self.alpha_grey, 450, 180, 65)
             self.img_center("logo edit", 450,180,50,50,"logo_edit")
-
         else:
             self.picture_cursor = False
             self.circle(self.theme_color, 450, 180, 65)
