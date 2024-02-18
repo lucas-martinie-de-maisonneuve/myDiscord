@@ -2,13 +2,11 @@ import pygame
 
 from source.pygame_manager.event_handler import Event_handler
 from source.pygame_manager.element import Element
-from source.pygame_manager.screen import Screen
 from data.discord_manager import Discord_Manager
 
-class Main_page(Element, Screen, Event_handler, Discord_Manager):
+class Main_page(Element, Event_handler, Discord_Manager):
     
     def __init__(self):
-        Screen.__init__(self)
         Element.__init__(self)
         Event_handler.__init__(self)
         Discord_Manager.__init__(self)
@@ -33,7 +31,7 @@ class Main_page(Element, Screen, Event_handler, Discord_Manager):
         self.image_not_center("Logo prinicpal", 20, 25, 95, 95,"main_page/main_page3")   
 
         # Hover server
-        self.cercle1 = pygame.draw.circle(self.Window, self.grey10, (64, 150), 35)     
+        self.cercle1 = pygame.draw.circle(self.Window, self.grey10, (64, 170), 35)     
         if self.is_mouse_over_button(self.cercle1):      
             self.img_center("Logo prinicpal", 64, 170, 70, 70,"main_page/main_page2")
             self.img_center("Logo prinicpal", 64, 170, 115, 115,"main_page/main_page4")
@@ -90,10 +88,8 @@ class Main_page(Element, Screen, Event_handler, Discord_Manager):
                         self.str_communication1= self.communication[0][0]
                         self.communication = f'{self.str_communication1}'
                         if self.communication == "0": 
-                            print (self.communication)                        
                             self.img_center("Volume logiciel", 170,(20*i)+330, 25, 25,"main_page/main_page10")
                         elif self.communication == "1": 
-                            print (self.communication) 
                             self.img_center("Hashtags logiciel", 170, 350, 15, 15,"main_page/main_page14") 
 
                         self.text_not_align(self.font2, 15, self.name_channel1, self.grey1, 200, (20*i)+320)
@@ -153,13 +149,13 @@ class Main_page(Element, Screen, Event_handler, Discord_Manager):
 
                 elif event.type == pygame.KEYDOWN:
                     if event.key == pygame.K_RETURN:
-                        print("Recherche: " + search_text)
+                        print("Recherche: " + self.search_text)
                         # Faites quelque chose avec le texte saisi, par exemple une recherche en ligne
-                        search_text = ""
+                        self.search_text = ""
                     elif event.key == pygame.K_BACKSPACE:
-                        search_text = search_text[:-1]
+                        self.search_text = self.search_text[:-1]
                     else:
-                        search_text += event.unicode
+                        self.search_text += event.unicode
 
             self.DisplayAll()
             self.update()
