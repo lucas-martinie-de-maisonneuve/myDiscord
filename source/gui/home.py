@@ -44,11 +44,11 @@ class Home(Event_handler, Discord_Manager, Animation, Element, Cursor):
         self.rect_border(self.grey2, 920, 355, 400, 580, 2, 5)
 
         # Discord image logo
-        self.image_not_center("Discord", 840, 65, 170, 170,"home/home1") 
+        self.image_not_center("Discord", 840, 55, 170, 170,"home/home1") 
 
         # Rect email
-        self.input_email_rect = self.button_hover("Email", 920, 260, 350, 50, self.grey2, self.grey2, self.grey2, self.grey2,self.input_email, self.font2, self.white, 15, 4, 5)
-        self.text_input(self.input_email_rect, self.input_email, "Email address", 920, 260, 350, 50, id="email")
+        self.input_email_rect = self.button_hover("Email", 920, 250, 350, 50, self.grey2, self.grey2, self.grey2, self.grey2,self.input_email, self.font2, self.white, 15, 4, 5)
+        self.text_input(self.input_email_rect, self.input_email, "Email address", 920, 250, 350, 50, id="email")
 
         # Rect password
         self.input_password_rect = self.button_hover("password", 920, 320, 350, 50, self.grey2, self.grey2, self.grey2, self.grey2,self.input_password, self.font2, self.white, 15, 4, 5)
