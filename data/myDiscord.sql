@@ -118,14 +118,14 @@ SELECT * FROM channel;
 ('Inessa', '2024-03-06 19:10:16',"I am not sure software development is for me. I like to play with data better. I will probably pick a different specialty than both of you.", 7);
 
 # Logiciel
-('Inessa', '2024-03-06 20:10:21',"Hey guys, I wanted to share something with you. I've decided to specialize in AI for my studies.", 3),
-('Vannyssa', '2024-03-06 20:10:22',"Oh, that's awesome! What made you choose AI ?", 3),
-('Inessa', '2024-03-06 20:10:23',"Well, I've always been fascinated by data analysis, and AI seems to be at the forefront of that. Plus, it's such a promising field for the future, you know?", 3),
-('Lucassa','2024-03-06 20:10:24'," Absolutely! The potential of AI is incredible. It's reshaping so many industries and opening up new possibilities.", 3),
-('Inessassa','2024-03-06 20:10:25',"Exactly! I feel like there's so much to explore and innovate within AI. It's both challenging and rewarding.", 3),
-('Vannyssa', '2024-03-06 20:10:26',"I'm really glad you found your passion, Inessa. And you're right, AI is definitely a field that's only going to keep growing.", 3),
-('Lucassa', '2024-03-06 20:10:27',"Totally! You've got our full support, Inessa. If you ever need help or want to bounce ideas off of us, we're here for you.", 3),
-('Inessa', '2024-03-06 20:10:28',"Thanks, guys! I appreciate your encouragement. It means a lot to me. Together, I know we can accomplish great things in this field.", 3);
+('Inessa', '2024-03-06 20:10:21',"Hey guys, I wanted to share something with you. I've decided to specialize in AI for my studies.", 5),
+('Vannyssa', '2024-03-06 20:10:22',"Oh, that's awesome! What made you choose AI ?", 5),
+('Inessa', '2024-03-06 20:10:23',"Well, I've always been fascinated by data analysis, and AI seems to be at the forefront of that. Plus, it's such a promising field for the future, you know?", 5),
+('Lucassa','2024-03-06 20:10:24'," Absolutely! The potential of AI is incredible. It's reshaping so many industries and opening up new possibilities.", 5),
+('Inessassa','2024-03-06 20:10:25',"Exactly! I feel like there's so much to explore and innovate within AI. It's both challenging and rewarding.", 5),
+('Vannyssa', '2024-03-06 20:10:26',"I'm really glad you found your passion, Inessa. And you're right, AI is definitely a field that's only going to keep growing.", 5),
+('Lucassa', '2024-03-06 20:10:27',"Totally! You've got our full support, Inessa. If you ever need help or want to bounce ideas off of us, we're here for you.", 5),
+('Inessa', '2024-03-06 20:10:28',"Thanks, guys! I appreciate your encouragement. It means a lot to me. Together, I know we can accomplish great things in this field.", 5);
 
 # Light Side
 INSERT INTO message(name, time, message, id_channel) VALUES
