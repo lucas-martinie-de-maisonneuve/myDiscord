@@ -89,9 +89,9 @@ class Home(Screen, Event_handler, Discord_Manager, Animation, Element, Cursor):
         email = self.input_email
         password = self.input_password
 
-        hashed_password = sha256(password.encode()).hexdigest()
+        # hashed_password = sha256(password.encode()).hexdigest()
 
-        if self.check_credentials(email, hashed_password):
+        if self.check_credentials(email, password):
             print("Connexion successful!")     
         else:
             print("Error. Connexion failed")

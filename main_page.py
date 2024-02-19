@@ -90,10 +90,10 @@ class Main_page(Element, Screen, Event_handler, Discord_Manager):
                         self.str_communication1= self.communication[0][0]
                         self.communication = f'{self.str_communication1}'
                         if self.communication == "0": 
-                            print (self.communication)                        
+                            # print (self.communication)                        
                             self.img_center("Volume logiciel", 170,(20*i)+330, 25, 25,"main_page/main_page10")
                         elif self.communication == "1": 
-                            print (self.communication) 
+                            # print (self.communication) 
                             self.img_center("Hashtags logiciel", 170, 350, 15, 15,"main_page/main_page14") 
 
                         self.text_not_align(self.font2, 15, self.name_channel1, self.grey1, 200, (20*i)+320)
