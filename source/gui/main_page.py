@@ -6,13 +6,14 @@ from data.discord_manager import Discord_Manager
 
 class Main_page(Element, Event_handler, Discord_Manager):
     
-    def __init__(self):
+    def __init__(self, user):
         Element.__init__(self)
         Event_handler.__init__(self)
         Discord_Manager.__init__(self)
-        pygame.init()
-
+        self.main_page_running = False
         self.search_text = ""
+        self.user = user
+        print(user)
 
     def background(self): 
         self.img_background("background", 600, 350, 1200, 800, "main_page/main_page8")
@@ -141,7 +142,6 @@ class Main_page(Element, Event_handler, Discord_Manager):
         self.ThirdSection()            
 
     def event_main_page(self):
-        self.main_page_running = True
         while self.main_page_running :
             for event in pygame.event.get():
                 if event.type == pygame.QUIT:

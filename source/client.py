@@ -1,13 +1,12 @@
-import socket 
-import pyaudio
+from source.user import User
+class Client(User):
+    def __init__(self):
+        super().__init__()
 
-class Client:
-    def __init(self, server): 
-        self.server_ip = 
-        self.server_port = 
-        self.server_connection = (socket.AF_INET, socket.SOCK_STREAM)    
+    def page_manager(self):
+        pass
 
-    def connect(self): 
+    def connect(self):
         pass
 
     def send_audio(self): 
@@ -20,11 +19,6 @@ class Client:
         self.mute = True
 
     def Unmute(self): 
-
         self.mute = False
 
-
-HOST = '192.168.243.1'
-
-server = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
 

@@ -94,8 +94,8 @@ class Event_handler():
                 else:
                     self.entry = 0
                 if self.sign.collidepoint(event.pos):
-                    self.register.register_running = True
-                    self.register.register_run()
+                    self.register_running = True
+                    self.register_run()
                 # elif self.is_mouse_over_button(pygame.Rect(745, 385, 350, 50)):                         
                 #     if self.input_email != "" and self.input_password != "":                  
                 #         self.login(self.input_email, self.input_password)

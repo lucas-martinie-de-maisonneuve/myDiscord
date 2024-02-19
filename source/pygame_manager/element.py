@@ -56,11 +56,11 @@ class Element(Screen):
         self.alpha_grey2 =(50,50,50,200) #Alpha background register
         self.alpha_none =(0,0,0,0)
 
-        self.font1 = "Uni Sans Heavy.otf"
-        self.font2 = "gg sans Regular.ttf"
-        self.font3 = "Uni Sans Thin.otf"
-        self.font4 = "gg sans Semibold.ttf"
-        self.font5 = "gg sans Bold.ttf"
+        self.font1 = "font/Uni Sans Heavy.otf"
+        self.font2 = "font/gg sans Regular.ttf"
+        self.font3 = "font/Uni Sans Thin.otf"
+        self.font4 = "font/gg sans Semibold.ttf"
+        self.font5 = "font/gg sans Bold.ttf"
 
 # Def text          
 
@@ -88,7 +88,7 @@ class Element(Screen):
         self.Window.blit(name, (x,y))
         
     def img_background(self, name, x, y, width, height, image_name):
-        name = pygame.image.load(f'image/{image_name}.png').convert()
+        name = pygame.image.load(f'image/{image_name}.png').convert_alpha()
         name = pygame.transform.scale(name, (width, height))
         self.Window.blit(name, (x - name.get_width()//2, y - name.get_height()//2))
 

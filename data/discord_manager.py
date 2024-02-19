@@ -1,13 +1,25 @@
-from data.database import Database
 from datetime import datetime
+from data.database import Database
 
 class Discord_Manager(Database):
     def __init__(self):
-        # Database.__init__(self, 'localhost', 'root', '$~Bc4gB9', 'discord')
-        Database.__init__(self, 'localhost', 'root', 'VannyLamorte25!', 'discord')
+        Database.__init__(self, 'localhost', 'root', '$~Bc4gB9', 'discord')
+        # Database.__init__(self, 'localhost', 'root', 'VannyLamorte25!', 'discord')
         # Database.__init__(self, 'localhost', 'root', 'azerty', 'discord')
         self.connect()
 
+    def check_credentials(self, email, password):
+        sql = "SELECT * FROM user WHERE email = %s AND password = %s"
+        values = (email, password)
+        user = self.fetchone(sql, values)
+        return user is not None
+    
+    def get_user(self, email, password):
+        sql = "SELECT * FROM user WHERE email = %s AND password = %s"
+        values = (email, password)
+        user = self.fetchone(sql, values)
+        return user
+    
     def add_user(self, surname, name, pseudo, email, password, photo, id_role):
         sql = "INSERT INTO product (surname, name, pseudo, email, password, photo, id_role) VALUES (%s, %s, %s, %s, %s, %s, %s)"
         values = (surname, name, pseudo, email, password, photo, id_role)
@@ -118,12 +130,6 @@ class Discord_Manager(Database):
         sql = "DELETE FROM channel WHERE id = %s"
         values = (id,)
         self.executeQuery(sql, values)
-
-    def check_credentials(self, nickname, password):
-        sql = "SELECT * FROM user WHERE pseudo = %s AND password = %s"
-        values = (nickname, password)
-        user = self.fetch(sql, values)
-        return user is not None  
 
     def save_message(self, name, message, id_channel):
         time = datetime.now()
