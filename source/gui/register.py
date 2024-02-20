@@ -46,7 +46,6 @@ class Register(Element, Screen, Event_handler, Cursor, Animation):
         self.button_hover("email", 600, 300, 400, 40, self.grey2, self.grey2, self.grey2, self.grey2,self.email, self.font2, self.white, 15, 4, 5)
         self.text_input(self.email_rect, self.email, "Email address", 600, 300, 400, 40, id="email")
 
-
         # Surname
         self.surname_rect = self.rect_full(self.grey2, 600, 360, 400, 40, 5)
         self.button_hover("Surname", 600, 360, 400, 40, self.grey2, self.grey2, self.grey2, self.grey2,self.surname, self.font2, self.white, 15, 4, 5)
@@ -56,7 +55,6 @@ class Register(Element, Screen, Event_handler, Cursor, Animation):
         self.name_rect = self.rect_full(self.grey2, 600, 420, 400, 40, 5)
         self.button_hover("name", 600, 420, 400, 40, self.grey2, self.grey2, self.grey2, self.grey2,self.name, self.font2, self.white, 15, 4, 5)
         self.text_input(self.name_rect, self.name, "Name", 600, 420, 400, 40, id="name")
-
 
         # Password
         self.password_rect = self.rect_full(self.grey2, 600, 480, 400, 40, 5)
@@ -101,7 +99,6 @@ class Register(Element, Screen, Event_handler, Cursor, Animation):
         if self.is_mouse_over_button(self.p_profil1):
             self.profil1_cercle = pygame.draw.circle(self.Window, self.black, (380, 140), 50)
             self.img_center("profil1",380,140,140,140,"register/register1")
-            # self.hover_profil1_cercle = pygame.draw.circle(self.Window, self.grey1, (380, 140), 50, width=2) 
         else:
             self.profil1_cercle = pygame.draw.circle(self.Window, self.black, (380, 140), 50)
             self.hover_profil1_cercle = pygame.draw.circle(self.Window, self.grey2, (380, 140), 50, width=2) 
@@ -110,7 +107,6 @@ class Register(Element, Screen, Event_handler, Cursor, Animation):
         if self.is_mouse_over_button(self.p_profil2):
             self.profil2_cercle = pygame.draw.circle(self.Window, self.black, (530, 140), 50)
             self.img_center("profil1",530,140,140,140,"register/register1")
-            # self.hover_profil2_cercle = pygame.draw.circle(self.Window, self.grey1, (530, 140), 50, width=2)   
         else:
             self.profil2_cercle = pygame.draw.circle(self.Window, self.black, (530, 140), 50)
             self.hover_profil2_cercle = pygame.draw.circle(self.Window, self.grey2, (530, 140), 50, width=2) 
@@ -119,7 +115,6 @@ class Register(Element, Screen, Event_handler, Cursor, Animation):
         if self.is_mouse_over_button(self.p_profil3):
             self.profil3_cercle = pygame.draw.circle(self.Window, self.black, (680, 140), 50)
             self.img_center("profil1",680,140,140,140,"register/register1")
-            # self.hover_profil3_cercle = pygame.draw.circle(self.Window, self.grey1, (680, 140), 50, width=2)
         else:
             self.profil3_cercle = pygame.draw.circle(self.Window, self.black, (680, 140), 50)
             self.hover_profil3_cercle = pygame.draw.circle(self.Window, self.grey2, (680, 140), 50, width=2)
@@ -128,13 +123,11 @@ class Register(Element, Screen, Event_handler, Cursor, Animation):
         if self.is_mouse_over_button(self.p_profil4):
             self.profil4_cercle = pygame.draw.circle(self.Window, self.black, (830, 140), 50)
             self.img_center("profil1",830,140,140,140,"register/register1")
-            # self.hover_profil4_cercle= pygame.draw.circle(self.Window, self.grey1, (830, 140), 50, width=2) 
         else:
             self.profil4_cercle = pygame.draw.circle(self.Window, self.black, (830, 140), 50)
             self.hover_profil4_cercle= pygame.draw.circle(self.Window, self.grey2, (830, 140), 50, width=2)
 
     def ProfilHovered(self): 
-       # Display neon circle
        
        if self.profil_hovered:
                 if self.profil_hovered == self.profil1_cercle:

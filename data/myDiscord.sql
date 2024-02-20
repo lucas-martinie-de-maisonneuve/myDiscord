@@ -236,6 +236,25 @@ INSERT INTO message(name, time, message, id_channel) VALUES
 ('Inessa', '2024-02-06 22:24:06'," Great teamwork, everyone. Let's keep our Discord community thriving!", 8); 
 
 
+#--- Modifier mot de pass ---#
+UPDATE user
+SET password="586447cae9b58ff7e2c0a2b3980caf7f2ac5984bfe92cbb99eb0a5f0a702914d"
+WHERE id = 1;
+
+UPDATE user
+SET password="5c5bdc4a2ad0deadbd40affb8fe0e359ff6fb3402a38b2a8addbdee2b802d1b5"
+WHERE id = 3;
+
+UPDATE user
+SET password="fc96020f4fc3fbbe01b03f6c1ef101a57110b6844511567e2cca087e02c0d4bb"
+WHERE id = 2;
+
+UPDATE user
+SET password="2f5cede731389f72b1c679168da2258bb21420e12f547c89ab6cd769ba5e8087"
+WHERE id = 4;
+
+
+
 
 
 
