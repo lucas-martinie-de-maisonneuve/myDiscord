@@ -3,6 +3,7 @@ import pygame
 from source.pygame_manager.EventHandler import EventHandler
 from source.pygame_manager.Element import Element
 from data.DiscordManager import DiscordManager
+from source.gui.Profil import Profil
 
 class MainPage(Element, EventHandler, DiscordManager):
     
@@ -10,6 +11,8 @@ class MainPage(Element, EventHandler, DiscordManager):
         Element.__init__(self)
         EventHandler.__init__(self)
         DiscordManager.__init__(self)
+        self.user = user
+        self.profil = Profil(self.user)
         self.main_page_running = False
         self.input_search = "Search..."
         self.message = ""
@@ -63,7 +66,7 @@ class MainPage(Element, EventHandler, DiscordManager):
             self.img_center("neon circle", 64, 540, 110, 110,"main_page/main_page4") 
 
         # Hover Power Off
-        self.cercle2 = pygame.draw.circle(self.Window, self.grey10, (64, 635), 35)
+        self.cercle3 = pygame.draw.circle(self.Window, self.grey10, (64, 635), 35)
         if self.is_mouse_over_button(self.cercle2):           
             self.img_center("Power Off", 64, 635, 60, 60,"main_page/main_page9")
             self.img_center("neon circle", 64, 635, 115, 115,"main_page/main_page4")   
@@ -202,11 +205,11 @@ class MainPage(Element, EventHandler, DiscordManager):
 
     def mainPage_run(self):
         while self.main_page_running :
-            self.background() 
-            self.FirstSection()
-            self.SecondSection()
-            self.ThirdSection()
-            self.banner() 
-       
-            self.event_main_page()
-            self.update()
+            if not self.profil.profil_running:
+                self.background()
+                self.FirstSection()
+                self.SecondSection()
+                self.ThirdSection()
+                self.banner() 
+                self.event_main_page()
+                self.update()

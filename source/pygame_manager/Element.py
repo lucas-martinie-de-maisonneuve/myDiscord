@@ -7,6 +7,7 @@ class Element(Screen):
         # Color
         self.black = (0, 0, 0)
         self.white = (255, 255, 255)
+
         self.darkgrey = (100,100,100)
         self.grey = (250, 250, 250) # backhome
         self.grey1 = (240, 242, 245)   
@@ -19,42 +20,51 @@ class Element(Screen):
         self.grey8 = (51, 55, 62) # Banner principal page
         self.grey9 = (45, 49, 53) # 2 section principal page
         self.grey10 = (29,30,33) # Rectangle principal page
+        self.dark_grey = (34, 31, 37)
 
-        self.green = (66, 183, 42)
         self.dark_green = (43, 147, 72) #connected bubble
 
         self.blue = (0, 151, 254) # login
         self.blue1 = (0, 140, 234) # login  
-        self.blue2 = (20, 236, 232) # flashy blue #14ece8
-        self.purple1 = (202, 8, 255) #linehome
-        self.purple2 = (125, 85, 196)
-
-        self.pink = (222, 50, 79)
-        self.dark_purple = (67, 47, 104)
-        self.dark_grey = (34, 31, 37)
-        self.yellow = (233, 164, 41)   
-
-        self.darkgreen = (97, 155, 138)
-
-        self.darkgreenblue = (37, 50, 55)
-        self.darkblue = (67, 97, 238)
+        self.blue2 = (33, 6, 84) # Theme color pink
+        self.blue3 = (27, 38, 59) # Theme color orange
+        self.blue4 = (20, 236, 232) # flashy blue #14ece8
+        self.darkblue = (65, 90, 119) 
         self.lightblue = (189, 224, 254)
-        self.greyblue = (92, 103, 125)
-        self.darkbluesea = (0, 40, 85)
-        self.lightbluesea = (39, 76, 119)
-
-        self.yellow = (255, 183, 3)
-        self.lightyellow = (244, 226, 133)
-        self.orange = (251, 133, 0)
-
-        self.red = (242, 106, 141)
-        self.darkred = (221, 45, 74)
-        self.brown = (75, 67, 67)
 
         self.alpha_grey =(50,50,50,100) # Alpha profil picture on profil page
         self.alpha_grey2 =(50,50,50,200) #Alpha background register
         self.alpha_none =(0,0,0,0)
 
+        self.pink = (222, 50, 79)
+      
+        self.yellow = (233, 164, 41)   
+
+        self.green = (66, 183, 42) #connected bubble
+        self.green2 = (39, 78, 19)
+        self.darkgreen = (97, 155, 138)
+
+        self.purple1 = (202, 8, 255) #linehome
+        self.purple2 = (125, 85, 196)
+        self.purple3 = (60, 9, 108)  # Theme color blue
+        self.purple4 = (67, 47, 104) # Theme color green
+        self.dark_purple = (67, 47, 104)
+
+        self.darkgreenblue = (37, 50, 55)
+     
+        self.greyblue = (92, 103, 125)
+        self.darkbluesea = (0, 40, 85)
+        self.lightbluesea = (39, 76, 119)
+
+        self.yellow = (233, 164, 41)   
+        self.lightyellow = (244, 226, 133)
+        self.orange = (251, 133, 0)
+        self.orange2 = (255, 103, 2) 
+
+        self.red = (242, 106, 141)
+        self.darkred = (221, 45, 74)
+        self.brown = (75, 67, 67)
+   
         self.font1 = "assets/font/Uni Sans Heavy.otf"
         self.font2 = "assets/font/gg sans Regular.ttf"
         self.font3 = "assets/font/Uni Sans Thin.otf"

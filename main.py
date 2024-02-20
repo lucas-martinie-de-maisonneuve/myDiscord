@@ -18,7 +18,7 @@ class Display_test(Element):
         self.main_running = True
         self.main_page = MainPage((2, 'None', 'Martinie', 'Lucassa', 'lucas.martinie@laplateforme.io', 'LucasMartinie2412!', 2, 2))
         self.connexion = Home()
-        self.profil = Profil()
+        self.profil = Profil((2, 'None', 'Martinie', 'Lucassa', 'lucas.martinie@laplateforme.io', 'LucasMartinie2412!', 2, 2))
         self.register = Register()
         self.connexion.home_running = False
         self.profil.profil_running = False

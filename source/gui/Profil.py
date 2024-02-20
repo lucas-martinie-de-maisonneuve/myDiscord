@@ -4,23 +4,18 @@ from source.pygame_manager.Element import Element
 from source.pygame_manager.Cursor import Cursor
 class Profil(Element, EventHandler, Cursor):
     
-    def __init__(self):
+    def __init__(self, user):
         EventHandler.__init__(self)
         Element.__init__(self)
         Cursor.__init__(self)
         self.profil_running = False
         self.edit = 0
-
+        self.user = user
         self.password_edit, self.username_edit, self.email_edit, self.picture_edit, self.status_edit = False, False, False, False, False
-        # Info a recuperer de la classe User
-        self.picture = 1#
-        self.theme_color = self.dark_purple
-        self.username = "Lucasssa"#
-        self.email = "lucas.leplusfort@gmail.com"#
-        self.password = "bananaaa"#
+        self.theme_color = self.purple4
+        self.username, self.email ,self.password ,self.picture, self.role = self.user[3], self.user[4], self.user[5], self.user[6], self.user[7]
         self.password_display = " *" * len(self.password)
         self.show_pass = False
-        self.role = "Admin"#
         self.status = "Online"
         self.status_color = self.green
         self.size_username, self.size_email ,self.size_password, self.size_profile_picture= 0, 0, 0, 0
@@ -113,12 +108,16 @@ class Profil(Element, EventHandler, Cursor):
     def profile_picture_edit(self):
         if self.picture == 1: 
             self.pict = [2, 3, 4]
+            self.theme_color = self.purple3
         elif self.picture == 2:
             self.pict = [1, 3, 4]
+            self.theme_color = self.blue2
         elif self.picture == 3:
             self.pict = [1, 2, 4]
+            self.theme_color = self.purple4
         elif self.picture == 4:
             self.pict = [1, 2, 3]
+            self.theme_color = self.blue3
         if self.picture_edit:
             if self.size_profile_picture < 400:
                 self.size_profile_picture += 10
