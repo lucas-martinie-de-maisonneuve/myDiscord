@@ -112,7 +112,6 @@ class Main_page(Element,Event_handler, Discord_Manager):
         # self.channels = self.cursor.fetchall()
         # return self.channels 
     
-                        
         # Neon light blue
         self.img_center("Neon light", 260, 230, 140, 105,"main_page/main_page7")
         self.img_center("Neon light", 260, 430, 140, 105,"main_page/main_page7")
@@ -151,31 +150,30 @@ class Main_page(Element,Event_handler, Discord_Manager):
     def ThirdSection(self):
         self.rect_full(self.grey10, 795, 385, 775, 610, 10)
         self.entry_message = self.rect_full(self.grey1, 795, 650, 650, 60, 10)
+        texte_decoupe = []
+        ligne_actuelle = ""
+        mots = self.message.split(" ")
+        for mot in mots:
+            if len(ligne_actuelle) + len(mot) < self.LONGUEUR_MAX:
+                ligne_actuelle += mot + " "
+            else:
+                texte_decoupe.append(ligne_actuelle.strip())
+                ligne_actuelle = mot + " "
+        texte_decoupe.append(ligne_actuelle.strip())
 
+        for i, ligne in enumerate(texte_decoupe):
+            self.text_not_align(self.font2, 17, ligne, self.black, 510, 620 + i * 15)
 
     def DisplayAll(self):
-        self.background()
-        self.banner()
-        self.FirstSection()
-        self.SecondSection()
-        self.ThirdSection()
-
-    def event_main_page(self):
         self.main_page_running = True
         while self.main_page_running :
-            self.DisplayAll()
-            for event in pygame.event.get():
-                if event.type == pygame.QUIT:
-                        self.main_page_running = False
-
-                elif event.type == pygame.KEYDOWN:
-                    if event.key == pygame.K_RETURN:
-                        pass
-                    elif event.key == pygame.K_BACKSPACE:
-                        self.message = self.message[:-1]
-                    else:
-                        self.message += event.unicode
+            self.background()
+            self.banner()
+            self.FirstSection()
+            self.SecondSection()
+            self.ThirdSection()
+            self.event_main_page()
             self.update()
-
+        
 main_page = Main_page()
-main_page.event_main_page()
+main_page.DisplayAll()

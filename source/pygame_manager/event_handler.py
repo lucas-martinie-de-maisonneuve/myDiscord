@@ -112,7 +112,6 @@ class Event_handler():
                         if event.unicode:
                             self.input_password= self.input_password + event.unicode
 
-
             elif event.type == pygame.KEYDOWN:
                 if event.key == pygame.K_BACKSPACE:
                     if self.username_edit:
@@ -131,7 +130,7 @@ class Event_handler():
                     elif self.password_edit:
                             if event.unicode:
                                 self.password += event.unicode
-                     
+
     def event_register(self):
         for event in pygame.event.get():
                 if event.type == pygame.QUIT:
@@ -175,7 +174,7 @@ class Event_handler():
                         if self.username!="Username" and self.email!="Email address" and self.surname != "Surname" and self.name != "Name" and self.password != "Password" and self.photo != 0:
                             self.manager.add_user(self.surname,self.name,self.username,self.email,self.password,self.photo,2)
                             print("ajouter")
-                            
+
                 elif event.type == pygame.KEYDOWN:
                     if event.key == pygame.K_BACKSPACE:
                         if self.entry ==1:
@@ -211,3 +210,17 @@ class Event_handler():
                         elif self.entry == 5:
                             if event.unicode:
                                 self.password = self.password + event.unicode
+
+    def event_main_page(self):
+        for event in pygame.event.get():
+            if event.type == pygame.QUIT:
+                    self.main_page_running = False
+
+            elif event.type == pygame.KEYDOWN:
+                if event.key == pygame.K_RETURN:
+                    pass
+                elif event.key == pygame.K_BACKSPACE:
+                    self.message = self.message[:-1]
+                else:
+                    self.message += event.unicode
+        
