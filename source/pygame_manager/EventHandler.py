@@ -85,8 +85,10 @@ class EventHandler():
             elif event.type == pygame.MOUSEBUTTONDOWN:
                 if self.input_email_rect.collidepoint(event.pos): 
                     self.entry = 1
+                    self.user_info = False
                 elif self.input_password_rect.collidepoint(event.pos): 
                     self.entry = 2
+                    self.user_info = False
                 else:
                     self.entry = 0
                 if self.sign.collidepoint(event.pos):

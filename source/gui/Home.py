@@ -18,6 +18,7 @@ class Home(Register):
         self.home_running = False
         self.anim_pass = False 
         self.anim_email = False
+        self.user_info = False
 
     def design(self): 
         self.screen_color(self.grey)
@@ -93,18 +94,25 @@ class Home(Register):
         self.HoverLostPassword() 
         self.HoverSign()       
         self.logo_home(355, 180, 370, 200, 150)
+        self.connexion()
+
+
+    def connexion(self):
+        if self.is_mouse_over_button(pygame.Rect(745, 385, 350, 50)) and pygame.mouse.get_pressed()[0]:
+            self.user = User(self.input_email, self.input_password)
+            self.user_info = self.user.loginUser()
+
+            if self.user.connected:
+                self.main_page = MainPage(self.user_info)
+                self.main_page.main_page_running = True
+                self.main_page.mainPage_run()
+                self.home_running = False
+                self.user.connected = False
+        if self.user_info is None:
+            self.text_center(self.font1, 11, "Wrong password or Email", self.darkred, 825, 360)
         
     def home_run(self):
         while self.home_running :
-            if self.is_mouse_over_button(pygame.Rect(745, 385, 350, 50)) and pygame.mouse.get_pressed()[0]:
-                self.user = User(self.input_email, self.input_password)
-                user = self.user.loginUser()
-                if self.user.connected:
-                    self.main_page = MainPage(user)
-                    self.main_page.main_page_running = True
-                    self.main_page.mainPage_run()
-                    self.home_running = False
-                    self.user.connected = False
             if not self.register_running:
                 self.DisplayAll()
                 self.event_home()
