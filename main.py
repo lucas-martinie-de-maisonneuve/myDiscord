@@ -8,7 +8,7 @@
 import pygame
 from source.pygame_manager.element import Element
 from source.pygame_manager.screen import Screen
-from source.gui.home import Home
+from home import Home
 from source.gui.profil import Profil
 from source.gui.register import Register
 from main_page import Main_page

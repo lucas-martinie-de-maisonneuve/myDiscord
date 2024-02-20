@@ -95,7 +95,14 @@ class Event_handler():
                     self.entry = 0
                 # elif self.is_mouse_over_button(pygame.Rect(745, 385, 350, 50)):                         
                 #     if self.input_email != "" and self.input_password != "":                  
-                #         self.login(self.input_email, self.input_password)
+                #         self.login(self.input_email, self.input_password)                    
+
+                if self.show_pass_rect.collidepoint(event.pos):
+                    self.show_pass = True                  
+
+            elif event.type == pygame.MOUSEBUTTONUP:
+                if self.show_pass_rect.collidepoint(event.pos):
+                    self.show_pass = False
 
             elif event.type == pygame.KEYDOWN: 
                 if event.key == pygame.K_BACKSPACE:
@@ -111,7 +118,6 @@ class Event_handler():
                     elif self.entry == 2:
                         if event.unicode:
                             self.input_password= self.input_password + event.unicode
-
 
             elif event.type == pygame.KEYDOWN:
                 if event.key == pygame.K_BACKSPACE:

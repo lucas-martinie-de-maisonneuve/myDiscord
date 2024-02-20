@@ -119,11 +119,18 @@ class Discord_Manager(Database):
         values = (id,)
         self.executeQuery(sql, values)
 
-    def check_credentials(self, nickname, password):
-        sql = "SELECT * FROM user WHERE pseudo = %s AND password = %s"
-        values = (nickname, password)
-        user = self.fetch(sql, values)
-        return user is not None  
+    def check_credentials(self, email, password):
+        sql = "SELECT * FROM user WHERE email = %s AND password = %s"
+        values = (email, password)
+        user = self.fetchone(sql, values)
+        return user is not None
+
+    def fetchone(self, query, params=None):
+        self.connect()
+        self.cursor.execute(query, params or ())
+        result = self.cursor.fetchone()
+        self.disconnect()
+        return result
 
     def save_message(self, name, message, id_channel):
         time = datetime.now()

@@ -86,6 +86,7 @@ class Element(Screen):
         name = pygame.image.load(f'image/{image_name}.png').convert_alpha()
         name = pygame.transform.scale(name,(width,height))
         self.Window.blit(name, (x,y))
+        return name
         
     def img_background(self, name, x, y, width, height, image_name):
         name = pygame.image.load(f'image/{image_name}.png').convert()
