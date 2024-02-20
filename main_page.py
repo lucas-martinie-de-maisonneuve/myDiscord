@@ -3,16 +3,21 @@ import pygame
 from source.pygame_manager.event_handler import Event_handler
 from source.pygame_manager.element import Element
 from data.discord_manager import Discord_Manager
+# from test2 import Test2
+class Main_page(Element,Event_handler, Discord_Manager):
 
-class Main_page(Element, Event_handler, Discord_Manager):
-    
     def __init__(self):
         Element.__init__(self)
         Event_handler.__init__(self)
         Discord_Manager.__init__(self)
+        self.message = ""
+        self.message = ""
+        # self.test2 = Test2()
+        self.RECTANGLE_LARGEUR = 600
+        self.RECTANGLE_HAUTEUR = 60 
+        self.LONGUEUR_MAX = 80
+        self.police = pygame.freetype.SysFont(self.font5,18)
         pygame.init()
-
-        self.search_text = ""
 
     def background(self): 
         self.img_background("background", 600, 350, 1200, 800, "main_page/main_page8")
@@ -95,7 +100,6 @@ class Main_page(Element, Event_handler, Discord_Manager):
                         self.text_not_align(self.font2, 15, self.name_channel1, self.grey1, 200, (20*i)+320)
                         
                     elif a==2:
-
                         self.communication = self.communication_channel(a+1)
                         self.text_not_align(self.font2, 15, self.name_channel1, self.grey1, 200, (20*i)+520)
                     
@@ -128,36 +132,49 @@ class Main_page(Element, Event_handler, Discord_Manager):
         # self.img_center("Dark Side Lock logo", 170, 530, 25, 25,"main_page/main_page11")
         # self.img_center("Volume logo ia", 170, 550, 25, 25,"main_page/main_page10")
         # self.img_center("Hashtags ia", 170, 570, 15, 15,"main_page/main_page14")
- 
+
+    def split_string(self,string, length):
+        result = []
+        start_index = 0
+
+        while start_index < len(string):
+            end_index = start_index + length
+            
+            while end_index < len(string) and string[end_index] != ' ':
+                end_index -= 1
+            
+            result.append(string[start_index:end_index])
+            start_index = end_index + 1
+
+        return result
+    
     def ThirdSection(self):
         self.rect_full(self.grey10, 795, 385, 775, 610, 10)
-        self.rect_full(self.grey1, 795, 650, 650, 60, 10)
+        self.entry_message = self.rect_full(self.grey1, 795, 650, 650, 60, 10)
 
-    def DisplayAll(self): 
-        self.background() 
+
+    def DisplayAll(self):
+        self.background()
         self.banner()
         self.FirstSection()
         self.SecondSection()
-        self.ThirdSection()            
+        self.ThirdSection()
 
     def event_main_page(self):
         self.main_page_running = True
         while self.main_page_running :
+            self.DisplayAll()
             for event in pygame.event.get():
                 if event.type == pygame.QUIT:
                         self.main_page_running = False
 
                 elif event.type == pygame.KEYDOWN:
                     if event.key == pygame.K_RETURN:
-                        print("Recherche: " + self.search_text)
-                        # Faites quelque chose avec le texte saisi, par exemple une recherche en ligne
-                        self.search_text = ""
+                        pass
                     elif event.key == pygame.K_BACKSPACE:
-                        self.search_text = self.search_text[:-1]
+                        self.message = self.message[:-1]
                     else:
-                        self.search_text += event.unicode
-
-            self.DisplayAll()
+                        self.message += event.unicode
             self.update()
 
 main_page = Main_page()

@@ -75,13 +75,7 @@ class Discord_Manager(Database):
         self.cursor.execute(sql,values)
         self.channels = self.cursor.fetchall()
         return self.channels
-    
-    def count_channel(self):
-        sql = "SELECT COUNT(*) AS nb FROM channel"
-        self.cursor.execute(sql)
-        nb = self.cursor.fetchone()
-        return nb
-    
+
     def count_channel(self,id):
         sql = "SELECT COUNT(*) AS nb FROM channel WHERE id_category = %s"
         values = (id,)
@@ -130,7 +124,16 @@ class Discord_Manager(Database):
         sql = "INSERT INTO message (name, time, message, id_channel) VALUES (%s, %s, %s, %s)"
         values = (name, time, message, id_channel)
         self.executeQuery(sql, values)
-
+        
+    def count_message(self):
+        # sql = "SELECT COUNT(*) AS nb FROM channel WHERE id_category = %s"
+        # values = (id,)
+        # self.cursor.execute(sql,values)
+        sql = "SELECT COUNT(*) AS nb FROM channel"
+        self.cursor.execute(sql)
+        nb = self.cursor.fetchone()
+        return nb
+    
     def get_message(self):
         sql = "SELECT * FROM message"
         return self.fetch(sql)
@@ -174,4 +177,4 @@ manager = Discord_Manager()
 # manager.delete_category("id")
 # manager.delete_channel("id")
 # manager.name_channel()
-
+manager.close_connection()
