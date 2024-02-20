@@ -30,10 +30,10 @@ class Element(Screen):
         self.purple1 = (202, 8, 255) #linehome
         self.purple2 = (125, 85, 196)
 
-        self.pink = (222, 50, 79)
+        self.pink = (254, 0, 135)
         self.dark_purple = (67, 47, 104)
         self.dark_grey = (34, 31, 37)
-        self.yellow = (233, 164, 41)   
+        self.yellow = (233, 164, 41)
 
         self.darkgreen = (97, 155, 138)
 

@@ -37,7 +37,7 @@ class Display_test(Element, Screen):
                         self.main_page.main_page_running = True
                         self.main_page.DisplayAll()
                     elif self.inscri.collidepoint(event.pos):
-                        self.register.register_running = True
+                        self.register.reigster_running = True
                         self.register.register_run()
                     elif self.connec.collidepoint(event.pos):
                         self.connexion.home_running = True
@@ -45,7 +45,7 @@ class Display_test(Element, Screen):
                     elif self.profi.collidepoint(event.pos):
                         self.profil.profil_running = True
                         self.profil.profil_run()
-
+    
             self.princi = self.rect_full(self.white, self.W//3, self. H//3, 300, 70, 10)
             self.text_center(self.font1, 25, "Principal", self.black, self.W//3, self. H//3)
 

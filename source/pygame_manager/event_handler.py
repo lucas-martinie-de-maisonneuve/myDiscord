@@ -231,7 +231,8 @@ class Event_handler():
 
             elif event.type == pygame.KEYDOWN:
                 if event.key == pygame.K_RETURN:
-                    pass
+                    pass # Remplir les informations en dessous !!!!
+                    # self.save_message(USER,self.message,CHANNEL)
                 elif event.key == pygame.K_BACKSPACE:
                     self.message = self.message[:-1]
                 else:

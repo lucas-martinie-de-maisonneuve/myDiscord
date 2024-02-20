@@ -31,3 +31,9 @@ class Database:
         result = self.cursor.fetchall()
         self.disconnect()
         return result
+    def fetch_one(self, query, params=None):
+        self.connect()
+        self.cursor.execute(query, params or ())
+        result = self.cursor.fetchone()
+        self.disconnect()
+        return result
