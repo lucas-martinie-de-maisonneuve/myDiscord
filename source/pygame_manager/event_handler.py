@@ -93,9 +93,19 @@ class Event_handler():
                     self.entry = 2
                 else:
                     self.entry = 0
+                if self.sign.collidepoint(event.pos):
+                    self.register.register_running = True
+                    self.register.register_run()
                 # elif self.is_mouse_over_button(pygame.Rect(745, 385, 350, 50)):                         
                 #     if self.input_email != "" and self.input_password != "":                  
-                #         self.login(self.input_email, self.input_password)
+                #         self.login(self.input_email, self.input_password)                    
+
+                if self.show_pass_rect.collidepoint(event.pos):
+                    self.show_pass = True                  
+
+            elif event.type == pygame.MOUSEBUTTONUP:
+                if self.show_pass_rect.collidepoint(event.pos):
+                    self.show_pass = False
 
             elif event.type == pygame.KEYDOWN: 
                 if event.key == pygame.K_BACKSPACE:
@@ -175,6 +185,9 @@ class Event_handler():
                             self.manager.add_user(self.surname,self.name,self.username,self.email,self.password,self.photo,2)
                             print("ajouter")
 
+                    elif self.sign.collidepoint(event.pos):
+                        self.register_running = False
+                            
                 elif event.type == pygame.KEYDOWN:
                     if event.key == pygame.K_BACKSPACE:
                         if self.entry ==1:

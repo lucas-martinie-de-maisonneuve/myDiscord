@@ -201,6 +201,6 @@ class Main_page(Element,Event_handler, Discord_Manager):
             self.ThirdSection()
             self.event_main_page()
             self.update()
-        
-main_page = Main_page()
-main_page.DisplayAll()
+
+# main_page = Main_page()
+# main_page.event_main_page()

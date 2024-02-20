@@ -28,7 +28,11 @@ class Profil(Element, Event_handler, Cursor):
         self.picture1 = pygame.Rect(0, 0, 0, 0)
         self.picture2 = pygame.Rect(0, 0, 0, 0)
         self.picture3 = pygame.Rect(0, 0, 0, 0)
-
+        self.username_rect = pygame.Rect(960, 300, 80, 30)
+        self.email_rect = pygame.Rect(960, 360, 80, 30)
+        self.password_rect = pygame.Rect(960, 420, 80, 30)
+        self.role_rect = pygame.Rect(960, 480, 80, 30)
+        self.status_rect = pygame.Rect(960, 540, 80, 30)
     def design(self):
         # Profil main rectangle
         self.img_background("background", 600, 350, 1200, 700, "main_page/main_page8")
@@ -74,13 +78,13 @@ class Profil(Element, Event_handler, Cursor):
         # Profile picture
         self.profile_pict = pygame.draw.circle(self.Window, self.theme_color, (450,180), 65)
         if self.is_mouse_over_button(self.profile_pict):
-            self.img_center("profile_picture", 450,180,100,100,f"profil/profil{self.picture}")
+            self.img_center("profile_picture", 450,180,130,130,f"profil/profil{self.picture}")
             self.circle_alpha(self.alpha_grey, 450, 180, 65)
             self.img_center("logo edit", 450,180,50,50,"logo_edit")
         else:
             self.picture_cursor = False
             self.circle(self.theme_color, 450, 180, 65)
-            self.img_center("profile_picture", 450,180,100,100,f"profil/profil{self.picture}")
+            self.img_center("profile_picture", 450,180,130,130,f"profil/profil{self.picture}")
 
     def status_display(self, x, y, texte, texte2, color, color2):
         self.status_edit_rect = pygame.Rect(540, 570, 80, 20)
@@ -124,20 +128,20 @@ class Profil(Element, Event_handler, Cursor):
         self.rect_full_not_centered(self.grey3, 450, 120, 0 + self.size_profile_picture, 100, 50)
         if self.size_profile_picture > 170:
             self.picture1 = pygame.draw.circle(self.Window, self.theme_color, (570,170), 45)
-            self.image_not_center("image1", 540, 140, 60, 60, f"profil/profil{self.pict[0]}")
+            self.image_not_center("image1", 525, 125, 90, 90, f"profil/profil{self.pict[0]}")
             if self.is_mouse_over_button(self.picture1):
                 self.image_not_center("bubble", 510, 110, 120, 120, f"main_page/main_page4")
 
         if self.size_profile_picture > 270:
             self.picture2 = pygame.draw.circle(self.Window, self.theme_color, (670,170), 45)
-            self.image_not_center("image1", 640, 140, 60, 60, f"profil/profil{self.pict[1]}")
+            self.image_not_center("image1", 625, 125, 90, 90, f"profil/profil{self.pict[1]}")
             if self.is_mouse_over_button(self.picture2):
                 self.image_not_center("bubble", 610, 110, 120, 120, f"main_page/main_page4")
 
 
         if self.size_profile_picture > 370:
             self.picture3 = pygame.draw.circle(self.Window, self.theme_color, (770,170), 45)
-            self.image_not_center("image1", 740, 140, 60, 60, f"profil/profil{self.pict[2]}")
+            self.image_not_center("image1", 725, 125, 90, 90, f"profil/profil{self.pict[2]}")
             if self.is_mouse_over_button(self.picture3):
                 self.image_not_center("bubble", 710, 110, 120, 120, f"main_page/main_page4")
 
