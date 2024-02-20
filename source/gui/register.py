@@ -1,10 +1,10 @@
 import pygame
-from source.pygame_manager.element import Element
-from source.pygame_manager.event_handler import Event_handler
-from source.pygame_manager.cursor import Cursor
-from source.pygame_manager.animation import Animation
+from source.pygame_manager.Element import Element
+from source.pygame_manager.EventHandler import EventHandler
+from source.pygame_manager.Cursor import Cursor
+from source.pygame_manager.Animation import Animation
 
-class Register(Element, Event_handler, Cursor, Animation):
+class Register(Element, EventHandler, Cursor, Animation):
     def __init__(self):
         Element.__init__(self)
         Cursor.__init__(self)
@@ -97,7 +97,6 @@ class Register(Element, Event_handler, Cursor, Animation):
         if self.is_mouse_over_button(self.p_profil1):
             self.profil1_cercle = pygame.draw.circle(self.Window, self.black, (380, 140), 50)
             self.img_center("profil1",380,140,140,140,"register/register1")
-            # self.hover_profil1_cercle = pygame.draw.circle(self.Window, self.grey1, (380, 140), 50, width=2) 
         else:
             self.profil1_cercle = pygame.draw.circle(self.Window, self.black, (380, 140), 50)
             self.hover_profil1_cercle = pygame.draw.circle(self.Window, self.grey2, (380, 140), 50, width=2) 
@@ -106,7 +105,6 @@ class Register(Element, Event_handler, Cursor, Animation):
         if self.is_mouse_over_button(self.p_profil2):
             self.profil2_cercle = pygame.draw.circle(self.Window, self.black, (530, 140), 50)
             self.img_center("profil1",530,140,140,140,"register/register1")
-            # self.hover_profil2_cercle = pygame.draw.circle(self.Window, self.grey1, (530, 140), 50, width=2)   
         else:
             self.profil2_cercle = pygame.draw.circle(self.Window, self.black, (530, 140), 50)
             self.hover_profil2_cercle = pygame.draw.circle(self.Window, self.grey2, (530, 140), 50, width=2) 
@@ -115,7 +113,6 @@ class Register(Element, Event_handler, Cursor, Animation):
         if self.is_mouse_over_button(self.p_profil3):
             self.profil3_cercle = pygame.draw.circle(self.Window, self.black, (680, 140), 50)
             self.img_center("profil1",680,140,140,140,"register/register1")
-            # self.hover_profil3_cercle = pygame.draw.circle(self.Window, self.grey1, (680, 140), 50, width=2)
         else:
             self.profil3_cercle = pygame.draw.circle(self.Window, self.black, (680, 140), 50)
             self.hover_profil3_cercle = pygame.draw.circle(self.Window, self.grey2, (680, 140), 50, width=2)
@@ -124,7 +121,6 @@ class Register(Element, Event_handler, Cursor, Animation):
         if self.is_mouse_over_button(self.p_profil4):
             self.profil4_cercle = pygame.draw.circle(self.Window, self.black, (830, 140), 50)
             self.img_center("profil1",830,140,140,140,"register/register1")
-            # self.hover_profil4_cercle= pygame.draw.circle(self.Window, self.grey1, (830, 140), 50, width=2) 
         else:
             self.profil4_cercle = pygame.draw.circle(self.Window, self.black, (830, 140), 50)
             self.hover_profil4_cercle= pygame.draw.circle(self.Window, self.grey2, (830, 140), 50, width=2)

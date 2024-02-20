@@ -1,5 +1,3 @@
-import pygame
-
 class Cursor:
     def __init__(self):
         self.password_cursor = False
@@ -27,7 +25,6 @@ class Cursor:
         self.profil2_cursor = False 
         self.profil3_cursor = False 
         self.profil4_cursor = False
-
 
     def set_cursor(self, rect, button):
         if self.is_mouse_over_button(rect):

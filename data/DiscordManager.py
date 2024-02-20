@@ -1,7 +1,7 @@
 from datetime import datetime
-from data.database import Database
+from data.Database import Database
 
-class Discord_Manager(Database):
+class DiscordManager(Database):
     def __init__(self):
         Database.__init__(self, 'localhost', 'root', '$~Bc4gB9', 'discord')
         # Database.__init__(self, 'localhost', 'root', 'VannyLamorte25!', 'discord')
@@ -170,7 +170,7 @@ class Discord_Manager(Database):
     #     self.cursor.execute(sql, (product_id,))
     #     self.connection.commit()
     
-manager = Discord_Manager()
+manager = DiscordManager()
 # manager.display_category()
 # manager.add_user("surname", "name", "pseudo", "email", "password","photo","id_role")
 # manager.surname_user()

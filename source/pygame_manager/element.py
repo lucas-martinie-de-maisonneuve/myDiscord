@@ -1,7 +1,6 @@
 import pygame
-from source.pygame_manager.screen import Screen
+from source.pygame_manager.Screen import Screen
 class Element(Screen):
-
     def __init__(self):
         Screen.__init__(self)
 
@@ -16,37 +15,39 @@ class Element(Screen):
         self.grey4 = (146, 151, 153)
         self.grey5 = (34, 31, 37)
         self.grey6 = (176, 186, 181)
-        self.grey10 = (29,30,33)
         self.grey7 = (30, 33, 35) # First section principal page
         self.grey8 = (51, 55, 62) # Banner principal page
         self.grey9 = (45, 49, 53) # 2 section principal page
         self.grey10 = (29,30,33) # Rectangle principal page
 
-        self.green = (66, 183, 42)
-        self.dark_green = (43, 147, 72) #connected bubble
-
-        self.blue = (0, 151, 254) # login
-        self.blue1 = (0, 140, 234) # login  
-        self.purple1 = (202, 8, 255) #linehome
-        self.purple2 = (125, 85, 196)
-
-        self.pink = (222, 50, 79)
-        self.dark_purple = (67, 47, 104)
-        self.dark_grey = (34, 31, 37)
-        self.yellow = (233, 164, 41)   
-
+        self.green = (66, 183, 42) #connected bubble
+        self.green2 = (39, 78, 19)
         self.darkgreen = (97, 155, 138)
 
+        self.blue = (0, 151, 254) # login
+        self.blue1 = (0, 140, 234) # login 
+        self.blue2 = (33, 6, 84) # Theme color pink
+        self.blue3 = (27, 38, 59) # Theme color orange
+        self.purple1 = (202, 8, 255) #linehome
+        self.purple2 = (125, 85, 196)
+        self.purple3 = (60, 9, 108)  # Theme color blue
+        self.purple4 = (67, 47, 104) # Theme color green
+
+        self.pink = (222, 50, 79)
+        self.dark_grey = (34, 31, 37)
+
+
         self.darkgreenblue = (37, 50, 55)
-        self.darkblue = (67, 97, 238)
+        self.darkblue = (65, 90, 119) 
         self.lightblue = (189, 224, 254)
         self.greyblue = (92, 103, 125)
         self.darkbluesea = (0, 40, 85)
         self.lightbluesea = (39, 76, 119)
 
-        self.yellow = (255, 183, 3)
+        self.yellow = (233, 164, 41)   
         self.lightyellow = (244, 226, 133)
         self.orange = (251, 133, 0)
+        self.orange2 = (255, 103, 2) 
 
         self.red = (242, 106, 141)
         self.darkred = (221, 45, 74)
@@ -56,40 +57,40 @@ class Element(Screen):
         self.alpha_grey2 =(50,50,50,200) #Alpha background register
         self.alpha_none =(0,0,0,0)
 
-        self.font1 = "font/Uni Sans Heavy.otf"
-        self.font2 = "font/gg sans Regular.ttf"
-        self.font3 = "font/Uni Sans Thin.otf"
-        self.font4 = "font/gg sans Semibold.ttf"
-        self.font5 = "font/gg sans Bold.ttf"
+        self.font1 = "assets/font/Uni Sans Heavy.otf"
+        self.font2 = "assets/font/gg sans Regular.ttf"
+        self.font3 = "assets/font/Uni Sans Thin.otf"
+        self.font4 = "assets/font/gg sans Semibold.ttf"
+        self.font5 = "assets/font/gg sans Bold.ttf"
 
 # Def text          
 
     def text_center(self, font, text_size, text_content, color, x, y):
         pygame.font.init()
-        text = pygame.font.Font(f"source/pygame_manager/{font}", text_size).render(text_content, True,color)
+        text = pygame.font.Font(f"{font}", text_size).render(text_content, True,color)
         text_rect = text.get_rect(center=(x, y))
         self.Window.blit(text, text_rect)
     
     def text_not_align(self, font, text_size, text_content, color, x, y):
-        text = pygame.font.Font(f"source/pygame_manager/{font}", text_size).render(text_content, True, color)
+        text = pygame.font.Font(f"{font}", text_size).render(text_content, True, color)
         text_rect = text.get_rect(topleft=(x, y))
         self.Window.blit(text, text_rect)
 
 # Def image
 
     def img_center(self, name, x, y, width, height, image_name):
-        name = pygame.image.load(f'image/{image_name}.png')
+        name = pygame.image.load(f'assets/image/{image_name}.png')
         name = pygame.transform.scale(name, (width, height))
         self.Window.blit(name, (x - name.get_width()//2, y - name.get_height()//2))
 
     def image_not_center(self, name, x, y, width, height, image_name):
-        name = pygame.image.load(f'image/{image_name}.png').convert_alpha()
+        name = pygame.image.load(f'assets/image/{image_name}.png').convert_alpha()
         name = pygame.transform.scale(name,(width,height))
         self.Window.blit(name, (x,y))
         return name
         
     def img_background(self, name, x, y, width, height, image_name):
-        name = pygame.image.load(f'image/{image_name}.png').convert_alpha()
+        name = pygame.image.load(f'assets/image/{image_name}.png').convert_alpha()
         name = pygame.transform.scale(name, (width, height))
         self.Window.blit(name, (x - name.get_width()//2, y - name.get_height()//2))
 
@@ -102,7 +103,6 @@ class Element(Screen):
         return name_rect
  
 # Def rectangle  
-             
     def rect_full(self, color, x, y, width, height, radius):
         button = pygame.draw.rect(self.Window, color, pygame.Rect(x - width//2, y - height//2, width, height),0, radius)
         return button
@@ -174,11 +174,3 @@ class Element(Screen):
         pygame.draw.rect(self.alpha_window, color, pygame.Rect(0,0, self.W, self.H))
         self.Window.blit(self.alpha_window, (0,0))
 
-    # Hover texte
-    # def hover(self):
-    #     sign = (pygame.Rect(967, 594, 45, 13))    
-    #     if self.is_mouse_over_button(sign):
-    #         self.text_center(self.font1, 13, "Sign Up", self.blue, 990, 600)          
-    #     else:
-    #         self.text_center(self.font1, 12, "Sign Up", self.blue, 990, 600)
-        
