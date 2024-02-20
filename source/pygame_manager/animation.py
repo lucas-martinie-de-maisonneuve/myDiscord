@@ -7,6 +7,8 @@ class Animation():
         self.anim_y = 0
 
         self.anim_field = {
+            "email_login": {"new_y": 0, "new_x": 0, "new_height": 0, "new_width": 0, "text_size": 0},
+            "password_login": { "new_y": 0, "new_x": 0, "new_height": 0, "new_width": 0, "text_size": 0},
             "email": {"new_y": 0, "new_x": 0, "new_height": 0, "new_width": 0, "text_size": 0},
             "password": { "new_y": 0, "new_x": 0, "new_height": 0, "new_width": 0, "text_size": 0},
             "name": { "new_y": 0, "new_x": 0, "new_height": 0, "new_width": 0, "text_size": 0},

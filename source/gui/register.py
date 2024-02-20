@@ -1,20 +1,16 @@
 import pygame
-from source.pygame_manager.element import Element
-from source.pygame_manager.screen import Screen
-from data.discord_manager import Discord_Manager
-from source.pygame_manager.event_handler import Event_handler
-from source.pygame_manager.cursor import Cursor
-from source.pygame_manager.animation import Animation
+from source.pygame_manager.Element import Element
+from source.pygame_manager.EventHandler import EventHandler
+from source.pygame_manager.Cursor import Cursor
+from source.pygame_manager.Animation import Animation
 
-class Register(Element, Screen, Event_handler, Cursor, Animation):
+class Register(Element, EventHandler, Cursor, Animation):
     def __init__(self):
-        Screen.__init__(self)
         Element.__init__(self)
         Cursor.__init__(self)
         Animation.__init__(self)
         
         self.register_running = False
-        self.manager = Discord_Manager()
         self.username = ""
         self.email = ""
         self.surname = ""
@@ -24,14 +20,15 @@ class Register(Element, Screen, Event_handler, Cursor, Animation):
         self.photo = 0
         self.profil_hovered = None
         self.entry = 0
-        pygame.init()
+
+    def background(self):
+        self.img_background("Background", 600,350,1200,700,"register/background_register")
+        self.logo_home(150, 127, 260, 140, 105)
+        self.screen_alpha(self.alpha_grey2)
 
     def form(self):
 
         # Display rectangles
-        self.img_background("Background", 600,350,1200,700,"register/background_register")
-        self.logo_home(150, 127, 260, 140, 105)
-        self.screen_alpha(self.alpha_grey2)
         self.rect_full(self.grey3, 600, 355, 600, 580, 10)
         self.rect_border(self.grey2, 600, 355, 600, 580, 2, 10)
 
@@ -144,6 +141,7 @@ class Register(Element, Screen, Event_handler, Cursor, Animation):
 
     def register_run(self):
         while self.register_running:
+            self.background()
             self.form()
             self.profil_hover()
             self.profil_screen()

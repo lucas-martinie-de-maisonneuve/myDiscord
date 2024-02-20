@@ -1,9 +1,6 @@
 import pygame
 
-class Event_handler():
-    def __init__(self):
-        pygame.init()
-
+class EventHandler():
     def event_profil(self):
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
@@ -94,8 +91,8 @@ class Event_handler():
                 else:
                     self.entry = 0
                 if self.sign.collidepoint(event.pos):
-                    self.register.register_running = True
-                    self.register.register_run()
+                    self.register_running = True
+                    self.register_run()
                 # elif self.is_mouse_over_button(pygame.Rect(745, 385, 350, 50)):                         
                 #     if self.input_email != "" and self.input_password != "":                  
                 #         self.login(self.input_email, self.input_password)                    
@@ -140,7 +137,7 @@ class Event_handler():
                     elif self.password_edit:
                             if event.unicode:
                                 self.password += event.unicode
-                     
+
     def event_register(self):
         for event in pygame.event.get():
                 if event.type == pygame.QUIT:
@@ -223,3 +220,17 @@ class Event_handler():
                         elif self.entry == 5:
                             if event.unicode:
                                 self.password = self.password + event.unicode
+
+    def event_main_page(self):
+        for event in pygame.event.get():
+            if event.type == pygame.QUIT:
+                self.main_page_running = False
+
+            elif event.type == pygame.KEYDOWN:
+                if event.key == pygame.K_RETURN:
+                    pass
+                elif event.key == pygame.K_BACKSPACE:
+                    self.message = self.message[:-1]
+                else:
+                    self.message += event.unicode
+        

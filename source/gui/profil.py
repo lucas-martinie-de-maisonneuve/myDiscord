@@ -1,11 +1,11 @@
 import pygame
-from source.pygame_manager.event_handler import Event_handler
-from source.pygame_manager.element import Element
-from source.pygame_manager.cursor import Cursor
-class Profil(Element, Event_handler, Cursor):
+from source.pygame_manager.EventHandler import EventHandler
+from source.pygame_manager.Element import Element
+from source.pygame_manager.Cursor import Cursor
+class Profil(Element, EventHandler, Cursor):
     
     def __init__(self):
-        Event_handler.__init__(self)
+        EventHandler.__init__(self)
         Element.__init__(self)
         Cursor.__init__(self)
         self.profil_running = False

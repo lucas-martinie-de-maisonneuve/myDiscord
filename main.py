@@ -6,22 +6,20 @@
 ##################################################
 
 import pygame
-from source.pygame_manager.element import Element
-from source.pygame_manager.screen import Screen
-from home import Home
-from source.gui.profil import Profil
-from source.gui.register import Register
-from main_page import Main_page
+from source.pygame_manager.Element import Element
+from source.gui.Home import Home
+from source.gui.Profil import Profil
+from source.gui.Register import Register
+from source.gui.MainPage import MainPage
 
-class Display_test(Element, Screen):
+class Display_test(Element):
     def __init__(self):
         Element.__init__(self)
-        Screen.__init__(self)
         self.main_running = True
+        self.main_page = MainPage((2, 'None', 'Martinie', 'Lucassa', 'lucas.martinie@laplateforme.io', 'LucasMartinie2412!', 2, 2))
         self.connexion = Home()
         self.profil = Profil()
         self.register = Register()
-        self.main_page = Main_page()
         self.connexion.home_running = False
         self.profil.profil_running = False
         self.register.register_running = False
@@ -33,9 +31,9 @@ class Display_test(Element, Screen):
                 if event.type == pygame.QUIT:
                     self.main_running = False
                 elif event.type == pygame.MOUSEBUTTONDOWN:
-                    self.main_page.main_page_running = True
                     if self.princi.collidepoint(event.pos):
-                        self.main_page.event_main_page()
+                        self.main_page.main_page_running = True
+                        self.main_page.mainPage_run()
                     elif self.inscri.collidepoint(event.pos):
                         self.register.register_running = True
                         self.register.register_run()
@@ -45,7 +43,7 @@ class Display_test(Element, Screen):
                     elif self.profi.collidepoint(event.pos):
                         self.profil.profil_running = True
                         self.profil.profil_run()
-
+                    
             self.princi = self.rect_full(self.white, self.W//3, self. H//3, 300, 70, 10)
             self.text_center(self.font1, 25, "Principal", self.black, self.W//3, self. H//3)
 
