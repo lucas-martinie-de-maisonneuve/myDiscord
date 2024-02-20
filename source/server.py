@@ -1,4 +1,4 @@
-from source.user import User
+from source.User import User
 
 class Server(User):
     def __init__(self):

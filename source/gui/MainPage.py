@@ -1,28 +1,43 @@
 import pygame
 
-from source.pygame_manager.event_handler import Event_handler
-from source.pygame_manager.element import Element
-from source.pygame_manager.screen import Screen
-from data.discord_manager import Discord_Manager
+from source.pygame_manager.EventHandler import EventHandler
+from source.pygame_manager.Element import Element
+from data.DiscordManager import DiscordManager
+from source.gui.Profil import Profil
 
-class Main_page(Element, Screen, Event_handler, Discord_Manager):
+class MainPage(Element, EventHandler, DiscordManager):
     
-    def __init__(self):
-        Screen.__init__(self)
+    def __init__(self, user):
         Element.__init__(self)
-        Event_handler.__init__(self)
-        Discord_Manager.__init__(self)
-        pygame.init()
-
-        self.search_text = ""
+        EventHandler.__init__(self)
+        DiscordManager.__init__(self)
+        self.user = user
+        self.profil = Profil(self.user)
+        self.main_page_running = False
+        self.input_search = "Search..."
+        self.message = ""
+        self.RECTANGLE_LARGEUR = 600
+        self.RECTANGLE_HAUTEUR = 60 
+        self.LONGUEUR_MAX = 80
+        self.police = pygame.freetype.SysFont(self.font5,18)
+        self.user = user
+        self.link_is_clicked = True   
 
     def background(self): 
         self.img_background("background", 600, 350, 1200, 800, "main_page/main_page8")
-        
+   
     def banner(self):
-        self.rect_full(self.grey10, 655, 40, 1055, 60, 10)
 
-        # self.text_not_align(self.font2, 40, "self.search_text", self.white, 10, 5)
+        # Link to the LaPlateforme website
+        self.rect_full(self.grey10, 655, 40, 1055, 60, 10)
+        self.image_not_center("Question mark", 1120, 15, 50, 50,"main_page/main_page15")    
+        self.link_logo_rect = pygame.Rect(1120, 15, 50, 50)
+        self.url = "https://laplateforme.io/"
+
+        # Search bar
+        self.input_search_rect = self.rect_full(self.grey2, 970, 40, 240, 35, 80)
+        self.text_not_align(self.font2, 15, self.input_search, self.white, 860, 30.5)
+        self.image_not_center("Search logo", 1050, 25, 30, 30,"main_page/main_page16")  
 
     def FirstSection(self):
 
@@ -33,7 +48,7 @@ class Main_page(Element, Screen, Event_handler, Discord_Manager):
         self.image_not_center("Logo prinicpal", 20, 25, 95, 95,"main_page/main_page3")   
 
         # Hover server
-        self.cercle1 = pygame.draw.circle(self.Window, self.grey10, (64, 150), 35)     
+        self.cercle1 = pygame.draw.circle(self.Window, self.grey10, (64, 170), 35)     
         if self.is_mouse_over_button(self.cercle1):      
             self.img_center("Logo prinicpal", 64, 170, 70, 70,"main_page/main_page2")
             self.img_center("Logo prinicpal", 64, 170, 115, 115,"main_page/main_page4")
@@ -51,7 +66,7 @@ class Main_page(Element, Screen, Event_handler, Discord_Manager):
             self.img_center("neon circle", 64, 540, 110, 110,"main_page/main_page4") 
 
         # Hover Power Off
-        self.cercle2 = pygame.draw.circle(self.Window, self.grey10, (64, 635), 35)
+        self.cercle3 = pygame.draw.circle(self.Window, self.grey10, (64, 635), 35)
         if self.is_mouse_over_button(self.cercle2):           
             self.img_center("Power Off", 64, 635, 60, 60,"main_page/main_page9")
             self.img_center("neon circle", 64, 635, 115, 115,"main_page/main_page4")   
@@ -100,7 +115,6 @@ class Main_page(Element, Screen, Event_handler, Discord_Manager):
                             self.img_center("Hashtags logiciel", 170, (20*i)+350, 15, 15,"main_page/main_page14") 
                         
                     elif a==2:
-
                         self.communication = self.communication_channel(a+1)
                         self.text_not_align(self.font2, 15, self.name_channel1, self.grey1, 200, (20*i)+520)
                         self.communication = self.communication_channel(a+1)
@@ -149,7 +163,6 @@ class Main_page(Element, Screen, Event_handler, Discord_Manager):
         # self.channels = self.cursor.fetchall()
         # return self.channels 
     
-                        
         # Neon light blue
         self.img_center("Neon light", 260, 230, 140, 105,"main_page/main_page7")
         self.img_center("Neon light", 260, 430, 140, 105,"main_page/main_page7")
@@ -169,37 +182,73 @@ class Main_page(Element, Screen, Event_handler, Discord_Manager):
         # self.img_center("Dark Side Lock logo", 170, 530, 25, 25,"main_page/main_page11")
         # self.img_center("Volume logo ia", 170, 550, 25, 25,"main_page/main_page10")
         # self.img_center("Hashtags ia", 170, 570, 15, 15,"main_page/main_page14")
- 
+
+    def split_string(self,string, length):
+        result = []
+        start_index = 0
+
+        while start_index < len(string):
+            end_index = start_index + length
+            
+            while end_index < len(string) and string[end_index] != ' ':
+                end_index -= 1
+            
+            result.append(string[start_index:end_index])
+            start_index = end_index + 1
+
+        return result
+    
     def ThirdSection(self):
         self.rect_full(self.grey10, 795, 385, 775, 610, 10)
-        self.rect_full(self.grey1, 795, 650, 650, 60, 10)
+        self.entry_message = self.rect_full(self.grey1, 795, 650, 650, 60, 10)
+        #         # self.text_center()
+        # for i in range(2):
+        #     # self.message_name = self.name_message()
+        #     # self.str_name1 = self.message_name[i][0]
+        #     # self.message_name = f'{self.str_name1} '
 
-    def DisplayAll(self): 
-        self.background() 
-        self.banner()
-        self.FirstSection()
-        self.SecondSection()
-        self.ThirdSection()            
+        #     # self.message_1 = self.message_message()
+        #     # self.str_name2 = self.message_1[i][0]
+        #     # self.message_1 = f'{self.str_name2} '
 
-    def event_main_page(self):
-        self.main_page_running = True
+        #     # self.message_time1 = self.time_message()
+        #     # self.str_name3 = self.message_time1[i][0]
+        #     # self.message_time1 = f'{self.str_name3} '
+
+        #     long_string = "Une phrase tres  tres tres long pour tester que ca marche super bien et que ines est la plus intelligentetres tres long pour tester que ca marche super bien et que ines est la plus intelligente"
+        #     chunked_strings = self.split_string(long_string,50)
+
+        #     max_line_length =  758
+        #     rectangle_height = len(chunked_strings) * 40
+        #     pos_x = 408
+        #     pos_y =  200 + rectangle_height
+        #     # self.rect_full_not_centered(self.blue, pos_x, pos_y, 20 + max_line_length, rectangle_height, 2)
+
+        #     # for i, chunk in enumerate(chunked_strings):
+        #     #     self.text_not_align(self.font2, 16, chunk, self.grey1, pos_x + 12, (30 * i) + pos_y + 20)
+        #     # self.text_not_align(self.font1, 18, self.message_name, self.black, pos_x + 12, pos_y + 5)
+        #     # self.text_not_align(self.font1, 10, self.message_time1, self.grey1, pos_x + 82, pos_y + 10)
+        texte_decoupe = []
+        ligne_actuelle = ""
+        mots = self.message.split(" ")
+        for mot in mots:
+            if len(ligne_actuelle) + len(mot) < self.LONGUEUR_MAX:
+                ligne_actuelle += mot + " "
+            else:
+                texte_decoupe.append(ligne_actuelle.strip())
+                ligne_actuelle = mot + " "
+        texte_decoupe.append(ligne_actuelle.strip())
+
+        for i, ligne in enumerate(texte_decoupe):
+            self.text_not_align(self.font2, 17, ligne, self.black, 510, 620 + i * 15)
+
+    def mainPage_run(self):
         while self.main_page_running :
-            for event in pygame.event.get():
-                if event.type == pygame.QUIT:
-                        self.main_page_running = False
-
-                elif event.type == pygame.KEYDOWN:
-                    if event.key == pygame.K_RETURN:
-                        print("Recherche: " + search_text)
-                        # Faites quelque chose avec le texte saisi, par exemple une recherche en ligne
-                        search_text = ""
-                    elif event.key == pygame.K_BACKSPACE:
-                        search_text = search_text[:-1]
-                    else:
-                        search_text += event.unicode
-
-            self.DisplayAll()
-            self.update()
-
-main_page = Main_page()
-main_page.event_main_page()
+            if not self.profil.profil_running:
+                self.background()
+                self.FirstSection()
+                self.SecondSection()
+                self.ThirdSection()
+                self.banner() 
+                self.event_main_page()
+                self.update()
