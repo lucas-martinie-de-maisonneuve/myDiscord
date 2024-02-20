@@ -17,9 +17,3 @@ class User(DiscordManager):
             return(user)
         else:
             print("Erreur. Connexion échouée.")
-
-    # Infos user 
-    # Authentification
-    # Création de compte
-    # Déconnexion
-    # envoi vers le serveur

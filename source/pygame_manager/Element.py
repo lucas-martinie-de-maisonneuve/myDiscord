@@ -101,7 +101,6 @@ class Element(Screen):
         return name_rect
  
 # Def rectangle  
-             
     def rect_full(self, color, x, y, width, height, radius):
         button = pygame.draw.rect(self.Window, color, pygame.Rect(x - width//2, y - height//2, width, height),0, radius)
         return button
@@ -173,11 +172,3 @@ class Element(Screen):
         pygame.draw.rect(self.alpha_window, color, pygame.Rect(0,0, self.W, self.H))
         self.Window.blit(self.alpha_window, (0,0))
 
-    # Hover texte
-    # def hover(self):
-    #     sign = (pygame.Rect(967, 594, 45, 13))    
-    #     if self.is_mouse_over_button(sign):
-    #         self.text_center(self.font1, 13, "Sign Up", self.blue, 990, 600)          
-    #     else:
-    #         self.text_center(self.font1, 12, "Sign Up", self.blue, 990, 600)
-        

@@ -75,7 +75,6 @@ class Home(Register):
         self.google = self.hover_image("Google", "Google",  970, 520, 30, 30, "home/home5")       # Google   
    
     def HoverLostPassword(self): 
-        # self.rect_full(self.green, 1045, 360, 105, 10, 5)
         self.forgot_p = (pygame.Rect(992, 355, 115, 15))    
         if self.is_mouse_over_button(self.forgot_p):
             self.text_center(self.font1, 12,"Forgot password", self.blue, 1045, 360)          
