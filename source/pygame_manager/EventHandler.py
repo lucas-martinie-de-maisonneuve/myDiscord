@@ -228,19 +228,34 @@ class EventHandler():
                 self.main_page_running = False
 
             elif event.type == pygame.KEYDOWN:
+                
                 if event.key == pygame.K_RETURN:
                     pass
+
                 elif event.key == pygame.K_BACKSPACE:
-                    self.message = self.message[:-1]
+                    if self.entry == 1 :
+                        self.message = self.message[:-1]
+                    elif self.entry == 2: 
+                        self.input_search = self.input_search[:-1]
                 else:
-                    self.message += event.unicode
-            
+                    if self.entry == 1 :
+                        self.message += event.unicode  
+                    elif self.entry == 2: 
+                        self.input_search  += event.unicode 
+
             elif event.type == pygame.MOUSEBUTTONDOWN:
-                
-                if self.link_logo_rect.collidepoint(event.pos):
+
+                if self.entry_message.collidepoint(event.pos): 
+                    self.entry = 1
+
+                elif self.link_logo_rect.collidepoint(event.pos):
                     if self.link_is_clicked: 
                         webbrowser.open(self.url)  
                         self.link_is_clicked = False
+
+                elif self.input_search_rect.collidepoint(event.pos):  
+                    self.input_search = ""
+                    self.entry = 2                 
 
             elif event.type == pygame.MOUSEBUTTONUP:
                  if self.link_logo_rect.collidepoint(event.pos):

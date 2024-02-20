@@ -1,7 +1,5 @@
 import pygame
 
-
-
 from source.pygame_manager.EventHandler import EventHandler
 from source.pygame_manager.Element import Element
 from data.DiscordManager import DiscordManager
@@ -13,7 +11,7 @@ class MainPage(Element, EventHandler, DiscordManager):
         EventHandler.__init__(self)
         DiscordManager.__init__(self)
         self.main_page_running = False
-        self.search_text = ""
+        self.input_search = "Search..."
         self.message = ""
         self.RECTANGLE_LARGEUR = 600
         self.RECTANGLE_HAUTEUR = 60 
@@ -24,7 +22,6 @@ class MainPage(Element, EventHandler, DiscordManager):
 
     def background(self): 
         self.img_background("background", 600, 350, 1200, 800, "main_page/main_page8")
-
    
     def banner(self):
 
@@ -35,8 +32,9 @@ class MainPage(Element, EventHandler, DiscordManager):
         self.url = "https://laplateforme.io/"
 
         # Search bar
-        self.rect_full(self.grey2, 970, 40, 240, 35, 80)
-        self.image_not_center("Search logo", 1050, 25, 30, 30,"main_page/main_page16")   
+        self.input_search_rect = self.rect_full(self.grey2, 970, 40, 240, 35, 80)
+        self.text_not_align(self.font2, 15, self.input_search, self.white, 860, 30.5)
+        self.image_not_center("Search logo", 1050, 25, 30, 30,"main_page/main_page16")  
 
 
     def FirstSection(self):
