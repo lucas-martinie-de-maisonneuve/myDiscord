@@ -1,4 +1,5 @@
 import pygame
+import webbrowser
 
 class EventHandler():
     def event_profil(self):
@@ -233,4 +234,18 @@ class EventHandler():
                     self.message = self.message[:-1]
                 else:
                     self.message += event.unicode
-        
+            
+            elif event.type == pygame.MOUSEBUTTONDOWN:
+                
+                if self.link_logo_rect.collidepoint(event.pos):
+                    if self.link_is_clicked: 
+                        webbrowser.open(self.url)  
+                        self.link_is_clicked = False
+
+            elif event.type == pygame.MOUSEBUTTONUP:
+                 if self.link_logo_rect.collidepoint(event.pos):
+                    self.link_is_clicked = True
+                
+
+
+

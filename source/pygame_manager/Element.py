@@ -15,7 +15,6 @@ class Element(Screen):
         self.grey4 = (146, 151, 153)
         self.grey5 = (34, 31, 37)
         self.grey6 = (176, 186, 181)
-        self.grey10 = (29,30,33)
         self.grey7 = (30, 33, 35) # First section principal page
         self.grey8 = (51, 55, 62) # Banner principal page
         self.grey9 = (45, 49, 53) # 2 section principal page

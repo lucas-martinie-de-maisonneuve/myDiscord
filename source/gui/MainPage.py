@@ -1,5 +1,7 @@
 import pygame
 
+
+
 from source.pygame_manager.EventHandler import EventHandler
 from source.pygame_manager.Element import Element
 from data.DiscordManager import DiscordManager
@@ -18,16 +20,24 @@ class MainPage(Element, EventHandler, DiscordManager):
         self.LONGUEUR_MAX = 80
         self.police = pygame.freetype.SysFont(self.font5,18)
         self.user = user
-        print(user)
+        self.link_is_clicked = True   
 
     def background(self): 
         self.img_background("background", 600, 350, 1200, 800, "main_page/main_page8")
-                
-    def banner(self):
-        self.rect_full(self.grey10, 655, 40, 1055, 60, 10)
-        self.image_not_center("Question mark", 20, 25, 95, 95,"main_page/main_page")   
 
-        
+   
+    def banner(self):
+
+        # Link to the LaPlateforme website
+        self.rect_full(self.grey10, 655, 40, 1055, 60, 10)
+        self.image_not_center("Question mark", 1120, 15, 50, 50,"main_page/main_page15")    
+        self.link_logo_rect = pygame.Rect(1120, 15, 50, 50)
+        self.url = "https://laplateforme.io/"
+
+        # Search bar
+        self.rect_full(self.grey2, 970, 40, 240, 35, 80)
+        self.image_not_center("Search logo", 1050, 25, 30, 30,"main_page/main_page16")   
+
 
     def FirstSection(self):
 
@@ -195,10 +205,11 @@ class MainPage(Element, EventHandler, DiscordManager):
 
     def mainPage_run(self):
         while self.main_page_running :
-            self.background()
-            self.banner()
+            self.background() 
             self.FirstSection()
             self.SecondSection()
             self.ThirdSection()
+            self.banner() 
+       
             self.event_main_page()
             self.update()

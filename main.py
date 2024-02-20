@@ -24,7 +24,7 @@ class Display_test(Element):
         self.profil.profil_running = False
         self.register.register_running = False
         self.main_page.main_page_running = False
-
+        
     def test(self):
         while self.main_running:
             for event in pygame.event.get():
