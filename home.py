@@ -5,6 +5,7 @@ from source.pygame_manager.element import Element
 from source.pygame_manager.animation import Animation
 from source.pygame_manager.cursor import Cursor
 from data.discord_manager import Discord_Manager
+from source.gui.register import Register
 
 from hashlib import sha256
 
@@ -16,7 +17,7 @@ class Home(Event_handler, Discord_Manager, Animation, Element, Cursor):
         Event_handler.__init__(self)
         Discord_Manager.__init__(self)
         Animation.__init__(self)
-    
+        self.register = Register()
         self.input_email = ""
         self.input_password = ""
         self.password_display = " *" * len(self.password)
@@ -45,11 +46,11 @@ class Home(Event_handler, Discord_Manager, Animation, Element, Cursor):
         self.rect_border(self.grey2, 920, 355, 400, 580, 2, 5)
 
         # Discord image logo
-        self.image_not_center("Discord", 840, 65, 170, 170,"home/home1") 
+        self.image_not_center("Discord", 840, 55, 170, 170,"home/home1") 
 
         # Rect email
-        self.input_email_rect = self.button_hover("Email", 920, 260, 350, 50, self.grey2, self.grey2, self.grey2, self.grey2,self.input_email, self.font2, self.white, 15, 4, 5)
-        self.text_input(self.input_email_rect, self.input_email, "Email address", 920, 260, 350, 50, id="email")
+        self.input_email_rect = self.button_hover("Email", 920, 250, 350, 50, self.grey2, self.grey2, self.grey2, self.grey2,self.input_email, self.font2, self.white, 15, 4, 5)
+        self.text_input(self.input_email_rect, self.input_email, "Email address", 920, 250, 350, 50, id="email")
 
         self.input_password_rect = self.button_hover("password", 920, 320, 350, 50, self.grey2, self.grey2, self.grey2, self.grey2,self.password_display, self.font2, self.white, 15, 4, 5)
         self.text_input(self.input_password_rect, self.password_display, "Password", 920, 320, 350, 50, id="password")

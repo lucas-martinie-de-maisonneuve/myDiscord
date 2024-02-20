@@ -160,5 +160,5 @@ class Main_page(Element, Event_handler, Discord_Manager):
             self.DisplayAll()
             self.update()
 
-main_page = Main_page()
-main_page.event_main_page()
+# main_page = Main_page()
+# main_page.event_main_page()
