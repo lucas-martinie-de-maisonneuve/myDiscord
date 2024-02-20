@@ -1,15 +1,13 @@
 import pygame
-from source.pygame_manager.element import Element
-from source.pygame_manager.screen import Screen
-from data.discord_manager import Discord_Manager
-from source.pygame_manager.event_handler import Event_handler
+from source.pygame_manager.Element import Element
+from data.DiscordManager import DiscordManager
+from source.pygame_manager.EventHandler import Event_handler
 
-class Test2(Element, Screen, Event_handler):
+class Test2(Element, Event_handler):
     def __init__(self):
-        Screen.__init__(self)
         Element.__init__(self)
         self.inscription_running = True
-        self.manager = Discord_Manager()
+        self.manager = DiscordManager()
         pygame.init()
         
     def split_string(self,string, length):

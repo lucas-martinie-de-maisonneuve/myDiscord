@@ -1,9 +1,7 @@
 import pygame
+import webbrowser
 
-class Event_handler():
-    def __init__(self):
-        pygame.init()
-
+class EventHandler():
     def event_profil(self):
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
@@ -81,7 +79,6 @@ class Event_handler():
                             if event.unicode:
                                 self.password += event.unicode
                           
-
     def event_home(self): 
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
@@ -89,13 +86,15 @@ class Event_handler():
             elif event.type == pygame.MOUSEBUTTONDOWN:
                 if self.input_email_rect.collidepoint(event.pos): 
                     self.entry = 1
+                    self.user_info = False
                 elif self.input_password_rect.collidepoint(event.pos): 
                     self.entry = 2
+                    self.user_info = False
                 else:
                     self.entry = 0
                 if self.sign.collidepoint(event.pos):
-                    self.register.register_running = True
-                    self.register.register_run()
+                    self.register_running = True
+                    self.register_run()
                 # elif self.is_mouse_over_button(pygame.Rect(745, 385, 350, 50)):                         
                 #     if self.input_email != "" and self.input_password != "":                  
                 #         self.login(self.input_email, self.input_password)                    
@@ -143,86 +142,85 @@ class Event_handler():
 
     def event_register(self):
         for event in pygame.event.get():
-                if event.type == pygame.QUIT:
+            if event.type == pygame.QUIT:
+                self.register_running = False
+            elif event.type == pygame.MOUSEBUTTONDOWN:
+                if self.sign_up.collidepoint(event.pos):
+                    self.inscription_running = False
+                elif self.profil1_cercle.collidepoint(event.pos):
+                    self.photo = 1
+                    self.profil_hovered = self.profil1_cercle
+
+                elif self.profil2_cercle.collidepoint(event.pos):
+                    self.photo = 2
+                    self.profil_hovered = self.profil2_cercle
+
+                elif self.profil3_cercle.collidepoint(event.pos):
+                    self.photo = 3
+                    self.profil_hovered = self.profil3_cercle
+
+                elif self.profil4_cercle.collidepoint(event.pos):
+                    self.photo = 4
+                    self.profil_hovered = self.profil4_cercle
+
+                elif self.username_rect.collidepoint(event.pos):
+                    self.entry = 1
+
+                elif self.email_rect.collidepoint(event.pos):
+                    self.entry = 2
+
+                elif self.surname_rect .collidepoint(event.pos):
+                    self.entry = 3
+
+                elif self.name_rect.collidepoint(event.pos):
+                    self.entry = 4
+
+                elif self.password_rect.collidepoint(event.pos):
+                    self.password = ""
+                    self.entry = 5
+
+                elif self.sign_up.collidepoint(event.pos):
+                    if self.username!="Username" and self.email!="Email address" and self.surname != "Surname" and self.name != "Name" and self.password != "Password" and self.photo != 0:
+                        self.manager.add_user(self.surname,self.name,self.username,self.email,self.password,self.photo,2)
+                        print("ajouter")
+
+                elif self.sign.collidepoint(event.pos):
                     self.register_running = False
-                elif event.type == pygame.MOUSEBUTTONDOWN:
-                    if self.sign_up.collidepoint(event.pos):
-                        self.inscription_running = False
-                    elif self.profil1_cercle.collidepoint(event.pos):
-                        self.photo = 1
-                        self.profil_hovered = self.profil1_cercle
 
-                    elif self.profil2_cercle.collidepoint(event.pos):
-                        self.photo = 2
-                        self.profil_hovered = self.profil2_cercle
+            elif event.type == pygame.KEYDOWN:
+                if event.key == pygame.K_BACKSPACE:
+                    if self.entry ==1:
+                        self.username = self.username[:-1]
+                    elif self.entry == 2:
+                        self.email = self.email[:-1]
+                    elif self.entry == 3:
+                        self.surname = self.surname[:-1]
+                    elif self.entry == 4:
+                        self.name = self.name[:-1]
+                    elif self.entry == 5:
+                        self.password = self.password[:-1]
+                else:
+                    if self.entry == 1:
+                        if event.unicode.isalpha() or event.unicode.isdigit():
+                            self.username += event.unicode
+                        
+                    elif self.entry == 2:
+                        if event.unicode:
+                            self.email = self.email + event.unicode
 
-                    elif self.profil3_cercle.collidepoint(event.pos):
-                        self.photo = 3
-                        self.profil_hovered = self.profil3_cercle
+                    elif self.entry == 3:
+                        if event.unicode.isalpha():
+                            self.surname = self.surname + event.unicode
+                            self.surname = self.surname.capitalize()
 
-                    elif self.profil4_cercle.collidepoint(event.pos):
-                        self.photo = 4
-                        self.profil_hovered = self.profil4_cercle
+                    elif self.entry == 4:
+                        if event.unicode.isalpha():
+                            self.name = self.name + event.unicode
+                            self.name = self.name.capitalize()
 
-                    elif self.username_rect.collidepoint(event.pos):
-                        self.entry = 1
-
-                    elif self.email_rect.collidepoint(event.pos):
-                        self.entry = 2
-
-                    elif self.surname_rect .collidepoint(event.pos):
-                        self.entry = 3
-
-                    elif self.name_rect.collidepoint(event.pos):
-                        self.entry = 4
-
-                    elif self.password_rect.collidepoint(event.pos):
-                        self.password = ""
-                        self.entry = 5
-
-                    elif self.sign_up.collidepoint(event.pos):
-                        if self.username!="Username" and self.email!="Email address" and self.surname != "Surname" and self.name != "Name" and self.password != "Password" and self.photo != 0:
-                            self.manager.add_user(self.surname,self.name,self.username,self.email,self.password,self.photo,2)
-                            print("ajouter")
-
-                    elif self.sign.collidepoint(event.pos):
-                        self.register_running = False
-                            
-                elif event.type == pygame.KEYDOWN:
-                    if event.key == pygame.K_BACKSPACE:
-                        if self.entry ==1:
-                            self.username = self.username[:-1]
-                        elif self.entry == 2:
-                            self.email = self.email[:-1]
-                        elif self.entry == 3:
-                            self.surname = self.surname[:-1]
-                        elif self.entry == 4:
-                            self.name = self.name[:-1]
-                        elif self.entry == 5:
-                            self.password = self.password[:-1]
-
-                    else:
-                        if self.entry == 1:
-                            if event.unicode.isalpha() or event.unicode.isdigit():
-                                self.username += event.unicode
-                            
-                        elif self.entry == 2:
-                            if event.unicode:
-                                self.email = self.email + event.unicode
-
-                        elif self.entry == 3:
-                            if event.unicode.isalpha():
-                                self.surname = self.surname + event.unicode
-                                self.surname = self.surname.capitalize()
-
-                        elif self.entry == 4:
-                            if event.unicode.isalpha():
-                                self.name = self.name + event.unicode
-                                self.name = self.name.capitalize()
-
-                        elif self.entry == 5:
-                            if event.unicode:
-                                self.password = self.password + event.unicode
+                    elif self.entry == 5:
+                        if event.unicode:
+                            self.password = self.password + event.unicode
 
     def event_main_page(self):
         for event in pygame.event.get():
@@ -230,10 +228,43 @@ class Event_handler():
                 self.main_page_running = False
 
             elif event.type == pygame.KEYDOWN:
+                
                 if event.key == pygame.K_RETURN:
                     pass
+
                 elif event.key == pygame.K_BACKSPACE:
-                    self.message = self.message[:-1]
+                    if self.entry == 1 :
+                        self.message = self.message[:-1]
+                    elif self.entry == 2: 
+                        self.input_search = self.input_search[:-1]
                 else:
+                    if self.entry == 1 :
+                        self.message += event.unicode  
+                    elif self.entry == 2: 
+                        self.input_search  += event.unicode 
+
+            elif event.type == pygame.MOUSEBUTTONDOWN:
+
+                if self.entry_message.collidepoint(event.pos): 
+                    self.entry = 1
+
+                elif self.link_logo_rect.collidepoint(event.pos):
+                    if self.link_is_clicked: 
+                        webbrowser.open(self.url)  
+                        self.link_is_clicked = False
+
+                elif self.input_search_rect.collidepoint(event.pos):  
+                    self.input_search = ""
+                    self.entry = 2   
+
+                elif self.cercle2.collidepoint(event.pos):
+                    self.profil.profil_running = True
+                    self.profil.profil_run()                              
+
+            elif event.type == pygame.MOUSEBUTTONUP:
+                 if self.link_logo_rect.collidepoint(event.pos):
+                    self.link_is_clicked = True              
                     self.message += event.unicode
-        
+
+               
+                
