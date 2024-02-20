@@ -22,11 +22,12 @@ class MainPage(Element, EventHandler, DiscordManager):
 
     def background(self): 
         self.img_background("background", 600, 350, 1200, 800, "main_page/main_page8")
-        
+                
     def banner(self):
         self.rect_full(self.grey10, 655, 40, 1055, 60, 10)
+        self.image_not_center("Question mark", 20, 25, 95, 95,"main_page/main_page")   
 
-        # self.text_not_align(self.font2, 40, "self.search_text", self.white, 10, 5)
+        
 
     def FirstSection(self):
 

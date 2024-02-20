@@ -26,6 +26,7 @@ class Element(Screen):
 
         self.blue = (0, 151, 254) # login
         self.blue1 = (0, 140, 234) # login  
+        self.blue2 = (20, 236, 232) # flashy blue #14ece8
         self.purple1 = (202, 8, 255) #linehome
         self.purple2 = (125, 85, 196)
 
