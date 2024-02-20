@@ -85,7 +85,7 @@ class Profil(Element, EventHandler, Cursor):
             self.picture_cursor = False
             self.circle(self.theme_color, 450, 180, 65)
             self.img_center("profile_picture", 450,180,130,130,f"profil/profil{self.picture}")
-
+        # Status color 
     def status_display(self, x, y, texte, texte2, color, color2):
         self.status_edit_rect = pygame.Rect(540, 570, 80, 20)
         self.status_active_rect = pygame.Rect(440, 570, 80, 20)
@@ -222,4 +222,3 @@ class Profil(Element, EventHandler, Cursor):
             self.event_profil()
             self.profil_page_cursor()
             self.update()
-            

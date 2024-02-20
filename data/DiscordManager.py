@@ -1,5 +1,5 @@
 from datetime import datetime
-from data.database import Database
+from data.Database import Database
 
 class DiscordManager(Database):
     def __init__(self):

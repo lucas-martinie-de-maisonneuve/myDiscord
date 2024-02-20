@@ -26,7 +26,6 @@ class Cursor:
         self.profil3_cursor = False 
         self.profil4_cursor = False
 
-
     def set_cursor(self, rect, button):
         if self.is_mouse_over_button(rect):
             button = True
