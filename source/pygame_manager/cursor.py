@@ -1,5 +1,3 @@
-import pygame
-
 class Cursor:
     def __init__(self):
         self.password_cursor = False

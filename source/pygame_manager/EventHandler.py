@@ -1,9 +1,6 @@
 import pygame
 
-class Event_handler():
-    def __init__(self):
-        pygame.init()
-
+class EventHandler():
     def event_profil(self):
         for event in pygame.event.get():
             if event.type == pygame.QUIT:

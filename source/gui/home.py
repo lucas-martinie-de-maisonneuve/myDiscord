@@ -1,8 +1,8 @@
 import pygame
 
-from source.gui.register import Register
-from source.gui.main_page import Main_page
-from source.user import User
+from source.gui.Register import Register
+from source.gui.MainPage import MainPage
+from source.User import User
 
 class Home(Register):
     
@@ -12,7 +12,7 @@ class Home(Register):
         self.input_password = ""
         self.password_display = " *" * len(self.password)
         self.user = User(self.input_email, self.input_password)
-        self.main_page = Main_page((0, '', '', '', '', '', 0, 0))
+        self.main_page = MainPage((0, '', '', '', '', '', 0, 0))
         self.show_pass = False
         self.entry = 0
         self.home_running = False
@@ -101,7 +101,7 @@ class Home(Register):
                 self.user = User(self.input_email, self.input_password)
                 user = self.user.loginUser()
                 if self.user.connected:
-                    self.main_page = Main_page(user)
+                    self.main_page = MainPage(user)
                     self.main_page.main_page_running = True
                     self.main_page.mainPage_run()
                     self.home_running = False

@@ -6,19 +6,17 @@
 ##################################################
 
 import pygame
-from source.pygame_manager.element import Element
-from source.pygame_manager.screen import Screen
-from source.gui.home import Home
-from source.gui.profil import Profil
-from source.gui.register import Register
-from source.gui.main_page import Main_page
+from source.pygame_manager.Element import Element
+from source.gui.Home import Home
+from source.gui.Profil import Profil
+from source.gui.Register import Register
+from source.gui.MainPage import MainPage
 
-class Display_test(Element, Screen):
+class Display_test(Element):
     def __init__(self):
         Element.__init__(self)
-        Screen.__init__(self)
         self.main_running = True
-        self.main_page = Main_page((2, 'None', 'Martinie', 'Lucassa', 'lucas.martinie@laplateforme.io', 'LucasMartinie2412!', 2, 2))
+        self.main_page = MainPage((2, 'None', 'Martinie', 'Lucassa', 'lucas.martinie@laplateforme.io', 'LucasMartinie2412!', 2, 2))
         self.connexion = Home()
         self.profil = Profil()
         self.register = Register()

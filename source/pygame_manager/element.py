@@ -1,7 +1,6 @@
 import pygame
-from source.pygame_manager.screen import Screen
+from source.pygame_manager.Screen import Screen
 class Element(Screen):
-
     def __init__(self):
         Screen.__init__(self)
 
@@ -56,40 +55,40 @@ class Element(Screen):
         self.alpha_grey2 =(50,50,50,200) #Alpha background register
         self.alpha_none =(0,0,0,0)
 
-        self.font1 = "font/Uni Sans Heavy.otf"
-        self.font2 = "font/gg sans Regular.ttf"
-        self.font3 = "font/Uni Sans Thin.otf"
-        self.font4 = "font/gg sans Semibold.ttf"
-        self.font5 = "font/gg sans Bold.ttf"
+        self.font1 = "assets/font/Uni Sans Heavy.otf"
+        self.font2 = "assets/font/gg sans Regular.ttf"
+        self.font3 = "assets/font/Uni Sans Thin.otf"
+        self.font4 = "assets/font/gg sans Semibold.ttf"
+        self.font5 = "assets/font/gg sans Bold.ttf"
 
 # Def text          
 
     def text_center(self, font, text_size, text_content, color, x, y):
         pygame.font.init()
-        text = pygame.font.Font(f"source/pygame_manager/{font}", text_size).render(text_content, True,color)
+        text = pygame.font.Font(f"{font}", text_size).render(text_content, True,color)
         text_rect = text.get_rect(center=(x, y))
         self.Window.blit(text, text_rect)
     
     def text_not_align(self, font, text_size, text_content, color, x, y):
-        text = pygame.font.Font(f"source/pygame_manager/{font}", text_size).render(text_content, True, color)
+        text = pygame.font.Font(f"{font}", text_size).render(text_content, True, color)
         text_rect = text.get_rect(topleft=(x, y))
         self.Window.blit(text, text_rect)
 
 # Def image
 
     def img_center(self, name, x, y, width, height, image_name):
-        name = pygame.image.load(f'image/{image_name}.png')
+        name = pygame.image.load(f'assets/image/{image_name}.png')
         name = pygame.transform.scale(name, (width, height))
         self.Window.blit(name, (x - name.get_width()//2, y - name.get_height()//2))
 
     def image_not_center(self, name, x, y, width, height, image_name):
-        name = pygame.image.load(f'image/{image_name}.png').convert_alpha()
+        name = pygame.image.load(f'assets/image/{image_name}.png').convert_alpha()
         name = pygame.transform.scale(name,(width,height))
         self.Window.blit(name, (x,y))
         return name
         
     def img_background(self, name, x, y, width, height, image_name):
-        name = pygame.image.load(f'image/{image_name}.png').convert_alpha()
+        name = pygame.image.load(f'assets/image/{image_name}.png').convert_alpha()
         name = pygame.transform.scale(name, (width, height))
         self.Window.blit(name, (x - name.get_width()//2, y - name.get_height()//2))
 

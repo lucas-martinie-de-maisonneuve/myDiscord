@@ -1,10 +1,10 @@
 import pygame
-from source.pygame_manager.element import Element
-from source.pygame_manager.event_handler import Event_handler
-from source.pygame_manager.cursor import Cursor
-from source.pygame_manager.animation import Animation
+from source.pygame_manager.Element import Element
+from source.pygame_manager.EventHandler import EventHandler
+from source.pygame_manager.Cursor import Cursor
+from source.pygame_manager.Animation import Animation
 
-class Register(Element, Event_handler, Cursor, Animation):
+class Register(Element, EventHandler, Cursor, Animation):
     def __init__(self):
         Element.__init__(self)
         Cursor.__init__(self)

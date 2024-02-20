@@ -1,15 +1,15 @@
 import pygame
 
-from source.pygame_manager.event_handler import Event_handler
-from source.pygame_manager.element import Element
-from data.discord_manager import Discord_Manager
+from source.pygame_manager.EventHandler import EventHandler
+from source.pygame_manager.Element import Element
+from data.DiscordManager import DiscordManager
 
-class Main_page(Element, Event_handler, Discord_Manager):
+class MainPage(Element, EventHandler, DiscordManager):
     
     def __init__(self, user):
         Element.__init__(self)
-        Event_handler.__init__(self)
-        Discord_Manager.__init__(self)
+        EventHandler.__init__(self)
+        DiscordManager.__init__(self)
         self.main_page_running = False
         self.search_text = ""
         self.message = ""
