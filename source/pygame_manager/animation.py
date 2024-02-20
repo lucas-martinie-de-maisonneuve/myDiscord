@@ -39,9 +39,9 @@ class Animation():
         if self.change_img == 1:
             self.img_center("0wl", x, y, size, self.anim_y,"home/home9")
         elif self.change_img == 2:
-            self.img_center("Butterfly", x, y, size, self.anim_y,"home/home6")         
-        elif self.change_img == 3:
             self.img_center("Bat", x, y, size, self.anim_y,"home/home7") 
+        elif self.change_img == 3:
+            self.img_center("Butterfly", x, y, size, self.anim_y,"home/home6")         
         elif self.change_img == 4:
             self.img_center("Manta Ray", x, y, size, self.anim_y,"home/home8") 
         

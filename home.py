@@ -4,21 +4,24 @@ from source.pygame_manager.event_handler import Event_handler
 from source.pygame_manager.element import Element
 from source.pygame_manager.animation import Animation
 from source.pygame_manager.cursor import Cursor
+from data.discord_manager import Discord_Manager
 from source.gui.register import Register
-from source.user import User
-from source.gui.main_page import Main_page
-class Home(Register):
+
+from hashlib import sha256
+
+class Home(Event_handler, Discord_Manager, Animation, Element, Cursor):
     
     def __init__(self):
         Element.__init__(self)
         Cursor.__init__(self)
         Event_handler.__init__(self)
+        Discord_Manager.__init__(self)
         Animation.__init__(self)
-        Register.__init__(self)
+        self.register = Register()
         self.input_email = ""
         self.input_password = ""
-        self.user = User(self.input_email, self.input_password)
-        self.main_page = Main_page((0, '', '', '', '', '', 0, 0))
+        self.password_display = " *" * len(self.password)
+        self.show_pass = False
         self.entry = 0
         self.home_running = False
         self.anim_pass = False 
@@ -38,7 +41,7 @@ class Home(Register):
 
     # Connexion section       
 
-        # Rec principal
+        # Rect principal
         self.rect_full(self.grey3, 920, 355, 400, 580, 5)
         self.rect_border(self.grey2, 920, 355, 400, 580, 2, 5)
 
@@ -47,12 +50,20 @@ class Home(Register):
 
         # Rect email
         self.input_email_rect = self.button_hover("Email", 920, 250, 350, 50, self.grey2, self.grey2, self.grey2, self.grey2,self.input_email, self.font2, self.white, 15, 4, 5)
-        self.text_input(self.input_email_rect, self.input_email, "Email address", 920, 250, 350, 50, id="email_login")
+        self.text_input(self.input_email_rect, self.input_email, "Email address", 920, 250, 350, 50, id="email")
 
+        self.input_password_rect = self.button_hover("password", 920, 320, 350, 50, self.grey2, self.grey2, self.grey2, self.grey2,self.password_display, self.font2, self.white, 15, 4, 5)
+        self.text_input(self.input_password_rect, self.password_display, "Password", 920, 320, 350, 50, id="password")
+
+        # Eye to show password
+        self.image_not_center("Eye", 1050, 305, 30,30,"home/home11")
+        self.show_pass_rect = pygame.Rect(1050, 305,30,30)
+              
         # Rect password
-        self.input_password_rect = self.button_hover("password", 920, 320, 350, 50, self.grey2, self.grey2, self.grey2, self.grey2,self.input_password, self.font2, self.white, 15, 4, 5)
-        self.text_input(self.input_password_rect, self.input_password, "Password", 920, 320, 350, 50, id="password_login")
-
+        if self.show_pass:
+           self.password_display = self.input_password
+        else:
+            self.password_display = " *" * len(self.input_password)
 
         # Rect log In
         self.login = self.button_hover("login", 920, 410, 350, 50, self.blue, self.blue, self.blue1, self.blue1,"Log In", self.font1, self.white, 15, 4, 5) 
@@ -69,8 +80,8 @@ class Home(Register):
         self.text_center(self.font2, 12,"Sign In with", self.white, 925, 475)   
         self.facebook = self.hover_image("Facebook", "Facebook", 880, 520, 30, 30, "home/home3")    # Facebook
         self.instagram = self.hover_image("Instagram", "Instagram", 925, 520, 30, 30,"home/home4")   # Instagram
-        self.google = self.hover_image("Google", "Google",  970, 520, 30, 30, "home/home5")       # Google    
-
+        self.google = self.hover_image("Google", "Google",  970, 520, 30, 30, "home/home5")       # Google   
+   
     def HoverLostPassword(self): 
         # self.rect_full(self.green, 1045, 360, 105, 10, 5)
         self.forgot_p = (pygame.Rect(992, 355, 115, 15))    
@@ -86,24 +97,32 @@ class Home(Register):
         else:
             self.text_center(self.font1, 11, "Sign Up", self.blue, 990, 600)
 
-    def DisplayAll(self):
+    def LoginUser (self): 
+        email = self.input_email
+        password = self.input_password
+
+        hashed_password = sha256(password.encode()).hexdigest()
+
+        if self.check_credentials(email, hashed_password):
+            print("Connexion successful!")     
+        else:
+            print(hashed_password)
+
+    def DisplayAll(self): 
         self.design()
         self.HoverLostPassword() 
         self.HoverSign()       
         self.logo_home(355, 180, 370, 200, 150)
-        
+
     def home_run(self):
         while self.home_running :
-            if self.is_mouse_over_button(pygame.Rect(745, 385, 350, 50)) and pygame.mouse.get_pressed()[0]:
-                self.user = User(self.input_email, self.input_password)
-                user = self.user.loginUser()
-                if self.user.connected:
-                    self.main_page = Main_page(user)
-                    self.main_page.main_page_running = True
-                    self.main_page.event_main_page()
-                    self.home_running = False
-            if not self.register_running:
-                self.DisplayAll()
-                self.event_home()
-                self.home_page_cursor()
+            if self.is_mouse_over_button(pygame.Rect(920, 410, 350, 50)) and pygame.mouse.get_pressed()[0]:
+                self.LoginUser()   
+
+            self.DisplayAll()
+            self.event_home()
+            self.home_page_cursor()
             self.update()            
+
+test = Home()
+test.home_run()

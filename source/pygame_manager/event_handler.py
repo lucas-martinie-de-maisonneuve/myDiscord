@@ -98,7 +98,14 @@ class Event_handler():
                     self.register_run()
                 # elif self.is_mouse_over_button(pygame.Rect(745, 385, 350, 50)):                         
                 #     if self.input_email != "" and self.input_password != "":                  
-                #         self.login(self.input_email, self.input_password)
+                #         self.login(self.input_email, self.input_password)                    
+
+                if self.show_pass_rect.collidepoint(event.pos):
+                    self.show_pass = True                  
+
+            elif event.type == pygame.MOUSEBUTTONUP:
+                if self.show_pass_rect.collidepoint(event.pos):
+                    self.show_pass = False
 
             elif event.type == pygame.KEYDOWN: 
                 if event.key == pygame.K_BACKSPACE:
@@ -114,7 +121,6 @@ class Event_handler():
                     elif self.entry == 2:
                         if event.unicode:
                             self.input_password= self.input_password + event.unicode
-
 
             elif event.type == pygame.KEYDOWN:
                 if event.key == pygame.K_BACKSPACE:
@@ -134,7 +140,7 @@ class Event_handler():
                     elif self.password_edit:
                             if event.unicode:
                                 self.password += event.unicode
-                     
+
     def event_register(self):
         for event in pygame.event.get():
                 if event.type == pygame.QUIT:
@@ -217,3 +223,17 @@ class Event_handler():
                         elif self.entry == 5:
                             if event.unicode:
                                 self.password = self.password + event.unicode
+
+    def event_main_page(self):
+        for event in pygame.event.get():
+            if event.type == pygame.QUIT:
+                self.main_page_running = False
+
+            elif event.type == pygame.KEYDOWN:
+                if event.key == pygame.K_RETURN:
+                    pass
+                elif event.key == pygame.K_BACKSPACE:
+                    self.message = self.message[:-1]
+                else:
+                    self.message += event.unicode
+        
