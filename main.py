@@ -8,7 +8,7 @@
 import pygame
 from source.pygame_manager.element import Element
 from source.pygame_manager.screen import Screen
-from home import Home
+from source.gui.home import Home
 from source.gui.profil import Profil
 from source.gui.register import Register
 from source.gui.main_page import Main_page
@@ -35,7 +35,7 @@ class Display_test(Element, Screen):
                 elif event.type == pygame.MOUSEBUTTONDOWN:
                     if self.princi.collidepoint(event.pos):
                         self.main_page.main_page_running = True
-                        self.main_page.DisplayAll()
+                        self.main_page.mainPage_run()
                     elif self.inscri.collidepoint(event.pos):
                         self.register.register_running = True
                         self.register.register_run()

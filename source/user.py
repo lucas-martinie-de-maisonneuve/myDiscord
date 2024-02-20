@@ -1,5 +1,5 @@
 from data.discord_manager import Discord_Manager
-
+from hashlib import sha256
 class User(Discord_Manager):
     def __init__(self, email, password):
         self.user_email = email
@@ -8,9 +8,11 @@ class User(Discord_Manager):
         super().__init__()
 
     def loginUser(self):
-        if self.check_credentials(self.user_email, self.user_password):
+        hashed_password = sha256(self.user_password.encode()).hexdigest()
+
+        if self.check_credentials(self.user_email, hashed_password):
             self.connected = True
-            user = self.get_user(self.user_email, self.user_password)
+            user = self.get_user(self.user_email, hashed_password)
             print("Connexion successfull !")
             return(user)
         else:
