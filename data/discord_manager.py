@@ -4,8 +4,8 @@ from datetime import datetime
 class Discord_Manager(Database):
     def __init__(self):
         # Database.__init__(self, 'localhost', 'root', '$~Bc4gB9', 'discord')
-        Database.__init__(self, 'localhost', 'root', 'VannyLamorte25!', 'discord')
-        # Database.__init__(self, 'localhost', 'root', 'azerty', 'discord')
+        # Database.__init__(self, 'localhost', 'root', 'VannyLamorte25!', 'discord')
+        Database.__init__(self, 'localhost', 'root', 'azerty', 'discord')
         self.connect()
 
     def add_user(self, surname, name, pseudo, email, password, photo, id_role):
@@ -95,9 +95,9 @@ class Discord_Manager(Database):
         self.channels = self.cursor.fetchall()
         return self.channels
 
-    def communication_channel(self, id_category):
+    def communication_channel(self, id):
         sql = "SELECT communication FROM channel WHERE id_category = %s"
-        values = (id_category,)
+        values = (id,)
         self.cursor.execute(sql, values)
         self.channels = self.cursor.fetchall()
         return self.channels 

@@ -76,32 +76,69 @@ class Main_page(Element, Screen, Event_handler, Discord_Manager):
             self.text_not_align(self.font1, 18, self.name_category1, self.grey1, 200, (190*a) +100)
 
             for i in range(self.nb_channels):
-                self.name_channel1 = self.name_channel(a+1)
+                self.name_channel1 = self.name_channel(a+1)                
                 self.str_name3 = self.name_channel1[i][0]
                 self.name_channel1 = f'{self.str_name3} '
                 
                 for _ in range(self.nb_channels):
+                    
                     if a==0:
                         self.text_not_align(self.font2, 15, self.name_channel1, self.grey1, 200, (20*i)+120)
                         self.img_center("Book about us", 170, (20*i)+125, 25, 25,"main_page/main_page12")
-
-                    elif a ==1:
-                        self.communication = self.communication_channel(a+1)
-                        self.str_communication1= self.communication[0][0]
-                        self.communication = f'{self.str_communication1}'
-                        if self.communication == "0": 
-                            # print (self.communication)                        
-                            self.img_center("Volume logiciel", 170,(20*i)+330, 25, 25,"main_page/main_page10")
-                        elif self.communication == "1": 
-                            # print (self.communication) 
-                            self.img_center("Hashtags logiciel", 170, 350, 15, 15,"main_page/main_page14") 
-
+                        
+                    elif a == 1:
                         self.text_not_align(self.font2, 15, self.name_channel1, self.grey1, 200, (20*i)+320)
+                        
+                        self.communication = self.communication_channel(a+1)
+                        self.str_communication1= self.communication[i][0]
+                        self.communication = f'{self.str_communication1}'
+
+                        if self.communication == "0":
+                            self.img_center("Volume logiciel", 170,(20*i)+310, 25, 25,"main_page/main_page10")
+                            
+                        if self.communication == "1": 
+                            self.img_center("Hashtags logiciel", 170, (20*i)+350, 15, 15,"main_page/main_page14") 
                         
                     elif a==2:
 
                         self.communication = self.communication_channel(a+1)
                         self.text_not_align(self.font2, 15, self.name_channel1, self.grey1, 200, (20*i)+520)
+                        self.communication = self.communication_channel(a+1)
+                        self.str_communication1= self.communication[i][0]                        
+                        self.communication = f'{self.str_communication1}'
+
+                        if self.communication == "0":
+                            self.img_center("Volume logiciel", 170,(20*i)+530, 25, 25,"main_page/main_page10")
+                            print(i,"volume")
+                            
+                        if self.communication == "1": 
+                            self.img_center("Hashtags logiciel", 170, (20*i)+530, 15, 15,"main_page/main_page14") 
+                            print(i,"hashtag")
+                        
+                        
+                # for _ in range(self.nb_channels):
+                #     if a==0:
+                #         self.text_not_align(self.font2, 15, self.name_channel1, self.grey1, 200, (20*i)+120)
+                #         self.img_center("Book about us", 170, (20*i)+125, 25, 25,"main_page/main_page12")
+
+                #     elif a == 1:
+                #         self.communication = self.communication_channel(a+1)
+                #         print(self.communication)
+                #         self.str_communication1= self.communication[0][0]
+                #         self.communication = f'{self.str_communication1}'
+                #         if self.communication == "0":
+                #             # print (self.communication)                        
+                #             self.img_center("Volume logiciel", 170,(20*i)+330, 25, 25,"main_page/main_page10")
+                #         elif self.communication == "1": 
+                #             # print (self.communication) 
+                #             self.img_center("Hashtags logiciel", 170, 350, 15, 15,"main_page/main_page14") 
+
+                #         self.text_not_align(self.font2, 15, self.name_channel1, self.grey1, 200, (20*i)+320)
+                        
+                #     elif a==2:
+
+                #         self.communication = self.communication_channel(a+1)
+                #         self.text_not_align(self.font2, 15, self.name_channel1, self.grey1, 200, (20*i)+520)
                     
                     # True = 0 =  son
                     # False = 1 = Message
