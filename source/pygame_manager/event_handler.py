@@ -227,7 +227,7 @@ class Event_handler():
     def event_main_page(self):
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
-                    self.main_page_running = False
+                self.main_page_running = False
 
             elif event.type == pygame.KEYDOWN:
                 if event.key == pygame.K_RETURN:

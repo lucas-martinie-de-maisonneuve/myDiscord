@@ -12,6 +12,8 @@ class Main_page(Element,Event_handler, Discord_Manager):
         Discord_Manager.__init__(self)
         self.message = ""
         self.message = ""
+        self.main_page_running = False
+
         # self.test2 = Test2()
         self.RECTANGLE_LARGEUR = 600
         self.RECTANGLE_HAUTEUR = 60 
@@ -192,7 +194,6 @@ class Main_page(Element,Event_handler, Discord_Manager):
             self.text_not_align(self.font2, 17, ligne, self.black, 510, 620 + i * 15)
 
     def DisplayAll(self):
-        self.main_page_running = True
         while self.main_page_running :
             self.background()
             self.banner()
@@ -203,4 +204,4 @@ class Main_page(Element,Event_handler, Discord_Manager):
             self.update()
 
 # main_page = Main_page()
-# main_page.event_main_page()
+# main_page.DisplayAll()

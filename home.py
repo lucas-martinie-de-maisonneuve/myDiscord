@@ -115,7 +115,6 @@ class Home(Event_handler, Discord_Manager, Animation, Element, Cursor):
         self.logo_home(355, 180, 370, 200, 150)
 
     def home_run(self):
-        self.home_running = True
         while self.home_running :
             if self.is_mouse_over_button(pygame.Rect(920, 410, 350, 50)) and pygame.mouse.get_pressed()[0]:
                 self.LoginUser()   

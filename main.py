@@ -33,9 +33,9 @@ class Display_test(Element, Screen):
                 if event.type == pygame.QUIT:
                     self.main_running = False
                 elif event.type == pygame.MOUSEBUTTONDOWN:
-                    self.main_page.main_page_running = True
                     if self.princi.collidepoint(event.pos):
-                        self.main_page.event_main_page()
+                        self.main_page.main_page_running = True
+                        self.main_page.DisplayAll()
                     elif self.inscri.collidepoint(event.pos):
                         self.register.register_running = True
                         self.register.register_run()
