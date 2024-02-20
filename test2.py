@@ -32,6 +32,7 @@ class Test2(Element, Screen, Event_handler):
         self.rect_full(self.grey1, 795, 650, 650, 60, 10)
         # self.nb_message = self.manager.count_message()
         # self.nb_message = self.nb_message[0]
+        # self.nb =  self.nb_message
         # print(self.nb_message)
         
         for i in range(2):
@@ -39,9 +40,9 @@ class Test2(Element, Screen, Event_handler):
             self.str_name1 = self.message_name[i][0]
             self.message_name = f'{self.str_name1} '
 
-            self.message_1 = self.manager.message_message()
-            self.str_name2 = self.message_1[i][0]
-            self.message_1 = f'{self.str_name2} '
+            # self.message_1 = self.manager.message_message()
+            # self.str_name2 = self.message_1[i][0]
+            # self.message_1 = f'{self.str_name2} '
 
             self.message_time1 = self.manager.time_message()
             self.str_name3 = self.message_time1[i][0]
@@ -64,6 +65,9 @@ class Test2(Element, Screen, Event_handler):
     def register_run(self):
         self.inscription_running = True
         while self.inscription_running:
+            for event in pygame.event.get():
+                if event.type == pygame.QUIT:
+                    self.inscription_running = False
             self.ThirdSection()
             # self.event_register()
             self.update()
