@@ -187,13 +187,13 @@ class Main_page(Element,Event_handler, Discord_Manager):
             self.text_not_align(self.font1, 10, self.message_time1, self.grey1, pos_x + 142, (pos_y + 10))
 
 
-            # if i==0:
-            #     self.rect_full_not_centered(self.grey10, pos_x, pos_y, 20 + max_line_length, rectangle_height , 2)
+            if i==0:
+                self.rect_full_not_centered(self.grey10, pos_x, pos_y, 20 + max_line_length, rectangle_height , 2)
 
-            #     for i, chunk in enumerate(chunked_strings):
-            #         self.text_not_align(self.font2, 16, chunk, self.grey1, pos_x + 12, ((30 * i) + pos_y + 20))
-            #     self.text_not_align(self.font1, 18, self.message_name, self.pink, pos_x + 12, (pos_y + 5))
-            #     self.text_not_align(self.font1, 10, self.message_time1, self.grey1, pos_x + 142, (pos_y + 10))
+                for i, chunk in enumerate(chunked_strings):
+                    self.text_not_align(self.font2, 16, chunk, self.grey1, pos_x + 12, ((30 * i) + pos_y + 20))
+                self.text_not_align(self.font1, 18, self.message_name, self.pink, pos_x + 12, (pos_y + 5))
+                self.text_not_align(self.font1, 10, self.message_time1, self.grey1, pos_x + 142, (pos_y + 10))
 
             # if i==1:
             #     # Avoir la longueur du second message 
