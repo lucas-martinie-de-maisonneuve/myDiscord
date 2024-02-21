@@ -1,33 +1,43 @@
 import pygame
 
-from source.pygame_manager.event_handler import Event_handler
-from source.pygame_manager.element import Element
-from data.discord_manager import Discord_Manager
-# from test2 import Test2
-class Main_page(Element,Event_handler, Discord_Manager):
+from source.pygame_manager.EventHandler import EventHandler
+from source.pygame_manager.Element import Element
+from data.DiscordManager import DiscordManager
+from source.gui.Profil import Profil
 
-    def __init__(self):
+class MainPage(Element, EventHandler, DiscordManager):
+    
+    def __init__(self, user):
         Element.__init__(self)
-        Event_handler.__init__(self)
-        Discord_Manager.__init__(self)
-        self.message = ""
-        self.message = ""
+        EventHandler.__init__(self)
+        DiscordManager.__init__(self)
+        self.user = user
+        self.profil = Profil(self.user)
         self.main_page_running = False
-
-        # self.test2 = Test2()
+        self.input_search = "Search..."
+        self.message = ""
         self.RECTANGLE_LARGEUR = 600
         self.RECTANGLE_HAUTEUR = 60 
         self.LONGUEUR_MAX = 80
         self.police = pygame.freetype.SysFont(self.font5,18)
-        pygame.init()
+        self.user = user
+        self.link_is_clicked = True   
 
     def background(self): 
         self.img_background("background", 600, 350, 1200, 800, "main_page/main_page8")
-        
+   
     def banner(self):
-        self.rect_full(self.grey10, 655, 40, 1055, 60, 10)
 
-        # self.text_not_align(self.font2, 40, "self.search_text", self.white, 10, 5)
+        # Link to the LaPlateforme website
+        self.rect_full(self.grey10, 655, 40, 1055, 60, 10)
+        self.image_not_center("Question mark", 1120, 15, 50, 50,"main_page/main_page15")    
+        self.link_logo_rect = pygame.Rect(1120, 15, 50, 50)
+        self.url = "https://laplateforme.io/"
+
+        # Search bar
+        self.input_search_rect = self.rect_full(self.grey2, 970, 40, 240, 35, 80)
+        self.text_not_align(self.font2, 15, self.input_search, self.white, 860, 30.5)
+        self.image_not_center("Search logo", 1050, 25, 30, 30,"main_page/main_page16")  
 
     def FirstSection(self):
 
@@ -56,7 +66,7 @@ class Main_page(Element,Event_handler, Discord_Manager):
             self.img_center("neon circle", 64, 540, 110, 110,"main_page/main_page4") 
 
         # Hover Power Off
-        self.cercle2 = pygame.draw.circle(self.Window, self.grey10, (64, 635), 35)
+        self.cercle3 = pygame.draw.circle(self.Window, self.grey10, (64, 635), 35)
         if self.is_mouse_over_button(self.cercle2):           
             self.img_center("Power Off", 64, 635, 60, 60,"main_page/main_page9")
             self.img_center("neon circle", 64, 635, 115, 115,"main_page/main_page4")   
@@ -81,29 +91,68 @@ class Main_page(Element,Event_handler, Discord_Manager):
             self.text_not_align(self.font1, 18, self.name_category1, self.grey1, 200, (190*a) +100)
 
             for i in range(self.nb_channels):
-                self.name_channel1 = self.name_channel(a+1)
+                self.name_channel1 = self.name_channel(a+1)                
                 self.str_name3 = self.name_channel1[i][0]
                 self.name_channel1 = f'{self.str_name3} '
                 
                 for _ in range(self.nb_channels):
+                    
                     if a==0:
                         self.text_not_align(self.font2, 15, self.name_channel1, self.grey1, 200, (20*i)+120)
                         self.img_center("Book about us", 170, (20*i)+125, 25, 25,"main_page/main_page12")
-
-                    elif a ==1:
-                        self.communication = self.communication_channel(a+1)
-                        self.str_communication1= self.communication[0][0]
-                        self.communication = f'{self.str_communication1}'
-                        if self.communication == "0": 
-                            self.img_center("Volume logiciel", 170,(20*i)+330, 25, 25,"main_page/main_page10")
-                        elif self.communication == "1": 
-                            self.img_center("Hashtags logiciel", 170, 350, 15, 15,"main_page/main_page14") 
-
+                        
+                    elif a == 1:
                         self.text_not_align(self.font2, 15, self.name_channel1, self.grey1, 200, (20*i)+320)
+                        
+                        self.communication = self.communication_channel(a+1)
+                        self.str_communication1= self.communication[i][0]
+                        self.communication = f'{self.str_communication1}'
+
+                        if self.communication == "0":
+                            self.img_center("Volume logiciel", 170,(20*i)+310, 25, 25,"main_page/main_page10")
+                            
+                        if self.communication == "1": 
+                            self.img_center("Hashtags logiciel", 170, (20*i)+350, 15, 15,"main_page/main_page14") 
                         
                     elif a==2:
                         self.communication = self.communication_channel(a+1)
                         self.text_not_align(self.font2, 15, self.name_channel1, self.grey1, 200, (20*i)+520)
+                        self.communication = self.communication_channel(a+1)
+                        self.str_communication1= self.communication[i][0]                        
+                        self.communication = f'{self.str_communication1}'
+
+                        if self.communication == "0":
+                            self.img_center("Volume logiciel", 170,(20*i)+530, 25, 25,"main_page/main_page10")
+                            print(i,"volume")
+                            
+                        if self.communication == "1": 
+                            self.img_center("Hashtags logiciel", 170, (20*i)+530, 15, 15,"main_page/main_page14") 
+                            print(i,"hashtag")
+                        
+                        
+                # for _ in range(self.nb_channels):
+                #     if a==0:
+                #         self.text_not_align(self.font2, 15, self.name_channel1, self.grey1, 200, (20*i)+120)
+                #         self.img_center("Book about us", 170, (20*i)+125, 25, 25,"main_page/main_page12")
+
+                #     elif a == 1:
+                #         self.communication = self.communication_channel(a+1)
+                #         print(self.communication)
+                #         self.str_communication1= self.communication[0][0]
+                #         self.communication = f'{self.str_communication1}'
+                #         if self.communication == "0":
+                #             # print (self.communication)                        
+                #             self.img_center("Volume logiciel", 170,(20*i)+330, 25, 25,"main_page/main_page10")
+                #         elif self.communication == "1": 
+                #             # print (self.communication) 
+                #             self.img_center("Hashtags logiciel", 170, 350, 15, 15,"main_page/main_page14") 
+
+                #         self.text_not_align(self.font2, 15, self.name_channel1, self.grey1, 200, (20*i)+320)
+                        
+                #     elif a==2:
+
+                #         self.communication = self.communication_channel(a+1)
+                #         self.text_not_align(self.font2, 15, self.name_channel1, self.grey1, 200, (20*i)+520)
                     
                     # True = 0 =  son
                     # False = 1 = Message
@@ -252,15 +301,13 @@ class Main_page(Element,Event_handler, Discord_Manager):
         for i, ligne in enumerate(texte_decoupe):
             self.text_not_align(self.font2, 17, ligne, self.black, 510, 620 + i * 15)
 
-    def DisplayAll(self):
+    def mainPage_run(self):
         while self.main_page_running :
-            self.background()
-            self.banner()
-            self.FirstSection()
-            self.SecondSection()
-            self.ThirdSection()
-            self.event_main_page()
-            self.update()
-
-# main_page = Main_page()
-# main_page.DisplayAll()
+            if not self.profil.profil_running:
+                self.background()
+                self.FirstSection()
+                self.SecondSection()
+                self.ThirdSection()
+                self.banner() 
+                self.event_main_page()
+                self.update()

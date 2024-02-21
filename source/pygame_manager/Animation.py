@@ -7,6 +7,8 @@ class Animation():
         self.anim_y = 0
 
         self.anim_field = {
+            "email_login": {"new_y": 0, "new_x": 0, "new_height": 0, "new_width": 0, "text_size": 0},
+            "password_login": { "new_y": 0, "new_x": 0, "new_height": 0, "new_width": 0, "text_size": 0},
             "email": {"new_y": 0, "new_x": 0, "new_height": 0, "new_width": 0, "text_size": 0},
             "password": { "new_y": 0, "new_x": 0, "new_height": 0, "new_width": 0, "text_size": 0},
             "name": { "new_y": 0, "new_x": 0, "new_height": 0, "new_width": 0, "text_size": 0},
@@ -66,5 +68,3 @@ class Animation():
                 self.rect_border(self.black, (x - self.anim_field[id]["new_x"]), y - self.anim_field[id]["new_y"], width - self.anim_field[id]["new_width"], height - self.anim_field[id]["new_height"], 2, 5)
             self.rect_full(self.grey2,(x - self.anim_field[id]["new_x"]), y - self.anim_field[id]["new_y"], width - self.anim_field[id]["new_width"], height - self.anim_field[id]["new_height"], 5)
             self.text_center(self.font2, 15 - self.anim_field[id]["text_size"], text, self.white,(x - self.anim_field[id]["new_x"]), y - self.anim_field[id]["new_y"])
-
-

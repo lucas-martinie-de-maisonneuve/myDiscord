@@ -1,13 +1,25 @@
-from data.database import Database
 from datetime import datetime
+from data.Database import Database
 
-class Discord_Manager(Database):
+class DiscordManager(Database):
     def __init__(self):
         # Database.__init__(self, 'localhost', 'root', '$~Bc4gB9', 'discord')
         # Database.__init__(self, 'localhost', 'root', 'VannyLamorte25!', 'discord')
         Database.__init__(self, 'localhost', 'root', 'azerty', 'discord')
         self.connect()
 
+    def check_credentials(self, email, password):
+        sql = "SELECT * FROM user WHERE email = %s AND password = %s"
+        values = (email, password)
+        user = self.fetchone(sql, values)
+        return user is not None
+    
+    def get_user(self, email, password):
+        sql = "SELECT * FROM user WHERE email = %s AND password = %s"
+        values = (email, password)
+        user = self.fetchone(sql, values)
+        return user
+    
     def add_user(self, surname, name, pseudo, email, password, photo, id_role):
         sql = "INSERT INTO product (surname, name, pseudo, email, password, photo, id_role) VALUES (%s, %s, %s, %s, %s, %s, %s)"
         values = (surname, name, pseudo, email, password, photo, id_role)
@@ -81,7 +93,7 @@ class Discord_Manager(Database):
         self.channels = self.cursor.fetchall()
         return self.channels
 
-    def communication_channel(self, id_category):
+    def communication_channel(self, id):
         sql = "SELECT communication FROM channel WHERE id_category = %s"
         values = (id_category,)
         return self.fetch(sql, values) 
@@ -152,7 +164,7 @@ class Discord_Manager(Database):
     #     self.cursor.execute(sql, (product_id,))
     #     self.connection.commit()
     
-manager = Discord_Manager()
+manager = DiscordManager()
 # manager.display_category()
 # manager.add_user("surname", "name", "pseudo", "email", "password","photo","id_role")
 # manager.surname_user()
