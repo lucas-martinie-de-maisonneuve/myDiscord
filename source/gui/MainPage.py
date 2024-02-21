@@ -41,8 +41,7 @@ class MainPage(Element, EventHandler, DiscordManager):
 
         # Logo Crown
         self.image_not_center("Crown logo", 155, 15, 200, 57,"main_page/main_page17") 
-        self.image_not_center("Crown logo", 120, 12, 270, 55,"main_page/main_page18") 
-
+        self.image_not_center("Rectangle logo", 120, 12, 270, 55,"main_page/main_page18") 
 
     def FirstSection(self):
 
