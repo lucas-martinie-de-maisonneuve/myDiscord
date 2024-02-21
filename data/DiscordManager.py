@@ -126,9 +126,10 @@ class DiscordManager(Database):
         values = (id,)
         return self.fetch_one(sql,values)
     
-    def get_message(self):
-        sql = "SELECT * FROM message"
-        return self.fetch(sql)
+    def get_message(self,id):
+        sql = "SELECT * FROM message WHERE id_channel = %s"
+        values = (id,)
+        return self.fetch(sql,values)
 
     def name_message(self,id):
         sql = "SELECT name FROM message WHERE id_channel = %s"

@@ -72,8 +72,7 @@ class MainPage(Element, EventHandler, DiscordManager):
         else:      
             self.img_center("Power Off", 64, 635, 60, 60,"main_page/main_page9")
             self.img_center("neon circle", 64, 635, 110, 110,"main_page/main_page4") 
-   
-     
+
     def SecondSection(self):
         self.rect_full(self.grey10, 257, 385, 260, 610, 10)
 
@@ -93,26 +92,26 @@ class MainPage(Element, EventHandler, DiscordManager):
                 self.name_channel1 = self.name_channel(a+1)                
                 self.str_name3 = self.name_channel1[i][0]
                 self.name_channel1 = f'{self.str_name3} '
-                
+
                 for _ in range(self.nb_channels):
-                    
+
                     if a==0:
                         self.text_not_align(self.font2, 15, self.name_channel1, self.grey1, 200, (20*i)+120)
                         self.img_center("Book about us", 170, (20*i)+125, 25, 25,"main_page/main_page12")
-                        
+
                     elif a == 1:
                         self.text_not_align(self.font2, 15, self.name_channel1, self.grey1, 200, (20*i)+320)
-                        
+
                         self.communication = self.communication_channel(a+1)
                         self.str_communication1= self.communication[i][0]
                         self.communication = f'{self.str_communication1}'
 
                         if self.communication == "0":
                             self.img_center("Volume logiciel", 170,(20*i)+310, 25, 25,"main_page/main_page10")
-                            
+
                         if self.communication == "1": 
                             self.img_center("Hashtags logiciel", 170, (20*i)+350, 15, 15,"main_page/main_page14") 
-                        
+
                     elif a==2:
                         self.communication = self.communication_channel(a+1)
                         self.text_not_align(self.font2, 15, self.name_channel1, self.grey1, 200, (20*i)+520)
@@ -122,45 +121,12 @@ class MainPage(Element, EventHandler, DiscordManager):
 
                         if self.communication == "0":
                             self.img_center("Volume logiciel", 170,(20*i)+530, 25, 25,"main_page/main_page10")
-                            print(i,"volume")
                             
                         if self.communication == "1": 
                             self.img_center("Hashtags logiciel", 170, (20*i)+530, 15, 15,"main_page/main_page14") 
-                            print(i,"hashtag")
-                        
-                        
-                # for _ in range(self.nb_channels):
-                #     if a==0:
-                #         self.text_not_align(self.font2, 15, self.name_channel1, self.grey1, 200, (20*i)+120)
-                #         self.img_center("Book about us", 170, (20*i)+125, 25, 25,"main_page/main_page12")
-
-                #     elif a == 1:
-                #         self.communication = self.communication_channel(a+1)
-                #         print(self.communication)
-                #         self.str_communication1= self.communication[0][0]
-                #         self.communication = f'{self.str_communication1}'
-                #         if self.communication == "0":
-                #             # print (self.communication)                        
-                #             self.img_center("Volume logiciel", 170,(20*i)+330, 25, 25,"main_page/main_page10")
-                #         elif self.communication == "1": 
-                #             # print (self.communication) 
-                #             self.img_center("Hashtags logiciel", 170, 350, 15, 15,"main_page/main_page14") 
-
-                #         self.text_not_align(self.font2, 15, self.name_channel1, self.grey1, 200, (20*i)+320)
-                        
-                #     elif a==2:
-
-                #         self.communication = self.communication_channel(a+1)
-                #         self.text_not_align(self.font2, 15, self.name_channel1, self.grey1, 200, (20*i)+520)
-                    
+                                         
                     # True = 0 =  son
                     # False = 1 = Message
-                        
-        # def communication_channel(self):
-        # sql = "SELECT communication FROM channel"
-        # self.cursor.execute(sql)
-        # self.channels = self.cursor.fetchall()
-        # return self.channels 
     
         # Neon light blue
         self.img_center("Neon light", 260, 230, 140, 105,"main_page/main_page7")
@@ -258,7 +224,7 @@ class MainPage(Element, EventHandler, DiscordManager):
 
         for i, ligne in enumerate(texte_decoupe):
             self.text_not_align(self.font2, 17, ligne, self.black, 510, 620 + i * 15)
-
+            
     def mainPage_run(self):
         while self.main_page_running :
             if not self.profil.profil_running:
