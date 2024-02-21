@@ -145,9 +145,7 @@ class EventHandler():
             if event.type == pygame.QUIT:
                 self.register_running = False
             elif event.type == pygame.MOUSEBUTTONDOWN:
-                if self.sign_up.collidepoint(event.pos):
-                    self.inscription_running = False
-                elif self.profil1_cercle.collidepoint(event.pos):
+                if self.profil1_cercle.collidepoint(event.pos):
                     self.photo = 1
                     self.profil_hovered = self.profil1_cercle
 
@@ -166,22 +164,21 @@ class EventHandler():
                 elif self.username_rect.collidepoint(event.pos):
                     self.entry = 1
 
-                elif self.email_rect.collidepoint(event.pos):
+                elif self.email_rect.collidepoint(event.pos):                    
                     self.entry = 2
 
-                elif self.surname_rect .collidepoint(event.pos):
+                elif self.surname_rect .collidepoint(event.pos):                    
                     self.entry = 3
 
-                elif self.name_rect.collidepoint(event.pos):
+                elif self.name_rect.collidepoint(event.pos):                    
                     self.entry = 4
 
                 elif self.password_rect.collidepoint(event.pos):
-                    self.password = ""
                     self.entry = 5
 
                 elif self.sign_up.collidepoint(event.pos):
-                    if self.username!="Username" and self.email!="Email address" and self.surname != "Surname" and self.name != "Name" and self.password != "Password" and self.photo != 0:
-                        self.manager.add_user(self.surname,self.name,self.username,self.email,self.password,self.photo,2)
+                    if self.username!="" and self.email!="" and self.surname != "" and self.name != "" and self.password != "" and self.photo != 0:
+                        self.add_user(self.surname,self.name,self.username,self.email,self.password,self.photo,2)
                         print("ajouter")
 
                 elif self.sign.collidepoint(event.pos):

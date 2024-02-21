@@ -35,7 +35,7 @@ class Display_test(Element):
                         self.main_page.main_page_running = True
                         self.main_page.mainPage_run()
                     elif self.inscri.collidepoint(event.pos):
-                        self.register.reigster_running = True
+                        self.register.register_running = True
                         self.register.register_run()
                     elif self.connec.collidepoint(event.pos):
                         self.connexion.home_running = True

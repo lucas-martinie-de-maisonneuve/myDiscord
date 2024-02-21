@@ -9,8 +9,8 @@ class MainPage(Element, EventHandler, DiscordManager):
     
     def __init__(self, user):
         Element.__init__(self)
-        EventHandler.__init__(self)
         DiscordManager.__init__(self)
+        EventHandler.__init__(self)
         self.user = user
         self.profil = Profil(self.user)
         self.main_page_running = False
@@ -20,7 +20,6 @@ class MainPage(Element, EventHandler, DiscordManager):
         self.RECTANGLE_HAUTEUR = 60 
         self.LONGUEUR_MAX = 80
         self.police = pygame.freetype.SysFont(self.font5,18)
-        self.user = user
         self.link_is_clicked = True   
 
     def background(self): 
@@ -304,6 +303,7 @@ class MainPage(Element, EventHandler, DiscordManager):
     def mainPage_run(self):
         while self.main_page_running :
             if not self.profil.profil_running:
+                
                 self.background()
                 self.FirstSection()
                 self.SecondSection()

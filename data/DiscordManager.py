@@ -11,13 +11,13 @@ class DiscordManager(Database):
     def check_credentials(self, email, password):
         sql = "SELECT * FROM user WHERE email = %s AND password = %s"
         values = (email, password)
-        user = self.fetchone(sql, values)
+        user = self.fetch_one(sql, values)
         return user is not None
     
     def get_user(self, email, password):
         sql = "SELECT * FROM user WHERE email = %s AND password = %s"
         values = (email, password)
-        user = self.fetchone(sql, values)
+        user = self.fetch_one(sql, values)
         return user
     
     def add_user(self, surname, name, pseudo, email, password, photo, id_role):
@@ -95,7 +95,7 @@ class DiscordManager(Database):
 
     def communication_channel(self, id):
         sql = "SELECT communication FROM channel WHERE id_category = %s"
-        values = (id_category,)
+        values = (id,)
         return self.fetch(sql, values) 
 
     # Supprimer User
@@ -114,11 +114,6 @@ class DiscordManager(Database):
         values = (id,)
         self.executeQuery(sql, values)
 
-    def check_credentials(self, email, password):
-        sql = "SELECT * FROM user WHERE email = %s AND password = %s"
-        values = (email, password)
-        user = self.cursor.fetchone(sql, values)
-        return user is not None
 
     def save_message(self, name, message, id_channel):
         time = datetime.now()

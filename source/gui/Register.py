@@ -3,8 +3,9 @@ from source.pygame_manager.Element import Element
 from source.pygame_manager.EventHandler import EventHandler
 from source.pygame_manager.Cursor import Cursor
 from source.pygame_manager.Animation import Animation
+from data.DiscordManager import DiscordManager
 
-class Register(Element, EventHandler, Cursor, Animation):
+class Register(Element, EventHandler, Cursor, Animation,DiscordManager):
     def __init__(self):
         Element.__init__(self)
         Cursor.__init__(self)
