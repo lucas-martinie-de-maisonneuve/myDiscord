@@ -167,20 +167,6 @@ class MainPage(Element, EventHandler, DiscordManager):
         self.img_center("Neon light", 260, 430, 140, 105,"main_page/main_page7")
         self.img_center("Neon Light", 260, 630, 140, 105,"main_page/main_page7")    
 
-        # Logo hashtags, volume and book
-        # self.img_center("Book about us", 170, 125, 25, 25,"main_page/main_page12")
-        # self.img_center("Book Rules", 170, 150, 25, 25,"main_page/main_page12")
-        # self.img_center("Book News", 170, 175, 25, 25,"main_page/main_page12")
-
-        # self.img_center("Volume logiciel", 170, 330, 25, 25,"main_page/main_page10")
-        # self.img_center("Hashtags logiciel", 170, 350, 15, 15,"main_page/main_page14")
-        
-        # self.img_center("Volume ia", 170, 370, 25, 25,"main_page/main_page10")
-        # self.img_center("Hashtags ia", 170, 390, 15, 15,"main_page/main_page14")
-
-        # self.img_center("Dark Side Lock logo", 170, 530, 25, 25,"main_page/main_page11")
-        # self.img_center("Volume logo ia", 170, 550, 25, 25,"main_page/main_page10")
-        # self.img_center("Hashtags ia", 170, 570, 15, 15,"main_page/main_page14")
 
     def split_string(self,string, length):
         result = []
@@ -209,7 +195,8 @@ class MainPage(Element, EventHandler, DiscordManager):
         # chunked_strings = self.split_string(long_string,50)
 
         max_line_length =  755
-        pos_x = 408
+        pos_y = 610
+            
         for i in range(self.nb):
             self.message_1 = self.message_message(3)
             self.str_name2 = self.message_1[i][0]
@@ -223,69 +210,41 @@ class MainPage(Element, EventHandler, DiscordManager):
             self.str_name3 = self.message_time1[i][0]
             self.message_time1 = f'{self.str_name3} '
 
-            chunked_strings = self.split_string(self.message_1,105)
-            rectangle_height = len(chunked_strings) * 40
-            pos_y = 610 - rectangle_height
+            index_message_suivant = i + 1
+
+            # Vérifier s'il y a un message suivant avant de le récupérer
+            if index_message_suivant < self.nb:  # self.nb étant le nombre total de messages
+                print(i)
+                # Obtenez les données du message suivant en utilisant des fonctions similaires à celles que vous utilisez actuellement
+                next_message_1 = self.message_message(3)
+                next_str_name2 = next_message_1[index_message_suivant][0]
+                next_message_1_content = f'{next_str_name2} '
+
+                next_message_name = self.name_message(3)
+                next_str_name1 = next_message_name[index_message_suivant][0]
+                next_message_name_content = f'{next_str_name1} '
+
+                next_message_time = self.time_message(3)
+                next_str_name3 = next_message_time[index_message_suivant][0]
+                next_message_time_content = f'{next_str_name3} '
+
+                next_chunked_strings = self.split_string(next_message_1_content, 105)
+                next_rectangle_height = len(next_chunked_strings) * 40
+          
+            chunked_strings = self.split_string(self.message_1, 105)
+            rectangle_height = len(chunked_strings) * 40  
+            pos_y -= rectangle_height + 10 
+
+
+# Ajuster la position verticale en fonction de la hauteur du prochain message
+            pos_y -= next_rectangle_height + 10
             
-            self.rect_full_not_centered(self.grey10, pos_x, pos_y, 20 + max_line_length, rectangle_height , 2)
+            self.rect_full_not_centered(self.grey10, 795, pos_y, 20 + max_line_length, rectangle_height , 2)
 
-            for i, chunk in enumerate(chunked_strings):
-                self.text_not_align(self.font2, 16, chunk, self.grey1, pos_x + 12, ((30 * i) + pos_y + 20))
-            self.text_not_align(self.font1, 18, self.message_name, self.pink, pos_x + 12, (pos_y + 5))
-            self.text_not_align(self.font1, 10, self.message_time1, self.grey1, pos_x + 142, (pos_y + 10))
-
-
-            if i==0:
-                self.rect_full_not_centered(self.grey10, pos_x, pos_y, 20 + max_line_length, rectangle_height , 2)
-
-                for i, chunk in enumerate(chunked_strings):
-                    self.text_not_align(self.font2, 16, chunk, self.grey1, pos_x + 12, ((30 * i) + pos_y + 20))
-                self.text_not_align(self.font1, 18, self.message_name, self.pink, pos_x + 12, (pos_y + 5))
-                self.text_not_align(self.font1, 10, self.message_time1, self.grey1, pos_x + 142, (pos_y + 10))
-
-            # if i==1:
-            #     # Avoir la longueur du second message 
-            #     self.message_1 = self.message_message(1)
-            #     self.str_name = self.message_1[i+1][0]
-            #     self.message_2 = f'{self.str_name} '
-            #     chunked_strings2 = self.split_string(self.message_2,105)
-            #     rectangle_height2 = len(chunked_strings) * 20
-
-            #     self.rect_full_not_centered(self.grey10, pos_x, pos_y-rectangle_height2, 20 + max_line_length, rectangle_height , 2)
-
-            #     for i, chunk in enumerate(chunked_strings):
-            #         self.text_not_align(self.font2, 16, chunk, self.grey1, pos_x + 12, ((30 * i) + pos_y + 20)-rectangle_height2)
-            #     self.text_not_align(self.font1, 18, self.message_name, self.black, pos_x + 12, (pos_y + 5)-rectangle_height2)
-            #     self.text_not_align(self.font1, 10, self.message_time1, self.grey1, pos_x + 142, (pos_y + 10)-rectangle_height2)
-
-        # for i in range(2):
-        #     self.message_name = self.name_message()
-        #     self.str_name1 = self.message_name[i][0]
-        #     self.message_name = f'{self.str_name1} '
-
-        #     self.message_1 = self.message_message()
-        #     self.str_name2 = self.message_1[i][0]
-        #     self.message_1 = f'{self.str_name2} '
-
-        #     self.message_time1 = self.time_message()
-        #     self.str_name3 = self.message_time1[i][0]
-        #     self.message_time1 = f'{self.str_name3} '
-
-        #     long_string = "Une phrase tres  tres tres long pour tester que ca marche super bien et que ines est la plus intelligentetres tres long pour tester que ca marche super bien et que ines est la plus intelligente"
-        #     chunked_strings = self.split_string(long_string,50)
-
-        #     max_line_length =  758
-        #     rectangle_height = len(chunked_strings) * 40
-        #     pos_x = 408
-        #     pos_y =  200 + rectangle_height
-        #     self.rect_full_not_centered(self.blue, pos_x, pos_y, 20 + max_line_length, rectangle_height, 2)
-
-        #     for i, chunk in enumerate(chunked_strings):
-        #         self.text_not_align(self.font2, 16, chunk, self.grey1, pos_x + 12, (30 * i) + pos_y + 20)
-        #     self.text_not_align(self.font1, 18, self.message_name, self.black, pos_x + 12, pos_y + 5)
-        #     self.text_not_align(self.font1, 10, self.message_time1, self.grey1, pos_x + 82, pos_y + 10)
-
-
+            for j, chunk in enumerate(chunked_strings):
+                self.text_not_align(self.font2, 16, chunk, self.grey1, 435, ((30 * j) + pos_y + 20))
+            self.text_not_align(self.font1, 18, self.message_name, self.pink, 435, (pos_y + 5))
+            self.text_not_align(self.font1, 10, self.message_time1, self.grey1, 580, (pos_y + 10))
         texte_decoupe = []
         ligne_actuelle = ""
         mots = self.message.split(" ")
