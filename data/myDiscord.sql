@@ -105,3 +105,23 @@ INSERT INTO message(name, time, message, id_channel) VALUES
 ('Inessa', '2024-02-06 22:20:04',"Sounds fair to me. It gives members a chance to be active and participate while also keeping the community clean and focused.", 8),
 ('Lucassa', '2024-02-06 22:23:05'," Agreed. We'll implement that policy starting next week. In the meantime, let's encourage existing members to participate more and welcome new ones warmly.", 8),
 ('Inessa', '2024-02-06 22:24:06'," Great teamwork, everyone. Let's keep our Discord community thriving!", 8);
+
+CREATE TABLE user (
+    id INT PRIMARY KEY AUTO_INCREMENT,
+    surname VARCHAR(255),
+    name VARCHAR(255),
+    pseudo VARCHAR(255), 
+    email VARCHAR(255),
+    password VARCHAR(255),
+    photo INT, 
+    id_role INT
+);
+
+INSERT INTO user(surname, name, pseudo, email, password, photo, id_role) VALUES
+('Ines','Lorquet', 'Inessa', 'ines.lorquet@laplateforme.io', '586447cae9b58ff7e2c0a2b3980caf7f2ac5984bfe92cbb99eb0a5f0a702914d', 1, 1),
+('Lucas','Martinie', 'Lucassa', 'lucas.martinie@laplateforme.io', 'fc96020f4fc3fbbe01b03f6c1ef101a57110b6844511567e2cca087e02c0d4bb', 2, 1),
+('Vanny','Lamorte', 'Vannyssa', 'vanny.lamorte@laplateforme.io', '5c5bdc4a2ad0deadbd40affb8fe0e359ff6fb3402a38b2a8addbdee2b802d1b5', 3, 2),
+('Jacques','Dubois', 'Jack', 'jacques.dubois@laplateforme.io', '2f5cede731389f72b1c679168da2258bb21420e12f547c89ab6cd769ba5e8087', 4, 2);
+
+
+

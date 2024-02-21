@@ -39,6 +39,11 @@ class MainPage(Element, EventHandler, DiscordManager):
         self.text_not_align(self.font2, 15, self.input_search, self.white, 860, 30.5)
         self.image_not_center("Search logo", 1050, 25, 30, 30,"main_page/main_page16")  
 
+        # Logo Crown
+        self.image_not_center("Crown logo", 155, 15, 200, 57,"main_page/main_page17") 
+        self.image_not_center("Crown logo", 120, 12, 270, 55,"main_page/main_page18") 
+
+
     def FirstSection(self):
 
         # First section background color
