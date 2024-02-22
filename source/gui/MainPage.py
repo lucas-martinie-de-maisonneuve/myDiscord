@@ -72,7 +72,7 @@ class MainPage(Element, EventHandler, DiscordManager):
             self.img_center("Power Off", 64, 635, 60, 60,"main_page/main_page9")
             self.img_center("neon circle", 64, 635, 110, 110,"main_page/main_page4") 
 
-    def SecondSection(self):
+    def second_section(self):
         self.rect_full(self.grey10, 257, 385, 260, 610, 10)
 
         self.nb_category = self.count_category()
@@ -134,7 +134,7 @@ class MainPage(Element, EventHandler, DiscordManager):
         self.img_center("Neon light", 260, 430, 140, 105,"main_page/main_page7")
         self.img_center("Neon Light", 260, 630, 140, 105,"main_page/main_page7")    
 
-    def ThirdSection(self):
+    def third_section(self):
         self.rect_full(self.grey10, 795, 385, 775, 610, 10)
         self.display_text_chat(10)
         self.input_write_user()
@@ -206,8 +206,8 @@ class MainPage(Element, EventHandler, DiscordManager):
             if not self.profil.profil_running:                
                 self.background()
                 self.FirstSection()
-                self.SecondSection()
-                self.ThirdSection()
+                self.second_section()
+                self.third_section()
                 self.banner() 
                 self.event_main_page()
                 self.update()
