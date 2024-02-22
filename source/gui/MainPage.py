@@ -173,20 +173,26 @@ class MainPage(Element, EventHandler, DiscordManager):
 
             self.message_name = self.name_message(id_channel)
             self.str_name1 = self.message_name[i][0]
-            self.message_name = f'{self.str_name1} '
-            
+            self.message_name = f'{self.str_name1}'
+
+            self.message_picture = self.get_profile_picture(self.message_name)
+            if self.message_picture:
+                self.str_picture = self.message_picture[0][0]
+
             self.message_time1 = self.time_message(id_channel)
             self.str_name3 = self.message_time1[i][0]
             self.message_time1 = f'{self.str_name3} '
           
             chunked_strings = self.split_string(self.message_1, 101)
             rectangle_height = len(chunked_strings) * 30  
-            pos_y -= rectangle_height + 40 
+            pos_y -= rectangle_height + 40
 
             for j, chunk in enumerate(chunked_strings):
                 self.text_not_align(self.font2, 16, chunk, self.grey1, 480, ((30 * j) + pos_y + 20))
             self.text_not_align(self.font1, 18, self.message_name, self.pink, 480, (pos_y + 5))
             self.text_not_align(self.font1, 10, self.message_time1, self.grey1, 590, (pos_y+10))
+            self.img_center("bubble", 460, (pos_y + 10), 40, 40, f"main_page/main_page4")
+            self.img_center("ProfilePicture", 460, (pos_y + 10), 35, 35, f'profile/profile{self.str_picture}')
 
     def input_write_user(self): 
         split_text = []
