@@ -36,7 +36,7 @@ class Profile(Element, EventHandler, Cursor):
         self.rect_radius_bot(self.grey5, 750, 400, 800, 520, 10)
         
         # Left rectangle
-        self.rect_full(self.grey5, 195, 350, 290, 610, 10) 
+        self.rect_full(self.grey5, 195, 350, 290, 620, 10) 
         
         # Username
         if self.size_profile_picture < 100:
@@ -125,7 +125,7 @@ class Profile(Element, EventHandler, Cursor):
         else:
             if self.size_profile_picture > 0:
                 self.size_profile_picture -=10
-        self.rect_full_not_centered(self.grey3, 450, 120, 0 + self.size_profile_picture, 100, 50)
+        self.rect_full_not_centered(self.grey3, 440, 120, 0 + self.size_profile_picture, 100, 50)
         if self.size_profile_picture > 170:
             self.picture1 = pygame.draw.circle(self.Window, self.theme_color, (570,170), 45)
             self.image_not_center("image1", 525, 125, 90, 90, f"profile/profile{self.pict[0]}")
