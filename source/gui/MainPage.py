@@ -36,7 +36,7 @@ class MainPage(Element, EventHandler, DiscordManager):
 
         # Search bar
         self.input_search_rect = self.rect_full(self.grey2, 920, 40, 240, 35, 80)
-        self.text_not_align(self.font2, 15, self.input_search, self.white, 860, 30.5)
+        self.text_not_align(self.font2, 15, self.input_search, self.white, 810, 30.5)
         self.image_not_center("Search logo", 1000, 25, 30, 30,"main_page/main_page16")
 
         # Logo bell
@@ -46,9 +46,6 @@ class MainPage(Element, EventHandler, DiscordManager):
         self.image_not_center("Question mark", 1120, 15, 50, 50,"main_page/main_page15")    
         self.link_logo_rect = pygame.Rect(1120, 15, 50, 50)
         self.url = "https://laplateforme.io/"
-   
-      
-
 
     def FirstSection(self):
 
@@ -140,20 +137,6 @@ class MainPage(Element, EventHandler, DiscordManager):
         self.img_center("Neon light", 260, 430, 140, 105,"main_page/main_page7")
         self.img_center("Neon Light", 260, 630, 140, 105,"main_page/main_page7")    
 
-        # Logo hashtags, volume and book
-        # self.img_center("Book about us", 170, 125, 25, 25,"main_page/main_page12")
-        # self.img_center("Book Rules", 170, 150, 25, 25,"main_page/main_page12")
-        # self.img_center("Book News", 170, 175, 25, 25,"main_page/main_page12")
-
-        # self.img_center("Volume logiciel", 170, 330, 25, 25,"main_page/main_page10")
-        # self.img_center("Hashtags logiciel", 170, 350, 15, 15,"main_page/main_page14")
-        
-        # self.img_center("Volume ia", 170, 370, 25, 25,"main_page/main_page10")
-        # self.img_center("Hashtags ia", 170, 390, 15, 15,"main_page/main_page14")
-
-        # self.img_center("Dark Side Lock logo", 170, 530, 25, 25,"main_page/main_page11")
-        # self.img_center("Volume logo ia", 170, 550, 25, 25,"main_page/main_page10")
-        # self.img_center("Hashtags ia", 170, 570, 15, 15,"main_page/main_page14")
 
     def split_string(self,string, length):
         result = []
