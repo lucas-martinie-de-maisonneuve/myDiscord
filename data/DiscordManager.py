@@ -3,8 +3,8 @@ from data.Database import Database
 
 class DiscordManager(Database):
     def __init__(self):
-        # Database.__init__(self, 'localhost', 'root', '$~Bc4gB9', 'discord')
-        Database.__init__(self, 'localhost', 'root', 'VannyLamorte25!', 'discord')
+        Database.__init__(self, 'localhost', 'root', '$~Bc4gB9', 'discord')
+        # Database.__init__(self, 'localhost', 'root', 'VannyLamorte25!', 'discord')
         # Database.__init__(self, 'localhost', 'root', 'azerty', 'discord')
         self.connect()
 
@@ -23,7 +23,7 @@ class DiscordManager(Database):
     def add_user(self, surname, name, pseudo, email, password, photo, id_role):
         sql = "INSERT INTO product (surname, name, pseudo, email, password, photo, id_role) VALUES (%s, %s, %s, %s, %s, %s, %s)"
         values = (surname, name, pseudo, email, password, photo, id_role)
-        self.executeQuery(sql, values)
+        self.execute_query(sql, values)
 
     def surname_user(self):
         sql = "SELECT surname FROM user"
@@ -102,29 +102,30 @@ class DiscordManager(Database):
     def delete_user(self, id):
         sql = "DELETE FROM user WHERE id = %s"
         values = (id,)
-        self.executeQuery(sql, values)
+        self.execute_query(sql, values)
 
     def delete_category(self, id):
         sql = "DELETE FROM category WHERE id = %s"
         values = (id,)
-        self.executeQuery(sql, values)
+        self.execute_query(sql, values)
 
     def delete_channel(self, id):
         sql = "DELETE FROM channel WHERE id = %s"
         values = (id,)
-        self.executeQuery(sql, values)
+        self.execute_query(sql, values)
 
 
     def save_message(self, name, message, id_channel):
         time = datetime.now()
         sql = "INSERT INTO message (name, time, message, id_channel) VALUES (%s, %s, %s, %s)"
         values = (name, time, message, id_channel)
-        self.executeQuery(sql, values)
+        self.execute_query(sql, values)
         
-    def count_message(self,id):
-        sql = "SELECT COUNT(*) AS nb FROM message WHERE id_channel = %s"
-        values = (id,)
-        return self.fetch_one(sql,values)
+    def count_message(self):
+        sql = "SELECT COUNT(*) AS nb FROM channel"
+        self.cursor.execute(sql)
+        nb = self.cursor.fetchone()
+        return nb
     
     def get_message(self,id):
         sql = "SELECT * FROM message WHERE id_channel = %s"
@@ -161,16 +162,4 @@ class DiscordManager(Database):
     #     self.connection.commit()
     
 manager = DiscordManager()
-# manager.display_category()
-# manager.add_user("surname", "name", "pseudo", "email", "password","photo","id_role")
-# manager.surname_user()
-# manager.display_user()
-# manager.display_role_name()
-# manager.add_category("name","intro")
-# manager.add_channel("name","status","communication","id_category")
-# manager.display_channel()
-# manager.delete_user("id")
-# manager.delete_category("id")
-# manager.delete_channel("id")
-# manager.name_channel()
 manager.close_connection()

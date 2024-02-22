@@ -21,10 +21,10 @@ class Cursor:
         self.forgot_p_cursor = False
         self.login_cursor = False
         self.sign_cursor = False
-        self.profil1_cursor = False 
-        self.profil2_cursor = False 
-        self.profil3_cursor = False 
-        self.profil4_cursor = False
+        self.profile1_cursor = False 
+        self.profile2_cursor = False 
+        self.profile3_cursor = False 
+        self.profile4_cursor = False
 
     def set_cursor(self, rect, button):
         if self.is_mouse_over_button(rect):
@@ -46,11 +46,11 @@ class Cursor:
             self.picture3_cursor, self.disconnect_cursor, self.status_edit_cursor,
             self.status_active_cursor, self.login_cursor, self.google_cursor,
             self.facebook_cursor, self.instagram_cursor, self.forgot_p_cursor, self.sign_cursor,
-            self.profil1_cursor, self.profil2_cursor, self.profil3_cursor, self.profil4_cursor,
+            self.profile1_cursor, self.profile2_cursor, self.profile3_cursor, self.profile4_cursor,
             self.surname_cursor, self.name_cursor
         ])
 
-    def profil_page_cursor(self):
+    def profile_page_cursor(self):
         self.username_cursor = self.set_cursor(self.username_rect, self.username_cursor)
         self.email_cursor = self.set_cursor(self.email_rect, self.email_cursor)
         self.pass_cursor = self.set_cursor(self.password_rect, self.pass_cursor)
@@ -76,10 +76,10 @@ class Cursor:
         self.password_cursor = self.set_cursor(self.input_password_rect, self.password_cursor)
 
     def register_cursor(self):
-        self.profil1_cursor = self.set_cursor(self.p_profil1, self.profil1_cursor)
-        self.profil2_cursor = self.set_cursor(self.p_profil2, self.profil2_cursor) 
-        self.profil3_cursor = self.set_cursor(self.p_profil3, self.profil3_cursor) 
-        self.profil4_cursor = self.set_cursor(self.p_profil4, self.profil4_cursor)
+        self.profile1_cursor = self.set_cursor(self.p_profile1, self.profile1_cursor)
+        self.profile2_cursor = self.set_cursor(self.p_profile2, self.profile2_cursor) 
+        self.profile3_cursor = self.set_cursor(self.p_profile3, self.profile3_cursor) 
+        self.profile4_cursor = self.set_cursor(self.p_profile4, self.profile4_cursor)
         self.login_cursor = self.set_cursor(self.sign_up, self.login_cursor)
         self.sign_cursor = self.set_cursor(self.sign, self.sign_cursor)
         self.username_cursor = self.set_cursor(self.username_rect, self.username_cursor)

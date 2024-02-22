@@ -2,10 +2,10 @@ import pygame
 import webbrowser
 
 class EventHandler():
-    def event_profil(self):
+    def event_profile(self):
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
-                    self.profil_running = False
+                    self.profile_running = False
             if event.type == pygame.MOUSEBUTTONDOWN:
                 if self.show.collidepoint(event.pos):
                     self.show_pass = True
@@ -145,21 +145,23 @@ class EventHandler():
             if event.type == pygame.QUIT:
                 self.register_running = False
             elif event.type == pygame.MOUSEBUTTONDOWN:
-                if self.profil1_cercle.collidepoint(event.pos):
+                if self.sign_up.collidepoint(event.pos):
+                    self.inscription_running = False
+                elif self.profile1_circle.collidepoint(event.pos):
                     self.photo = 1
-                    self.profil_hovered = self.profil1_cercle
+                    self.profile_hovered = self.profile1_circle
 
-                elif self.profil2_cercle.collidepoint(event.pos):
+                elif self.profile2_circle.collidepoint(event.pos):
                     self.photo = 2
-                    self.profil_hovered = self.profil2_cercle
+                    self.profile_hovered = self.profile2_circle
 
-                elif self.profil3_cercle.collidepoint(event.pos):
+                elif self.profile3_circle.collidepoint(event.pos):
                     self.photo = 3
-                    self.profil_hovered = self.profil3_cercle
+                    self.profile_hovered = self.profile3_circle
 
-                elif self.profil4_cercle.collidepoint(event.pos):
+                elif self.profile4_circle.collidepoint(event.pos):
                     self.photo = 4
-                    self.profil_hovered = self.profil4_cercle
+                    self.profile_hovered = self.profile4_circle
 
                 elif self.username_rect.collidepoint(event.pos):
                     self.entry = 1
@@ -254,14 +256,13 @@ class EventHandler():
                     self.input_search = ""
                     self.entry = 2   
 
-                elif self.cercle2.collidepoint(event.pos):
-                    self.profil.profil_running = True
-                    self.profil.profil_run()                              
+                elif self.circle2.collidepoint(event.pos):
+                    self.profile.profile_running = True
+                    self.profile.profile_run()                              
 
             elif event.type == pygame.MOUSEBUTTONUP:
                  if self.link_logo_rect.collidepoint(event.pos):
                     self.link_is_clicked = True              
-                    self.message += event.unicode
 
                
                 
