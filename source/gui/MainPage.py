@@ -28,20 +28,27 @@ class MainPage(Element, EventHandler, DiscordManager):
    
     def banner(self):
 
-        # Link to the LaPlateforme website
         self.rect_full(self.grey10, 655, 40, 1055, 60, 10)
+
+        # Logo Names
+        self.image_not_center("Names", 155, 15, 200, 57,"main_page/main_page17") 
+        self.image_not_center("Rectangle logo", 120, 12, 270, 55,"main_page/main_page18") 
+
+        # Search bar
+        self.input_search_rect = self.rect_full(self.grey2, 920, 40, 240, 35, 80)
+        self.text_not_align(self.font2, 15, self.input_search, self.white, 860, 30.5)
+        self.image_not_center("Search logo", 1000, 25, 30, 30,"main_page/main_page16")
+
+        # Logo bell
+        self.image_not_center("Bell logo", 1060, 15, 50, 50,"main_page/main_page19") 
+
+        # Link to the LaPlateforme website  
         self.image_not_center("Question mark", 1120, 15, 50, 50,"main_page/main_page15")    
         self.link_logo_rect = pygame.Rect(1120, 15, 50, 50)
         self.url = "https://laplateforme.io/"
+   
+      
 
-        # Search bar
-        self.input_search_rect = self.rect_full(self.grey2, 970, 40, 240, 35, 80)
-        self.text_not_align(self.font2, 15, self.input_search, self.white, 860, 30.5)
-        self.image_not_center("Search logo", 1050, 25, 30, 30,"main_page/main_page16")  
-
-        # Logo Crown
-        self.image_not_center("Crown logo", 155, 15, 200, 57,"main_page/main_page17") 
-        self.image_not_center("Rectangle logo", 120, 12, 270, 55,"main_page/main_page18") 
 
     def FirstSection(self):
 
