@@ -16,10 +16,9 @@ class MainPage(Element, EventHandler, DiscordManager):
         self.main_page_running = False
         self.input_search = "Search..."
         self.message = ""
-        self.RECTANGLE_LARGEUR = 600
-        self.RECTANGLE_HAUTEUR = 60 
-        self.LONGUEUR_MAX = 80
-        self.police = pygame.freetype.SysFont(self.font5,18)
+        self.RECT_W = 600
+        self.RECT_H= 60 
+        self.L_MAX = 80
         self.link_is_clicked = True   
 
     def background(self): 
@@ -124,7 +123,9 @@ class MainPage(Element, EventHandler, DiscordManager):
                             
                         if self.communication == "1": 
                             self.img_center("Hashtags logiciel", 170, (20*i)+530, 15, 15,"main_page/main_page14") 
-                                         
+                            # self.img_center("Hashtags logiciel", 170, (20*i)+530, 15, 15,"main_page/main_page1") 
+
+                          
                     # True = 0 =  son
                     # False = 1 = Message
     
@@ -156,7 +157,6 @@ class MainPage(Element, EventHandler, DiscordManager):
         self.nb_message = self.count_message(3)
         self.nb_message = self.nb_message[0]
         self.nb =  self.nb_message
-        print(self.nb)
         long_string = "Une phrase tres  tres tres long pour tester que ca marche super bien et que ines est la plus intelligentetres tres long pour tester que ca marche super bien et que ines est la plus intelligente"
         # chunked_strings = self.split_string(long_string,50)
 
@@ -176,22 +176,19 @@ class MainPage(Element, EventHandler, DiscordManager):
             self.str_name3 = self.message_time1[i][0]
             self.message_time1 = f'{self.str_name3} '
 
-            index_message_suivant = i + 1
+            index_next_message = i + 1
 
-            # Vérifier s'il y a un message suivant avant de le récupérer
-            if index_message_suivant < self.nb:  # self.nb étant le nombre total de messages
-                print(i)
-                # Obtenez les données du message suivant en utilisant des fonctions similaires à celles que vous utilisez actuellement
+            if index_next_message < self.nb:
                 next_message_1 = self.message_message(3)
-                next_str_name2 = next_message_1[index_message_suivant][0]
+                next_str_name2 = next_message_1[index_next_message][0]
                 next_message_1_content = f'{next_str_name2} '
 
                 next_message_name = self.name_message(3)
-                next_str_name1 = next_message_name[index_message_suivant][0]
+                next_str_name1 = next_message_name[index_next_message][0]
                 next_message_name_content = f'{next_str_name1} '
 
                 next_message_time = self.time_message(3)
-                next_str_name3 = next_message_time[index_message_suivant][0]
+                next_str_name3 = next_message_time[index_next_message][0]
                 next_message_time_content = f'{next_str_name3} '
 
                 next_chunked_strings = self.split_string(next_message_1_content, 105)
@@ -201,8 +198,6 @@ class MainPage(Element, EventHandler, DiscordManager):
             rectangle_height = len(chunked_strings) * 40  
             pos_y -= rectangle_height + 10 
 
-
-# Ajuster la position verticale en fonction de la hauteur du prochain message
             pos_y -= next_rectangle_height + 10
             
             self.rect_full_not_centered(self.grey10, 795, pos_y, 20 + max_line_length, rectangle_height , 2)
@@ -211,18 +206,18 @@ class MainPage(Element, EventHandler, DiscordManager):
                 self.text_not_align(self.font2, 16, chunk, self.grey1, 435, ((30 * j) + pos_y + 20))
             self.text_not_align(self.font1, 18, self.message_name, self.pink, 435, (pos_y + 5))
             self.text_not_align(self.font1, 10, self.message_time1, self.grey1, 580, (pos_y + 10))
-        texte_decoupe = []
-        ligne_actuelle = ""
-        mots = self.message.split(" ")
-        for mot in mots:
-            if len(ligne_actuelle) + len(mot) < self.LONGUEUR_MAX:
-                ligne_actuelle += mot + " "
+        split_text = []
+        line = ""
+        words = self.message.split(" ")
+        for word in words:
+            if len(line) + len(word) < self.L_MAX:
+                line += word + " "
             else:
-                texte_decoupe.append(ligne_actuelle.strip())
-                ligne_actuelle = mot + " "
-        texte_decoupe.append(ligne_actuelle.strip())
+                split_text.append(line.strip())
+                line = word + " "
+        split_text.append(line.strip())
 
-        for i, ligne in enumerate(texte_decoupe):
+        for i, ligne in enumerate(split_text):
             self.text_not_align(self.font2, 17, ligne, self.black, 510, 620 + i * 15)
             
     def mainPage_run(self):
