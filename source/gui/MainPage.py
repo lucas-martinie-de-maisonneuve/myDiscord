@@ -132,7 +132,7 @@ class MainPage(Element, EventHandler, DiscordManager):
 
     def third_section(self):
         self.rect_full(self.grey10, 795, 385, 775, 610, 10)
-        self.display_text_chat(10)
+        self.display_text_chat(7)
         self.input_write_user()
 
     def split_string(self, string, length):
@@ -201,7 +201,7 @@ class MainPage(Element, EventHandler, DiscordManager):
         while self.main_page_running :
             if not self.profile.profile_running:                
                 self.background()
-                self.FirstSection()
+                self.first_section()
                 self.second_section()
                 self.third_section()
                 self.banner() 

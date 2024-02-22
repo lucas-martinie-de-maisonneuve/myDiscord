@@ -121,11 +121,10 @@ class DiscordManager(Database):
         values = (name, time, message, id_channel)
         self.execute_query(sql, values)
         
-    def count_message(self):
-        sql = "SELECT COUNT(*) AS nb FROM channel"
-        self.cursor.execute(sql)
-        nb = self.cursor.fetchone()
-        return nb
+    def count_message(self,id):
+        sql = "SELECT COUNT(*) AS nb FROM message WHERE id_channel = %s"
+        values = (id,)
+        return self.fetch_one(sql,values)
     
     def get_message(self,id):
         sql = "SELECT * FROM message WHERE id_channel = %s"
