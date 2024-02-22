@@ -49,11 +49,6 @@ class MainPage(Element, EventHandler, DiscordManager):
         self.link_logo_rect = pygame.Rect(1120, 15, 50, 50)
         self.url = "https://laplateforme.io/"
 
-        # Search bar
-        self.input_search_rect = self.rect_full(self.grey2, 970, 40, 240, 35, 80)
-        self.text_not_align(self.font2, 15, self.input_search, self.white, 860, 30.5)
-        self.image_not_center("Search logo", 1050, 25, 30, 30,"main_page/main_page16")  
-
     def first_section(self):
         # First section background color
         self.rect_full(self.grey10, 65, 350, 90, 680, 10)
