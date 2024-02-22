@@ -25,7 +25,7 @@ class Animation():
                 self.img_shrink = True
                 self.img_growth = False
 
-        if self.img_shrink: #Shrinking image
+        if self.img_shrink: # Shrinking image
             if self.anim_y > 0:
                 self.anim_y -= 10
             elif self.anim_y == 0:
@@ -43,9 +43,9 @@ class Animation():
         elif self.change_img == 3:
             self.img_center("Butterfly", x, y, size, self.anim_y,"home/home6")         
         elif self.change_img == 4:
-            self.img_center("Manta Ray", x, y, size, self.anim_y,"home/home8") 
+            self.img_center("MantaRay", x, y, size, self.anim_y,"home/home8") 
         
-        self.img_center("Logo Discord", x, logo_y, logo_size, logo_size,"home/home10")
+        self.img_center("LogoDiscord", x, logo_y, logo_size, logo_size,"home/home10")
 
     def text_input(self, rect, input, text, x, y, width, height, id):
         if self.is_mouse_over_button(rect) or input != "":

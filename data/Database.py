@@ -19,7 +19,7 @@ class Database:
     def disconnect(self):
         self.connection.close()
 
-    def executeQuery(self, query, params=None):
+    def execute_query(self, query, params=None):
         self.connect()
         self.cursor.execute(query, params or ())
         self.connection.commit()
@@ -32,7 +32,7 @@ class Database:
         self.disconnect()
         return result
         
-    def fetchone(self, query, params=None):
+    def fetch_one(self, query, params=None):
         self.connect()
         self.cursor.execute(query, params or ())
         result = self.cursor.fetchone()

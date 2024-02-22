@@ -9,7 +9,7 @@ class Element(Screen):
         self.white = (255, 255, 255)
 
         self.darkgrey = (100,100,100)
-        self.grey = (250, 250, 250) # backhome
+        self.grey = (250, 250, 250) # Backgroud Home
         self.grey1 = (240, 242, 245)   
         self.grey2 = (53, 53, 53)    
         self.grey3 = (25, 25, 25)
@@ -18,33 +18,33 @@ class Element(Screen):
         self.grey6 = (176, 186, 181)
         self.grey7 = (30, 33, 35) # First section principal page
         self.grey8 = (51, 55, 62) # Banner principal page
-        self.grey9 = (45, 49, 53) # 2 section principal page
-        self.grey10 = (29,30,33) # Rectangle principal page
+        self.grey9 = (45, 49, 53) # Second section principal page
+        self.grey10 = (29,30,33) # Rect principal page
         self.dark_grey = (34, 31, 37)
 
-        self.dark_green = (43, 147, 72) #connected bubble
+        self.dark_green = (43, 147, 72)
 
-        self.blue = (0, 151, 254) # login
-        self.blue1 = (0, 140, 234) # login  
+        self.blue = (0, 151, 254) # Login
+        self.blue1 = (0, 140, 234) # Login  
         self.blue2 = (33, 6, 84) # Theme color pink
         self.blue3 = (27, 38, 59) # Theme color orange
-        self.blue4 = (20, 236, 232) # flashy blue #14ece8
+        self.blue4 = (20, 236, 232) # Flashy blue #14ece8
         self.darkblue = (65, 90, 119) 
         self.lightblue = (189, 224, 254)
 
         self.alpha_grey =(50,50,50,100) # Alpha profil picture on profil page
-        self.alpha_grey2 =(50,50,50,200) #Alpha background register
+        self.alpha_grey2 =(50,50,50,200) # Alpha background register
         self.alpha_none =(0,0,0,0)
 
         self.pink = (222, 50, 79)
       
         self.yellow = (233, 164, 41)   
 
-        self.green = (66, 183, 42) #connected bubble
+        self.green = (66, 183, 42) # Connected bubble
         self.green2 = (39, 78, 19)
         self.darkgreen = (97, 155, 138)
 
-        self.purple1 = (202, 8, 255) #linehome
+        self.purple1 = (202, 8, 255) # Linehome
         self.purple2 = (125, 85, 196)
         self.purple3 = (60, 9, 108)  # Theme color blue
         self.purple4 = (67, 47, 104) # Theme color green
@@ -150,19 +150,18 @@ class Element(Screen):
         else:
             self.circle(color, x, y, radius)
 
-# Def Hoover
-    
+# Def Hover
     def is_mouse_over_button(self, button_rect):
         mouse_pos = pygame.mouse.get_pos()
         return button_rect.collidepoint(mouse_pos)
     
-    def button_hover(self, name, x, y, width, height, color_full, color_border, color_hoover, color_border_hoover, text, font, text_color,text_size, thickness, radius): 
+    def button_hover(self, name, x, y, width, height, color_full, color_border, color_hover, color_border_hover, text, font, text_color,text_size, thickness, radius): 
 
         name = pygame.Rect((x - width//2), (y - height//2), width, height)
 
         if self.is_mouse_over_button(name):
-            self.rect_full(color_hoover, x, y, width + 5, height + 5, radius)
-            self.rect_border(color_border_hoover, x, y, width + 5, height + 5, thickness, radius)
+            self.rect_full(color_hover, x, y, width + 5, height + 5, radius)
+            self.rect_border(color_border_hover, x, y, width + 5, height + 5, thickness, radius)
         else:
             self.rect_full(color_full, x, y, width, height, radius)
             self.rect_border(color_border, x, y, width, height, thickness, radius)
@@ -182,4 +181,3 @@ class Element(Screen):
         self.alpha_window = pygame.Surface((self.W, self.H), pygame.SRCALPHA)
         pygame.draw.rect(self.alpha_window, color, pygame.Rect(0,0, self.W, self.H))
         self.Window.blit(self.alpha_window, (0,0))
-

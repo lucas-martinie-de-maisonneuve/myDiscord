@@ -8,7 +8,7 @@ class User(DiscordManager):
         self.connected = False
         super().__init__()
 
-    def loginUser(self):
+    def login_user(self):
         hashed_password = sha256(self.user_password.encode()).hexdigest()
 
         if self.check_credentials(self.user_email, hashed_password):
