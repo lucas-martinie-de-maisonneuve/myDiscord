@@ -16,6 +16,7 @@ class MainPage(Element, EventHandler, DiscordManager):
         self.main_page_running = False
         self.input_search = "Search..."
         self.message = ""
+        self.next_rectangle_height = 0
         self.RECT_W = 600
         self.RECT_H= 60 
         self.L_MAX = 80
@@ -163,7 +164,8 @@ class MainPage(Element, EventHandler, DiscordManager):
         max_line_length =  755
         pos_y = 610
             
-        for i in range(self.nb):
+        for i in reversed(range(self.nb)):
+            print(self.nb)
             self.message_1 = self.message_message(3)
             self.str_name2 = self.message_1[i][0]
             self.message_1 = f'{self.str_name2} '
@@ -192,14 +194,11 @@ class MainPage(Element, EventHandler, DiscordManager):
                 next_message_time_content = f'{next_str_name3} '
 
                 next_chunked_strings = self.split_string(next_message_1_content, 105)
-                next_rectangle_height = len(next_chunked_strings) * 40
           
             chunked_strings = self.split_string(self.message_1, 105)
-            rectangle_height = len(chunked_strings) * 40  
-            pos_y -= rectangle_height + 10 
+            rectangle_height = len(chunked_strings) * 30  
+            pos_y -= rectangle_height + 40 
 
-            pos_y -= next_rectangle_height + 10
-            
             self.rect_full_not_centered(self.grey10, 795, pos_y, 20 + max_line_length, rectangle_height , 2)
 
             for j, chunk in enumerate(chunked_strings):
