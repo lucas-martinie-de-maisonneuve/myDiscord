@@ -3,14 +3,14 @@ import mysql.connector
 class Database:
     def __init__(self, host, user, password, database):
         self.host = host
-        self.user = user
+        self.userdb = user
         self.password = password
         self.database = database
 
     def connect(self):
         self.connection = mysql.connector.connect(
             host=self.host,
-            user=self.user,
+            user=self.userdb,
             password=self.password,
             database=self.database
         )
@@ -38,4 +38,3 @@ class Database:
         result = self.cursor.fetchone()
         self.disconnect()
         return result
-    

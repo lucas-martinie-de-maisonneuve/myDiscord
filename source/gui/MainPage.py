@@ -9,18 +9,16 @@ class MainPage(Element, EventHandler, DiscordManager):
     
     def __init__(self, user):
         Element.__init__(self)
-        EventHandler.__init__(self)
         DiscordManager.__init__(self)
+        EventHandler.__init__(self)
         self.user = user
         self.profile = Profile(self.user)
         self.main_page_running = False
         self.input_search = "Search..."
         self.message = ""
-        self.RECTANGLE_LARGEUR = 600
-        self.RECTANGLE_HAUTEUR = 60 
-        self.LONGUEUR_MAX = 80
-        # self.police = pygame.freetype.SysFont(self.font5,18)
-        self.user = user
+        self.RECT_W = 600
+        self.RECT_H= 60 
+        self.L_MAX = 80
         self.link_is_clicked = True
         self.entry = 0
 
@@ -102,16 +100,16 @@ class MainPage(Element, EventHandler, DiscordManager):
                 self.name_channel1 = self.name_channel(a+1)                
                 self.str_name3 = self.name_channel1[i][0]
                 self.name_channel1 = f'{self.str_name3} '
-                
+
                 for _ in range(self.nb_channels):
-                    
+
                     if a==0:
                         self.text_not_align(self.font2, 15, self.name_channel1, self.grey1, 200, (20*i)+120)
                         self.img_center("Book about us", 170, (20*i)+125, 25, 25,"main_page/main_page12")
-                        
+
                     elif a == 1:
                         self.text_not_align(self.font2, 15, self.name_channel1, self.grey1, 200, (20*i)+320)
-                        
+
                         self.communication = self.communication_channel(a+1)
                         self.str_communication1= self.communication[i][0]
                         self.communication = f'{self.str_communication1}'
@@ -120,7 +118,7 @@ class MainPage(Element, EventHandler, DiscordManager):
                             self.img_center("Volume logiciel", 170,(20*i)+310, 25, 25,"main_page/main_page10")
                         elif self.communication == "1": 
                             self.img_center("Hashtags logiciel", 170, (20*i)+350, 15, 15,"main_page/main_page14") 
-                        
+
                     elif a==2:
                         self.communication = self.communication_channel(a+1)
                         self.text_not_align(self.font2, 15, self.name_channel1, self.grey1, 200, (20*i)+520)
@@ -130,48 +128,20 @@ class MainPage(Element, EventHandler, DiscordManager):
 
                         if self.communication == "0":
                             self.img_center("Volume logiciel", 170,(20*i)+530, 25, 25,"main_page/main_page10")
-                        elif self.communication == "1": 
+                        elif self.communication == "1":                             
                             self.img_center("Hashtags logiciel", 170, (20*i)+530, 15, 15,"main_page/main_page14") 
-                        
-                # for _ in range(self.nb_channels):
-                #     if a==0:
-                #         self.text_not_align(self.font2, 15, self.name_channel1, self.grey1, 200, (20*i)+120)
-                #         self.img_center("Book about us", 170, (20*i)+125, 25, 25,"main_page/main_page12")
-
-                #     elif a == 1:
-                #         self.communication = self.communication_channel(a+1)
-                #         print(self.communication)
-                #         self.str_communication1= self.communication[0][0]
-                #         self.communication = f'{self.str_communication1}'
-                #         if self.communication == "0":
-                #             # print (self.communication)                        
-                #             self.img_center("Volume logiciel", 170,(20*i)+330, 25, 25,"main_page/main_page10")
-                #         elif self.communication == "1": 
-                #             # print (self.communication) 
-                #             self.img_center("Hashtags logiciel", 170, 350, 15, 15,"main_page/main_page14") 
-
-                #         self.text_not_align(self.font2, 15, self.name_channel1, self.grey1, 200, (20*i)+320)
-                        
-                #     elif a==2:
-
-                #         self.communication = self.communication_channel(a+1)
-                #         self.text_not_align(self.font2, 15, self.name_channel1, self.grey1, 200, (20*i)+520)
-                    
-                    # True = 0 =  son
-                    # False = 1 = Message
-                        
-        # def communication_channel(self):
-        # sql = "SELECT communication FROM channel"
-        # self.cursor.execute(sql)
-        # self.channels = self.cursor.fetchall()
-        # return self.channels 
-    
+     
         # Neon light blue
         self.img_center("Neon light", 260, 230, 140, 105,"main_page/main_page7")
         self.img_center("Neon light", 260, 430, 140, 105,"main_page/main_page7")
         self.img_center("Neon Light", 260, 630, 140, 105,"main_page/main_page7")    
 
-    def split_string(self,string, length):
+    def third_section(self):
+        self.rect_full(self.grey10, 795, 385, 775, 610, 10)
+        self.display_text_chat(7)
+        self.input_write_user()
+
+    def split_string(self, string, length):
         result = []
         start_index = 0
 
@@ -186,53 +156,56 @@ class MainPage(Element, EventHandler, DiscordManager):
 
         return result
     
-    def third_section(self):
-        self.rect_full(self.grey10, 795, 385, 775, 610, 10)
+    def display_text_chat(self, id_channel): 
+        
         self.entry_message = self.rect_full(self.grey1, 795, 650, 650, 60, 10)
-        #         # self.text_center()
-        # for i in range(2):
-        #     # self.message_name = self.name_message()
-        #     # self.str_name1 = self.message_name[i][0]
-        #     # self.message_name = f'{self.str_name1} '
 
-        #     # self.message_1 = self.message_message()
-        #     # self.str_name2 = self.message_1[i][0]
-        #     # self.message_1 = f'{self.str_name2} '
+        self.nb_message = self.count_message(id_channel)
+        self.nb_message = self.nb_message[0]
+        self.nb =  self.nb_message
+    
+        pos_y = 610
+            
+        for i in reversed(range(self.nb)):
+            self.message_1 = self.message_message(id_channel)
+            self.str_name2 = self.message_1[i][0]
+            self.message_1 = f'{self.str_name2} '
 
-        #     # self.message_time1 = self.time_message()
-        #     # self.str_name3 = self.message_time1[i][0]
-        #     # self.message_time1 = f'{self.str_name3} '
+            self.message_name = self.name_message(id_channel)
+            self.str_name1 = self.message_name[i][0]
+            self.message_name = f'{self.str_name1} '
+            
+            self.message_time1 = self.time_message(id_channel)
+            self.str_name3 = self.message_time1[i][0]
+            self.message_time1 = f'{self.str_name3} '
+          
+            chunked_strings = self.split_string(self.message_1, 101)
+            rectangle_height = len(chunked_strings) * 30  
+            pos_y -= rectangle_height + 40 
 
-        #     long_string = "Une phrase tres  tres tres long pour tester que ca marche super bien et que ines est la plus intelligentetres tres long pour tester que ca marche super bien et que ines est la plus intelligente"
-        #     chunked_strings = self.split_string(long_string,50)
+            for j, chunk in enumerate(chunked_strings):
+                self.text_not_align(self.font2, 16, chunk, self.grey1, 480, ((30 * j) + pos_y + 20))
+            self.text_not_align(self.font1, 18, self.message_name, self.pink, 480, (pos_y + 5))
+            self.text_not_align(self.font1, 10, self.message_time1, self.grey1, 590, (pos_y+10))
 
-        #     max_line_length =  758
-        #     rectangle_height = len(chunked_strings) * 40
-        #     pos_x = 408
-        #     pos_y =  200 + rectangle_height
-        #     # self.rect_full_not_centered(self.blue, pos_x, pos_y, 20 + max_line_length, rectangle_height, 2)
-
-        #     # for i, chunk in enumerate(chunked_strings):
-        #     #     self.text_not_align(self.font2, 16, chunk, self.grey1, pos_x + 12, (30 * i) + pos_y + 20)
-        #     # self.text_not_align(self.font1, 18, self.message_name, self.black, pos_x + 12, pos_y + 5)
-        #     # self.text_not_align(self.font1, 10, self.message_time1, self.grey1, pos_x + 82, pos_y + 10)
-        texte_decoupe = []
-        ligne_actuelle = ""
-        mots = self.message.split(" ")
-        for mot in mots:
-            if len(ligne_actuelle) + len(mot) < self.LONGUEUR_MAX:
-                ligne_actuelle += mot + " "
+    def input_write_user(self): 
+        split_text = []
+        line = ""
+        words = self.message.split(" ")
+        for word in words:
+            if len(line) + len(word) < self.L_MAX:
+                line += word + " "
             else:
-                texte_decoupe.append(ligne_actuelle.strip())
-                ligne_actuelle = mot + " "
-        texte_decoupe.append(ligne_actuelle.strip())
+                split_text.append(line.strip())
+                line = word + " "
+        split_text.append(line.strip())
 
-        for i, ligne in enumerate(texte_decoupe):
+        for i, ligne in enumerate(split_text):
             self.text_not_align(self.font2, 17, ligne, self.black, 510, 620 + i * 15)
 
     def mainPage_run(self):
         while self.main_page_running :
-            if not self.profile.profile_running:
+            if not self.profile.profile_running:                
                 self.background()
                 self.first_section()
                 self.second_section()
