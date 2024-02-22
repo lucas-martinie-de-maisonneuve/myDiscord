@@ -8,7 +8,7 @@
 import pygame
 from source.pygame_manager.Element import Element
 from source.gui.Home import Home
-from source.gui.Profil import Profil
+from source.gui.Profile import Profile
 from source.gui.Register import Register
 from source.gui.MainPage import MainPage
 
@@ -18,10 +18,10 @@ class Display_test(Element):
         self.main_running = True
         self.main_page = MainPage((2, 'None', 'Martinie', 'Lucassa', 'lucas.martinie@laplateforme.io', 'LucasMartinie2412!', 2, 2))
         self.connexion = Home()
-        self.profil = Profil((2, 'None', 'Martinie', 'Lucassa', 'lucas.martinie@laplateforme.io', 'LucasMartinie2412!', 2, 2))
+        self.profile = Profile((2, 'None', 'Martinie', 'Lucassa', 'lucas.martinie@laplateforme.io', 'LucasMartinie2412!', 2, 2))
         self.register = Register()
         self.connexion.home_running = False
-        self.profil.profil_running = False
+        self.profile.profile_running = False
         self.register.register_running = False
         self.main_page.main_page_running = False
         
@@ -41,9 +41,9 @@ class Display_test(Element):
                         self.connexion.home_running = True
                         self.connexion.home_run()
                     elif self.profi.collidepoint(event.pos):
-                        self.profil.profil_running = True
-                        self.profil.profil_run()
-                    
+                        self.profile.profile_running = True
+                        self.profile.profile_run()
+
             self.princi = self.rect_full(self.white, self.W//3, self. H//3, 300, 70, 10)
             self.text_center(self.font1, 25, "Principal", self.black, self.W//3, self. H//3)
 
@@ -60,7 +60,3 @@ class Display_test(Element):
 
 display = Display_test()
 display.test()
-
-
-
-

@@ -3,7 +3,7 @@ import pygame
 from source.pygame_manager.EventHandler import EventHandler
 from source.pygame_manager.Element import Element
 from data.DiscordManager import DiscordManager
-from source.gui.Profil import Profil
+from source.gui.Profile import Profile
 
 class MainPage(Element, EventHandler, DiscordManager):
     
@@ -12,22 +12,22 @@ class MainPage(Element, EventHandler, DiscordManager):
         EventHandler.__init__(self)
         DiscordManager.__init__(self)
         self.user = user
-        self.profil = Profil(self.user)
+        self.profile = Profile(self.user)
         self.main_page_running = False
         self.input_search = "Search..."
         self.message = ""
         self.RECTANGLE_LARGEUR = 600
         self.RECTANGLE_HAUTEUR = 60 
         self.LONGUEUR_MAX = 80
-        self.police = pygame.freetype.SysFont(self.font5,18)
+        # self.police = pygame.freetype.SysFont(self.font5,18)
         self.user = user
-        self.link_is_clicked = True   
+        self.link_is_clicked = True
+        self.entry = 0
 
     def background(self): 
-        self.img_background("background", 600, 350, 1200, 800, "main_page/main_page8")
+        self.img_background("Background", 600, 350, 1200, 800, "main_page/main_page8")
    
     def banner(self):
-
         # Link to the LaPlateforme website
         self.rect_full(self.grey10, 655, 40, 1055, 60, 10)
         self.image_not_center("Question mark", 1120, 15, 50, 50,"main_page/main_page15")    
@@ -39,43 +39,42 @@ class MainPage(Element, EventHandler, DiscordManager):
         self.text_not_align(self.font2, 15, self.input_search, self.white, 860, 30.5)
         self.image_not_center("Search logo", 1050, 25, 30, 30,"main_page/main_page16")  
 
-    def FirstSection(self):
-
+    def first_section(self):
         # First section background color
         self.rect_full(self.grey10, 65, 350, 90, 680, 10)
 
         # Main Logo    
-        self.image_not_center("Logo prinicpal", 20, 25, 95, 95,"main_page/main_page3")   
+        self.image_not_center("Logo principal", 20, 25, 95, 95,"main_page/main_page3")   
 
         # Hover server
-        self.cercle1 = pygame.draw.circle(self.Window, self.grey10, (64, 170), 35)     
-        if self.is_mouse_over_button(self.cercle1):      
-            self.img_center("Logo prinicpal", 64, 170, 70, 70,"main_page/main_page2")
-            self.img_center("Logo prinicpal", 64, 170, 115, 115,"main_page/main_page4")
+        self.circle1 = pygame.draw.circle(self.Window, self.grey10, (64, 170), 35)     
+        if self.is_mouse_over_button(self.circle1):      
+            self.img_center("Logo principal", 64, 170, 70, 70,"main_page/main_page2")
+            self.img_center("Logo principal", 64, 170, 115, 115,"main_page/main_page4")
         else:          
-            self.img_center("Logo prinicpal", 64, 170, 70, 70,"main_page/main_page2")
-            self.img_center("neon cercle", 64, 170, 110, 110,"main_page/main_page4")
+            self.img_center("Logo principal", 64, 170, 70, 70,"main_page/main_page2")
+            self.img_center("Neon circle", 64, 170, 110, 110,"main_page/main_page4")
                
         # Hover settings
-        self.cercle2 = pygame.draw.circle(self.Window, self.grey10, (64, 540), 35)
-        if self.is_mouse_over_button(self.cercle2):           
-            self.img_center("neon server", 64, 540, 85, 85,"main_page/main_page5")
-            self.img_center("neon circle", 64, 540, 115, 115,"main_page/main_page4")   
+        self.circle2 = pygame.draw.circle(self.Window, self.grey10, (64, 540), 35)
+        if self.is_mouse_over_button(self.circle2):           
+            self.img_center("Neon server", 64, 540, 85, 85,"main_page/main_page5")
+            self.img_center("Neon circle", 64, 540, 115, 115,"main_page/main_page4")   
         else:      
-            self.img_center("neon server", 64, 540, 85, 85,"main_page/main_page5")
-            self.img_center("neon circle", 64, 540, 110, 110,"main_page/main_page4") 
+            self.img_center("Neon server", 64, 540, 85, 85,"main_page/main_page5")
+            self.img_center("Neon circle", 64, 540, 110, 110,"main_page/main_page4") 
 
         # Hover Power Off
-        self.cercle3 = pygame.draw.circle(self.Window, self.grey10, (64, 635), 35)
-        if self.is_mouse_over_button(self.cercle2):           
+        self.circle3 = pygame.draw.circle(self.Window, self.grey10, (64, 635), 35)
+        if self.is_mouse_over_button(self.circle2):           
             self.img_center("Power Off", 64, 635, 60, 60,"main_page/main_page9")
-            self.img_center("neon circle", 64, 635, 115, 115,"main_page/main_page4")   
+            self.img_center("Neon circle", 64, 635, 115, 115,"main_page/main_page4")   
         else:      
             self.img_center("Power Off", 64, 635, 60, 60,"main_page/main_page9")
-            self.img_center("neon circle", 64, 635, 110, 110,"main_page/main_page4") 
+            self.img_center("Neon circle", 64, 635, 110, 110,"main_page/main_page4") 
    
      
-    def SecondSection(self):
+    def second_section(self):
         self.rect_full(self.grey10, 257, 385, 260, 610, 10)
 
         self.nb_category = self.count_category()
@@ -110,8 +109,7 @@ class MainPage(Element, EventHandler, DiscordManager):
 
                         if self.communication == "0":
                             self.img_center("Volume logiciel", 170,(20*i)+310, 25, 25,"main_page/main_page10")
-                            
-                        if self.communication == "1": 
+                        elif self.communication == "1": 
                             self.img_center("Hashtags logiciel", 170, (20*i)+350, 15, 15,"main_page/main_page14") 
                         
                     elif a==2:
@@ -123,12 +121,8 @@ class MainPage(Element, EventHandler, DiscordManager):
 
                         if self.communication == "0":
                             self.img_center("Volume logiciel", 170,(20*i)+530, 25, 25,"main_page/main_page10")
-                            print(i,"volume")
-                            
-                        if self.communication == "1": 
+                        elif self.communication == "1": 
                             self.img_center("Hashtags logiciel", 170, (20*i)+530, 15, 15,"main_page/main_page14") 
-                            print(i,"hashtag")
-                        
                         
                 # for _ in range(self.nb_channels):
                 #     if a==0:
@@ -198,7 +192,7 @@ class MainPage(Element, EventHandler, DiscordManager):
 
         return result
     
-    def ThirdSection(self):
+    def third_section(self):
         self.rect_full(self.grey10, 795, 385, 775, 610, 10)
         self.entry_message = self.rect_full(self.grey1, 795, 650, 650, 60, 10)
         #         # self.text_center()
@@ -244,11 +238,11 @@ class MainPage(Element, EventHandler, DiscordManager):
 
     def mainPage_run(self):
         while self.main_page_running :
-            if not self.profil.profil_running:
+            if not self.profile.profile_running:
                 self.background()
-                self.FirstSection()
-                self.SecondSection()
-                self.ThirdSection()
+                self.first_section()
+                self.second_section()
+                self.third_section()
                 self.banner() 
                 self.event_main_page()
                 self.update()
