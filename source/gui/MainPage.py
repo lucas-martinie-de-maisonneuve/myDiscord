@@ -16,7 +16,6 @@ class MainPage(Element, EventHandler, DiscordManager):
         self.main_page_running = False
         self.input_search = "Search..."
         self.message = ""
-        self.next_rectangle_height = 0
         self.RECT_W = 600
         self.RECT_H= 60 
         self.L_MAX = 80
@@ -135,8 +134,12 @@ class MainPage(Element, EventHandler, DiscordManager):
         self.img_center("Neon light", 260, 430, 140, 105,"main_page/main_page7")
         self.img_center("Neon Light", 260, 630, 140, 105,"main_page/main_page7")    
 
+    def ThirdSection(self):
+        self.rect_full(self.grey10, 795, 385, 775, 610, 10)
+        self.display_text_chat(10)
+        self.input_write_user()
 
-    def split_string(self,string, length):
+    def split_string(self, string, length):
         result = []
         start_index = 0
 
@@ -150,61 +153,40 @@ class MainPage(Element, EventHandler, DiscordManager):
             start_index = end_index + 1
 
         return result
-
-    def ThirdSection(self):
-        self.rect_full(self.grey10, 795, 385, 775, 610, 10)
+    
+    def display_text_chat(self, id_channel): 
+        
         self.entry_message = self.rect_full(self.grey1, 795, 650, 650, 60, 10)
 
-        self.nb_message = self.count_message(3)
+        self.nb_message = self.count_message(id_channel)
         self.nb_message = self.nb_message[0]
         self.nb =  self.nb_message
-        long_string = "Une phrase tres  tres tres long pour tester que ca marche super bien et que ines est la plus intelligentetres tres long pour tester que ca marche super bien et que ines est la plus intelligente"
-        # chunked_strings = self.split_string(long_string,50)
-
-        max_line_length =  755
+    
         pos_y = 610
             
         for i in reversed(range(self.nb)):
-            print(self.nb)
-            self.message_1 = self.message_message(3)
+            self.message_1 = self.message_message(id_channel)
             self.str_name2 = self.message_1[i][0]
             self.message_1 = f'{self.str_name2} '
 
-            self.message_name = self.name_message(3)
+            self.message_name = self.name_message(id_channel)
             self.str_name1 = self.message_name[i][0]
             self.message_name = f'{self.str_name1} '
             
-            self.message_time1 = self.time_message(3)
+            self.message_time1 = self.time_message(id_channel)
             self.str_name3 = self.message_time1[i][0]
             self.message_time1 = f'{self.str_name3} '
-
-            index_next_message = i + 1
-
-            if index_next_message < self.nb:
-                next_message_1 = self.message_message(3)
-                next_str_name2 = next_message_1[index_next_message][0]
-                next_message_1_content = f'{next_str_name2} '
-
-                next_message_name = self.name_message(3)
-                next_str_name1 = next_message_name[index_next_message][0]
-                next_message_name_content = f'{next_str_name1} '
-
-                next_message_time = self.time_message(3)
-                next_str_name3 = next_message_time[index_next_message][0]
-                next_message_time_content = f'{next_str_name3} '
-
-                next_chunked_strings = self.split_string(next_message_1_content, 105)
           
-            chunked_strings = self.split_string(self.message_1, 105)
+            chunked_strings = self.split_string(self.message_1, 101)
             rectangle_height = len(chunked_strings) * 30  
             pos_y -= rectangle_height + 40 
 
-            self.rect_full_not_centered(self.grey10, 795, pos_y, 20 + max_line_length, rectangle_height , 2)
-
             for j, chunk in enumerate(chunked_strings):
-                self.text_not_align(self.font2, 16, chunk, self.grey1, 435, ((30 * j) + pos_y + 20))
-            self.text_not_align(self.font1, 18, self.message_name, self.pink, 435, (pos_y + 5))
-            self.text_not_align(self.font1, 10, self.message_time1, self.grey1, 580, (pos_y + 10))
+                self.text_not_align(self.font2, 16, chunk, self.grey1, 480, ((30 * j) + pos_y + 20))
+            self.text_not_align(self.font1, 18, self.message_name, self.pink, 480, (pos_y + 5))
+            self.text_not_align(self.font1, 10, self.message_time1, self.grey1, 590, (pos_y+10))
+
+    def input_write_user(self): 
         split_text = []
         line = ""
         words = self.message.split(" ")
@@ -218,11 +200,10 @@ class MainPage(Element, EventHandler, DiscordManager):
 
         for i, ligne in enumerate(split_text):
             self.text_not_align(self.font2, 17, ligne, self.black, 510, 620 + i * 15)
-            
+
     def mainPage_run(self):
         while self.main_page_running :
-            if not self.profil.profil_running:
-                
+            if not self.profil.profil_running:                
                 self.background()
                 self.FirstSection()
                 self.SecondSection()
