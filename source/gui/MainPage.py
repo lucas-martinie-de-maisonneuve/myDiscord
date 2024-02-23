@@ -138,7 +138,7 @@ class MainPage(Element, EventHandler, DiscordManager):
 
     def third_section(self):
         self.rect_full(self.grey10, 795, 385, 775, 610, 10)
-        self.display_text_chat(7)
+        self.display_text_chat(3)
         self.input_write_user()
 
     def split_string(self, string, length):
