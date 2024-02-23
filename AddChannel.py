@@ -35,7 +35,9 @@ class AddChannel(Element, DiscordManager):
     def second_section(self):
         # Rectangle de fond
         self.rect_full(self.grey10, 600, 400, 500, 510, 10)
+        
         self.text_center(self.font1, 31, "ADD CHANNEL", self.grey1, 600, 200)
+        self.text_center(self.font2, 21, "Name Channel", self.grey1, 600, 270)
 
     def addChannel_run(self):
         while self.add_channel_running :
