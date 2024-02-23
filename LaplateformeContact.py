@@ -1,4 +1,5 @@
 import pygame
+import pywebview
 from source.pygame_manager.Element import Element
 
 
@@ -57,7 +58,13 @@ class LaplateformeContact(Element):
         self.image_not_center("Neon light", 120, 190, 140, 105,"main_page/main_page7")
         self.image_not_center("Neon light", 120, 390, 140, 105,"main_page/main_page7")
 
+        # Rect Maps
+        self.rect_full(self.grey5, 195, 350, 290, 620, 10)
+     
+
     def laplateforme_contact_running(self):
+        pygame.init()
+      
         
         while self.laplateforme_contact_run:
             for event in pygame.event.get():
@@ -66,6 +73,9 @@ class LaplateformeContact(Element):
 
             self.design()
             self.update()
+
+        pygame.quit()
+
 
 test = LaplateformeContact()
 test.laplateforme_contact_running()

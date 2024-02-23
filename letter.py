@@ -1,57 +1,27 @@
 import pygame
-import sys
+import pywebview
 
-# Initialisation de Pygame
-pygame.init()
+def main():
+    # Initialisation de Pygame
+    pygame.init()
 
-# Définition de la taille de la fenêtre
-WIDTH, HEIGHT = 800, 600
-SCREEN = pygame.display.set_mode((WIDTH, HEIGHT))
-pygame.display.set_caption("Rotation de lettres")
+    # Création de la fenêtre Pygame
+    screen = pygame.display.set_mode((800, 600))
+    pygame.display.set_caption("Google Maps in Pygame")
 
-# Couleurs
-WHITE = (255, 255, 255)
-BLACK = (0, 0, 0)
+    # Initialisation de pywebview
+    pywebview.create_window("Google Maps", "https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d")
 
-# Police de caractères
-font = pygame.font.SysFont(None, 100)
+    # Boucle principale
+    running = True
+    while running:
+        for event in pygame.event.get():
+            if event.type == pygame.QUIT:
+                running = False
 
-# Texte à afficher
-text = "ABC"
+        pygame.display.flip()
 
-# Boucle principale
-running = True
-while running:
-    for event in pygame.event.get():
-        if event.type == pygame.QUIT:
-            running = False
+    pygame.quit()
 
-    # Effacement de l'écran
-    SCREEN.fill(WHITE)
-
-    # Rendu du texte
-    text_surface = font.render(text, True, BLACK)
-
-    # Récupération du rectangle entourant le texte
-    text_rect = text_surface.get_rect()
-
-    # Positionnement du texte au centre de l'écran
-    text_rect.center = (WIDTH // 2, HEIGHT // 2)
-
-    # Rotation du texte autour de son centre
-    rotated_text = pygame.transform.rotate(text_surface, 90)
-
-    # Obtention du rectangle entourant le texte rotatif
-    rotated_text_rect = rotated_text.get_rect(center=text_rect.center)
-
-    # Affichage du texte rotatif sur l'écran
-    SCREEN.blit(rotated_text, rotated_text_rect)
-
-    # Mise à jour de l'affichage
-    pygame.display.flip()
-
-    # Pause de 1 seconde avant de faire la rotation suivante
-    pygame.time.delay(1000)
-
-pygame.quit()
-sys.exit()
+if __name__ == "__main__":
+    main()
