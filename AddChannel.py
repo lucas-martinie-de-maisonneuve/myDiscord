@@ -64,9 +64,39 @@ class AddChannel(Element, DiscordManager):
         
         self.rect_full(self.grey9, 655, 580, 100, 30, 10)
         self.text_center(self.font2, 16, "Public", self.grey1, 655, 580)
+                # logo choix
+        self.img_center("Volume logiciel", 465, 499, 35, 35,"main_page/main_page10")
+        self.img_center("Hashtags logiciel", 725, 498, 25, 25,"main_page/main_page14") 
         # Neon light blue
         self.img_center("Neon light", 600, 170, 240, 90,"main_page/main_page7")
         self.img_center("Neon light", 600, 225, 240, 90,"main_page/main_page7")
+       # self.rect_full(self.grey9, 600, 320, 300, 30, 10)
+
+        
+
+        
+        
+        
+        
+        
+
+        # # Rectangle de fond
+        
+        
+        # # Check Bachelor IT 
+        # # self.img_center("Check NO", 470, 420, 25, 25,"profile/check1")
+        # # self.img_center("Check YES", 470, 420, 35, 34,"profile/check2")
+        # # self.img_center("Check YES", 470, 420, 136, 134,"profile/check2")
+        
+        
+        # # Check Talk Talk
+        # # self.img_center("Check NO", 730, 420, 45, 40,"profile/check1")
+        # # self.img_center("Check YES", 730, 420, 45, 40,"profile/check2")
+        
+
+        
+
+        # # self.img_center("Neon Light", 260, 630, 140, 105,"main_page/main_page7") 
     def addChannel_run(self):
         while self.add_channel_running :
             self.background()
