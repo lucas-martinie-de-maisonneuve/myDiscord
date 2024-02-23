@@ -1,25 +1,24 @@
 import pygame
-
-from source.gui.Register import Register
+from source.pygame_manager.Gui import Gui
 from source.gui.MainPage import MainPage
 from source.User import User
 
-class Home(Register):
+class Home(Gui):
     
     def __init__(self):
-        Register.__init__(self)
+        Gui.__init__(self)
+        self.home_running = False
         self.input_email = ""
         self.input_password = ""
-        self.password_display = " *" * len(self.password)
+        self.password_display = " *" * len(self.input_password)
         self.user = User(self.input_email, self.input_password)
         self.main_page = MainPage((0, '', '', '', '', '', 0, 0))
         self.show_pass = False
         self.entry = 0
-        self.home_running = False
         self.anim_pass = False 
         self.anim_email = False
         self.user_info = False
-
+        self.login_to_register = False
     def design(self): 
         self.screen_color(self.grey)
 
@@ -111,9 +110,7 @@ class Home(Register):
             self.text_center(self.font1, 11, "Wrong password or Email", self.darkred, 825, 360)
         
     def home_run(self):
-        while self.home_running :
-            if not self.register_running:
-                self.display_all()
-                self.event_home()
-                self.home_page_cursor()
-            self.update()
+        if self.home_running:
+            self.display_all()
+            self.event_home()
+            self.home_page_cursor()

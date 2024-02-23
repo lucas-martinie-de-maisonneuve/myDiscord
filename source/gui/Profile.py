@@ -1,14 +1,12 @@
 import pygame
-from source.pygame_manager.EventHandler import EventHandler
-from source.pygame_manager.Element import Element
-from source.pygame_manager.Cursor import Cursor
-class Profile(Element, EventHandler, Cursor):
+from source.pygame_manager.Gui import Gui
+class Profile(Gui):
     
     def __init__(self, user):
-        EventHandler.__init__(self)
-        Element.__init__(self)
-        Cursor.__init__(self)
+        Gui.__init__(self)
         self.profile_running = False
+        self.profile_to_main_page = False
+        self.profile_to_login = False
         self.edit = 0
         self.user = user
         self.password_edit, self.username_edit, self.email_edit, self.picture_edit, self.status_edit = False, False, False, False, False
@@ -210,6 +208,10 @@ class Profile(Element, EventHandler, Cursor):
                     self.text_not_align(self.font2, 16, self.password_display, self.white, 440, 442)
             else:
                 self.text_not_align(self.font2, 16, self.password, self.black, 440, 442)
+
+        # Quit
+            self.close_profile = pygame.Rect(1095,45,50,50)
+            self.img_center("Quit", 1120, 70, 50,50, "profile/profile8")
 
     def profile_run(self):
         while self.profile_running :

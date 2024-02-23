@@ -1,8 +1,6 @@
 import pygame
-from source.pygame_manager.Screen import Screen
-class Element(Screen):
+class Element():
     def __init__(self):
-        Screen.__init__(self)
 
         # Color
         self.black = (0, 0, 0)
@@ -90,6 +88,7 @@ class Element(Screen):
         name = pygame.image.load(f'assets/image/{image_name}.png')
         name = pygame.transform.scale(name, (width, height))
         self.Window.blit(name, (x - name.get_width()//2, y - name.get_height()//2))
+        return name
 
     def image_not_center(self, name, x, y, width, height, image_name):
         name = pygame.image.load(f'assets/image/{image_name}.png').convert_alpha()

@@ -54,6 +54,12 @@ class EventHandler():
                     self.picture = self.pict[1]
                 elif self.picture3.collidepoint(event.pos):
                     self.picture = self.pict[2]
+                elif self.disconnect_button.collidepoint(event.pos):    
+                    self.profile_to_login = True
+                    self.profile_running = False
+                elif self.close_profile.collidepoint(event.pos):
+                    self.profile_to_main_page = True
+                    self.profile_running = False
 
             elif event.type == pygame.MOUSEBUTTONUP:
                 if self.show.collidepoint(event.pos):
@@ -82,7 +88,7 @@ class EventHandler():
     def event_home(self): 
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
-                self.home_running = False                
+                self.home_running = False
             elif event.type == pygame.MOUSEBUTTONDOWN:
                 if self.input_email_rect.collidepoint(event.pos): 
                     self.entry = 1
@@ -93,11 +99,8 @@ class EventHandler():
                 else:
                     self.entry = 0
                 if self.sign.collidepoint(event.pos):
-                    self.register_running = True
-                    self.register_run()
-                # elif self.is_mouse_over_button(pygame.Rect(745, 385, 350, 50)):                         
-                #     if self.input_email != "" and self.input_password != "":                  
-                #         self.login(self.input_email, self.input_password)                    
+                    self.login_to_register = True
+                    self.home_running = False
 
                 if self.show_pass_rect.collidepoint(event.pos):
                     self.show_pass = True                  
@@ -184,6 +187,7 @@ class EventHandler():
                         print("ajouter")
 
                 elif self.sign.collidepoint(event.pos):
+                    self.register_to_login = True
                     self.register_running = False
 
             elif event.type == pygame.KEYDOWN:
@@ -227,7 +231,7 @@ class EventHandler():
                 self.main_page_running = False
 
             elif event.type == pygame.KEYDOWN:
-                
+               
                 if event.key == pygame.K_RETURN:
                     pass
 
@@ -243,13 +247,12 @@ class EventHandler():
                         self.input_search  += event.unicode 
 
             elif event.type == pygame.MOUSEBUTTONDOWN:
-
                 if self.entry_message.collidepoint(event.pos): 
                     self.entry = 1
 
                 elif self.link_logo_rect.collidepoint(event.pos):
-                    if self.link_is_clicked: 
-                        webbrowser.open(self.url)  
+                    if self.link_is_clicked:
+                        webbrowser.open(self.url)
                         self.link_is_clicked = False
 
                 elif self.input_search_rect.collidepoint(event.pos):  
@@ -257,8 +260,13 @@ class EventHandler():
                     self.entry = 2   
 
                 elif self.circle2.collidepoint(event.pos):
-                    self.profile.profile_running = True
-                    self.profile.profile_run()                              
+                    self.main_page_to_profile = True
+                    self.main_page_running = False
+
+                elif self.circle3.collidepoint(event.pos):
+                    self.main_page_to_login = True
+                    self.main_page_running = False
+                                             
 
             elif event.type == pygame.MOUSEBUTTONUP:
                  if self.link_logo_rect.collidepoint(event.pos):

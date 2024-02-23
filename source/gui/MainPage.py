@@ -1,19 +1,15 @@
 import pygame
-
-from source.pygame_manager.EventHandler import EventHandler
-from source.pygame_manager.Element import Element
 from data.DiscordManager import DiscordManager
-from source.gui.Profile import Profile
-
-class MainPage(Element, EventHandler, DiscordManager):
+from source.pygame_manager.Gui import Gui
+class MainPage(Gui, DiscordManager):
     
     def __init__(self, user):
-        Element.__init__(self)
         DiscordManager.__init__(self)
-        EventHandler.__init__(self)
+        Gui.__init__(self)
         self.user = user
-        self.profile = Profile(self.user)
         self.main_page_running = False
+        self.main_page_to_profile = False
+        self.main_page_to_login = False
         self.input_search = "Search..."
         self.message = ""
         self.RECT_W = 600
@@ -74,7 +70,7 @@ class MainPage(Element, EventHandler, DiscordManager):
 
         # Hover Power Off
         self.circle3 = pygame.draw.circle(self.Window, self.grey10, (64, 635), 35)
-        if self.is_mouse_over_button(self.circle2):           
+        if self.is_mouse_over_button(self.circle3):     
             self.img_center("Power Off", 64, 635, 60, 60,"main_page/main_page9")
             self.img_center("Neon circle", 64, 635, 115, 115,"main_page/main_page4")   
         else:      
@@ -210,12 +206,10 @@ class MainPage(Element, EventHandler, DiscordManager):
             self.text_not_align(self.font2, 17, ligne, self.black, 510, 620 + i * 15)
 
     def mainPage_run(self):
-        while self.main_page_running :
-            if not self.profile.profile_running:                
-                self.background()
-                self.first_section()
-                self.second_section()
-                self.third_section()
-                self.banner() 
-                self.event_main_page()
-                self.update()
+        if self.main_page_running :
+            self.background()
+            self.first_section()
+            self.second_section()
+            self.third_section()
+            self.banner() 
+            self.event_main_page()
