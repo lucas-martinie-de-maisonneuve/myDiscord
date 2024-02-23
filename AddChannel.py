@@ -64,7 +64,9 @@ class AddChannel(Element, DiscordManager):
         
         self.rect_full(self.grey9, 655, 580, 100, 30, 10)
         self.text_center(self.font2, 16, "Public", self.grey1, 655, 580)
-
+        # Neon light blue
+        self.img_center("Neon light", 600, 170, 240, 90,"main_page/main_page7")
+        self.img_center("Neon light", 600, 225, 240, 90,"main_page/main_page7")
     def addChannel_run(self):
         while self.add_channel_running :
             self.background()
