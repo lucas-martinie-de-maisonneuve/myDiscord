@@ -50,6 +50,10 @@ class LaplateformeContact(Element):
         self.image_not_center("Email", 100, 580, 25, 25,"laplateforme_contact/laplateforme_contact3")
         self.text_not_align(self.font4, 13,"vanny.lamorte@gmail.com", self.grey6, 130, 590)
 
+        # Neon Lines
+        self.image_not_center("Neon light", 120, 190, 140, 105,"main_page/main_page7")
+        self.image_not_center("Neon light", 120, 390, 140, 105,"main_page/main_page7")
+
   
         # Profile logo
 
