@@ -9,7 +9,7 @@ class Element():
         self.darkgrey = (100,100,100)
         self.grey = (250, 250, 250) # Backgroud Home
         self.grey1 = (240, 242, 245)   
-        self.grey2 = (53, 53, 53)    
+        self.grey2 = (53, 53, 53) # Info profile rectangle 
         self.grey3 = (25, 25, 25)
         self.grey4 = (146, 151, 153)
         self.grey5 = (34, 31, 37)
@@ -101,10 +101,10 @@ class Element():
         name = pygame.transform.scale(name, (width, height))
         self.Window.blit(name, (x - name.get_width()//2, y - name.get_height()//2))
 
-    def hover_image(self, name_rect, name, x, y, width, height, image_name): 
+    def hover_image(self, name_rect, name, x, y, width, height, image_name, image_name_hover): 
         name_rect = pygame.Rect( x - width//2, y - height//2, width, height)        
         if self.is_mouse_over_button(name_rect):
-            self.img_center(name, x, y, width+5, height+5, image_name)     
+            self.img_center(name, x, y, width+5, height+5, image_name_hover)     
         else:
             self.img_center(name, x, y, width, height, image_name)
         return name_rect

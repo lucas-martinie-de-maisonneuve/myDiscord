@@ -1,18 +1,18 @@
 import pygame
 from source.pygame_manager.Gui import Gui
-class Profile(Gui):
+from source.Client import Client
+class Profile(Gui, Client):
     
-    def __init__(self, user):
+    def __init__(self):
         Gui.__init__(self)
+        Client.__init__(self)
         self.profile_running = False
         self.profile_to_main_page = False
         self.profile_to_login = False
         self.edit = 0
-        self.user = user
         self.password_edit, self.username_edit, self.email_edit, self.picture_edit, self.status_edit = False, False, False, False, False
         self.theme_color = self.purple4
-        self.username, self.email ,self.password ,self.picture, self.role = self.user[3], self.user[4], self.user[5], self.user[6], self.user[7]
-        self.password_display = " *" * len(self.password)
+
         self.show_pass = False
         self.status = "Online"
         self.status_color = self.green
@@ -210,15 +210,18 @@ class Profile(Gui):
                 self.text_not_align(self.font2, 16, self.password, self.black, 440, 442)
 
         # Quit
-            self.close_profile = pygame.Rect(1095,45,50,50)
-            self.img_center("Quit", 1120, 70, 50,50, "profile/profile8")
+            self.close_profile = self.hover_image("Quit", "Quit", 1120, 70, 50, 50, "profile/profile11", "profile/profile8")
 
     def profile_run(self):
-        while self.profile_running :
+        self.user = self.user_info
+        print (self.user)
+        self.username, self.email ,self.password ,self.picture, self.role = self.user[3], self.user[4], self.user[5], self.user[6], self.user[7]
+        self.password_display = " *" * len(self.password)
+
+        if self.profile_running :
             self.design()
             self.profile_picture_edit()
             self.info_profile_edit()
             self.password_show()
             self.event_profile()
             self.profile_page_cursor()
-            self.update()

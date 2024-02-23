@@ -1,24 +1,22 @@
 import pygame
 from source.pygame_manager.Gui import Gui
-from source.gui.MainPage import MainPage
-from source.User import User
+from source.Client import Client
 
-class Home(Gui):
+class Home(Gui, Client):
     
     def __init__(self):
         Gui.__init__(self)
+        Client.__init__(self)
         self.home_running = False
         self.input_email = ""
         self.input_password = ""
         self.password_display = " *" * len(self.input_password)
-        self.user = User(self.input_email, self.input_password)
-        self.main_page = MainPage((0, '', '', '', '', '', 0, 0))
         self.show_pass = False
         self.entry = 0
         self.anim_pass = False 
         self.anim_email = False
-        self.user_info = False
         self.login_to_register = False
+        self.home_to_main_page = False
     def design(self): 
         self.screen_color(self.grey)
 
@@ -70,9 +68,9 @@ class Home(Gui):
 
         # Social Media    
         self.text_center(self.font2, 12,"Sign In with", self.white, 925, 475)   
-        self.facebook = self.hover_image("Facebook", "Facebook", 880, 520, 30, 30, "home/home3")    # Facebook
-        self.instagram = self.hover_image("Instagram", "Instagram", 925, 520, 30, 30,"home/home4")   # Instagram
-        self.google = self.hover_image("Google", "Google",  970, 520, 30, 30, "home/home5")       # Google   
+        self.facebook = self.hover_image("Facebook", "Facebook", 880, 520, 30, 30, "home/home3", "home/home3")    # Facebook
+        self.instagram = self.hover_image("Instagram", "Instagram", 925, 520, 30, 30,"home/home4", "home/home4")   # Instagram
+        self.google = self.hover_image("Google", "Google",  970, 520, 30, 30, "home/home5", "home/home5")       # Google   
    
     def hover_lost_password(self): 
         self.forgot_p = (pygame.Rect(992, 355, 115, 15))    
@@ -97,14 +95,13 @@ class Home(Gui):
 
     def connexion(self):
         if self.is_mouse_over_button(pygame.Rect(745, 385, 350, 50)) and pygame.mouse.get_pressed()[0]:
-            self.user = User(self.input_email, self.input_password)
-            self.user_info = self.user.login_user()
-            if self.user.connected:
-                self.main_page = MainPage(self.user_info)
-                self.main_page.main_page_running = True
-                self.main_page.mainPage_run()
-                self.home_running = False
-                self.user.connected = False
+            self.user_email = self.input_email
+            self.user_password = self.input_password
+            self.user_info = self.login_user()
+        if self.connected:
+            self.home_to_main_page = True
+            self.home_running = False
+            self.connected = False
 
         if self.user_info is None:
             self.text_center(self.font1, 11, "Wrong password or Email", self.darkred, 825, 360)

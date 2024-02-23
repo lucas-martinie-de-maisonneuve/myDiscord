@@ -1,12 +1,13 @@
 import pygame
 from data.DiscordManager import DiscordManager
 from source.pygame_manager.Gui import Gui
-class MainPage(Gui, DiscordManager):
+from source.Client import Client
+class MainPage(Gui, Client, DiscordManager):
     
-    def __init__(self, user):
+    def __init__(self):
+        Client.__init__(self)
         DiscordManager.__init__(self)
         Gui.__init__(self)
-        self.user = user
         self.main_page_running = False
         self.main_page_to_profile = False
         self.main_page_to_login = False
@@ -206,6 +207,7 @@ class MainPage(Gui, DiscordManager):
             self.text_not_align(self.font2, 17, ligne, self.black, 510, 620 + i * 15)
 
     def mainPage_run(self):
+        self.user = self.user_info
         if self.main_page_running :
             self.background()
             self.first_section()

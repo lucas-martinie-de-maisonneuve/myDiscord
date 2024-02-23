@@ -11,14 +11,13 @@ from source.gui.Home import Home
 from source.gui.Profile import Profile
 from source.gui.Register import Register
 from source.gui.MainPage import MainPage
-
 class Display_test(Gui):
     def __init__(self):
         Gui.__init__(self)
         self.main_running = True
         self.connexion = Home()
-        self.main_page = MainPage((2, 'None', 'Martinie', 'Lucassa', 'lucas.martinie@laplateforme.io', 'LucasMartinie2412!', 2, 2))
-        self.profile = Profile((2, 'None', 'Martinie', 'Lucassa', 'lucas.martinie@laplateforme.io', 'LucasMartinie2412!', 2, 2))
+        self.main_page = MainPage()
+        self.profile = Profile()
         self.register = Register()
 
     def test(self):
@@ -49,10 +48,12 @@ class Display_test(Gui):
                 self.register.register_running = True
                 self.register.register_run()
                 self.connexion.login_to_register = False
-            elif self.profile.profile_to_main_page or self.main_page.main_page_running:
+
+            elif self.profile.profile_to_main_page or self.main_page.main_page_running or self.connexion.home_to_main_page:
                 self.main_page.main_page_running = True
                 self.main_page.mainPage_run()
-                self.profile.profile_to_main_page = False
+                self.profile.profile_to_main_page, self.connexion.home_to_main_page = False, False
+
             elif self.main_page.main_page_to_profile or self.profile.profile_running:
                 self.profile.profile_running = True
                 self.profile.profile_run()
