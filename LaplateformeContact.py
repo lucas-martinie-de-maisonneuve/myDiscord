@@ -40,6 +40,17 @@ class LaplateformeContact(Element):
         self.image_not_center("Email", 100, 380, 25, 25,"laplateforme_contact/laplateforme_contact3")
         self.text_not_align(self.font4, 13,"lucas.martinie@gmail.com", self.grey6, 130, 390)
 
+        # Vanny
+        self.image_not_center("Creator Vanny ", 55, 460, 50, 50,"laplateforme_contact/laplateforme_contact1")
+        self.text_not_align(self.font1, 13, "Vanny Lamorte", self.grey6, 110, 487)        
+        self.image_not_center("LinkedIn ", 100, 510, 25, 25,"laplateforme_contact/laplateforme_contact4")
+        self.text_not_align(self.font4, 13, "Vanny Lamorte", self.grey6, 130, 520)
+        self.image_not_center("Github", 100, 545, 25, 25,"laplateforme_contact/laplateforme_contact2")
+        self.text_not_align(self.font4, 13, "vanny-laure-lamorte", self.grey6, 130, 555)
+        self.image_not_center("Email", 100, 580, 25, 25,"laplateforme_contact/laplateforme_contact3")
+        self.text_not_align(self.font4, 13,"vanny.lamorte@gmail.com", self.grey6, 130, 590)
+
+  
         # Profile logo
 
     def laplateforme_contact_running(self):
