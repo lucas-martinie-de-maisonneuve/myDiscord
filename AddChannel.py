@@ -42,7 +42,11 @@ class AddChannel(Element, DiscordManager):
         self.rect_full(self.grey9, 600, 320, 300, 30, 10)
         
         self.text_center(self.font2, 21, "Category", self.grey1, 600, 370)
-
+        
+        self.text_center(self.font2, 16, "Bachelor IT", self.grey1, 540, 405)
+        
+        self.text_center(self.font2, 16, "Talk Talk", self.grey1, 650, 405)
+        
     def addChannel_run(self):
         while self.add_channel_running :
             self.background()
