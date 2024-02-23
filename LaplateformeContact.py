@@ -19,7 +19,20 @@ class LaplateformeContact(Element):
 
         # Right rectangle
         self.rect_full(self.grey5,750, 350, 800, 620, 10) 
+        self.image_not_center("Logo LaPlateforme", 560, 55, 400, 66,"laplateforme_contact/laplateforme_contact5")
 
+        # Rect 1
+        self.rect_full(self.grey6, 750, 230, 740, 150, 10) 
+        self.rect_border(self.white, 750, 230, 740, 150, 3, 10)
+
+        # Rect 2
+        self.rect_full(self.grey6, 750, 395, 740, 150, 10) 
+        self.rect_border(self.white, 750, 395, 740, 150, 3, 10)
+
+        #Rect 3
+        self.rect_full(self.grey6, 750, 560, 740, 150, 10) 
+        self.rect_border(self.white, 750, 560, 740, 150, 3, 10)
+        
         # Ines
         self.image_not_center("Creator Ines Lorquet ", 55, 60, 50, 50,"laplateforme_contact/laplateforme_contact1")
         self.text_not_align(self.font1, 13, "Ines Lorquet", self.grey6, 110, 87)
@@ -53,7 +66,6 @@ class LaplateformeContact(Element):
         # Neon Lines
         self.image_not_center("Neon light", 120, 190, 140, 105,"main_page/main_page7")
         self.image_not_center("Neon light", 120, 390, 140, 105,"main_page/main_page7")
-
   
         # Profile logo
 
