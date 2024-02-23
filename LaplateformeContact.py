@@ -1,6 +1,7 @@
 import pygame
 from source.pygame_manager.Element import Element
 
+
 class LaplateformeContact(Element):
     
     def __init__(self):
@@ -8,7 +9,17 @@ class LaplateformeContact(Element):
         Element.__init__(self)
         self.laplateforme_contact_run = True    
         # self.laplateforme_contact_running = False
-        
+    
+    def creator_contact(self, creator_name, name, linkedin, github, email, y_name, y_neon, y_logo, y_text): 
+        self.text_not_align(self.font1, 13, name, self.grey6, 110, y_name)
+        self.image_not_center(creator_name, 55, y_neon, 50, 50,"laplateforme_contact/laplateforme_contact1")
+        self.image_not_center("LinkedIn ", 100, y_logo, 25, 25,"laplateforme_contact/laplateforme_contact4")
+        self.text_not_align(self.font4, 13, linkedin, self.grey6, 130, y_text)
+        self.image_not_center("Github", 100, y_logo + 35, 25, 25,"laplateforme_contact/laplateforme_contact2")
+        self.text_not_align(self.font4, 13, github, self.grey6, 130, y_text + 35)
+        self.image_not_center("Email", 100, y_logo + 70, 25, 25,"laplateforme_contact/laplateforme_contact3")
+        self.text_not_align(self.font4, 13, email, self.grey6, 130, y_text + 70)        
+
     def design(self):
    
         # Background
@@ -29,45 +40,22 @@ class LaplateformeContact(Element):
         self.rect_full(self.grey6, 750, 395, 740, 150, 10) 
         self.rect_border(self.white, 750, 395, 740, 150, 3, 10)
 
-        #Rect 3
+        # Rect 3
         self.rect_full(self.grey6, 750, 560, 740, 150, 10) 
         self.rect_border(self.white, 750, 560, 740, 150, 3, 10)
-        
+
         # Ines
-        self.image_not_center("Creator Ines Lorquet ", 55, 60, 50, 50,"laplateforme_contact/laplateforme_contact1")
-        self.text_not_align(self.font1, 13, "Ines Lorquet", self.grey6, 110, 87)
-        self.image_not_center("LinkedIn ", 100, 110, 25, 25,"laplateforme_contact/laplateforme_contact4")
-        self.text_not_align(self.font4, 13, "Ines Lorquet", self.grey6, 130, 120)
-        self.image_not_center("Github", 100, 145, 25, 25,"laplateforme_contact/laplateforme_contact2")
-        self.text_not_align(self.font4, 13, "ines-lorquet", self.grey6, 130, 155)
-        self.image_not_center("Email", 100, 180, 25, 25,"laplateforme_contact/laplateforme_contact3")
-        self.text_not_align(self.font4, 13,"ineslorquet@gmail.com", self.grey6, 130, 190)
+        self.creator_contact("Creator Ines", "Ines Lorquet", "Ines Lorquet","ines-lorquet","ineslorquet@gmail.com",87, 60, 110, 115)
 
         # Lucas
-        self.image_not_center("Creator Lucas ", 55, 260, 50, 50,"laplateforme_contact/laplateforme_contact1")
-        self.text_not_align(self.font1, 13, "Lucas Martinie de Maisonneuve", self.grey6, 110, 287)        
-        self.image_not_center("LinkedIn ", 100, 310, 25, 25,"laplateforme_contact/laplateforme_contact4")
-        self.text_not_align(self.font4, 13, "Lucas Martinie de Maisonneuve", self.grey6, 130, 320)
-        self.image_not_center("Github", 100, 345, 25, 25,"laplateforme_contact/laplateforme_contact2")
-        self.text_not_align(self.font4, 13, "lucas-martinie-de-maisonneuve", self.grey6, 130, 355)
-        self.image_not_center("Email", 100, 380, 25, 25,"laplateforme_contact/laplateforme_contact3")
-        self.text_not_align(self.font4, 13,"lucas.martinie@gmail.com", self.grey6, 130, 390)
+        self.creator_contact("Creator Lucas", "Lucas Martinie de Maisonneuve", "Lucas Martinie de Maisonneuve ","lucas-martinie-de-maisonneuve","lucas.martinie@gmail.com", 287, 260, 310, 315)
 
         # Vanny
-        self.image_not_center("Creator Vanny ", 55, 460, 50, 50,"laplateforme_contact/laplateforme_contact1")
-        self.text_not_align(self.font1, 13, "Vanny Lamorte", self.grey6, 110, 487)        
-        self.image_not_center("LinkedIn ", 100, 510, 25, 25,"laplateforme_contact/laplateforme_contact4")
-        self.text_not_align(self.font4, 13, "Vanny Lamorte", self.grey6, 130, 520)
-        self.image_not_center("Github", 100, 545, 25, 25,"laplateforme_contact/laplateforme_contact2")
-        self.text_not_align(self.font4, 13, "vanny-laure-lamorte", self.grey6, 130, 555)
-        self.image_not_center("Email", 100, 580, 25, 25,"laplateforme_contact/laplateforme_contact3")
-        self.text_not_align(self.font4, 13,"vanny.lamorte@gmail.com", self.grey6, 130, 590)
+        self.creator_contact("Creator Vanny", "Vanny Lamorte", "Vanny Lamorte","vanny-laure-lamorte","vannylamorte@gmail.com", 487, 460, 510, 515)
 
         # Neon Lines
         self.image_not_center("Neon light", 120, 190, 140, 105,"main_page/main_page7")
         self.image_not_center("Neon light", 120, 390, 140, 105,"main_page/main_page7")
-  
-        # Profile logo
 
     def laplateforme_contact_running(self):
         
