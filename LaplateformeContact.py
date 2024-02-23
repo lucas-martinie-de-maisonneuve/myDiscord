@@ -98,7 +98,9 @@ class LaplateformeContact(Element):
         self.hover_image("Youtube","Youtube", 850, 370, 45, 45,"laplateforme_contact/contact10")
 
         self.rect_full(self.grey1, 750, 430, 240, 40, 5) 
-        self.text_not_align(self.font1, 14,"download the brochure", self.grey7, 665, 425)
+        self.button_hover("Social media", 750, 430, 240, 40, self.grey6, self.white, self.white, self.white,"download the brochure", self.font1, self.grey7,14, 2, 5)
+
+        # self.text_not_align(self.font1, 14,"download the brochure", self.grey7, 665, 425)
 
         
 
