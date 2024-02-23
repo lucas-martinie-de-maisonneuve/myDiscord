@@ -32,6 +32,9 @@ class LaplateformeContact(Element):
         (pygame.Rect(750, 370, 40, 40),"https://twitter.com/i/flow/login?redirect_after_login=%2FLaPlateformeIO"),
         (pygame.Rect(800, 370, 40, 40), "https://www.instagram.com/LaPlateformeIO/"),
         (pygame.Rect(850, 370, 45, 45), "https://www.youtube.com/c/LaPlateformeIO"),
+
+        # Link Brochure
+        (pygame.Rect(750, 430, 240, 40), "https://laplateforme.io/telechargement-brochure/"),
     ]
 
     def draw_links(self):
@@ -94,10 +97,16 @@ class LaplateformeContact(Element):
         self.hover_image("Instagram","Instagram", 800, 370, 40, 40,"laplateforme_contact/contact9")
         self.hover_image("Youtube","Youtube", 850, 370, 45, 45,"laplateforme_contact/contact10")
 
+        self.rect_full(self.grey1, 750, 430, 240, 40, 5) 
+        self.text_not_align(self.font1, 14,"download the brochure", self.grey7, 665, 425)
+
+        
 
         # Rect 3
         self.rect_full(self.grey6, 750, 560, 740, 150, 10) 
         self.rect_border(self.white, 750, 560, 740, 150, 3, 10)
+
+     
 
         # Ines
         self.creator_contact("Creator Ines", "Ines Lorquet", "Ines Lorquet","ines-lorquet","ineslorquet@gmail.com", 87, 60, 125, 115)  
