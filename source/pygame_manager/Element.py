@@ -122,6 +122,7 @@ class Element(Screen):
     def rect_border(self, color, x, y, width, height, thickness, radius):
         button = pygame.draw.rect(self.Window, color, pygame.Rect(x - width //2, y - height //2, width, height),  thickness, radius)
         return button
+    
     #Rect border only on top  
     def rect_radius_top(self, color, x, y, width, height, radius):
         button = pygame.draw.rect(self.Window, color, pygame.Rect(x - width //2, y - height //2, width, height),False,0, radius, radius)

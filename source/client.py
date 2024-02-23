@@ -12,13 +12,13 @@ class Client(User):
     def send_audio(self): 
         pass
 
-    def StartAudioCon(self): 
+    def start_audio_con(self): 
         pass
 
-    def Mute(self): 
+    def mute(self): 
         self.mute = True
 
-    def Unmute(self): 
+    def unmute(self): 
         self.mute = False
 
 

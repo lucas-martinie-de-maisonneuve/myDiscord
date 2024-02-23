@@ -26,16 +26,26 @@ class MainPage(Element, EventHandler, DiscordManager):
         self.img_background("Background", 600, 350, 1200, 800, "main_page/main_page8")
    
     def banner(self):
-        # Link to the LaPlateforme website
+
+        # Rect Background 
         self.rect_full(self.grey10, 655, 40, 1055, 60, 10)
+
+        # Logo Names
+        self.image_not_center("Names", 155, 15, 200, 57,"main_page/main_page17") 
+        self.image_not_center("Rectangle logo", 120, 12, 270, 55,"main_page/main_page18") 
+
+        # Search bar
+        self.input_search_rect = self.rect_full(self.grey2, 920, 40, 240, 35, 80)
+        self.text_not_align(self.font2, 15, self.input_search, self.white, 810, 30.5)
+        self.image_not_center("Search logo", 1000, 25, 30, 30,"main_page/main_page16")
+
+        # Logo bell
+        self.image_not_center("Bell logo", 1060, 15, 50, 50,"main_page/main_page19") 
+
+        # Link to the LaPlateforme website  
         self.image_not_center("Question mark", 1120, 15, 50, 50,"main_page/main_page15")    
         self.link_logo_rect = pygame.Rect(1120, 15, 50, 50)
         self.url = "https://laplateforme.io/"
-
-        # Search bar
-        self.input_search_rect = self.rect_full(self.grey2, 970, 40, 240, 35, 80)
-        self.text_not_align(self.font2, 15, self.input_search, self.white, 860, 30.5)
-        self.image_not_center("Search logo", 1050, 25, 30, 30,"main_page/main_page16")  
 
     def first_section(self):
         # First section background color
@@ -70,8 +80,7 @@ class MainPage(Element, EventHandler, DiscordManager):
         else:      
             self.img_center("Power Off", 64, 635, 60, 60,"main_page/main_page9")
             self.img_center("Neon circle", 64, 635, 110, 110,"main_page/main_page4") 
-   
-     
+        
     def second_section(self):
         self.rect_full(self.grey10, 257, 385, 260, 610, 10)
 
@@ -121,9 +130,7 @@ class MainPage(Element, EventHandler, DiscordManager):
                             self.img_center("Volume logiciel", 170,(20*i)+530, 25, 25,"main_page/main_page10")
                         elif self.communication == "1":                             
                             self.img_center("Hashtags logiciel", 170, (20*i)+530, 15, 15,"main_page/main_page14") 
-                    # True = 0 =  son
-                    # False = 1 = Message
-    
+     
         # Neon light blue
         self.img_center("Neon light", 260, 230, 140, 105,"main_page/main_page7")
         self.img_center("Neon light", 260, 430, 140, 105,"main_page/main_page7")
@@ -166,20 +173,26 @@ class MainPage(Element, EventHandler, DiscordManager):
 
             self.message_name = self.name_message(id_channel)
             self.str_name1 = self.message_name[i][0]
-            self.message_name = f'{self.str_name1} '
-            
+            self.message_name = f'{self.str_name1}'
+
+            self.message_picture = self.get_profile_picture(self.message_name)
+            if self.message_picture:
+                self.str_picture = self.message_picture[0][0]
+
             self.message_time1 = self.time_message(id_channel)
             self.str_name3 = self.message_time1[i][0]
             self.message_time1 = f'{self.str_name3} '
           
             chunked_strings = self.split_string(self.message_1, 101)
             rectangle_height = len(chunked_strings) * 30  
-            pos_y -= rectangle_height + 40 
+            pos_y -= rectangle_height + 40
 
             for j, chunk in enumerate(chunked_strings):
                 self.text_not_align(self.font2, 16, chunk, self.grey1, 480, ((30 * j) + pos_y + 20))
             self.text_not_align(self.font1, 18, self.message_name, self.pink, 480, (pos_y + 5))
             self.text_not_align(self.font1, 10, self.message_time1, self.grey1, 590, (pos_y+10))
+            self.img_center("bubble", 460, (pos_y + 10), 40, 40, f"main_page/main_page4")
+            self.img_center("ProfilePicture", 460, (pos_y + 10), 35, 35, f'profile/profile{self.str_picture}')
 
     def input_write_user(self): 
         split_text = []

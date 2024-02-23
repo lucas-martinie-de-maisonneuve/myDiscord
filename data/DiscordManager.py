@@ -136,6 +136,11 @@ class DiscordManager(Database):
         values = (id,)
         return self.fetch(sql,values)
     
+    def get_profile_picture(self, id):
+        sql = "SELECT photo FROM user WHERE pseudo = %s"
+        values = (id,)
+        return self.fetch(sql,values)
+
     def time_message(self,id):
         sql = "SELECT time FROM message WHERE id_channel = %s"
         values = (id,)

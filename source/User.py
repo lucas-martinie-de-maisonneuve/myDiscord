@@ -1,5 +1,6 @@
 from data.DiscordManager import DiscordManager
 from hashlib import sha256
+
 class User(DiscordManager):
     def __init__(self, email, password):
         self.user_email = email
@@ -17,3 +18,6 @@ class User(DiscordManager):
             return(user)
         else:
             print("Erreur. Connexion échouée.")
+
+
+    
