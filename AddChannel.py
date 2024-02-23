@@ -15,7 +15,7 @@ class AddChannel(Element, DiscordManager):
     def background(self): 
         self.img_background1('Background', 600, 350, 1200, 800, 'main_page/main_page8', blur_radius=10)
         
-    def img_background1(self, name, x, y, width, height, image_name, blur_radius=5):
+    def img_background_blur(self, name, x, y, width, height, image_name, blur_radius=5):
         name = pygame.image.load(f'assets/image/{image_name}.png').convert_alpha()
         name = pygame.transform.scale(name, (width, height))
         self.Window.blit(name, (x - name.get_width()//2, y - name.get_height()//2))
@@ -50,7 +50,11 @@ class AddChannel(Element, DiscordManager):
         self.text_center(self.font2, 16, "Talk Talk", self.grey1, 650, 405)
         
         self.text_center(self.font2, 21, "Communication", self.grey1, 600, 465)
+        
+        self.rect_full(self.grey9, 537, 500, 100, 30, 10)
         self.text_center(self.font2, 16, "Text", self.grey1, 537, 500)
+        
+        self.rect_full(self.grey9, 655, 500, 100, 30, 10)
         self.text_center(self.font2, 16, "Vocal", self.grey1, 655, 500)
 
         
