@@ -22,7 +22,6 @@ class MainPage(Element, EventHandler, DiscordManager):
         self.link_is_clicked = True
         self.entry = 0
 
-
     def background(self): 
         self.img_background("Background", 600, 350, 1200, 800, "main_page/main_page8")
    
