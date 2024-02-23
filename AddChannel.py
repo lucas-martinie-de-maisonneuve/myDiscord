@@ -32,7 +32,9 @@ class AddChannel(Element, DiscordManager):
         )
         self.Window.blit(blurred_image, (x - width // 2, y - height // 2))
 
-
+    def second_section(self):
+        # Rectangle de fond
+        self.rect_full(self.grey10, 600, 400, 500, 510, 10)
 
 
     def addChannel_run(self):
