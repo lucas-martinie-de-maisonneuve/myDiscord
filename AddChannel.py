@@ -58,6 +58,9 @@ class AddChannel(Element, DiscordManager):
         self.text_center(self.font2, 16, "Vocal", self.grey1, 655, 500)
 
         self.text_center(self.font2, 21, "Status", self.grey1, 600, 550)
+        
+        self.text_center(self.font2, 16, "Private", self.grey1, 535, 580)
+        self.text_center(self.font2, 16, "Public", self.grey1, 655, 580)
 
     def addChannel_run(self):
         while self.add_channel_running :
