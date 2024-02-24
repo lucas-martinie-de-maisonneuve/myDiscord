@@ -32,6 +32,7 @@ class Element(Screen):
         self.darkblue = (65, 90, 119) 
         self.lightblue = (189, 224, 254)
 
+        self.alpha_white =(150,150,150, 200) # Alpha profil picture on profil page
         self.alpha_grey =(50,50,50,100) # Alpha profil picture on profil page
         self.alpha_grey2 =(50,50,50,200) # Alpha background register
         self.alpha_none =(0,0,0,0)
@@ -167,8 +168,7 @@ class Element(Screen):
             self.rect_border(color_border, x, y, width, height, thickness, radius)
         self.text_center(font, text_size, text, text_color,  x, y)
 
-        return name
-    
+        return name    
 # Def Cursor 
     def normal_cursor(self):
         pygame.mouse.set_cursor(pygame.cursors.arrow)
