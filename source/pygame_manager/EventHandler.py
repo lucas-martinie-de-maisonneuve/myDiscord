@@ -262,7 +262,18 @@ class EventHandler():
 
             elif event.type == pygame.MOUSEBUTTONUP:
                  if self.link_logo_rect.collidepoint(event.pos):
-                    self.link_is_clicked = True              
+                    self.link_is_clicked = True  
+
+    def event_contact(self):
+        for event in pygame.event.get():
+                if event.type == pygame.QUIT:
+                    pygame.quit()
+
+                self.handle_clicks(event)
+
+        self.draw_links()            
+        self.design()
+        self.update()   
 
                
                 

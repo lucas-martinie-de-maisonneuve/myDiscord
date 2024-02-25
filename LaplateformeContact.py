@@ -1,39 +1,40 @@
 import pygame
 import webbrowser
 from source.pygame_manager.Element import Element
+from source.pygame_manager.EventHandler import EventHandler
 
 
-class LaplateformeContact(Element):
+class LaplateformeContact(Element, EventHandler):
     
     def __init__(self):
 
         Element.__init__(self)
+        
         self.laplateforme_contact_run = True    
         # self.laplateforme_contact_running = False
         self.link_is_clicked = True        
 
         self.link_data = [
 
-        # Links creators
+        # Links Ines
         (pygame.Rect(110-13, 125-13, 25, 25), "https://www.linkedin.com/in/ines-lorquet-35b90128b/"),
         (pygame.Rect(110-13, 160-13, 25, 25), "https://github.com/ines-lorquet"),
         (pygame.Rect(110-13, 195-13, 25, 25), " https://mail.google.com/"),
-
+        # Links Lucas
         (pygame.Rect(110-13, 325-13, 25, 25), "https://www.linkedin.com/in/lucas-martinie-de-maisonneuve-2349892b3/"),
         (pygame.Rect(110-13, 360-13, 25, 25),"https://github.com/lucas-martinie-de-maisonneuve"),
         (pygame.Rect(110-13, 395-13, 25, 25), " https://mail.google.com/"),
-
+        #Links Vanny
         (pygame.Rect(110-13, 525-13, 25, 25), "https://www.linkedin.com/in/vanny-lamorte-b4262b129/"),
         (pygame.Rect(110-13, 560-13, 25, 25),"https://github.com/vanny-laure-lamorte"),
         (pygame.Rect(110-13, 595-13, 25, 25), "https://mail.google.com/"),
-
+        # Links LaPlateforme
         (pygame.Rect(450-20, 460-20, 40, 40), "https://www.facebook.com/LaPlateformeIO"),
         (pygame.Rect(500-20, 460-20, 40, 40), "https://www.linkedin.com/school/laplateformeio/"),
         (pygame.Rect(550-20, 460-20, 40, 40),"https://twitter.com/i/flow/login?redirect_after_login=%2FLaPlateformeIO"),
         (pygame.Rect(600-22, 460-22, 43, 43), "https://www.instagram.com/LaPlateformeIO/"),
         (pygame.Rect(650-23, 460-23, 45, 45), "https://www.youtube.com/c/LaPlateformeIO"),
-        # Link Brochure
-        (pygame.Rect(550-120, 590-20, 240, 40), "https://laplateforme.io/telechargement-brochure/"),
+       (pygame.Rect(550-120, 590-20, 240, 40), "https://laplateforme.io/telechargement-brochure/"),
     ]
 
     def draw_links(self):
@@ -133,32 +134,9 @@ class LaplateformeContact(Element):
         self.hover_image("Marseille", "Marseille", 990, 470, 25, 25,"laplateforme_contact/contact12") # Marseille  
         self.hover_image("Martigues","Martigues", 980, 465, 25, 25,"laplateforme_contact/contact12")  # Martigues
 
-               
-       
-
-
-   
-
-
-
- 
-    
-            
-
-       
-            
     def laplateforme_contact_running(self):        
         while self.laplateforme_contact_run:
-            for event in pygame.event.get():
-                if event.type == pygame.QUIT:
-                    pygame.quit()
-
-                self.handle_clicks(event)
-
-            self.draw_links()            
-            self.design()
-            # self.address()
-            self.update()
+            self.event_contact()
 
 test = LaplateformeContact()
 test.laplateforme_contact_running()
