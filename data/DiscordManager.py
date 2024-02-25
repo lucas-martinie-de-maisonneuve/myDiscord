@@ -46,9 +46,7 @@ class DiscordManager(Database):
     # Toutes Categories
     def display_category(self):
         sql = "SELECT * FROM category"
-        self.cursor.execute(sql)
-        self.categorys = self.cursor.fetchall()
-        return self.categorys
+        return self.fetch(sql)
     
     def count_category(self):
         sql = "SELECT COUNT(*) AS nb FROM category"

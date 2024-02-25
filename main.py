@@ -15,7 +15,6 @@ class Display_test(Gui):
     def __init__(self):
         Gui.__init__(self)
         self.main_running = True
-        self.connexion = Home()
         self.main_page = MainPage()
         self.profile = Profile()
         self.register = Register()
@@ -33,6 +32,7 @@ class Display_test(Gui):
                         self.register.register_running = True
                         self.register.register_run()
                     elif self.connec.collidepoint(event.pos):
+                        self.connexion = Home()
                         self.connexion.home_running = True
                         self.connexion.home_run()
 
