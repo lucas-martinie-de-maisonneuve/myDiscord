@@ -13,7 +13,7 @@ class AddChannel(Element, DiscordManager):
         self.entry_new_name = 0
 
     def background(self): 
-        self.img_background1('Background', 600, 350, 1200, 800, 'main_page/main_page8', blur_radius=10)
+        self.img_background_blur('Background', 600, 350, 1200, 800, 'main_page/main_page8', blur_radius=10)
         
     def img_background_blur(self, name, x, y, width, height, image_name, blur_radius=5):
         name = pygame.image.load(f'assets/image/{image_name}.png').convert_alpha()
@@ -41,44 +41,43 @@ class AddChannel(Element, DiscordManager):
         self.text_center(self.font2, 21, "Name Channel", self.grey1, 600, 270)
         self.rect_full(self.grey9, 600, 320, 300, 30, 10)
         
+        # Choice category
         self.text_center(self.font2, 21, "Category", self.grey1, 600, 370)
         
-        self.rect_full(self.grey9, 540, 405, 100, 30, 10)
-        self.text_center(self.font2, 16, "Bachelor IT", self.grey1, 540, 405)
+        # Button Bachelor IT category
+        self.but_bachelor = self.button_hover("bachelor it button",540, 405, 100, 30, 10,self.grey9,self.grey9,self.grey9,"Bachelor IT",self.font2,self.grey1,16,0,10)
+
+        # Button Talk TAlk category
+        self.but_talk = self.button_hover("talk talk button",650, 405, 100, 30, 10,self.grey9,self.grey9,self.grey9,"Talk Talk",self.font2,self.grey1,16,0,10)
         
-        self.rect_full(self.grey9, 650, 405, 100, 30, 10)
-        self.text_center(self.font2, 16, "Talk Talk", self.grey1, 650, 405)
-        
+        # Choice communication
         self.text_center(self.font2, 21, "Communication", self.grey1, 600, 465)
         
-        self.rect_full(self.grey9, 537, 500, 100, 30, 10)
-        self.text_center(self.font2, 16, "Text", self.grey1, 537, 500)
+        # Button text communication
+        self.but_text = self.button_hover("text button",537, 500, 100, 30, 10,self.grey9,self.grey9,self.grey9,"Text",self.font2,self.grey1,16,0,10)
         
-        self.rect_full(self.grey9, 655, 500, 100, 30, 10)
-        self.text_center(self.font2, 16, "Vocal", self.grey1, 655, 500)
+        #Button vocal communication
+        self.but_voval = self.button_hover("vocal button",655, 500, 100, 30, 10,self.grey9,self.grey9,self.grey9,"Vocal",self.font2,self.grey1,16,0,10)
 
+
+        # Choice status
         self.text_center(self.font2, 21, "Status", self.grey1, 600, 550)
         
-        self.rect_full(self.grey9, 535, 580, 100, 30, 10)
-        self.text_center(self.font2, 16, "Private", self.grey1, 535, 580)
+        # Button private status
+        self.but_private = self.button_hover("private button",535, 580, 100, 30, 10,self.grey9,self.grey9,self.grey9,"Private",self.font2,self.grey1,16,0,10)
         
-        self.rect_full(self.grey9, 655, 580, 100, 30, 10)
-        self.text_center(self.font2, 16, "Public", self.grey1, 655, 580)
-                # logo choix
+        # Button public
+        self.but_public = self.button_hover("public button",655, 580, 100, 30, 10,self.grey9,self.grey9,self.grey9,"Public",self.font2,self.grey1,16,0,10)
+
+
+        # logo choice
         self.img_center("Volume logiciel", 465, 499, 35, 35,"main_page/main_page10")
         self.img_center("Hashtags logiciel", 725, 498, 25, 25,"main_page/main_page14") 
+        
         # Neon light blue
         self.img_center("Neon light", 600, 170, 240, 90,"main_page/main_page7")
         self.img_center("Neon light", 600, 225, 240, 90,"main_page/main_page7")
-       # self.rect_full(self.grey9, 600, 320, 300, 30, 10)
 
-        
-
-        
-        
-        
-        
-        
 
         # # Rectangle de fond
         
@@ -92,11 +91,9 @@ class AddChannel(Element, DiscordManager):
         # # Check Talk Talk
         # # self.img_center("Check NO", 730, 420, 45, 40,"profile/check1")
         # # self.img_center("Check YES", 730, 420, 45, 40,"profile/check2")
-        
-
-        
 
         # # self.img_center("Neon Light", 260, 630, 140, 105,"main_page/main_page7") 
+        
     def addChannel_run(self):
         while self.add_channel_running :
             self.background()
@@ -105,6 +102,7 @@ class AddChannel(Element, DiscordManager):
             for event in pygame.event.get():
                 if event.type == pygame.QUIT:
                     self.add_channel_running = False 
+            
                 
 test = AddChannel()
 test.addChannel_run()
