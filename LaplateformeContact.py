@@ -15,28 +15,30 @@ class LaplateformeContact(Element):
         self.link_data = [
 
         # Links creators
-        (pygame.Rect(100-13, 110-13, 25, 25), "https://www.linkedin.com/in/ines-lorquet-35b90128b/"),
-        (pygame.Rect(100-13, 135-13, 25, 25), "https://github.com/ines-lorquet"),
-        (pygame.Rect(100-13, 170-13, 25, 25), " https://mail.google.com/"),
-        (pygame.Rect(100-13, 310-13, 25, 25), "https://www.linkedin.com/in/lucas-martinie-de-maisonneuve-2349892b3/"),
-        (pygame.Rect(100-13, 335-13, 25, 25),"https://github.com/lucas-martinie-de-maisonneuve"),
-        (pygame.Rect(100-13, 370-13, 25, 25), " https://mail.google.com/"),
-        (pygame.Rect(100-13, 510-13, 25, 25), "https://www.linkedin.com/in/vanny-lamorte-b4262b129/"),
-        (pygame.Rect(100-13, 535-13, 25, 25),"https://github.com/vanny-laure-lamorte"),
-        (pygame.Rect(100-13, 570-13, 25, 25), "https://mail.google.com/"),
-        # Link LaPlateforme - A revoir
+        (pygame.Rect(110-13, 125-13, 25, 25), "https://www.linkedin.com/in/ines-lorquet-35b90128b/"),
+        (pygame.Rect(110-13, 160-13, 25, 25), "https://github.com/ines-lorquet"),
+        (pygame.Rect(110-13, 195-13, 25, 25), " https://mail.google.com/"),
+
+        (pygame.Rect(110-13, 325-13, 25, 25), "https://www.linkedin.com/in/lucas-martinie-de-maisonneuve-2349892b3/"),
+        (pygame.Rect(110-13, 360-13, 25, 25),"https://github.com/lucas-martinie-de-maisonneuve"),
+        (pygame.Rect(110-13, 395-13, 25, 25), " https://mail.google.com/"),
+
+        (pygame.Rect(110-13, 525-13, 25, 25), "https://www.linkedin.com/in/vanny-lamorte-b4262b129/"),
+        (pygame.Rect(110-13, 560-13, 25, 25),"https://github.com/vanny-laure-lamorte"),
+        (pygame.Rect(110-13, 595-13, 25, 25), "https://mail.google.com/"),
+
         (pygame.Rect(450-20, 460-20, 40, 40), "https://www.facebook.com/LaPlateformeIO"),
         (pygame.Rect(500-20, 460-20, 40, 40), "https://www.linkedin.com/school/laplateformeio/"),
         (pygame.Rect(550-20, 460-20, 40, 40),"https://twitter.com/i/flow/login?redirect_after_login=%2FLaPlateformeIO"),
         (pygame.Rect(600-22, 460-22, 43, 43), "https://www.instagram.com/LaPlateformeIO/"),
         (pygame.Rect(650-23, 460-23, 45, 45), "https://www.youtube.com/c/LaPlateformeIO"),
         # Link Brochure
-        (pygame.Rect(550-120, 530-20, 240, 40), "https://laplateforme.io/telechargement-brochure/"),
+        (pygame.Rect(550-120, 590-20, 240, 40), "https://laplateforme.io/telechargement-brochure/"),
     ]
- 
+
     def draw_links(self):
         for link_rect, url in self.link_data:
-            pygame.draw.rect(self.Window, (0, 0, 255), link_rect)
+            pygame.draw.rect(self.Window, (0, 0, 255), link_rect)            
 
     def handle_clicks(self, event):
         if event.type == pygame.MOUSEBUTTONDOWN:
@@ -53,14 +55,21 @@ class LaplateformeContact(Element):
         self.hover_image("Github", "Github", 110, y_logo+35, 25, 25,"laplateforme_contact/contact2")
         self.text_not_align(self.font4, 13, github, self.grey6, 130, y_text + 35)
         self.hover_image("Github", "Github", 110, y_logo+70, 25, 25,"laplateforme_contact/contact3")
-        self.text_not_align(self.font4, 13, email, self.grey6, 130, y_text + 70)        
+        self.text_not_align(self.font4, 13, email, self.grey6, 130, y_text + 70)   
+
+    def address(self, name_rect, x, y, addr, addr_x, addr_y ):  
+        name_rect = pygame.Rect(x, y, 25, 25)
+        if self.is_mouse_over_button(name_rect): 
+            self.text_not_align(self.font4, 14, addr, self.pink, addr_x, addr_y)   
+        else:
+            self.text_not_align(self.font4, 15, addr, self.grey7, addr_x, addr_y)  
     
     def design(self):
         
         #--- Background ---#
         # self.img_background_blur("Background",600, 350, 1200, 700, "main_page/main_page8", blur_radius=5)
         self.img_background("Background", 600, 350, 1200, 700, "main_page/main_page8")
- 
+
         # --- Left rectangle ---#
         
         self.rect_full(self.grey5, 195, 350, 290, 620, 10)        
@@ -91,15 +100,15 @@ class LaplateformeContact(Element):
         self.rect_full(self.grey6, 555, 395, 350, 140, 10) 
         self.rect_border(self.white, 555, 395, 350, 140, 3, 10)
         self.text_not_align(self.font1, 15,"OUR LOCATIONS", self.grey7, 400, 345)
-        self.text_not_align(self.font1, 14,"• Marseille" , self.grey7, 400, 385)
-        self.text_not_align(self.font4, 14,": 8 rue d’Hozier, 13002 Marseille" , self.grey7, 485, 380)
-        self.text_not_align(self.font1, 14,"• Martigues", self.grey7, 400, 405)
-        self.text_not_align(self.font4, 14,": Place du 8 mai 1945,13500 Martigues" , self.grey7, 485, 400)
-        self.text_not_align(self.font1, 14,"• Toulon", self.grey7, 400, 425)
-        self.text_not_align(self.font4, 14,": 131 Av. Franklin Roosevelt, 83100 Toulon" , self.grey7, 465, 420) 
-        self.text_not_align(self.font1, 14,"• Cannes", self.grey7, 400, 445)
-        self.text_not_align(self.font4, 14,": 1 Chemin de l’École, 06150 Cannes" , self.grey7, 465, 440) 
-
+        self.text_not_align(self.font1, 14,"• Marseille : " , self.grey7, 400, 385)
+        self.address("Marseille", 990-13, 470-13,"8 rue d’Hozier, 13002 Marseille", 495, 380)
+        self.text_not_align(self.font1, 14,"• Martigues : ", self.grey7, 400, 405)
+        self.address("Matigues", 980-13, 465-13,"Place du 8 mai 1945, 13500 Martigues", 495, 400)
+        self.text_not_align(self.font1, 14,"• Toulon : ", self.grey7, 400, 425)
+        self.address("Toulon", 1020-12, 480-12,"131 Av. Franklin Roosevelt, 83100 Toulon",  470, 420)
+        self.text_not_align(self.font1, 14,"• Cannes : ", self.grey7, 400, 445)
+        self.address("Cannes", 1045-12, 465-12,"1 Chemin de l’École, 06150 Cannes", 475, 440)
+            
         # Social Media section
         self.rect_full(self.grey6, 555, 565, 350, 140, 10) 
         self.rect_border(self.white, 555, 565, 350, 140, 3, 10)
@@ -116,13 +125,26 @@ class LaplateformeContact(Element):
         self.rect_full(self.grey6, 940, 395, 365, 475, 10)
         self.rect_border(self.white, 940, 395, 365, 475, 3, 10)
         self.text_not_align(self.font1, 20,"LaPlateforme Locations" , self.grey4, 810, 185) # Title maps
-        self.image_not_center("Maps", 750, 190, 380, 380,"laplateforme_contact/contact11") # Maps   
+        self.image_not_center("Maps", 750, 190, 380, 380,"laplateforme_contact/contact11") # Maps  
 
         # Pin section
-        self.hover_image("Cannes","Cannes", 1045, 465, 25, 25,"laplateforme_contact/contact12") #Cannes
+        self.hover_image("Cannes","Cannes", 1045, 465, 25, 25,"laplateforme_contact/contact12") # Cannes
         self.hover_image("Toulon","Toulon", 1020, 480, 25, 25,"laplateforme_contact/contact12") # Toulon
         self.hover_image("Marseille", "Marseille", 990, 470, 25, 25,"laplateforme_contact/contact12") # Marseille  
         self.hover_image("Martigues","Martigues", 980, 465, 25, 25,"laplateforme_contact/contact12")  # Martigues
+
+               
+       
+
+
+   
+
+
+
+ 
+    
+            
+
        
             
     def laplateforme_contact_running(self):        
@@ -130,10 +152,12 @@ class LaplateformeContact(Element):
             for event in pygame.event.get():
                 if event.type == pygame.QUIT:
                     pygame.quit()
+
                 self.handle_clicks(event)
-            self.draw_links()              
-            
+
+            self.draw_links()            
             self.design()
+            # self.address()
             self.update()
 
 test = LaplateformeContact()
