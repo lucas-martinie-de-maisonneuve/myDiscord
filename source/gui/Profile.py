@@ -3,12 +3,10 @@ from source.pygame_manager.Gui import Gui
 from source.Client import Client
 class Profile(Gui, Client):
     
-    def __init__(self):
+    def __init__(self, user_info):
         Gui.__init__(self)
         Client.__init__(self)
-        self.profile_running = False
-        self.profile_to_main_page = False
-        self.profile_to_login = False
+        self.user_info = user_info
         self.edit = 0
         self.password_edit, self.username_edit, self.email_edit, self.picture_edit, self.status_edit = False, False, False, False, False
         self.theme_color = self.purple4

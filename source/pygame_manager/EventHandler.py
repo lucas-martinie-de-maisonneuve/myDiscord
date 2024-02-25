@@ -5,7 +5,7 @@ class EventHandler():
     def event_profile(self):
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
-                    self.profile_running = False
+                pygame.quit()
             if event.type == pygame.MOUSEBUTTONDOWN:
                 if self.show.collidepoint(event.pos):
                     self.show_pass = True
@@ -88,7 +88,7 @@ class EventHandler():
     def event_home(self): 
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
-                self.home_running = False
+                pygame.quit()
             elif event.type == pygame.MOUSEBUTTONDOWN:
                 if self.input_email_rect.collidepoint(event.pos): 
                     self.entry = 1
@@ -144,7 +144,7 @@ class EventHandler():
     def event_register(self):
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
-                self.register_running = False
+                pygame.quit()
             elif event.type == pygame.MOUSEBUTTONDOWN:
                 if self.sign_up.collidepoint(event.pos):
                     self.inscription_running = False
@@ -226,8 +226,7 @@ class EventHandler():
     def event_main_page(self):
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
-                self.main_page_running = False
-
+                pygame.quit()
             elif event.type == pygame.KEYDOWN:
                
                 if event.key == pygame.K_RETURN:

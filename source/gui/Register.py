@@ -1,11 +1,12 @@
 import pygame
 from data.DiscordManager import DiscordManager
 from source.pygame_manager.Gui import Gui
+from source.Client import Client
 
-class Register(Gui,DiscordManager):
+class Register(Gui, Client, DiscordManager):
     def __init__(self):
         Gui.__init__(self)
-        self.register_running = False
+        Client.__init__(self)
         self.username = ""
         self.email = ""
         self.surname = ""
@@ -16,6 +17,7 @@ class Register(Gui,DiscordManager):
         self.profile_hovered = None
         self.entry = 0
         self.register_to_login = False
+        
     def background(self):
         self.img_background("Background", 600,350,1200,700,"register/background_register")
         self.logo_home(150, 127, 260, 140, 105)

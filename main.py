@@ -14,64 +14,44 @@ from source.gui.MainPage import MainPage
 class Display_test(Gui):
     def __init__(self):
         Gui.__init__(self)
-        self.main_running = True
-        self.main_page = MainPage()
-        self.profile = Profile()
+        self.connexion = Home()
         self.register = Register()
-
+        self.main_page = MainPage(None)
+        self.profile = Profile(None)
+        self.connexion.home_running = True
+    
     def test(self):
-        while self.main_running:
-            for event in pygame.event.get():
-                if event.type == pygame.QUIT:
-                    self.main_running = False
-                elif event.type == pygame.MOUSEBUTTONDOWN:
-                    if self.princi.collidepoint(event.pos):
-                        self.main_page.main_page_running = True
-                        self.main_page.mainPage_run()
-                    elif self.inscri.collidepoint(event.pos):
-                        self.register.register_running = True
-                        self.register.register_run()
-                    elif self.connec.collidepoint(event.pos):
-                        self.connexion = Home()
-                        self.connexion.home_running = True
-                        self.connexion.home_run()
-
-                    elif self.profi.collidepoint(event.pos):
-                        self.profile.profile_running = True
-                        self.profile.profile_run()
-
+        while True:
             if self.register.register_to_login or self.main_page.main_page_to_login or self.profile.profile_to_login or self.connexion.home_running:
-                self.connexion.home_running = True
-                self.connexion.home_run()
-                self.register.register_to_login, self.main_page.main_page_to_login, self.profile.profile_to_login = False, False, False
+                if not self.connexion.home_running:
+                    self.connexion = Home()
+                    self.connexion.home_running = True
+                else:
+                    self.register.register_to_login, self.main_page.main_page_to_login, self.profile.profile_to_login = False, False, False
+                    self.connexion.home_run()
+
             elif self.connexion.login_to_register or self.register.register_running:
                 self.register.register_running = True
+                self.connexion.home_running = False
+                self.login_to_register = False
                 self.register.register_run()
-                self.connexion.login_to_register = False
 
             elif self.profile.profile_to_main_page or self.main_page.main_page_running or self.connexion.home_to_main_page:
-                self.main_page.main_page_running = True
-                self.main_page.mainPage_run()
-                self.profile.profile_to_main_page, self.connexion.home_to_main_page = False, False
+                if not self.main_page.main_page_running:
+                    self.main_page = MainPage(self.connexion.user_info)
+                    self.main_page.main_page_running = True
+                else:
+                    self.profile.profile_to_main_page, self.connexion.home_to_main_page = False, False
+                    self.main_page.mainPage_run()
+
 
             elif self.main_page.main_page_to_profile or self.profile.profile_running:
-                self.profile.profile_running = True
-                self.profile.profile_run()
-                self.main_page.main_page_to_profile = False
-
-            else:
-                self.princi = self.rect_full(self.white, self.W//3, self. H//3, 300, 70, 10)
-                self.text_center(self.font1, 25, "Principal", self.black, self.W//3, self. H//3)
-
-                self.inscri = self.rect_full(self.white, 2 * (self.W//3), self. H//3, 300, 70, 10)
-                self.text_center(self.font1, 25, "Inscription", self.black, 2 * (self.W//3), self. H//3)
-
-                self.connec = self.rect_full(self.white, self.W//3, 2 * (self. H//3), 300, 70, 10)
-                self.text_center(self.font1, 25, "Connexion", self.black, self.W//3, 2 * (self. H//3))
-
-                self.profi = self.rect_full(self.white, 2 * (self.W//3), 2 * (self. H//3), 300, 70, 10)
-                self.text_center(self.font1, 25, "Profil", self.black, 2 * (self.W//3), 2 * (self. H//3))
-
+                if not self.profile.profile_running:
+                    self.profile = Profile(self.main_page.user_info)
+                    self.profile.profile_running = True
+                else:
+                    self.main_page.main_page_to_profile = False
+                    self.profile.profile_run()
             self.update()
 
 display = Display_test()

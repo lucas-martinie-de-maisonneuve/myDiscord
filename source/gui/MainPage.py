@@ -4,13 +4,11 @@ from source.pygame_manager.Gui import Gui
 from source.Client import Client
 class MainPage(Gui, Client, DiscordManager):
     
-    def __init__(self):
+    def __init__(self, user_info):
         Client.__init__(self)
         DiscordManager.__init__(self)
         Gui.__init__(self)
-        self.main_page_running = False
-        self.main_page_to_profile = False
-        self.main_page_to_login = False
+        self.user_info = user_info
         self.input_search = "Search..."
         self.message = ""
         self.RECT_W = 600
