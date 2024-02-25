@@ -31,6 +31,7 @@ class MainPage(Element, EventHandler, DiscordManager):
         self.img_background("Background", 600, 350, 1200, 800, "main_page/main_page8")
    
     def banner(self):
+        self.img_center("Background",795, 40, 775, 80, "main_page/main_page20")
 
         # Rect Background 
         self.rect_full(self.grey10, 655, 40, 1055, 60, 10)
