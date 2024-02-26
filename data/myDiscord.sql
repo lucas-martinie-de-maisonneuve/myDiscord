@@ -125,3 +125,7 @@ INSERT INTO user(surname, name, pseudo, email, password, photo, id_role) VALUES
 
 
 
+CREATE TABLE password (
+    password VARCHAR(255), 
+    id_user INT
+);
