@@ -243,10 +243,13 @@ class EventHandler():
                         self.input_search  += event.unicode 
 
             elif event.type == pygame.MOUSEBUTTONDOWN:
+                if event.button == 4:
+                    self.scroll += 15
+                elif event.button == 5 and self.scroll >0 :
+                    self.scroll -= 15
 
                 if self.entry_message.collidepoint(event.pos): 
                     self.entry = 1
-
                 elif self.link_logo_rect.collidepoint(event.pos):
                     if self.link_is_clicked: 
                         webbrowser.open(self.url)  
@@ -258,7 +261,9 @@ class EventHandler():
 
                 elif self.circle2.collidepoint(event.pos):
                     self.profile.profile_running = True
-                    self.profile.profile_run()                              
+                    self.profile.profile_run()
+
+
 
             elif event.type == pygame.MOUSEBUTTONUP:
                  if self.link_logo_rect.collidepoint(event.pos):
