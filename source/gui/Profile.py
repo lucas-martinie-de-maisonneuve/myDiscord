@@ -71,12 +71,15 @@ class Profile(Element, EventHandler, Cursor):
 
     def hover_profile_picture(self):
         self.circle(self.grey5, 450, 180, 70)
+        self.img_center("bubble", 450, 180, 130, 130, f"register/register1")
         # Profile picture
         self.profile_pict = pygame.draw.circle(self.Window, self.theme_color, (450,180), 65)
         if self.is_mouse_over_button(self.profile_pict):
             self.img_center("profile_picture", 450,180,130,130,f"profile/profile{self.picture}")
             self.circle_alpha(self.alpha_grey, 450, 180, 65)
             self.img_center("logo edit", 450,180,50,50,"profile/logo_edit")
+            self.img_center("bubble", 450, 180, 175, 175, f"main_page/main_page4")
+
         else:
             self.picture_cursor = False
             self.circle(self.theme_color, 450, 180, 65)
