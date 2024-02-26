@@ -17,11 +17,15 @@ class Client(DiscordManager):
         self.register_running = False
 
         self.profile_to_main_page = False
-        self.main_page_running = False
         self.home_to_main_page = False
+        self.main_page_running = False
         
         self.main_page_to_profile = False
+        self.creator_to_profile = False
         self.profile_running = False
+
+        self.profile_to_contact = False
+        self.contact_run = False
 
     def login_user(self):
         print(self.user_email, self.user_password)

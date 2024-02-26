@@ -57,6 +57,8 @@ class EventHandler():
                 elif self.disconnect_button.collidepoint(event.pos):    
                     self.profile_to_login = True
                     self.profile_running = False
+                elif self.contact_button.collidepoint(event.pos):
+                    self.profile_to_contact = True
                 elif self.close_profile.collidepoint(event.pos):
                     self.profile_to_main_page = True
                     self.profile_running = False
@@ -244,9 +246,13 @@ class EventHandler():
                         self.input_search  += event.unicode 
 
             elif event.type == pygame.MOUSEBUTTONDOWN:
+                if event.button == 4:
+                    self.scroll += 15
+                elif event.button == 5 and self.scroll >0 :
+                    self.scroll -= 15
+
                 if self.entry_message.collidepoint(event.pos): 
                     self.entry = 1
-
                 elif self.link_logo_rect.collidepoint(event.pos):
                     if self.link_is_clicked:
                         webbrowser.open(self.url)
@@ -265,9 +271,22 @@ class EventHandler():
                     self.main_page_running = False
                                              
 
+
+
             elif event.type == pygame.MOUSEBUTTONUP:
                  if self.link_logo_rect.collidepoint(event.pos):
-                    self.link_is_clicked = True              
+                    self.link_is_clicked = True  
+
+    def event_contact(self):
+        for event in pygame.event.get():
+                if event.type == pygame.QUIT:
+                    pygame.quit()
+
+                self.handle_clicks(event)
+
+        self.draw_links()            
+        self.design()
+        self.update()   
 
                
                 
