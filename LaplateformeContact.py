@@ -102,14 +102,14 @@ class LaplateformeContact(Element, EventHandler):
         self.rect_border(self.white, 555, 395, 350, 140, 3, 10)
         self.text_not_align(self.font1, 15,"OUR LOCATIONS", self.grey7, 400, 345)
         self.text_not_align(self.font1, 14,"• Marseille : " , self.grey7, 400, 385)
-        self.address("Marseille", 990-13, 470-13,"8 rue d’Hozier, 13002 Marseille", 495, 380)
+        self.address("Marseille", 990-13, 500-13,"8 rue d’Hozier, 13002 Marseille", 495, 380)
         self.text_not_align(self.font1, 14,"• Martigues : ", self.grey7, 400, 405)
-        self.address("Matigues", 980-13, 465-13,"Place du 8 mai 1945, 13500 Martigues", 495, 400)
+        self.address("Matigues", 980-13, 495-13,"Place du 8 mai 1945, 13500 Martigues", 495, 400)
         self.text_not_align(self.font1, 14,"• Toulon : ", self.grey7, 400, 425)
-        self.address("Toulon", 1020-12, 480-12,"131 Av. Franklin Roosevelt, 83100 Toulon",  470, 420)
+        self.address("Toulon", 1020-12, 510-12,"131 Av. Franklin Roosevelt, 83100 Toulon",  470, 420)
         self.text_not_align(self.font1, 14,"• Cannes : ", self.grey7, 400, 445)
-        self.address("Cannes", 1045-12, 465-12,"1 Chemin de l’École, 06150 Cannes", 475, 440)
-            
+        self.address("Cannes", 1045-12, 495-12,"1 Chemin de l’École, 06150 Cannes", 475, 440)
+    
         # Social Media section
         self.rect_full(self.grey6, 555, 565, 350, 140, 10) 
         self.rect_border(self.white, 555, 565, 350, 140, 3, 10)
@@ -126,13 +126,13 @@ class LaplateformeContact(Element, EventHandler):
         self.rect_full(self.grey6, 940, 395, 365, 475, 10)
         self.rect_border(self.white, 940, 395, 365, 475, 3, 10)
         self.text_not_align(self.font1, 20,"LaPlateforme Locations" , self.grey4, 810, 185) # Title maps
-        self.image_not_center("Maps", 750, 190, 380, 380,"laplateforme_contact/contact11") # Maps  
+        self.image_not_center("Maps", 750, 220, 380, 380,"laplateforme_contact/contact11") # Maps  
 
         # Pin section
-        self.hover_image("Cannes","Cannes", 1045, 465, 25, 25,"laplateforme_contact/contact12") # Cannes
-        self.hover_image("Toulon","Toulon", 1020, 480, 25, 25,"laplateforme_contact/contact12") # Toulon
-        self.hover_image("Marseille", "Marseille", 990, 470, 25, 25,"laplateforme_contact/contact12") # Marseille  
-        self.hover_image("Martigues","Martigues", 980, 465, 25, 25,"laplateforme_contact/contact12")  # Martigues
+        self.hover_image("Cannes","Cannes", 1045, 495, 25, 25,"laplateforme_contact/contact12") # Cannes
+        self.hover_image("Toulon","Toulon", 1020, 510, 25, 25,"laplateforme_contact/contact12") # Toulon
+        self.hover_image("Marseille", "Marseille", 990, 500, 25, 25,"laplateforme_contact/contact12") # Marseille  
+        self.hover_image("Martigues","Martigues", 980, 495, 25, 25,"laplateforme_contact/contact12")  # Martigues
 
     def laplateforme_contact_running(self):        
         while self.laplateforme_contact_run:
