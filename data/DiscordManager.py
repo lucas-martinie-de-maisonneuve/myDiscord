@@ -97,7 +97,7 @@ class DiscordManager(Database):
         values = (id,)
         return self.fetch(sql, values) 
 
-    # Supprimer User
+    # Delete User
     def delete_user(self, id):
         sql = "DELETE FROM user WHERE id = %s"
         values = (id,)
@@ -112,7 +112,6 @@ class DiscordManager(Database):
         sql = "DELETE FROM channel WHERE id = %s"
         values = (id,)
         self.execute_query(sql, values)
-
 
     def save_message(self, name, message, id_channel):
         time = datetime.now()
