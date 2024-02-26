@@ -68,8 +68,7 @@ class LaplateformeContact(Element, EventHandler):
     def design(self):
         
         #--- Background ---#
-        # self.img_background_blur("Background",600, 350, 1200, 700, "main_page/main_page8", blur_radius=5)
-        self.img_background("Background", 600, 350, 1200, 700, "main_page/main_page8")
+        self.img_background_blur("Background",600, 350, 1200, 700, "main_page/main_page8", blur_radius=5)
 
         # --- Left rectangle ---#
         
