@@ -5,58 +5,59 @@
 #  Lucas Martinie / Ines Lorquet / Vanny Lamorte #
 ##################################################
 
-import pygame
-from source.pygame_manager.Element import Element
 from source.gui.Home import Home
 from source.gui.Profile import Profile
 from source.gui.Register import Register
 from source.gui.MainPage import MainPage
+from source.gui.Contact import Contact
+from source.pygame_manager.Gui import Gui
 
-class Display_test(Element):
+class Display_test(Gui):
     def __init__(self):
-        Element.__init__(self)
-        self.main_running = True
-        self.main_page = MainPage((2, 'None', 'Martinie', 'Lucassa', 'lucas.martinie@laplateforme.io', 'LucasMartinie2412!', 2, 2))
+        Gui.__init__(self)
         self.connexion = Home()
-        self.profile = Profile((2, 'None', 'Martinie', 'Lucassa', 'lucas.martinie@laplateforme.io', 'LucasMartinie2412!', 2, 2))
         self.register = Register()
-        self.connexion.home_running = False
-        self.profile.profile_running = False
-        self.register.register_running = False
-        self.main_page.main_page_running = False
-
+        self.main_page = MainPage(None)
+        self.profile = Profile(None)
+        self.contact = Contact()
+        self.connexion.home_running = True
+    
     def test(self):
-        while self.main_running:
-            for event in pygame.event.get():
-                if event.type == pygame.QUIT:
-                    self.main_running = False
-                elif event.type == pygame.MOUSEBUTTONDOWN:
-                    if self.princi.collidepoint(event.pos):
-                        self.main_page.main_page_running = True
-                        self.main_page.mainPage_run()
-                    elif self.inscri.collidepoint(event.pos):
-                        self.register.register_running = True
-                        self.register.register_run()
-                    elif self.connec.collidepoint(event.pos):
-                        self.connexion.home_running = True
-                        self.connexion.home_run()
-                    elif self.profi.collidepoint(event.pos):
-                        self.profile.profile_running = True
-                        self.profile.profile_run()
+        while True:
+            if self.register.register_to_login or self.main_page.main_page_to_login or self.profile.profile_to_login or self.connexion.home_running:
+                if not self.connexion.home_running:
+                    self.connexion = Home()
+                    self.connexion.home_running = True
+                else:
+                    self.register.register_to_login, self.main_page.main_page_to_login, self.profile.profile_to_login = False, False, False
+                    self.connexion.home_run()
+            elif self.connexion.login_to_register or self.register.register_running:
+                self.register.register_running = True
+                self.connexion.home_running = False
+                self.login_to_register = False
+                self.register.register_run()
 
-            self.princi = self.rect_full(self.white, self.W//3, self. H//3, 300, 70, 10)
-            self.text_center(self.font1, 25, "Principal", self.black, self.W//3, self. H//3)
+            elif self.profile.profile_to_main_page or self.main_page.main_page_running or self.connexion.home_to_main_page:
+                if not self.main_page.main_page_running:
+                    self.normal_cursor()
+                    self.main_page = MainPage(self.connexion.user_info)
+                    self.main_page.main_page_running = True
+                else:
+                    self.profile.profile_to_main_page, self.connexion.home_to_main_page = False, False
+                    self.main_page.mainPage_run()
 
-            self.inscri = self.rect_full(self.white, 2 * (self.W//3), self. H//3, 300, 70, 10)
-            self.text_center(self.font1, 25, "Inscription", self.black, 2 * (self.W//3), self. H//3)
+            elif self.main_page.main_page_to_profile or self.profile.profile_running:
+                if not self.profile.profile_running:
+                    self.profile = Profile(self.main_page.user_info)
+                    self.profile.profile_running = True
+                else:
+                    self.main_page.main_page_to_profile = False
+                    self.profile.profile_run()
 
-            self.connec = self.rect_full(self.white, self.W//3, 2 * (self. H//3), 300, 70, 10)
-            self.text_center(self.font1, 25, "Connexion", self.black, self.W//3, 2 * (self. H//3))
-
-            self.profi = self.rect_full(self.white, 2 * (self.W//3), 2 * (self. H//3), 300, 70, 10)
-            self.text_center(self.font1, 25, "Profil", self.black, 2 * (self.W//3), 2 * (self. H//3))
-
+            elif self.profile.profile_to_contact or self.contact.contact_running:
+                self.contact.contact_running = True
+                self.contact.profile_to_contact = False
+                self.contact.contact_run()
             self.update()
-
 display = Display_test()
 display.test()

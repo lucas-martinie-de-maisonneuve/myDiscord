@@ -1,23 +1,15 @@
 import pygame
-
-from source.pygame_manager.EventHandler import EventHandler
-from source.pygame_manager.Element import Element
 from data.DiscordManager import DiscordManager
-from source.gui.Profile import Profile
-from source.pygame_manager.Cursor import Cursor
+from source.pygame_manager.Gui import Gui
+from source.Client import Client
 
-
-class MainPage(Element, EventHandler, DiscordManager, Cursor):
+class MainPage(Gui, Client, DiscordManager):
     
-    def __init__(self, user):
-        Element.__init__(self)
-        DiscordManager.__init__(self)
-        EventHandler.__init__(self)
-        Cursor.__init__(self)
-
-        self.user = user
-        self.profile = Profile(self.user)
-        self.main_page_running = False
+    def __init__(self, user_info):
+        Client.__init__(self)
+        DiscordManager.__init__(self)  
+        Gui.__init__(self)
+        self.user_info = user_info
         self.input_search = "Search..."
         self.message = ""
         self.RECT_W = 600
@@ -25,6 +17,7 @@ class MainPage(Element, EventHandler, DiscordManager, Cursor):
         self.L_MAX = 80
         self.link_is_clicked = True
         self.entry = 0
+        self.scroll = 0
 
         self.categories = self.display_category()
         self.channels = self.display_channel()
@@ -40,8 +33,6 @@ class MainPage(Element, EventHandler, DiscordManager, Cursor):
         self.img_background("Background", 600, 350, 1200, 800, "main_page/main_page8")
    
     def banner(self):
-        self.img_center("Background",795, 40, 775, 80, "main_page/main_page20")
-
         # Rect Background 
         self.rect_full(self.grey10, 655, 40, 1055, 60, 10)
 
@@ -89,7 +80,7 @@ class MainPage(Element, EventHandler, DiscordManager, Cursor):
 
         # Hover Power Off
         self.circle3 = pygame.draw.circle(self.Window, self.grey10, (64, 635), 35)
-        if self.is_mouse_over_button(self.circle2):           
+        if self.is_mouse_over_button(self.circle3):     
             self.img_center("Power Off", 64, 635, 60, 60,"main_page/main_page9")
             self.img_center("Neon circle", 64, 635, 115, 115,"main_page/main_page4")   
         else:      
@@ -137,7 +128,6 @@ class MainPage(Element, EventHandler, DiscordManager, Cursor):
         return result
     
     def display_text_chat(self):
-        self.entry_message = self.rect_full(self.grey1, 795, 650, 650, 60, 10)
         pos_y = 610
         
         for message in reversed(self.messages):
@@ -154,11 +144,14 @@ class MainPage(Element, EventHandler, DiscordManager, Cursor):
                 pos_y -= rectangle_height + 40
 
                 for j, chunk in enumerate(chunked_strings):
-                    self.text_not_align(self.font2, 16, str(chunk), self.grey1, 480, ((30 * j) + pos_y + 20))
-                self.text_not_align(self.font1, 18, str(message_name), self.pink, 480, (pos_y + 5))
-                self.text_not_align(self.font1, 10, str(message_time), self.grey1, 590, (pos_y+10))
-                self.img_center("bubble", 460, (pos_y + 10), 40, 40, "main_page/main_page4")
-                self.img_center("ProfilePicture", 460, (pos_y + 10), 35, 35, f'profile/profile{self.str_picture}')
+                    self.text_not_align(self.font2, 16, str(chunk), self.grey1, 480, ((30 * j) + pos_y + 20 + self.scroll))
+                self.text_not_align(self.font1, 18, str(message_name), self.pink, 480, pos_y + 5 + self.scroll)
+                self.text_not_align(self.font1, 10, str(message_time), self.grey1, 590, pos_y + 10 + self.scroll)
+                self.img_center("bubble", 460, pos_y + 10 + self.scroll, 40, 40, "main_page/main_page4")
+                self.img_center("ProfilePicture", 460, pos_y + 10 + self.scroll, 35, 35, f'profile/profile{self.str_picture}')
+        self.img_center("Background",795, 40, 775, 80, "main_page/main_page20")
+        self.img_center("Background",795, 660, 775, 80, "main_page/main_page21")
+        self.entry_message = self.rect_full(self.grey1, 795, 650, 650, 60, 10)
 
     def input_write_user(self): 
         split_text = []
@@ -177,12 +170,11 @@ class MainPage(Element, EventHandler, DiscordManager, Cursor):
 
     def mainPage_run(self):
         while self.main_page_running :
-            if not self.profile.profile_running:                
-                self.background()
-                self.first_section()
-                self.second_section()
-                self.third_section()
-                self.banner() 
-                self.event_main_page()
-                self.main_page_cursor()
-                self.update()
+            self.background()
+            self.first_section()
+            self.second_section()
+            self.third_section()
+            self.banner() 
+            self.event_main_page()
+            self.main_page_cursor()
+            self.update()

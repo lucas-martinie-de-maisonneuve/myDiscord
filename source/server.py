@@ -1,5 +1,5 @@
-from source.User import User
+from source.Client import Client
 
-class Server(User):
+class Server(Client):
     def __init__(self):
-        User().__init__()
+        Client().__init__()
