@@ -124,4 +124,3 @@ INSERT INTO user(surname, name, pseudo, email, password, photo, id_role) VALUES
 ('Jacques','Dubois', 'Jack', 'jacques.dubois@laplateforme.io', '2f5cede731389f72b1c679168da2258bb21420e12f547c89ab6cd769ba5e8087', 4, 2);
 
 
-
