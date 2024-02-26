@@ -1,11 +1,11 @@
-from source.pygame_manager.Element import Element
-from data.DiscordManager import DiscordManager
 import pygame
+from data.DiscordManager import DiscordManager
+from source.pygame_manager.Gui import Gui
 
-class AddChannel(Element, DiscordManager):
+class AddChannel(Gui, DiscordManager):
 
     def __init__(self):
-        Element.__init__(self)
+        Gui.__init__(self)
         DiscordManager.__init__(self)
         self.add_channel_running = True
         self.new_name_channel = ""
@@ -13,10 +13,9 @@ class AddChannel(Element, DiscordManager):
         self.status = None
         self.communication = None
         self.category = None
-         
+
     def background(self): 
         self.img_background_blur('Background', 600, 350, 1200, 800, 'main_page/main_page8', blur_radius=10)
-
 
     def second_section(self):
         # Rectangle de fond
@@ -29,7 +28,7 @@ class AddChannel(Element, DiscordManager):
         
         # Choice category
         self.text_center(self.font2, 21, "Category", self.grey1, 600, 370)
-        
+
         # Button Bachelor IT category
         if self.category==2:
             self.but_bachelor = self.button_hover("bachelor it button",540, 405, 100, 30, 10,self.grey1,self.grey2,self.grey2,"Bachelor IT",self.font2,self.white,16,2,10)
@@ -44,7 +43,7 @@ class AddChannel(Element, DiscordManager):
 
         # Choice communication
         self.text_center(self.font2, 21, "Communication", self.grey1, 600, 465)
-        
+
         # Button text communication
         if self.communication == 0:
             self.but_text = self.button_hover("text button",537, 500, 100, 30, 10,self.grey9,self.grey9,self.grey9,"Text",self.font2,self.white,16,2,10)

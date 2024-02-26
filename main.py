@@ -23,6 +23,7 @@ class Display_test(Gui):
         self.connexion.home_running = True
     
     def test(self):
+        
         while True:
             if self.register.register_to_login or self.main_page.main_page_to_login or self.profile.profile_to_login or self.connexion.home_running:
                 if not self.connexion.home_running:

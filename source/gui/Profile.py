@@ -233,7 +233,6 @@ class Profile( Gui, Client, DiscordManager):
 
     def profile_run(self):
         self.user = self.user_info
-        print (self.user)
         self.username, self.email ,self.password ,self.picture, self.role = self.user[3], self.user[4], self.user[5], self.user[6], self.user[7]
         self.password_display = " *" * len(self.password)
 

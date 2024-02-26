@@ -28,15 +28,12 @@ class Client(DiscordManager):
         self.contact_running = False
 
     def login_user(self):
-        print(self.user_email, self.user_password)
         hashed_password = sha256(self.user_password.encode()).hexdigest()
 
         if self.check_credentials(self.user_email, hashed_password):
             self.user_info = self.get_user(self.user_email, hashed_password)
             self.connected = True
             print("Connexion réussie !")
-            print(self.user_info)
             return self.user_info
         else:
             print("Erreur. Connexion échouée.")
-            print(self.user_info)

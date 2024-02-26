@@ -2,6 +2,16 @@ import pygame
 import webbrowser
 
 class EventHandler():
+    # def main_event(self):
+    #     for event in pygame.event.get():
+    #         if event.type == pygame.QUIT:
+    #             self.home_running = False
+    #             self.register_running = False
+    #             self.main_page_running = False
+    #             self.profile_running = False
+    #             self.contact_running = False
+    #             self.main_running = False
+
     def event_profile(self):
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
@@ -251,6 +261,11 @@ class EventHandler():
                     self.scroll += 15
                 elif event.button == 5 and self.scroll >0 :
                     self.scroll -= 15
+                elif event.button == 1:
+                    for channel_id, rect in self.channel_rects:
+                        if rect.collidepoint(event.pos):
+                            self.actual_channel = channel_id
+                            self.scroll = 0
 
                 if self.entry_message.collidepoint(event.pos): 
                     self.entry = 1

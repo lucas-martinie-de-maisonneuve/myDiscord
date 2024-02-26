@@ -18,11 +18,12 @@ class MainPage(Gui, Client, DiscordManager):
         self.link_is_clicked = True
         self.entry = 0
         self.scroll = 0
+        self.channel_rects = []
 
         self.categories = self.display_category()
         self.channels = self.display_channel()
         self.messages = self.display_message()
-        self.actual_channel = 7
+        self.actual_channel = 1
 
         self.bell = pygame.Rect(1060, 15, 50, 50)
         self.poweroff_c = pygame.Rect(64-115/2, 635-115/2, 115, 115)
@@ -99,14 +100,19 @@ class MainPage(Gui, Client, DiscordManager):
             for channel in self.channels:
                 if channel[4] == category[0]:
                     position_y += 20
-                    self.text_not_align(self.font2, 15, channel[1], self.grey1, 200, position_y)
+                    channel_rect = pygame.Rect(200, position_y, 150, 20)
+                    self.channel_rects.append((channel[0], channel_rect))
+                    if self.is_mouse_over_button(channel_rect):
+                        self.text_not_align(self.font2, 17, channel[1], self.pink, 200, position_y)
+                    else:
+                        self.text_not_align(self.font2, 15, channel[1], self.grey1, 200, position_y)
                     if channel[4] == 1:
                         self.img_center("Book about us", 170, position_y + 5, 25, 25, "main_page/main_page12")
                     elif channel[3] == 1:
                         self.img_center("Volume logiciel", 170, position_y + 5, 25, 25, "main_page/main_page10")
                     else:
                         self.img_center("Hashtags logiciel", 170, position_y + 5, 15, 15, "main_page/main_page14")
-  
+    
     def third_section(self):
         self.rect_full(self.grey10, 795, 385, 775, 610, 10)
         self.display_text_chat()
