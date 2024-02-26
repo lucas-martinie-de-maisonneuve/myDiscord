@@ -121,14 +121,14 @@ class Contact(Gui, Client):
         self.image_not_center("Maps", 750, 220, 380, 380,"laplateforme_contact/contact11") # Maps  
 
         # Pin section
-        self.cannes = self.hover_image("Cannes","Cannes", 1045, 495, 25, 25,"laplateforme_contact/contact12") # Cannes
-        self.toulon = self.hover_image("Toulon","Toulon", 1020, 510, 25, 25,"laplateforme_contact/contact12") # Toulon
-        self.marseille = self.hover_image("Marseille", "Marseille", 990, 500, 25, 25,"laplateforme_contact/contact12") # Marseille  
-        self.martigues = self.hover_image("Martigues","Martigues", 980, 495, 25, 25,"laplateforme_contact/contact12")  # Martigues
+        self.cannes = self.hover_image("Cannes","Cannes", 1045, 495, 25, 25,"laplateforme_contact/contact12", "laplateforme_contact/contact12") # Cannes
+        self.toulon = self.hover_image("Toulon","Toulon", 1020, 510, 25, 25,"laplateforme_contact/contact12","laplateforme_contact/contact12") # Toulon
+        self.marseille = self.hover_image("Marseille", "Marseille", 990, 500, 25, 25,"laplateforme_contact/contact12", "laplateforme_contact/contact12") # Marseille  
+        self.martigues = self.hover_image("Martigues","Martigues", 980, 495, 25, 25,"laplateforme_contact/contact12", "laplateforme_contact/contact12")  # Martigues
 
     def contact_run(self):        
         if self.contact_running:
             self.event_contact()
-            self.contact_cursor()
             self.draw_links()             
             self.design()
+            self.contact_cursor()
