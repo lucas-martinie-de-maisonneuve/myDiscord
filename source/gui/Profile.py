@@ -2,12 +2,15 @@ import pygame
 from source.pygame_manager.EventHandler import EventHandler
 from source.pygame_manager.Element import Element
 from source.pygame_manager.Cursor import Cursor
-class Profile(Element, EventHandler, Cursor):
+from data.DiscordManager import DiscordManager
+class Profile(Element, EventHandler, Cursor, DiscordManager):
     
     def __init__(self, user):
         EventHandler.__init__(self)
         Element.__init__(self)
         Cursor.__init__(self)
+        DiscordManager.__init__(self)
+
         self.profile_running = False
         self.edit = 0
         self.user = user
@@ -28,6 +31,13 @@ class Profile(Element, EventHandler, Cursor):
         self.password_rect = pygame.Rect(960, 420, 80, 30)
         self.role_rect = pygame.Rect(960, 480, 80, 30)
         self.status_rect = pygame.Rect(960, 540, 80, 30)
+
+    def display_user_community(self):
+        pos_y = 0
+        community = self.display_user()
+        for user in community: 
+            pos_y = pos_y + 20
+            self.text_not_align(self.font1, 20,str(user[3]), self.white, 140, 55 + pos_y )       
 
     def design(self):
         # Profile main rectangle
@@ -54,33 +64,28 @@ class Profile(Element, EventHandler, Cursor):
         self.info_profile("Role", self.role, 480)
         self.info_profile("Status", self.role, 540)
 
+        # Friends 
+        self.rect_full(self.grey2, 195, 260, 250, 350, 10)
+        self.text_not_align(self.font1, 20,"community" , self.white, 140, 55)
+        
         # Creators button
-        self.disconnect_button = self.lateral_menu_display(50, "profile/profile6", "profile9", "profile9")        
+        self.disconnect_button = self.lateral_menu_display(475, "profile/profile6", "profile9", "profile9")        
 
         # Disconnect button
         self.disconnect_button = self.lateral_menu_display(575, "main_page/main_page9", "disconnect_hover", "disconnect")
-        
 
-        # Neon light blue
-        # self.img_center("Neon light", 200, 260, 140, 105,"main_page/main_page14")
-
-    
-     
     def lateral_menu_display(self, y, logo, image_neon_hover, image_neon):
         button = pygame.Rect(55, y, 300, 60)
         if self.is_mouse_over_button(button):
-            self.img_center("Logo principal", 90, y + 30, 45, 45, f"{logo}")
-            self.img_center("Logo principal", 90, y + 30, 65, 65, "main_page/main_page4")
-            self.img_center("Disconnect", 220, y + 30, 220, 63, f"profile/{image_neon_hover}")
+            self.img_center("Logo principal", 100, y + 30, 50, 50, f"{logo}")
+            self.img_center("Neon circle", 100, y + 30, 100, 100, "main_page/main_page4")
+            self.img_center("Logo inside circle", 242, y + 30, 210, 59, f"profile/{image_neon_hover}")
         else:
-            self.img_center("Logo principal", 90, y + 30, 45, 45, f"{logo}")
-            self.img_center("Neon circle", 90, y + 30, 60, 60, "main_page/main_page4")
-            self.img_center("Disconnect", 220, y + 30, 200, 57, f"profile/{image_neon}")
-        return button
-    
+            self.img_center("Logo principal", 100, y + 30, 50, 50, f"{logo}")
+            self.img_center("Neon circle", 100, y + 30, 95, 95, "main_page/main_page4")
+            self.img_center("Logo inside circle", 240, y + 30, 200, 57, f"profile/{image_neon}")
+        return button  
 
-
-    
     def hover_profile_picture(self):
         self.circle(self.grey5, 450, 180, 70)
         # Profile picture
@@ -231,4 +236,5 @@ class Profile(Element, EventHandler, Cursor):
             self.password_show()
             self.event_profile()
             self.profile_page_cursor()
+            self.display_user_community()
             self.update()
