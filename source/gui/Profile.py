@@ -11,6 +11,8 @@ class Profile(Element, EventHandler, Cursor, DiscordManager):
         Cursor.__init__(self)
         DiscordManager.__init__(self)
 
+        self.community_list = self.display_user()
+
         self.profile_running = False
         self.edit = 0
         self.user = user
@@ -33,11 +35,11 @@ class Profile(Element, EventHandler, Cursor, DiscordManager):
         self.status_rect = pygame.Rect(960, 540, 80, 30)
 
     def display_user_community(self):
-        pos_y = 0
-        community = self.display_user()
-        for user in community: 
-            pos_y = pos_y + 20
-            self.text_not_align(self.font1, 20,str(user[3]), self.white, 140, 55 + pos_y )       
+        pos_y = 0  
+        for user_community in self.community_list: 
+            pos_y = pos_y + 30
+            self.text_not_align(self.font2, 20,str(user_community[3]), self.white, 140, 100 + pos_y )     
+
 
     def design(self):
         # Profile main rectangle
@@ -231,10 +233,10 @@ class Profile(Element, EventHandler, Cursor, DiscordManager):
     def profile_run(self):
         while self.profile_running :
             self.design()
+            self.display_user_community()
             self.profile_picture_edit()
             self.info_profile_edit()
             self.password_show()
             self.event_profile()
             self.profile_page_cursor()
-            self.display_user_community()
             self.update()

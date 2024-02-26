@@ -29,11 +29,11 @@ class LaplateformeContact(Element, EventHandler):
         (pygame.Rect(110-13, 560-13, 25, 25),"https://github.com/vanny-laure-lamorte"),
         (pygame.Rect(110-13, 595-13, 25, 25), "https://mail.google.com/"),
         # Links LaPlateforme
-        (pygame.Rect(450-20, 460-20, 40, 40), "https://www.facebook.com/LaPlateformeIO"),
-        (pygame.Rect(500-20, 460-20, 40, 40), "https://www.linkedin.com/school/laplateformeio/"),
-        (pygame.Rect(550-20, 460-20, 40, 40),"https://twitter.com/i/flow/login?redirect_after_login=%2FLaPlateformeIO"),
-        (pygame.Rect(600-22, 460-22, 43, 43), "https://www.instagram.com/LaPlateformeIO/"),
-        (pygame.Rect(650-23, 460-23, 45, 45), "https://www.youtube.com/c/LaPlateformeIO"),
+        (pygame.Rect(450-20, 530-20, 40, 40), "https://www.facebook.com/LaPlateformeIO"),
+        (pygame.Rect(500-20, 530-20, 40, 40), "https://www.linkedin.com/school/laplateformeio/"),
+        (pygame.Rect(550-20, 530-20, 40, 40),"https://twitter.com/i/flow/login?redirect_after_login=%2FLaPlateformeIO"),
+        (pygame.Rect(600-22, 530-22, 43, 43), "https://www.instagram.com/LaPlateformeIO/"),
+        (pygame.Rect(650-23, 530-23, 45, 45), "https://www.youtube.com/c/LaPlateformeIO"),
        (pygame.Rect(550-120, 590-20, 240, 40), "https://laplateforme.io/telechargement-brochure/"),
     ]
 
