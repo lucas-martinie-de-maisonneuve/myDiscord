@@ -163,7 +163,6 @@ class MainPage(Gui, Client, DiscordManager):
             self.text_not_align(self.font2, 17, ligne, self.black, 510, 620 + i * 15)
 
     def mainPage_run(self):
-        self.user = self.user_info
         if self.main_page_running :
             self.background()
             self.first_section()

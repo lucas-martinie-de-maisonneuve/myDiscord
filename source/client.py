@@ -25,7 +25,7 @@ class Client(DiscordManager):
         self.profile_running = False
 
         self.profile_to_contact = False
-        self.contact_run = False
+        self.contact_running = False
 
     def login_user(self):
         print(self.user_email, self.user_password)

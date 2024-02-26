@@ -5,13 +5,13 @@
 #  Lucas Martinie / Ines Lorquet / Vanny Lamorte #
 ##################################################
 
-import pygame
-from source.pygame_manager.Gui import Gui
 from source.gui.Home import Home
 from source.gui.Profile import Profile
 from source.gui.Register import Register
 from source.gui.MainPage import MainPage
 from source.gui.Contact import Contact
+from source.pygame_manager.Gui import Gui
+
 class Display_test(Gui):
     def __init__(self):
         Gui.__init__(self)
@@ -39,6 +39,7 @@ class Display_test(Gui):
 
             elif self.profile.profile_to_main_page or self.main_page.main_page_running or self.connexion.home_to_main_page:
                 if not self.main_page.main_page_running:
+                    self.normal_cursor()
                     self.main_page = MainPage(self.connexion.user_info)
                     self.main_page.main_page_running = True
                 else:
@@ -52,11 +53,11 @@ class Display_test(Gui):
                 else:
                     self.main_page.main_page_to_profile = False
                     self.profile.profile_run()
-            elif self.contact.profile_to_contact or self.contact.contact_run:
-                self.contact.contact_run = True
-                self.contact.profile_to_creator = False
-                self.contact.contact_running()
-            self.update()
 
+            elif self.profile.profile_to_contact or self.contact.contact_running:
+                self.contact.contact_running = True
+                self.contact.profile_to_contact = False
+                self.contact.contact_run()
+            self.update()
 display = Display_test()
 display.test()

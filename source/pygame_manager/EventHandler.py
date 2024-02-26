@@ -59,6 +59,7 @@ class EventHandler():
                     self.profile_running = False
                 elif self.contact_button.collidepoint(event.pos):
                     self.profile_to_contact = True
+                    self.profile_running = False
                 elif self.close_profile.collidepoint(event.pos):
                     self.profile_to_main_page = True
                     self.profile_running = False
@@ -281,12 +282,8 @@ class EventHandler():
         for event in pygame.event.get():
                 if event.type == pygame.QUIT:
                     pygame.quit()
-
-                self.handle_clicks(event)
-
-        self.draw_links()            
-        self.design()
-        self.update()   
-
-               
-                
+                if event.type == pygame.MOUSEBUTTONDOWN:
+                    if event.button == 1: 
+                        for link_rect, url in self.link_data:
+                            if link_rect.collidepoint(event.pos):
+                                webbrowser.open(url)   
