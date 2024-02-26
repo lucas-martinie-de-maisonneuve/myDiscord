@@ -46,10 +46,15 @@ class DiscordManager(Database):
     # Toutes Categories
     def display_category(self):
         sql = "SELECT * FROM category"
-        self.cursor.execute(sql)
-        self.categorys = self.cursor.fetchall()
-        return self.categorys
+        return self.fetch(sql)
+    def display_channel(self):
+        sql = "SELECT * FROM channel"
+        return self.fetch(sql)
     
+    def display_message(self):
+        sql = "SELECT * FROM message"
+        return self.fetch(sql)
+
     def count_category(self):
         sql = "SELECT COUNT(*) AS nb FROM category"
         return self.fetch_one(sql)
@@ -70,12 +75,6 @@ class DiscordManager(Database):
         values = (name,status,communication,id_category)
         self.cursor.execute(sql, values)
         self.connection.commit()
-
-    def display_channel(self):
-        sql = "SELECT * FROM channel"
-        self.cursor.execute(sql)
-        self.channels = self.cursor.fetchall()
-        return self.channels
 
     def name_channel(self,id):
         sql = "SELECT name FROM channel WHERE id_category = %s"
