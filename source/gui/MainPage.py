@@ -4,13 +4,17 @@ from source.pygame_manager.EventHandler import EventHandler
 from source.pygame_manager.Element import Element
 from data.DiscordManager import DiscordManager
 from source.gui.Profile import Profile
+from source.pygame_manager.Cursor import Cursor
 
-class MainPage(Element, EventHandler, DiscordManager):
+
+class MainPage(Element, EventHandler, DiscordManager, Cursor):
     
     def __init__(self, user):
         Element.__init__(self)
         DiscordManager.__init__(self)
         EventHandler.__init__(self)
+        Cursor.__init__(self)
+
         self.user = user
         self.profile = Profile(self.user)
         self.main_page_running = False
@@ -26,6 +30,11 @@ class MainPage(Element, EventHandler, DiscordManager):
         self.channels = self.display_channel()
         self.messages = self.display_message()
         self.actual_channel = 7
+
+        self.bell = pygame.Rect(1060, 15, 50, 50)
+        self.poweroff_c = pygame.Rect(64-115/2, 635-115/2, 115, 115)
+        self.settings_c = pygame.Rect( 64-115/2, 540-115/2, 115, 115)
+        self.server_c =  pygame.Rect(64-115/2, 170-115/2, 115, 115)
 
     def background(self): 
         self.img_background("Background", 600, 350, 1200, 800, "main_page/main_page8")
@@ -64,7 +73,7 @@ class MainPage(Element, EventHandler, DiscordManager):
         self.circle1 = pygame.draw.circle(self.Window, self.grey10, (64, 170), 35)     
         if self.is_mouse_over_button(self.circle1):      
             self.img_center("Logo principal", 64, 170, 70, 70,"main_page/main_page2")
-            self.img_center("Logo principal", 64, 170, 115, 115,"main_page/main_page4")
+            self.img_center("Neon circle", 64, 170, 115, 115,"main_page/main_page4")
         else:          
             self.img_center("Logo principal", 64, 170, 70, 70,"main_page/main_page2")
             self.img_center("Neon circle", 64, 170, 110, 110,"main_page/main_page4")
@@ -175,4 +184,5 @@ class MainPage(Element, EventHandler, DiscordManager):
                 self.third_section()
                 self.banner() 
                 self.event_main_page()
+                self.main_page_cursor()
                 self.update()
