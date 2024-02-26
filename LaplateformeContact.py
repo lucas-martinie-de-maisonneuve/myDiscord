@@ -2,39 +2,43 @@ import pygame
 import webbrowser
 from source.pygame_manager.Element import Element
 from source.pygame_manager.EventHandler import EventHandler
+from source.pygame_manager.Cursor import Cursor
 
 
-class LaplateformeContact(Element, EventHandler):
+class LaplateformeContact(Element, EventHandler, Cursor):
     
     def __init__(self):
 
         Element.__init__(self)
-        
+        Cursor.__init__(self)        
         self.laplateforme_contact_run = True    
-        # self.laplateforme_contact_running = False
-        self.link_is_clicked = True        
+        self.link_is_clicked = True   
+        self.linkedinI, self.githubI, self.mailI = pygame.Rect(110-13, 125-13, 25, 25), pygame.Rect(110-13, 160-13, 25, 25), pygame.Rect(110-13, 195-13, 25, 25)
+        self.linkedinL, self.githubL, self.mailL = pygame.Rect(110-13, 325-13, 25, 25), pygame.Rect(110-13, 360-13, 25, 25), pygame.Rect(110-13, 395-13, 25, 25)
+        self.linkedinV, self.githubV, self.mailV = pygame.Rect(110-13, 525-13, 25, 25), pygame.Rect(110-13, 560-13, 25, 25), pygame.Rect(110-13, 595-13, 25, 25)
+        self.FacebookP, self.linkedinP, self.twitterP, self.instagramP, self.youtubeP, self.brochureP = pygame.Rect(450-20, 530-20, 40, 40),pygame.Rect(500-20, 530-20, 40, 40), pygame.Rect(550-20, 530-20, 40, 40), pygame.Rect(600-22, 530-22, 43, 43), pygame.Rect(650-23, 530-23, 45, 45), pygame.Rect(550-120, 590-20, 240, 40)
 
         self.link_data = [
 
         # Links Ines
-        (pygame.Rect(110-13, 125-13, 25, 25), "https://www.linkedin.com/in/ines-lorquet-35b90128b/"),
-        (pygame.Rect(110-13, 160-13, 25, 25), "https://github.com/ines-lorquet"),
-        (pygame.Rect(110-13, 195-13, 25, 25), " https://mail.google.com/"),
+        (self.linkedinI, "https://www.linkedin.com/in/ines-lorquet-35b90128b/"),
+        (self.githubI, "https://github.com/ines-lorquet"),
+        (self.mailI, " https://mail.google.com/"),
         # Links Lucas
-        (pygame.Rect(110-13, 325-13, 25, 25), "https://www.linkedin.com/in/lucas-martinie-de-maisonneuve-2349892b3/"),
-        (pygame.Rect(110-13, 360-13, 25, 25),"https://github.com/lucas-martinie-de-maisonneuve"),
-        (pygame.Rect(110-13, 395-13, 25, 25), " https://mail.google.com/"),
+        ( self.linkedinL, "https://www.linkedin.com/in/lucas-martinie-de-maisonneuve-2349892b3/"),
+        (self.githubL,"https://github.com/lucas-martinie-de-maisonneuve"),
+        (self.mailL, " https://mail.google.com/"),
         #Links Vanny
-        (pygame.Rect(110-13, 525-13, 25, 25), "https://www.linkedin.com/in/vanny-lamorte-b4262b129/"),
-        (pygame.Rect(110-13, 560-13, 25, 25),"https://github.com/vanny-laure-lamorte"),
-        (pygame.Rect(110-13, 595-13, 25, 25), "https://mail.google.com/"),
+        (self.linkedinV, "https://www.linkedin.com/in/vanny-lamorte-b4262b129/"),
+        (self.githubV,"https://github.com/vanny-laure-lamorte"),
+        (self.mailI, "https://mail.google.com/"),
         # Links LaPlateforme
-        (pygame.Rect(450-20, 530-20, 40, 40), "https://www.facebook.com/LaPlateformeIO"),
-        (pygame.Rect(500-20, 530-20, 40, 40), "https://www.linkedin.com/school/laplateformeio/"),
-        (pygame.Rect(550-20, 530-20, 40, 40),"https://twitter.com/i/flow/login?redirect_after_login=%2FLaPlateformeIO"),
-        (pygame.Rect(600-22, 530-22, 43, 43), "https://www.instagram.com/LaPlateformeIO/"),
-        (pygame.Rect(650-23, 530-23, 45, 45), "https://www.youtube.com/c/LaPlateformeIO"),
-       (pygame.Rect(550-120, 590-20, 240, 40), "https://laplateforme.io/telechargement-brochure/"),
+        (self.FacebookP, "https://www.facebook.com/LaPlateformeIO"),
+        (self.linkedinP, "https://www.linkedin.com/school/laplateformeio/"),
+        (self.twitterP,"https://twitter.com/i/flow/login?redirect_after_login=%2FLaPlateformeIO"),
+        (self.instagramP, "https://www.instagram.com/LaPlateformeIO/"),
+        (self.youtubeP, "https://www.youtube.com/c/LaPlateformeIO"),
+       (self.brochureP , "https://laplateforme.io/telechargement-brochure/"),
     ]
 
     def draw_links(self):
@@ -128,14 +132,15 @@ class LaplateformeContact(Element, EventHandler):
         self.image_not_center("Maps", 750, 220, 380, 380,"laplateforme_contact/contact11") # Maps  
 
         # Pin section
-        self.hover_image("Cannes","Cannes", 1045, 495, 25, 25,"laplateforme_contact/contact12") # Cannes
-        self.hover_image("Toulon","Toulon", 1020, 510, 25, 25,"laplateforme_contact/contact12") # Toulon
-        self.hover_image("Marseille", "Marseille", 990, 500, 25, 25,"laplateforme_contact/contact12") # Marseille  
-        self.hover_image("Martigues","Martigues", 980, 495, 25, 25,"laplateforme_contact/contact12")  # Martigues
+        self.cannes = self.hover_image("Cannes","Cannes", 1045, 495, 25, 25,"laplateforme_contact/contact12") # Cannes
+        self.toulon = self.hover_image("Toulon","Toulon", 1020, 510, 25, 25,"laplateforme_contact/contact12") # Toulon
+        self.marseille = self.hover_image("Marseille", "Marseille", 990, 500, 25, 25,"laplateforme_contact/contact12") # Marseille  
+        self.martigues = self.hover_image("Martigues","Martigues", 980, 495, 25, 25,"laplateforme_contact/contact12")  # Martigues
 
     def laplateforme_contact_running(self):        
         while self.laplateforme_contact_run:
             self.event_contact()
+            self.contact_cursor()
 
 test = LaplateformeContact()
 test.laplateforme_contact_running()
