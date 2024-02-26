@@ -68,7 +68,6 @@ class AddChannel(Element, DiscordManager, EventHandler):
             self.but_voval = self.button_hover("vocal button",655, 495, 100, 30, 10,self.grey2,self.grey2,self.grey2,"Vocal",self.font2,self.white,16,0,10)
             self.img_center("Volume logiciel", 725, 495, 35, 35,"main_page/main_page10")
             
-            
         # Choice status
         self.text_center(self.font2, 21, "Status", self.grey1, 600, 550)
         
@@ -80,7 +79,6 @@ class AddChannel(Element, DiscordManager, EventHandler):
             self.but_private = self.button_hover("private button",535, 580, 100, 30, 10,self.grey2,self.grey2,self.grey2,"Private",self.font2,self.white,16,0,10)
             self.img_center("Private", 465, 580, 35, 35,"main_page/main_page11")
             
-            
         # Button public
         if self.status == 0:
             self.but_public = self.button_hover("public button",655, 580, 100, 30, 10,self.grey2,self.grey2,self.grey2,"Public",self.font2,self.white,16,2,10)
@@ -89,7 +87,7 @@ class AddChannel(Element, DiscordManager, EventHandler):
             self.but_public = self.button_hover("public button",655, 580, 100, 30, 10,self.grey2,self.grey2,self.grey2,"Public",self.font2,self.white,16,0,10)
             self.img_center("Public ", 725, 580, 35, 35,"profile/logo_public") 
             
-    
+        # Button Add Channel
         if self.add:
             self.but_add = self.button_hover("Button add channel",600, 630, 190, 30, 10,self.grey2,self.grey2,self.grey2,"ADD CHANNEL",self.font2,self.white,16,0,10)
         else:
