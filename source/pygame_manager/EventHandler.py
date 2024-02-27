@@ -2,6 +2,16 @@ import pygame
 import webbrowser
 
 class EventHandler():
+    # def main_event(self):
+    #     for event in pygame.event.get():
+    #         if event.type == pygame.QUIT:
+    #             self.home_running = False
+    #             self.register_running = False
+    #             self.main_page_running = False
+    #             self.profile_running = False
+    #             self.contact_running = False
+    #             self.main_running = False
+
     def event_profile(self):
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
@@ -233,8 +243,10 @@ class EventHandler():
             elif event.type == pygame.KEYDOWN:
                
                 if event.key == pygame.K_RETURN:
-                    pass
-
+                    if self.entry == 1 and self.message != "":
+                        self.save_message(self.user_info[3], self.message, self.actual_channel)
+                        self.update_message()
+                        self.message = ""
                 elif event.key == pygame.K_BACKSPACE:
                     if self.entry == 1 :
                         self.message = self.message[:-1]
@@ -251,6 +263,11 @@ class EventHandler():
                     self.scroll += 15
                 elif event.button == 5 and self.scroll >0 :
                     self.scroll -= 15
+                elif event.button == 1:
+                    for channel_id, rect in self.channel_rects:
+                        if rect.collidepoint(event.pos):
+                            self.actual_channel = channel_id
+                            self.scroll = 0
 
                 if self.entry_message.collidepoint(event.pos): 
                     self.entry = 1
@@ -274,7 +291,50 @@ class EventHandler():
             elif event.type == pygame.MOUSEBUTTONUP:
                  if self.link_logo_rect.collidepoint(event.pos):
                     self.link_is_clicked = True  
+                    
+    def event_add(self):
+        for event in pygame.event.get():
+                if event.type == pygame.QUIT:
+                    self.add_channel_running = False 
+                elif event.type == pygame.MOUSEBUTTONDOWN:
+                    if self.but_bachelor.collidepoint(event.pos):
+                        self.category = 2
+                    elif self.but_talk.collidepoint(event.pos):
+                        self.category = 3
+                        
+                    if self.but_text.collidepoint(event.pos):
+                        self.communication = 0
+                    elif self.but_voval.collidepoint(event.pos):
+                        self.communication = 1
+                                              
+                    if self.but_public.collidepoint(event.pos):
+                        self.status = 0
+                    elif self.but_private.collidepoint(event.pos):
+                        self.status = 1
+                    elif self.but_name.collidepoint(event.pos):
+                        self.entry_new_name = 1
+                    elif self.close_profile.collidepoint(event.pos):
+                        self.profile_to_main_page = True
+                        self.add_channel_running = False
+                    if self.but_add.collidepoint(event.pos) and self.add == True:
+                        self.add_channel(self.new_name_channel,self.status,self.communication,self.category)
+                        self.add = False       
+                        
+                if self.entry_new_name != 0 and self.status != None and self.communication != None and self.category != None:
+                    self.add=True
 
+                                                
+                elif event.type == pygame.KEYDOWN:
+                    if event.key == pygame.K_BACKSPACE:
+                        if self.entry_new_name==1:
+                            self.new_name_channel = self.new_name_channel[:-1]
+                    else:
+                        if self.entry_new_name==1:
+                            if event.unicode.isalpha():
+                                self.new_name_channel += event.unicode
+                                
+
+                        
     def event_contact(self):
         for event in pygame.event.get():
                 if event.type == pygame.QUIT:
