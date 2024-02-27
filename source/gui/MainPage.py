@@ -1,19 +1,15 @@
 import pygame
-
-from source.pygame_manager.EventHandler import EventHandler
-from source.pygame_manager.Element import Element
 from data.DiscordManager import DiscordManager
-from source.gui.Profile import Profile
+from source.pygame_manager.Gui import Gui
+from source.Client import Client
 
-class MainPage(Element, EventHandler, DiscordManager):
+class MainPage(Gui, Client, DiscordManager):
     
-    def __init__(self, user):
-        Element.__init__(self)
-        DiscordManager.__init__(self)
-        EventHandler.__init__(self)
-        self.user = user
-        self.profile = Profile(self.user)
-        self.main_page_running = False
+    def __init__(self, user_info):
+        Client.__init__(self)
+        DiscordManager.__init__(self)  
+        Gui.__init__(self)
+        self.user_info = user_info
         self.input_search = "Search..."
         self.message = ""
         self.RECT_W = 600
@@ -21,24 +17,25 @@ class MainPage(Element, EventHandler, DiscordManager):
         self.L_MAX = 80
         self.link_is_clicked = True
         self.entry = 0
+        self.scroll = 0
+        self.channel_rects = []
+        self.actual_channel = 1
 
-        self.categories = self.display_category()
-        self.channels = self.display_channel()
-        self.messages = self.display_message()
-        self.actual_channel = 7
+        self.bell = pygame.Rect(1060, 15, 50, 50)
+        self.poweroff_c = pygame.Rect(64-115/2, 635-115/2, 115, 115)
+        self.settings_c = pygame.Rect( 64-115/2, 540-115/2, 115, 115)
+        self.server_c =  pygame.Rect(64-115/2, 170-115/2, 115, 115)
 
     def background(self): 
         self.img_background("Background", 600, 350, 1200, 800, "main_page/main_page8")
    
     def banner(self):
-        self.img_center("Background",795, 40, 775, 80, "main_page/main_page20")
-
         # Rect Background 
         self.rect_full(self.grey10, 655, 40, 1055, 60, 10)
 
         # Logo Names
         self.image_not_center("Names", 155, 15, 200, 57,"main_page/main_page17") 
-        self.image_not_center("Rectangle logo", 120, 12, 270, 55,"main_page/main_page18") 
+        self.image_not_center("Rectangle logo", 120, 1, 270, 75,"main_page/main_page18") 
 
         # Search bar
         self.input_search_rect = self.rect_full(self.grey2, 920, 40, 240, 35, 80)
@@ -64,7 +61,7 @@ class MainPage(Element, EventHandler, DiscordManager):
         self.circle1 = pygame.draw.circle(self.Window, self.grey10, (64, 170), 35)     
         if self.is_mouse_over_button(self.circle1):      
             self.img_center("Logo principal", 64, 170, 70, 70,"main_page/main_page2")
-            self.img_center("Logo principal", 64, 170, 115, 115,"main_page/main_page4")
+            self.img_center("Neon circle", 64, 170, 115, 115,"main_page/main_page4")
         else:          
             self.img_center("Logo principal", 64, 170, 70, 70,"main_page/main_page2")
             self.img_center("Neon circle", 64, 170, 110, 110,"main_page/main_page4")
@@ -80,7 +77,7 @@ class MainPage(Element, EventHandler, DiscordManager):
 
         # Hover Power Off
         self.circle3 = pygame.draw.circle(self.Window, self.grey10, (64, 635), 35)
-        if self.is_mouse_over_button(self.circle2):           
+        if self.is_mouse_over_button(self.circle3):     
             self.img_center("Power Off", 64, 635, 60, 60,"main_page/main_page9")
             self.img_center("Neon circle", 64, 635, 115, 115,"main_page/main_page4")   
         else:      
@@ -99,14 +96,19 @@ class MainPage(Element, EventHandler, DiscordManager):
             for channel in self.channels:
                 if channel[4] == category[0]:
                     position_y += 20
-                    self.text_not_align(self.font2, 15, channel[1], self.grey1, 200, position_y)
+                    channel_rect = pygame.Rect(200, position_y, 150, 20)
+                    self.channel_rects.append((channel[0], channel_rect))
+                    if self.is_mouse_over_button(channel_rect):
+                        self.text_not_align(self.font2, 17, channel[1], self.pink, 200, position_y)
+                    else:
+                        self.text_not_align(self.font2, 15, channel[1], self.grey1, 200, position_y)
                     if channel[4] == 1:
                         self.img_center("Book about us", 170, position_y + 5, 25, 25, "main_page/main_page12")
                     elif channel[3] == 1:
                         self.img_center("Volume logiciel", 170, position_y + 5, 25, 25, "main_page/main_page10")
                     else:
                         self.img_center("Hashtags logiciel", 170, position_y + 5, 15, 15, "main_page/main_page14")
-  
+    
     def third_section(self):
         self.rect_full(self.grey10, 795, 385, 775, 610, 10)
         self.display_text_chat()
@@ -128,7 +130,6 @@ class MainPage(Element, EventHandler, DiscordManager):
         return result
     
     def display_text_chat(self):
-        self.entry_message = self.rect_full(self.grey1, 795, 650, 650, 60, 10)
         pos_y = 610
         
         for message in reversed(self.messages):
@@ -145,12 +146,16 @@ class MainPage(Element, EventHandler, DiscordManager):
                 pos_y -= rectangle_height + 40
 
                 for j, chunk in enumerate(chunked_strings):
-                    self.text_not_align(self.font2, 16, str(chunk), self.grey1, 480, ((30 * j) + pos_y + 20))
-                self.text_not_align(self.font1, 18, str(message_name), self.pink, 480, (pos_y + 5))
-                self.text_not_align(self.font1, 10, str(message_time), self.grey1, 590, (pos_y+10))
-                self.img_center("bubble", 460, (pos_y + 10), 40, 40, "main_page/main_page4")
-                self.img_center("ProfilePicture", 460, (pos_y + 10), 35, 35, f'profile/profile{self.str_picture}')
-
+                    self.text_not_align(self.font2, 16, str(chunk), self.grey1, 480, ((30 * j) + pos_y + 20 + self.scroll))
+                self.text_not_align(self.font1, 18, str(message_name), self.pink, 480, pos_y + 5 + self.scroll)
+                self.text_not_align(self.font1, 10, str(message_time), self.grey1, 590, pos_y + 10 + self.scroll)
+                self.img_center("bubble", 460, pos_y + 10 + self.scroll, 40, 40, "main_page/main_page4")
+                self.img_center("ProfilePicture", 460, pos_y + 10 + self.scroll, 35, 35, f'profile/profile{self.str_picture}')
+        self.img_center("Background",795, 40, 775, 80, "main_page/main_page20")
+        self.img_center("Background",795, 660, 775, 80, "main_page/main_page21")
+        self.entry_message = self.rect_full(self.grey10, 795, 650, 650, 60, 10)
+        self.rect_border(self.grey4, 795, 650, 650, 60, 2, 10)
+        
     def input_write_user(self): 
         split_text = []
         line = ""
@@ -164,15 +169,16 @@ class MainPage(Element, EventHandler, DiscordManager):
         split_text.append(line.strip())
 
         for i, ligne in enumerate(split_text):
-            self.text_not_align(self.font2, 17, ligne, self.black, 510, 620 + i * 15)
+            self.text_not_align(self.font2, 17, ligne, self.grey1, 510, 625.5 + i * 15)
 
     def mainPage_run(self):
         while self.main_page_running :
-            if not self.profile.profile_running:                
-                self.background()
-                self.first_section()
-                self.second_section()
-                self.third_section()
-                self.banner() 
-                self.event_main_page()
-                self.update()
+            self.update_message()
+            self.background()
+            self.first_section()
+            self.second_section()
+            self.third_section()
+            self.banner() 
+            self.event_main_page()
+            self.main_page_cursor()
+            self.update()

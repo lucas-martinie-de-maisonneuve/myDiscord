@@ -1,17 +1,12 @@
 import pygame
-from source.pygame_manager.Element import Element
-from source.pygame_manager.EventHandler import EventHandler
-from source.pygame_manager.Cursor import Cursor
-from source.pygame_manager.Animation import Animation
 from data.DiscordManager import DiscordManager
+from source.pygame_manager.Gui import Gui
+from source.Client import Client
 
-class Register(Element, EventHandler, Cursor, Animation,DiscordManager):
+class Register(Gui, Client, DiscordManager):
     def __init__(self):
-        Element.__init__(self)
-        Cursor.__init__(self)
-        Animation.__init__(self)
-        
-        self.register_running = False
+        Gui.__init__(self)
+        Client.__init__(self)
         self.username = ""
         self.email = ""
         self.surname = ""
@@ -21,7 +16,8 @@ class Register(Element, EventHandler, Cursor, Animation,DiscordManager):
         self.photo = 0
         self.profile_hovered = None
         self.entry = 0
-
+        self.register_to_login = False
+        
     def background(self):
         self.img_background("Background", 600,350,1200,700,"register/background_register")
         self.logo_home(150, 127, 260, 140, 105)
@@ -141,7 +137,7 @@ class Register(Element, EventHandler, Cursor, Animation,DiscordManager):
                     self.img_center("neon circle", 830, 140, 140, 140,"main_page/main_page4")
 
     def register_run(self):
-        while self.register_running:
+        if self.register_running:
             self.background()
             self.form()
             self.profile_hover()
@@ -149,4 +145,3 @@ class Register(Element, EventHandler, Cursor, Animation,DiscordManager):
             self.event_register()
             self.profile_picture_hovered()
             self.register_cursor()
-            self.update()

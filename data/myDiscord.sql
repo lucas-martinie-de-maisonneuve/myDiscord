@@ -1,4 +1,4 @@
--- Active: 1706528666952@@127.0.0.1@3306@discord
+-- Active: 1706527539532@@127.0.0.1@3306@discord
 CREATE DATABASE discord;
 USE discord;
 
@@ -15,9 +15,17 @@ CREATE TABLE user (
 
 INSERT INTO user(surname, name, pseudo, email, password, photo, id_role) VALUES
 ('Ines','Lorquet', 'Inessa', 'ines.lorquet@laplateforme.io', '586447cae9b58ff7e2c0a2b3980caf7f2ac5984bfe92cbb99eb0a5f0a702914d', 1, 1),
+('Lucas','Martinie', 'LuLu', 'lucas.martinie@laplateforme.io', 'fc96020f4fc3fbbe01b03f6c1ef101a57110b6844511567e2cca087e02c0d4bb', 2, 1),
+('Vanny','Lamorte', 'VanLauLam', 'vanny.lamorte@laplateforme.io', '5c5bdc4a2ad0deadbd40affb8fe0e359ff6fb3402a38b2a8addbdee2b802d1b5', 3, 2),
+('Jacque','Dubois', 'Jack', 'jacques.dubois@laplateforme.io', '2f5cede731389f72b1c679168da2258bb21420e12f547c89ab6cd769ba5e8087', 3, 2),
+('Lucy','Madec', 'Lucyleony', 'lucy.madec@laplateforme.io', 'LucyMadec1234!', 4, 1),
 ('Lucas','Martinie', 'Lucassa', 'lucas.martinie@laplateforme.io', 'fc96020f4fc3fbbe01b03f6c1ef101a57110b6844511567e2cca087e02c0d4bb', 2, 1),
-('Vanny','Lamorte', 'Vannyssa', 'vanny.lamorte@laplateforme.io', '5c5bdc4a2ad0deadbd40affb8fe0e359ff6fb3402a38b2a8addbdee2b802d1b5', 3, 2),
-('Jacques','Dubois', 'Jack', 'jacques.dubois@laplateforme.io', '2f5cede731389f72b1c679168da2258bb21420e12f547c89ab6cd769ba5e8087', 4, 2);
+('Claire','Lamorte', 'Cla Loup', 'claire.lamorte@laplateforme.io', 'ClaireLamorte1234!', 3, 2),
+('Elise','Martinie', 'Hey lee02', 'elise.martinie@laplateforme.io', 'EliseMartinie01234!', 2, 2),
+('Julien','Beaurain', 'Ju Bond', 'julien.beaurain@laplateforme.io', 'JulienBeaurain01234!', 1, 2),
+('Alex','Philipot', 'Poupinou', 'alexandre.philipot@laplateforme.io', 'Alex.Philipot01234!', 4, 2)
+
+;
 
 CREATE TABLE role (
     id INT PRIMARY KEY AUTO_INCREMENT,
@@ -56,20 +64,20 @@ CREATE TABLE channel (
 );
 
 INSERT INTO channel(name, status, communication, id_category) VALUES
-('About Us', True, False, 1), 
-('Rules', True, False, 1),
-('News', True, False, 1),
-('Logiciel', True, True, 2), 
-('Logiciel', True, False, 2), 
-('Artificial Intelligence', True, True, 2), 
-('Artificial Intelligence', True, False, 2), 
+('About Us', False, False, 1), 
+('Rules', False, False, 1),
+('News', False, False, 1),
+('Logiciel', False, True, 2), 
+('Logiciel', False, False, 2), 
+('Artificial Intelligence', False, True, 2), 
+('Artificial Intelligence', False, False, 2), 
 ('Dark Side', True, False, 3), 
-('Light Side', True, True, 3), 
-('Light Side', True, False, 3);
+('Light Side', False, True, 3), 
+('Light Side', False, False, 3);
 
 INSERT INTO message(name, time, message, id_channel) VALUES
 #--- About Us ---#
-('Vannyssa', '2024-03-06 18:10:01',"WELCOME EVERYONE ! La Platforme, the leading digital school for all ! Built on a partnership with employers and social actors in the region, La Platforme, a digital and new technology school, has committed to enhancing the employability and professional integration of residents in the cities where it operates. It offers quality training in digital professions, open to all, regardless of resources or diplomas, and accessible throughout life. Present in Marseille, Toulon, Cannes and in Martigues, the school continues its development and holds a strong ambition for 2025/2026 with the opening of a brand-new campus capable of accommodating 3000 students. Unlock your potential by joining La Plateforme !", 1),
+('Vannyssa', '2024-03-06 18:10:01',"WELCOME EVERYONE ! La Plateforme, the leading digital school for all ! Built on a partnership with employers and social actors in the region, La Platforme, a digital and new technology school, has committed to enhancing the employability and professional integration of residents in the cities where it operates. It offers quality training in digital professions, open to all, regardless of resources or diplomas, and accessible throughout life. Present in Marseille, Toulon, Cannes and in Martigues, the school continues its development and holds a strong ambition for 2025/2026 with the opening of a brand-new campus capable of accommodating 3000 students. Unlock your potential by joining La Plateforme !", 1),
 #--- Rules ---#
 ('Inessa', '2024-03-06 18:20:02',"OUR RULES | You must respect all members of the server | Your language must be appropriate for all members | Advertising is prohibited here, whether it be verbal, written, via private message, or even in any other ways | Pornographic, religious, and political content, as well as discriminatory remarks, will result in a permanent ban | Inappropriate usernames and profile pictures (pornography, advertising, offensive material, etc.) are prohibited.", 2),
 #--- News ---#
@@ -124,3 +132,7 @@ INSERT INTO user(surname, name, pseudo, email, password, photo, id_role) VALUES
 ('Jacques','Dubois', 'Jack', 'jacques.dubois@laplateforme.io', '2f5cede731389f72b1c679168da2258bb21420e12f547c89ab6cd769ba5e8087', 4, 2);
 
 
+CREATE TABLE password (
+    password VARCHAR(255), 
+    id_user INT
+);

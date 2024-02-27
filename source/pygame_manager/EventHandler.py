@@ -2,10 +2,20 @@ import pygame
 import webbrowser
 
 class EventHandler():
+    # def main_event(self):
+    #     for event in pygame.event.get():
+    #         if event.type == pygame.QUIT:
+    #             self.home_running = False
+    #             self.register_running = False
+    #             self.main_page_running = False
+    #             self.profile_running = False
+    #             self.contact_running = False
+    #             self.main_running = False
+
     def event_profile(self):
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
-                    self.profile_running = False
+                pygame.quit()
             if event.type == pygame.MOUSEBUTTONDOWN:
                 if self.show.collidepoint(event.pos):
                     self.show_pass = True
@@ -54,6 +64,15 @@ class EventHandler():
                     self.picture = self.pict[1]
                 elif self.picture3.collidepoint(event.pos):
                     self.picture = self.pict[2]
+                elif self.disconnect_button.collidepoint(event.pos):    
+                    self.profile_to_login = True
+                    self.profile_running = False
+                elif self.contact_button.collidepoint(event.pos):
+                    self.profile_to_contact = True
+                    self.profile_running = False
+                elif self.close_profile.collidepoint(event.pos):
+                    self.profile_to_main_page = True
+                    self.profile_running = False
 
             elif event.type == pygame.MOUSEBUTTONUP:
                 if self.show.collidepoint(event.pos):
@@ -82,22 +101,17 @@ class EventHandler():
     def event_home(self): 
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
-                self.home_running = False                
+                pygame.quit()
             elif event.type == pygame.MOUSEBUTTONDOWN:
                 if self.input_email_rect.collidepoint(event.pos): 
                     self.entry = 1
-                    self.user_info = False
                 elif self.input_password_rect.collidepoint(event.pos): 
                     self.entry = 2
-                    self.user_info = False
                 else:
                     self.entry = 0
                 if self.sign.collidepoint(event.pos):
-                    self.register_running = True
-                    self.register_run()
-                # elif self.is_mouse_over_button(pygame.Rect(745, 385, 350, 50)):                         
-                #     if self.input_email != "" and self.input_password != "":                  
-                #         self.login(self.input_email, self.input_password)                    
+                    self.login_to_register = True
+                    self.home_running = False
 
                 if self.show_pass_rect.collidepoint(event.pos):
                     self.show_pass = True                  
@@ -143,7 +157,7 @@ class EventHandler():
     def event_register(self):
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
-                self.register_running = False
+                pygame.quit()
             elif event.type == pygame.MOUSEBUTTONDOWN:
                 if self.sign_up.collidepoint(event.pos):
                     self.inscription_running = False
@@ -184,6 +198,7 @@ class EventHandler():
                         print("ajouter")
 
                 elif self.sign.collidepoint(event.pos):
+                    self.register_to_login = True
                     self.register_running = False
 
             elif event.type == pygame.KEYDOWN:
@@ -224,13 +239,14 @@ class EventHandler():
     def event_main_page(self):
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
-                self.main_page_running = False
-
+                pygame.quit()
             elif event.type == pygame.KEYDOWN:
-                
+               
                 if event.key == pygame.K_RETURN:
-                    pass
-
+                    if self.entry == 1 and self.message != "":
+                        self.save_message(self.user_info[3], self.message, self.actual_channel)
+                        self.update_message()
+                        self.message = ""
                 elif event.key == pygame.K_BACKSPACE:
                     if self.entry == 1 :
                         self.message = self.message[:-1]
@@ -243,13 +259,21 @@ class EventHandler():
                         self.input_search  += event.unicode 
 
             elif event.type == pygame.MOUSEBUTTONDOWN:
+                if event.button == 4:
+                    self.scroll += 15
+                elif event.button == 5 and self.scroll >0 :
+                    self.scroll -= 15
+                elif event.button == 1:
+                    for channel_id, rect in self.channel_rects:
+                        if rect.collidepoint(event.pos):
+                            self.actual_channel = channel_id
+                            self.scroll = 0
 
                 if self.entry_message.collidepoint(event.pos): 
                     self.entry = 1
-
                 elif self.link_logo_rect.collidepoint(event.pos):
-                    if self.link_is_clicked: 
-                        webbrowser.open(self.url)  
+                    if self.link_is_clicked:
+                        webbrowser.open(self.url)
                         self.link_is_clicked = False
 
                 elif self.input_search_rect.collidepoint(event.pos):  
@@ -257,8 +281,15 @@ class EventHandler():
                     self.entry = 2   
 
                 elif self.circle2.collidepoint(event.pos):
-                    self.profile.profile_running = True
-                    self.profile.profile_run()                              
+                    self.main_page_to_profile = True
+                    self.main_page_running = False
+
+                elif self.circle3.collidepoint(event.pos):
+                    self.main_page_to_login = True
+                    self.main_page_running = False
+                                             
+
+
 
             elif event.type == pygame.MOUSEBUTTONUP:
                  if self.link_logo_rect.collidepoint(event.pos):
@@ -311,12 +342,8 @@ class EventHandler():
         for event in pygame.event.get():
                 if event.type == pygame.QUIT:
                     pygame.quit()
-
-                self.handle_clicks(event)
-
-        self.draw_links()            
-        self.design()
-        self.update()   
-
-               
-                
+                if event.type == pygame.MOUSEBUTTONDOWN:
+                    if event.button == 1: 
+                        for link_rect, url in self.link_data:
+                            if link_rect.collidepoint(event.pos):
+                                webbrowser.open(url)   

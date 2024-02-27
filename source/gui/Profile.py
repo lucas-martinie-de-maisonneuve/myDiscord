@@ -1,20 +1,21 @@
 import pygame
-from source.pygame_manager.EventHandler import EventHandler
-from source.pygame_manager.Element import Element
-from source.pygame_manager.Cursor import Cursor
-class Profile(Element, EventHandler, Cursor):
+from data.DiscordManager import DiscordManager
+from source.pygame_manager.Gui import Gui
+from source.Client import Client
+
+class Profile( Gui, Client, DiscordManager):
     
-    def __init__(self, user):
-        EventHandler.__init__(self)
-        Element.__init__(self)
-        Cursor.__init__(self)
-        self.profile_running = False
+    def __init__(self, user_info):
+        Gui.__init__(self)
+        DiscordManager.__init__(self)
+        Client.__init__(self)
+
+        self.community_list = self.display_user()  
+        self.user_info = user_info
         self.edit = 0
-        self.user = user
         self.password_edit, self.username_edit, self.email_edit, self.picture_edit, self.status_edit = False, False, False, False, False
         self.theme_color = self.purple4
-        self.username, self.email ,self.password ,self.picture, self.role = self.user[3], self.user[4], self.user[5], self.user[6], self.user[7]
-        self.password_display = " *" * len(self.password)
+
         self.show_pass = False
         self.status = "Online"
         self.status_color = self.green
@@ -28,6 +29,17 @@ class Profile(Element, EventHandler, Cursor):
         self.password_rect = pygame.Rect(960, 420, 80, 30)
         self.role_rect = pygame.Rect(960, 480, 80, 30)
         self.status_rect = pygame.Rect(960, 540, 80, 30)
+
+    def display_user_community(self):
+        self.rect_full(self.grey2, 195, 250, 250, 380, 10)
+        self.rect_border(self.grey4, 195, 250, 250, 380, 1, 10)
+        self.text_not_align(self.font1, 18,"People You May Know..." , self.white, 90, 85)
+
+        pos_y = 0  
+        for i, user_community in enumerate(self.community_list[:10]): 
+            pos_y = pos_y + 30
+            self.text_not_align(self.font2, 20,str(user_community[3]), self.white, 150, 95 + pos_y)  
+            self.image_not_center("ProfilePicture", 90, pos_y + 90, 35, 35, f'profile/profile{user_community[6]}')
 
     def design(self):
         # Profile main rectangle
@@ -46,6 +58,8 @@ class Profile(Element, EventHandler, Cursor):
         
         # Profile info rectangle
         self.rect_full(self.grey2, 750, 445, 700, 350, 10)
+        self.rect_border(self.grey4, 750, 445, 700, 350, 1, 10)
+
         
         # Info profile
         self.info_profile("Username", self.username, 300)
@@ -54,41 +68,36 @@ class Profile(Element, EventHandler, Cursor):
         self.info_profile("Role", self.role, 480)
         self.info_profile("Status", self.role, 540)
 
+     
         # Creators button
-        self.disconnect_button = self.lateral_menu_display(50, "profile/profile6", "profile9", "profile9")        
+        self.contact_button = self.lateral_menu_display(475, "profile/profile6", "profile9", "profile9")        
 
         # Disconnect button
         self.disconnect_button = self.lateral_menu_display(575, "main_page/main_page9", "disconnect_hover", "disconnect")
-        
 
-        # Neon light blue
-        # self.img_center("Neon light", 200, 260, 140, 105,"main_page/main_page14")
-
-    
-     
     def lateral_menu_display(self, y, logo, image_neon_hover, image_neon):
         button = pygame.Rect(55, y, 300, 60)
         if self.is_mouse_over_button(button):
-            self.img_center("Logo principal", 90, y + 30, 45, 45, f"{logo}")
-            self.img_center("Logo principal", 90, y + 30, 65, 65, "main_page/main_page4")
-            self.img_center("Disconnect", 220, y + 30, 220, 63, f"profile/{image_neon_hover}")
+            self.img_center("Logo principal", 100, y + 30, 50, 50, f"{logo}")
+            self.img_center("Neon circle", 100, y + 30, 100, 100, "main_page/main_page4")
+            self.img_center("Logo inside circle", 242, y + 30, 210, 59, f"profile/{image_neon_hover}")
         else:
-            self.img_center("Logo principal", 90, y + 30, 45, 45, f"{logo}")
-            self.img_center("Neon circle", 90, y + 30, 60, 60, "main_page/main_page4")
-            self.img_center("Disconnect", 220, y + 30, 200, 57, f"profile/{image_neon}")
-        return button
-    
+            self.img_center("Logo principal", 100, y + 30, 50, 50, f"{logo}")
+            self.img_center("Neon circle", 100, y + 30, 95, 95, "main_page/main_page4")
+            self.img_center("Logo inside circle", 240, y + 30, 200, 57, f"profile/{image_neon}")
+        return button  
 
-
-    
     def hover_profile_picture(self):
         self.circle(self.grey5, 450, 180, 70)
+        self.img_center("bubble", 450, 180, 130, 130, f"register/register1")
         # Profile picture
         self.profile_pict = pygame.draw.circle(self.Window, self.theme_color, (450,180), 65)
         if self.is_mouse_over_button(self.profile_pict):
             self.img_center("profile_picture", 450,180,130,130,f"profile/profile{self.picture}")
             self.circle_alpha(self.alpha_grey, 450, 180, 65)
             self.img_center("logo edit", 450,180,50,50,"profile/logo_edit")
+            self.img_center("bubble", 450, 180, 175, 175, f"main_page/main_page4")
+
         else:
             self.picture_cursor = False
             self.circle(self.theme_color, 450, 180, 65)
@@ -223,12 +232,19 @@ class Profile(Element, EventHandler, Cursor):
             else:
                 self.text_not_align(self.font2, 16, self.password, self.black, 440, 442)
 
+        # Quit
+            self.close_profile = self.hover_image("Quit", "Quit", 1120, 70, 50, 50, "profile/profile11", "profile/profile8")
+
     def profile_run(self):
-        while self.profile_running :
+        self.user = self.user_info
+        self.username, self.email ,self.password ,self.picture, self.role = self.user[3], self.user[4], self.user[5], self.user[6], self.user[7]
+        self.password_display = " *" * len(self.password)
+
+        if self.profile_running :
             self.design()
+            self.display_user_community()
             self.profile_picture_edit()
             self.info_profile_edit()
             self.password_show()
             self.event_profile()
             self.profile_page_cursor()
-            self.update()

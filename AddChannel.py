@@ -1,14 +1,12 @@
-from source.pygame_manager.Element import Element
-from data.DiscordManager import DiscordManager
-from source.pygame_manager.EventHandler import EventHandler
 import pygame
+from data.DiscordManager import DiscordManager
+from source.pygame_manager.Gui import Gui
 
-class AddChannel(Element, DiscordManager, EventHandler):
+class AddChannel(Gui, DiscordManager):
 
     def __init__(self):
-        Element.__init__(self)
+        Gui.__init__(self)
         DiscordManager.__init__(self)
-        EventHandler.__init__(self)
         self.add_channel_running = True
         self.new_name_channel = ""
         self.entry_new_name = 0
@@ -32,7 +30,7 @@ class AddChannel(Element, DiscordManager, EventHandler):
         
         # Choice category
         self.text_center(self.font2, 21, "Category", self.grey1, 600, 370)
-        
+
         # Button Bachelor IT category
         if self.category==2:
             self.but_bachelor = self.button_hover("Bachelor IT button",540, 405, 100, 30, 10,self.grey2,self.grey2,self.grey2,"Bachelor IT",self.font2,self.white,16,2,10)
@@ -57,10 +55,10 @@ class AddChannel(Element, DiscordManager, EventHandler):
             self.but_text = self.button_hover("text button",537, 495, 100, 30, 10,self.grey2,self.grey2,self.grey2,"Text",self.font2,self.white,16,2,10)
             self.img_center("Hashtags logiciel", 465, 495, 40, 40,"profile/logo_text") 
         else:
-            self.but_text = self.button_hover("text button",537, 495, 100, 30, 10,self.grey2,self.grey2,self.grey2,"Text",self.font2,self.white,16,0,10)
+            self.but_text = self.button_hover("text button",537, 500, 100, 30, 10,self.grey2,self.grey2,self.grey2,"Text",self.font2,self.white,16,0,10)
             self.img_center("Hashtags logiciel", 465, 495, 30, 30,"profile/logo_text") 
-
-        #Button vocal communication
+            
+        # Button vocal communication
         if self.communication == 1:
             self.but_voval = self.button_hover("vocal button",655, 495, 100, 30, 10,self.grey2,self.grey2,self.grey2,"Vocal",self.font2,self.white,16,2,10)
             self.img_center("Volume logiciel", 725, 495, 45, 45,"main_page/main_page10")
@@ -96,6 +94,9 @@ class AddChannel(Element, DiscordManager, EventHandler):
         # Neon light blue
         self.img_center("Neon light", 600, 170, 240, 90,"main_page/main_page7")
         self.img_center("Neon light", 600, 225, 240, 90,"main_page/main_page7")
+        
+        # Cross quit
+        self.close_profile = self.hover_image("Quit", "Quit", 815, 180, 50, 50, "profile/profile11", "profile/profile8")
 
         self.img_center("Neon light", 600, 530, 150, 90,"main_page/main_page7")
         self.img_center("Neon light", 600, 440, 150, 90,"main_page/main_page7")
@@ -109,5 +110,5 @@ class AddChannel(Element, DiscordManager, EventHandler):
             self.update()
         
                         
-test = AddChannel()
-test.addChannel_run()
+# test = AddChannel()
+# test.addChannel_run()
