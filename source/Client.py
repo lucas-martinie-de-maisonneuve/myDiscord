@@ -27,10 +27,13 @@ class Client(DiscordManager):
 
         self.profile_to_contact = False
         self.contact_running = False
-
+        
+        self.main_page_to_add_channel = False
+        
         self.categories = self.display_category()
         self.channels = self.display_channel()
         self.messages = self.display_message()
+        
     def login_user(self):
         hashed_password = sha256(self.user_password.encode()).hexdigest()
 

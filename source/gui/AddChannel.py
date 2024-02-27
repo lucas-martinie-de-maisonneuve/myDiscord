@@ -1,13 +1,12 @@
 import pygame
-from data.DiscordManager import DiscordManager
 from source.pygame_manager.Gui import Gui
+from source.Client import Client
 
-class AddChannel(Gui, DiscordManager):
+class AddChannel(Gui, Client):
 
     def __init__(self):
         Gui.__init__(self)
-        DiscordManager.__init__(self)
-        self.add_channel_running = True
+        Client.__init__(self)
         self.new_name_channel = ""
         self.entry_new_name = 0
         self.status = None
@@ -108,7 +107,3 @@ class AddChannel(Gui, DiscordManager):
             self.event_add()
             self.add_section()
             self.update()
-        
-                        
-test = AddChannel()
-test.addChannel_run()

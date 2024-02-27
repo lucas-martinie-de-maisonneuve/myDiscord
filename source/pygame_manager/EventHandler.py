@@ -287,14 +287,16 @@ class EventHandler():
                 elif self.circle3.collidepoint(event.pos):
                     self.main_page_to_login = True
                     self.main_page_running = False
-                                             
-
-
-
+                    
+                elif self.circle4.collidepoint(event.pos):
+                    print("ok")
+                    self.add_channel_running = True
+                    self.main_page_running = False
+                    
             elif event.type == pygame.MOUSEBUTTONUP:
                  if self.link_logo_rect.collidepoint(event.pos):
                     self.link_is_clicked = True  
-                    
+
     def event_add(self):
         for event in pygame.event.get():
                 if event.type == pygame.QUIT:
