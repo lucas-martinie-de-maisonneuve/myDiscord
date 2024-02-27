@@ -103,11 +103,11 @@ class MainPage(Gui, Client, DiscordManager):
                     else:
                         self.text_not_align(self.font2, 15, channel[1], self.grey1, 200, position_y)
                     if channel[4] == 1:
-                        self.img_center("Book about us", 170, position_y + 5, 25, 25, "main_page/main_page12")
+                        self.img_center("Book about us", 170, position_y + 10, 25, 25, "main_page/main_page12")
                     elif channel[3] == 1:
-                        self.img_center("Volume logiciel", 170, position_y + 5, 25, 25, "main_page/main_page10")
+                        self.img_center("Volume logiciel", 170, position_y + 10, 25, 25, "main_page/main_page10")
                     else:
-                        self.img_center("Hashtags logiciel", 170, position_y + 5, 15, 15, "main_page/main_page14")
+                        self.img_center("Hashtags logiciel", 170, position_y + 10, 15, 15, "main_page/main_page14")
     
     def third_section(self):
         self.rect_full(self.grey10, 795, 385, 775, 610, 10)
