@@ -35,7 +35,7 @@ class MainPage(Gui, Client, DiscordManager):
 
         # Logo Names
         self.image_not_center("Names", 155, 15, 200, 57,"main_page/main_page17") 
-        self.image_not_center("Rectangle logo", 120, 12, 270, 55,"main_page/main_page18") 
+        self.image_not_center("Rectangle logo", 120, 1, 270, 75,"main_page/main_page18") 
 
         # Search bar
         self.input_search_rect = self.rect_full(self.grey2, 920, 40, 240, 35, 80)
