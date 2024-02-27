@@ -11,7 +11,6 @@ class MainPage(Gui, Client, DiscordManager):
         Gui.__init__(self)
         self.user_info = user_info
         self.input_search = "Search..."
-        self.message = ""
         self.RECT_W = 600
         self.RECT_H= 60 
         self.L_MAX = 80
@@ -19,7 +18,6 @@ class MainPage(Gui, Client, DiscordManager):
         self.entry = 0
         self.scroll = 0
         self.channel_rects = []
-        self.actual_channel = 1
 
         self.bell = pygame.Rect(1060, 15, 50, 50)
         self.poweroff_c = pygame.Rect(64-115/2, 635-115/2, 115, 115)
@@ -155,6 +153,7 @@ class MainPage(Gui, Client, DiscordManager):
         self.img_center("Background",795, 660, 775, 80, "main_page/main_page21")
         self.entry_message = self.rect_full(self.grey10, 795, 650, 650, 60, 10)
         self.rect_border(self.grey4, 795, 650, 650, 60, 2, 10)
+        self.send_button = self.hover_image("send_button", "Send_button", 1080, 650, 45, 45, "main_page/main_page22", "main_page/main_page22")
         
     def input_write_user(self): 
         split_text = []

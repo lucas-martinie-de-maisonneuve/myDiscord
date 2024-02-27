@@ -244,9 +244,7 @@ class EventHandler():
                
                 if event.key == pygame.K_RETURN:
                     if self.entry == 1 and self.message != "":
-                        self.save_message(self.user_info[3], self.message, self.actual_channel)
-                        self.update_message()
-                        self.message = ""
+                        self.add_message()
                 elif event.key == pygame.K_BACKSPACE:
                     if self.entry == 1 :
                         self.message = self.message[:-1]
@@ -269,7 +267,9 @@ class EventHandler():
                             self.actual_channel = channel_id
                             self.scroll = 0
 
-                if self.entry_message.collidepoint(event.pos): 
+                if self.send_button.collidepoint(event.pos):
+                    self.add_message()
+                elif self.entry_message.collidepoint(event.pos): 
                     self.entry = 1
                 elif self.link_logo_rect.collidepoint(event.pos):
                     if self.link_is_clicked:
@@ -322,8 +322,7 @@ class EventHandler():
                         
                 if self.entry_new_name != 0 and self.status != None and self.communication != None and self.category != None:
                     self.add=True
-
-                                                
+              
                 elif event.type == pygame.KEYDOWN:
                     if event.key == pygame.K_BACKSPACE:
                         if self.entry_new_name==1:
@@ -332,8 +331,6 @@ class EventHandler():
                         if self.entry_new_name==1:
                             if event.unicode.isalpha():
                                 self.new_name_channel += event.unicode
-                                
-
                         
     def event_contact(self):
         for event in pygame.event.get():

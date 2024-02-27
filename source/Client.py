@@ -31,6 +31,9 @@ class Client(DiscordManager):
         self.categories = self.display_category()
         self.channels = self.display_channel()
         self.messages = self.display_message()
+
+        self.actual_channel = 1
+        self.message = ""
     def login_user(self):
         hashed_password = sha256(self.user_password.encode()).hexdigest()
 
@@ -44,3 +47,9 @@ class Client(DiscordManager):
 
     def update_message(self):
         self.messages = self.display_message()
+
+    def add_message(self):
+        if self.message != "":
+            self.save_message(self.user_info[3], self.message, self.actual_channel)
+            self.update_message()
+            self.message = ""
