@@ -285,7 +285,9 @@ class EventHandler():
                         self.status = 1
                     elif self.but_name.collidepoint(event.pos):
                         self.entry_new_name = 1
-                        
+                    elif self.close_profile.collidepoint(event.pos):
+                        self.profile_to_main_page = True
+                        self.add_channel_running = False
                     if self.but_add.collidepoint(event.pos) and self.add == True:
                         self.add_channel(self.new_name_channel,self.status,self.communication,self.category)
                         self.add = False       
