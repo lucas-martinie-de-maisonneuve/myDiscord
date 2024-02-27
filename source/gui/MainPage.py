@@ -153,8 +153,9 @@ class MainPage(Gui, Client, DiscordManager):
                 self.img_center("ProfilePicture", 460, pos_y + 10 + self.scroll, 35, 35, f'profile/profile{self.str_picture}')
         self.img_center("Background",795, 40, 775, 80, "main_page/main_page20")
         self.img_center("Background",795, 660, 775, 80, "main_page/main_page21")
-        self.entry_message = self.rect_full(self.grey1, 795, 650, 650, 60, 10)
-
+        self.entry_message = self.rect_full(self.grey10, 795, 650, 650, 60, 10)
+        self.rect_border(self.grey4, 795, 650, 650, 60, 2, 10)
+        
     def input_write_user(self): 
         split_text = []
         line = ""
@@ -168,7 +169,7 @@ class MainPage(Gui, Client, DiscordManager):
         split_text.append(line.strip())
 
         for i, ligne in enumerate(split_text):
-            self.text_not_align(self.font2, 17, ligne, self.black, 510, 620 + i * 15)
+            self.text_not_align(self.font2, 17, ligne, self.grey1, 510, 625.5 + i * 15)
 
     def mainPage_run(self):
         while self.main_page_running :
