@@ -55,7 +55,6 @@ class Display_test(Gui):
                     self.contact.contact_to_profile = False
                     self.profile.profile_run()
 
-
             elif self.profile.profile_to_contact or self.contact.contact_running:
                 self.contact.contact_running = True
                 self.contact.profile_to_contact = False
