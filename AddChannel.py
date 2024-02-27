@@ -110,5 +110,5 @@ class AddChannel(Gui, DiscordManager):
             self.update()
         
                         
-# test = AddChannel()
-# test.addChannel_run()
+test = AddChannel()
+test.addChannel_run()
