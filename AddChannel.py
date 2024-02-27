@@ -17,7 +17,6 @@ class AddChannel(Element, DiscordManager):
     def background(self): 
         self.img_background_blur('Background', 600, 350, 1200, 800, 'main_page/main_page8', blur_radius=10)
 
-
     def second_section(self):
         # Rectangle de fond
         self.rect_full(self.grey10, 600, 400, 500, 510, 10)
@@ -51,7 +50,7 @@ class AddChannel(Element, DiscordManager):
         else:
             self.but_text = self.button_hover("text button",537, 500, 100, 30, 10,self.grey9,self.grey9,self.grey9,"Text",self.font2,self.white,16,0,10)
             
-        #Button vocal communication
+        # Button vocal communication
         if self.communication == 1:
             self.but_voval = self.button_hover("vocal button",655, 500, 100, 30, 10,self.grey9,self.grey9,self.grey9,"Vocal",self.font2,self.white,16,0,10)
         else: 
@@ -110,8 +109,7 @@ class AddChannel(Element, DiscordManager):
                     if self.but_private.collidepoint(event.pos):
                         self.status = 1
                     elif self.but_public.collidepoint(event.pos):
-                        self.status = 0
-                        
+                        self.status = 0                       
 
                         
 test = AddChannel()

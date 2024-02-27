@@ -31,10 +31,15 @@ class Profile( Gui, Client, DiscordManager):
         self.status_rect = pygame.Rect(960, 540, 80, 30)
 
     def display_user_community(self):
+        self.rect_full(self.grey2, 195, 250, 250, 380, 10)
+        self.rect_border(self.grey4, 195, 250, 250, 380, 1, 10)
+        self.text_not_align(self.font1, 18,"People You May Know..." , self.white, 90, 85)
+
         pos_y = 0  
-        for user_community in self.community_list: 
+        for i, user_community in enumerate(self.community_list[:10]): 
             pos_y = pos_y + 30
-            self.text_not_align(self.font2, 20,str(user_community[3]), self.white, 140, 100 + pos_y )     
+            self.text_not_align(self.font2, 20,str(user_community[3]), self.white, 150, 95 + pos_y)  
+            self.image_not_center("ProfilePicture", 90, pos_y + 90, 35, 35, f'profile/profile{user_community[6]}')
 
     def design(self):
         # Profile main rectangle
@@ -53,6 +58,8 @@ class Profile( Gui, Client, DiscordManager):
         
         # Profile info rectangle
         self.rect_full(self.grey2, 750, 445, 700, 350, 10)
+        self.rect_border(self.grey4, 750, 445, 700, 350, 1, 10)
+
         
         # Info profile
         self.info_profile("Username", self.username, 300)
@@ -61,10 +68,7 @@ class Profile( Gui, Client, DiscordManager):
         self.info_profile("Role", self.role, 480)
         self.info_profile("Status", self.role, 540)
 
-        # Friends 
-        self.rect_full(self.grey2, 195, 260, 250, 350, 10)
-        self.text_not_align(self.font1, 20,"community" , self.white, 140, 55)
-        
+     
         # Creators button
         self.contact_button = self.lateral_menu_display(475, "profile/profile6", "profile9", "profile9")        
 
