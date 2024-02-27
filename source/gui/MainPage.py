@@ -19,10 +19,6 @@ class MainPage(Gui, Client, DiscordManager):
         self.entry = 0
         self.scroll = 0
         self.channel_rects = []
-
-        self.categories = self.display_category()
-        self.channels = self.display_channel()
-        self.messages = self.display_message()
         self.actual_channel = 1
 
         self.bell = pygame.Rect(1060, 15, 50, 50)
@@ -176,6 +172,7 @@ class MainPage(Gui, Client, DiscordManager):
 
     def mainPage_run(self):
         while self.main_page_running :
+            self.update_message()
             self.background()
             self.first_section()
             self.second_section()

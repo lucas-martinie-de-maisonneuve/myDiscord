@@ -1,3 +1,4 @@
+import time
 from data.DiscordManager import DiscordManager
 from hashlib import sha256
 
@@ -27,6 +28,9 @@ class Client(DiscordManager):
         self.profile_to_contact = False
         self.contact_running = False
 
+        self.categories = self.display_category()
+        self.channels = self.display_channel()
+        self.messages = self.display_message()
     def login_user(self):
         hashed_password = sha256(self.user_password.encode()).hexdigest()
 
@@ -37,3 +41,6 @@ class Client(DiscordManager):
             return self.user_info
         else:
             print("Erreur. Connexion échouée.")
+
+    def update_message(self):
+        self.messages = self.display_message()

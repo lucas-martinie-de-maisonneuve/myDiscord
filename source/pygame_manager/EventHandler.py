@@ -243,8 +243,10 @@ class EventHandler():
             elif event.type == pygame.KEYDOWN:
                
                 if event.key == pygame.K_RETURN:
-                    pass
-
+                    if self.entry == 1 and self.message != "":
+                        self.save_message(self.user_info[3], self.message, self.actual_channel)
+                        self.update_message()
+                        self.message = ""
                 elif event.key == pygame.K_BACKSPACE:
                     if self.entry == 1 :
                         self.message = self.message[:-1]
