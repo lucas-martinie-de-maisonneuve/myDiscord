@@ -269,10 +269,7 @@ class EventHandler():
 
                 elif self.circle3.collidepoint(event.pos):
                     self.main_page_to_login = True
-                    self.main_page_running = False
-                                             
-
-
+                    self.main_page_running = False                                          
 
             elif event.type == pygame.MOUSEBUTTONUP:
                  if self.link_logo_rect.collidepoint(event.pos):
@@ -283,7 +280,12 @@ class EventHandler():
                 if event.type == pygame.QUIT:
                     pygame.quit()
                 if event.type == pygame.MOUSEBUTTONDOWN:
-                    if event.button == 1: 
+                    if self.close_about_us.collidepoint(event.pos):
+                        self.contact_to_profile = True
+                        self.contact_running = False 
+                        
+                    elif event.button == 1: 
                         for link_rect, url in self.link_data:
                             if link_rect.collidepoint(event.pos):
-                                webbrowser.open(url)   
+                                webbrowser.open(url)  
+

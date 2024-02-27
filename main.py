@@ -46,18 +46,21 @@ class Display_test(Gui):
                     self.profile.profile_to_main_page, self.connexion.home_to_main_page = False, False
                     self.main_page.mainPage_run()
 
-            elif self.main_page.main_page_to_profile or self.profile.profile_running:
+            elif self.main_page.main_page_to_profile or self.contact.contact_to_profile or self.profile.profile_running:
                 if not self.profile.profile_running:
                     self.profile = Profile(self.main_page.user_info)
                     self.profile.profile_running = True
                 else:
                     self.main_page.main_page_to_profile = False
+                    self.contact.contact_to_profile = False
                     self.profile.profile_run()
+
 
             elif self.profile.profile_to_contact or self.contact.contact_running:
                 self.contact.contact_running = True
                 self.contact.profile_to_contact = False
-                self.contact.contact_run()
+                self.contact.contact_run()         
+
             self.update()
 display = Display_test()
 display.test()
