@@ -2,13 +2,15 @@ import pygame
 from data.DiscordManager import DiscordManager
 from source.pygame_manager.Gui import Gui
 from source.Client import Client
+from Notification import Notification
 
-class MainPage(Gui, Client, DiscordManager):
+class MainPage(Gui, Client, DiscordManager, Notification):
     
     def __init__(self, user_info):
         Client.__init__(self)
         DiscordManager.__init__(self)  
         Gui.__init__(self)
+        Notification.__init__(self)
         self.user_info = user_info
         self.input_search = "Search..."
         self.message = ""
@@ -52,6 +54,8 @@ class MainPage(Gui, Client, DiscordManager):
         self.image_not_center("Question mark", 1120, 15, 50, 50,"main_page/main_page15")    
         self.link_logo_rect = pygame.Rect(1120, 15, 50, 50)
         self.url = "https://laplateforme.io/"
+
+
 
     def first_section(self):
         # First section background color
@@ -152,8 +156,9 @@ class MainPage(Gui, Client, DiscordManager):
         self.img_center("Background",795, 40, 775, 80, "main_page/main_page20")
         self.img_center("Background",795, 660, 775, 80, "main_page/main_page21")
         self.entry_message = self.rect_full(self.grey1, 795, 650, 650, 60, 10)
-
+  
     def input_write_user(self): 
+
         split_text = []
         line = ""
         words = self.message.split(" ")
@@ -168,8 +173,19 @@ class MainPage(Gui, Client, DiscordManager):
         for i, ligne in enumerate(split_text):
             self.text_not_align(self.font2, 17, ligne, self.black, 510, 620 + i * 15)
 
+    def notification(self): 
+        last_login_date = self.load_last_login_date() 
+        self.save_last_login_date() 
+
+        new_messages = [message for message in self.messages if message[2] > last_login_date]
+
+        if new_messages:
+            self.display_notification(len(new_messages))
+
+
     def mainPage_run(self):
         while self.main_page_running :
+
             self.background()
             self.first_section()
             self.second_section()
@@ -177,4 +193,7 @@ class MainPage(Gui, Client, DiscordManager):
             self.banner() 
             self.event_main_page()
             self.main_page_cursor()
+
+            self.notification()
+
             self.update()
