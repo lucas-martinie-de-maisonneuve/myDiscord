@@ -86,6 +86,9 @@ class AddChannel(Gui, DiscordManager):
         # Neon light blue
         self.img_center("Neon light", 600, 170, 240, 90,"main_page/main_page7")
         self.img_center("Neon light", 600, 225, 240, 90,"main_page/main_page7")
+        
+        # Cross quit
+        self.close_profile = self.hover_image("Quit", "Quit", 815, 180, 50, 50, "profile/profile11", "profile/profile8")
 
     def addChannel_run(self):
         while self.add_channel_running :
