@@ -4,8 +4,8 @@ from data.Database import Database
 
 class DiscordManager(Database):
     def __init__(self):
-        Database.__init__(self, 'localhost', 'root', '$~Bc4gB9', 'discord')
-        # Database.__init__(self, 'localhost', 'root', 'VannyLamorte25!', 'discord')
+        # Database.__init__(self, 'localhost', 'root', '$~Bc4gB9', 'discord')
+        Database.__init__(self, 'localhost', 'root', 'VannyLamorte25!', 'discord')
         # Database.__init__(self, 'localhost', 'root', 'azerty', 'discord')
         self.connect()
 
@@ -97,6 +97,27 @@ class DiscordManager(Database):
         sql = "SELECT communication FROM channel WHERE id_category = %s"
         values = (id,)
         return self.fetch(sql, values) 
+    
+    # Update
+    def update_user(self, pseudo, email, password,photo, id):
+        sql = 'UPDATE user SET pseudo = %s, email = %s, password = %s, photo= %s, WHERE = %s'
+        params = (pseudo, email, password, photo, id)
+        self.execute_query(sql, params)     
+
+    def update_message(self, name): 
+        sql = 'UPDATE message SET name = %s, WHERE name =%s'
+        params = (name)
+        self.execute_query(sql, params)        
+     
+    def update_abc_password(self, password, id_user): 
+        sql = 'UPDATE password SET password = %s, WHERE id_user =%s'
+        params=(password, id_user)
+        self.execute_query(sql, params)
+
+    # def update_product(self, name, description, price, quantity, id_category, id):
+    #     sql = 'UPDATE product SET name=%s, description=%s, price=%s, quantity=%s, id_category=%s WHERE id=%s'
+    #     params = (name, description, price, quantity, id_category, id)
+    #     self.execute_query(sql, params)
 
     # Delete User
     def delete_user(self, id):
@@ -161,6 +182,19 @@ class DiscordManager(Database):
 
     def close_connection(self):
         self.disconnect()
+
+    def add_abc_password (self, password, id_user):
+        sql = "INSERT INTO password (password, id_user) VALUES (%s, %s)"
+        values = (password, id_user)
+        self.execute_query(sql, values)
+
+
+    def save_last_login_date(self): 
+        pass
+
+    def load_last_login_date(self):
+        pass
+   
 
     # Modifier Role
     # def modify_role(self, user_id, id_role):

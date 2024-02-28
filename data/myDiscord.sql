@@ -10,10 +10,11 @@ CREATE TABLE user (
     email VARCHAR(255),
     password VARCHAR(255),
     photo INT,
-    id_role INT
-);
+    id_role INT,    
+    last_message DATETIME DEFAULT
+    );
 
-INSERT INTO user(surname, name, pseudo, email, password, photo, id_role) VALUES
+INSERT INTO user(surname, name, pseudo, email, password, photo, id_role, last_message) VALUES
 ('ILV','LLM', 'Super User', 'a', 'ca978112ca1bbdcafac231b39a23dc4da786eff8147c4e72b9807785afee48bb', 3, 2),
 ('Ines','Lorquet', 'Inessa', 'ines.lorquet@laplateforme.io', '586447cae9b58ff7e2c0a2b3980caf7f2ac5984bfe92cbb99eb0a5f0a702914d', 1, 1),
 ('Lucas','Martinie', 'Lucassa', 'lucas.martinie@laplateforme.io', 'fc96020f4fc3fbbe01b03f6c1ef101a57110b6844511567e2cca087e02c0d4bb', 2, 1),
