@@ -35,6 +35,7 @@ class Client(DiscordManager):
 
         self.actual_channel = 1
         self.message = ""
+        
     def login_user(self):
         hashed_password = sha256(self.user_password.encode()).hexdigest()
 
