@@ -9,7 +9,6 @@ class Profile( Gui, Client, DiscordManager):
         Gui.__init__(self)
         DiscordManager.__init__(self)
         Client.__init__(self)
-
         self.community_list = self.display_user()  
         self.user_info = user_info
         self.edit = 0
