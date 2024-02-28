@@ -1,11 +1,12 @@
+import time
 from datetime import datetime
 from data.Database import Database
 
 class DiscordManager(Database):
     def __init__(self):
-        # Database.__init__(self, 'localhost', 'root', '$~Bc4gB9', 'discord')
+        Database.__init__(self, 'localhost', 'root', '$~Bc4gB9', 'discord')
         # Database.__init__(self, 'localhost', 'root', 'VannyLamorte25!', 'discord')
-        Database.__init__(self, 'localhost', 'root', 'azerty', 'discord')
+        # Database.__init__(self, 'localhost', 'root', 'azerty', 'discord')
         self.connect()
 
     def check_credentials(self, email, password):
@@ -23,7 +24,7 @@ class DiscordManager(Database):
     def add_user(self, surname, name, pseudo, email, password, photo, id_role):
         sql = "INSERT INTO product (surname, name, pseudo, email, password, photo, id_role) VALUES (%s, %s, %s, %s, %s, %s, %s)"
         values = (surname, name, pseudo, email, password, photo, id_role)
-        self.executeQuery(sql, values)
+        self.execute_query(sql, values)
 
     def surname_user(self):
         sql = "SELECT surname FROM user"
@@ -46,10 +47,15 @@ class DiscordManager(Database):
     # Toutes Categories
     def display_category(self):
         sql = "SELECT * FROM category"
-        self.cursor.execute(sql)
-        self.categorys = self.cursor.fetchall()
-        return self.categorys
+        return self.fetch(sql)
+    def display_channel(self):
+        sql = "SELECT * FROM channel"
+        return self.fetch(sql)
     
+    def display_message(self):
+        sql = "SELECT * FROM message"
+        return self.fetch(sql)
+
     def count_category(self):
         sql = "SELECT COUNT(*) AS nb FROM category"
         return self.fetch_one(sql)
@@ -70,12 +76,6 @@ class DiscordManager(Database):
         values = (name,status,communication,id_category)
         self.cursor.execute(sql, values)
         self.connection.commit()
-
-    def display_channel(self):
-        sql = "SELECT * FROM channel"
-        self.cursor.execute(sql)
-        self.channels = self.cursor.fetchall()
-        return self.channels
 
     def name_channel(self,id):
         sql = "SELECT name FROM channel WHERE id_category = %s"
@@ -98,43 +98,48 @@ class DiscordManager(Database):
         values = (id,)
         return self.fetch(sql, values) 
 
-    # Supprimer User
+    # Delete User
     def delete_user(self, id):
         sql = "DELETE FROM user WHERE id = %s"
         values = (id,)
-        self.executeQuery(sql, values)
+        self.execute_query(sql, values)
 
     def delete_category(self, id):
         sql = "DELETE FROM category WHERE id = %s"
         values = (id,)
-        self.executeQuery(sql, values)
+        self.execute_query(sql, values)
 
     def delete_channel(self, id):
         sql = "DELETE FROM channel WHERE id = %s"
         values = (id,)
-        self.executeQuery(sql, values)
-
+        self.execute_query(sql, values)
 
     def save_message(self, name, message, id_channel):
-        time = datetime.now()
+        actual_time = datetime.now()
         sql = "INSERT INTO message (name, time, message, id_channel) VALUES (%s, %s, %s, %s)"
-        values = (name, time, message, id_channel)
-        self.executeQuery(sql, values)
+        values = (name, actual_time, message, id_channel)
+        self.execute_query(sql, values)
         
     def count_message(self,id):
         sql = "SELECT COUNT(*) AS nb FROM message WHERE id_channel = %s"
         values = (id,)
         return self.fetch_one(sql,values)
     
-    def get_message(self):
-        sql = "SELECT * FROM message"
-        return self.fetch(sql)
+    def get_message(self,id):
+        sql = "SELECT * FROM message WHERE id_channel = %s"
+        values = (id,)
+        return self.fetch(sql,values)
 
     def name_message(self,id):
         sql = "SELECT name FROM message WHERE id_channel = %s"
         values = (id,)
         return self.fetch(sql,values)
     
+    def get_profile_picture(self, id):
+        sql = "SELECT photo FROM user WHERE pseudo = %s"
+        values = (id,)
+        return self.fetch(sql,values)
+
     def time_message(self,id):
         sql = "SELECT time FROM message WHERE id_channel = %s"
         values = (id,)
@@ -160,16 +165,4 @@ class DiscordManager(Database):
     #     self.connection.commit()
     
 manager = DiscordManager()
-# manager.display_category()
-# manager.add_user("surname", "name", "pseudo", "email", "password","photo","id_role")
-# manager.surname_user()
-# manager.display_user()
-# manager.display_role_name()
-# manager.add_category("name","intro")
-# manager.add_channel("name","status","communication","id_category")
-# manager.display_channel()
-# manager.delete_user("id")
-# manager.delete_category("id")
-# manager.delete_channel("id")
-# manager.name_channel()
 manager.close_connection()

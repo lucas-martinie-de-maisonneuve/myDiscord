@@ -1,50 +1,53 @@
 import pygame
-from source.pygame_manager.Screen import Screen
-class Element(Screen):
+from PIL import Image, ImageFilter
+from io import BytesIO
+
+
+class Element():
     def __init__(self):
-        Screen.__init__(self)
 
         # Color
         self.black = (0, 0, 0)
         self.white = (255, 255, 255)
 
         self.darkgrey = (100,100,100)
-        self.grey = (250, 250, 250) # backhome
+        self.grey = (250, 250, 250) # Backgroud Home
         self.grey1 = (240, 242, 245)   
-        self.grey2 = (53, 53, 53)    
+        self.grey2 = (53, 53, 53) # Info profile rectangle 
         self.grey3 = (25, 25, 25)
         self.grey4 = (146, 151, 153)
         self.grey5 = (34, 31, 37)
         self.grey6 = (176, 186, 181)
         self.grey7 = (30, 33, 35) # First section principal page
         self.grey8 = (51, 55, 62) # Banner principal page
-        self.grey9 = (45, 49, 53) # 2 section principal page
-        self.grey10 = (29,30,33) # Rectangle principal page
+        self.grey9 = (17, 18, 20) # Second section principal page
+        self.grey10 = (29,30,33) # Rect principal page
         self.dark_grey = (34, 31, 37)
 
-        self.dark_green = (43, 147, 72) #connected bubble
+        self.dark_green = (43, 147, 72)
 
-        self.blue = (0, 151, 254) # login
-        self.blue1 = (0, 140, 234) # login  
+        self.blue = (0, 151, 254) # Login
+        self.blue1 = (0, 140, 234) # Login  
         self.blue2 = (33, 6, 84) # Theme color pink
         self.blue3 = (27, 38, 59) # Theme color orange
-        self.blue4 = (20, 236, 232) # flashy blue #14ece8
+        self.blue4 = (20, 236, 232) # Flashy blue #14ece8
         self.darkblue = (65, 90, 119) 
         self.lightblue = (189, 224, 254)
 
+        self.alpha_white =(150,150,150, 200) # Alpha profil picture on profil page
         self.alpha_grey =(50,50,50,100) # Alpha profil picture on profil page
-        self.alpha_grey2 =(50,50,50,200) #Alpha background register
+        self.alpha_grey2 =(50,50,50,200) # Alpha background register
         self.alpha_none =(0,0,0,0)
 
         self.pink = (222, 50, 79)
       
         self.yellow = (233, 164, 41)   
 
-        self.green = (66, 183, 42) #connected bubble
+        self.green = (66, 183, 42) # Connected bubble
         self.green2 = (39, 78, 19)
         self.darkgreen = (97, 155, 138)
 
-        self.purple1 = (202, 8, 255) #linehome
+        self.purple1 = (202, 8, 255) # Linehome
         self.purple2 = (125, 85, 196)
         self.purple3 = (60, 9, 108)  # Theme color blue
         self.purple4 = (67, 47, 104) # Theme color green
@@ -90,6 +93,7 @@ class Element(Screen):
         name = pygame.image.load(f'assets/image/{image_name}.png')
         name = pygame.transform.scale(name, (width, height))
         self.Window.blit(name, (x - name.get_width()//2, y - name.get_height()//2))
+        return name
 
     def image_not_center(self, name, x, y, width, height, image_name):
         name = pygame.image.load(f'assets/image/{image_name}.png').convert_alpha()
@@ -102,10 +106,27 @@ class Element(Screen):
         name = pygame.transform.scale(name, (width, height))
         self.Window.blit(name, (x - name.get_width()//2, y - name.get_height()//2))
 
-    def hover_image(self, name_rect, name, x, y, width, height, image_name): 
+    def img_background_blur(self, name, x, y, width, height, image_name, blur_radius=5):
+        name = pygame.image.load(f'assets/image/{image_name}.png').convert_alpha()
+        name = pygame.transform.scale(name, (width, height))
+        self.Window.blit(name, (x - name.get_width()//2, y - name.get_height()//2))
+
+        image_bytes = BytesIO()
+        pygame.image.save(name, image_bytes)
+        image_bytes.seek(0)
+        pillow_image = Image.open(image_bytes)
+        blurred_pillow_image = pillow_image.filter(ImageFilter.GaussianBlur(radius=blur_radius))
+        blurred_image = pygame.image.fromstring(
+            blurred_pillow_image.tobytes(), 
+            blurred_pillow_image.size, 
+            blurred_pillow_image.mode
+        )
+        self.Window.blit(blurred_image, (x - width // 2, y - height // 2))
+
+    def hover_image(self, name_rect, name, x, y, width, height, image_name, image_name_hover): 
         name_rect = pygame.Rect( x - width//2, y - height//2, width, height)        
         if self.is_mouse_over_button(name_rect):
-            self.img_center(name, x, y, width+5, height+5, image_name)     
+            self.img_center(name, x, y, width+5, height+5, image_name_hover)     
         else:
             self.img_center(name, x, y, width, height, image_name)
         return name_rect
@@ -122,12 +143,13 @@ class Element(Screen):
     def rect_border(self, color, x, y, width, height, thickness, radius):
         button = pygame.draw.rect(self.Window, color, pygame.Rect(x - width //2, y - height //2, width, height),  thickness, radius)
         return button
-    #Rect border only on top  
+    
+    # Rect border only on top  
     def rect_radius_top(self, color, x, y, width, height, radius):
         button = pygame.draw.rect(self.Window, color, pygame.Rect(x - width //2, y - height //2, width, height),False,0, radius, radius)
         return button
 
-    #Rect border only on bottom
+    # Rect border only on bottom
     def rect_radius_bot(self, color, x, y, width, height, radius):
         button = pygame.draw.rect(self.Window, color, pygame.Rect(x - width //2, y - height //2, width, height),False ,0,0,0, radius, radius)
         return button
@@ -149,26 +171,24 @@ class Element(Screen):
         else:
             self.circle(color, x, y, radius)
 
-# Def Hoover
-    
+# Def Hover
     def is_mouse_over_button(self, button_rect):
         mouse_pos = pygame.mouse.get_pos()
         return button_rect.collidepoint(mouse_pos)
     
-    def button_hover(self, name, x, y, width, height, color_full, color_border, color_hoover, color_border_hoover, text, font, text_color,text_size, thickness, radius): 
+    def button_hover(self, name, x, y, width, height, color_full, color_border, color_hover, color_border_hover, text, font, text_color,text_size, thickness, radius): 
 
         name = pygame.Rect((x - width//2), (y - height//2), width, height)
 
         if self.is_mouse_over_button(name):
-            self.rect_full(color_hoover, x, y, width + 5, height + 5, radius)
-            self.rect_border(color_border_hoover, x, y, width + 5, height + 5, thickness, radius)
+            self.rect_full(color_hover, x, y, width + 5, height + 5, radius)
+            self.rect_border(color_border_hover, x, y, width + 5, height + 5, thickness, radius)
         else:
             self.rect_full(color_full, x, y, width, height, radius)
             self.rect_border(color_border, x, y, width, height, thickness, radius)
         self.text_center(font, text_size, text, text_color,  x, y)
 
-        return name
-    
+        return name    
 # Def Cursor 
     def normal_cursor(self):
         pygame.mouse.set_cursor(pygame.cursors.arrow)
@@ -181,4 +201,20 @@ class Element(Screen):
         self.alpha_window = pygame.Surface((self.W, self.H), pygame.SRCALPHA)
         pygame.draw.rect(self.alpha_window, color, pygame.Rect(0,0, self.W, self.H))
         self.Window.blit(self.alpha_window, (0,0))
+        
+    def img_background_blur(self, name, x, y, width, height, image_name, blur_radius=5):
+        name = pygame.image.load(f'assets/image/{image_name}.png').convert_alpha()
+        name = pygame.transform.scale(name, (width, height))
+        self.Window.blit(name, (x - name.get_width()//2, y - name.get_height()//2))
 
+        image_bytes = BytesIO()
+        pygame.image.save(name, image_bytes)
+        image_bytes.seek(0)
+        pillow_image = Image.open(image_bytes)
+        blurred_pillow_image = pillow_image.filter(ImageFilter.GaussianBlur(radius=blur_radius))
+        blurred_image = pygame.image.fromstring(
+            blurred_pillow_image.tobytes(), 
+            blurred_pillow_image.size, 
+            blurred_pillow_image.mode
+        )
+        self.Window.blit(blurred_image, (x - width // 2, y - height // 2))
