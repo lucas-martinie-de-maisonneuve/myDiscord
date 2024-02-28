@@ -62,9 +62,8 @@ class Client(DiscordManager):
     def register_user(self):
             hashed_password = sha256(self.register_password.encode()).hexdigest()
             self.add_user(self.register_surname, self.register_name, self.register_username, self.register_email, hashed_password, self.register_photo, 2)
-            print(self.register_email, hashed_password)
             self.user_info = self.get_user(self.register_email, hashed_password)
-            print(self.user_info)
+            self.add_abc_password(self.register_password, self.user_info[0])
             return self.user_info
 
     def update_message(self):

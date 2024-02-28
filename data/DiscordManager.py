@@ -158,6 +158,11 @@ class DiscordManager(Database):
         sql = "SELECT password FROM password WHERE id_user = %s"
         values = (user_id,)
         return self.fetch(sql, values)
+    
+    def add_abc_password (self, password, id_user):
+        sql = "INSERT INTO password (password, id_user) VALUES (%s, %s)"
+        values = (password, id_user)
+        self.execute_query(sql, values)
 
     def close_connection(self):
         self.disconnect()
