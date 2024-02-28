@@ -325,14 +325,12 @@ class EventHandler():
 
                     elif self.but_add.collidepoint(event.pos):
                         if self.new_name_channel != "" and self.status != None and self.communication != None and self.category != None:
-                            print(self.new_name_channel,self.status,self.communication,self.category)
                             self.add_channel(self.new_name_channel,self.status,self.communication,self.category)
                             self.add = False
-                            print("ajouter")
 
                 if self.entry_new_name != 0 and self.status != None and self.communication != None and self.category != None:
                     self.add=True
-                                                   
+
                 elif event.type == pygame.KEYDOWN:
                     if event.key == pygame.K_BACKSPACE:
                         if self.entry_new_name==1:
