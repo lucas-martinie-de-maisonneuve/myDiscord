@@ -2,6 +2,7 @@ import pygame
 from data.DiscordManager import DiscordManager
 from source.pygame_manager.Gui import Gui
 from source.Client import Client
+# from Notification import Notification
 
 class MainPage(Gui, Client, DiscordManager):
     
@@ -9,6 +10,7 @@ class MainPage(Gui, Client, DiscordManager):
         Client.__init__(self)
         DiscordManager.__init__(self)  
         Gui.__init__(self)
+        # Notification.__init__(self)
         self.user_info = user_info
         self.input_search = "Search..."
         self.message = ""
@@ -17,7 +19,6 @@ class MainPage(Gui, Client, DiscordManager):
         self.entry = 0
         self.scroll = 0
         self.channel_rects = []
-        self.actual_channel = 1
 
         self.bell = pygame.Rect(1060, 15, 50, 50)
         self.poweroff_c = pygame.Rect(64-115/2, 635-115/2, 115, 115)
@@ -67,10 +68,10 @@ class MainPage(Gui, Client, DiscordManager):
         # Hover Add Channel
         self.circle4 = pygame.draw.circle(self.Window, self.grey10, (64, 485), 35)
         if self.is_mouse_over_button(self.circle4):
-            self.img_center("Add Channel", 65, 485, 45, 45,"profile/profile10")
+            self.img_center("Add Channel", 65, 485, 45, 45,"main_page/main_page13")
             self.img_center("Neon circle", 64, 485, 95 , 95,"main_page/main_page4")   
         else:      
-            self.img_center("Add Channel", 65, 485, 45, 45,"profile/profile10")
+            self.img_center("Add Channel", 65, 485, 45, 45,"main_page/main_page13")
             self.img_center("Neon circle", 64, 485, 90, 90,"main_page/main_page4")
             
         # Hover settings
@@ -110,11 +111,11 @@ class MainPage(Gui, Client, DiscordManager):
                     else:
                         self.text_not_align(self.font2, 15, channel[1], self.grey1, 200, position_y)
                     if channel[4] == 1:
-                        self.img_center("Book about us", 170, position_y + 5, 25, 25, "main_page/main_page12")
+                        self.img_center("Book about us", 170, position_y + 10, 25, 25, "main_page/main_page12")
                     elif channel[3] == 1:
-                        self.img_center("Volume logiciel", 170, position_y + 5, 25, 25, "main_page/main_page10")
+                        self.img_center("Volume logiciel", 170, position_y + 10, 25, 25, "main_page/main_page10")
                     else:
-                        self.img_center("Hashtags logiciel", 170, position_y + 5, 15, 15, "main_page/main_page14")
+                        self.img_center("Hashtags logiciel", 170, position_y + 10, 15, 15, "main_page/main_page14")
     
     def third_section(self):
         self.rect_full(self.grey10, 795, 385, 775, 610, 10)
@@ -162,8 +163,10 @@ class MainPage(Gui, Client, DiscordManager):
         self.img_center("Background",795, 660, 775, 80, "main_page/main_page21")
         self.entry_message = self.rect_full(self.grey10, 795, 650, 650, 60, 10)
         self.rect_border(self.grey4, 795, 650, 650, 60, 2, 10)
+        self.send_button = self.hover_image("send_button", "Send_button", 1080, 650, 45, 45, "main_page/main_page22", "main_page/main_page22")
         
     def input_write_user(self): 
+
         split_text = []
         line = ""
         words = self.message.split(" ")
@@ -178,6 +181,16 @@ class MainPage(Gui, Client, DiscordManager):
         for i, ligne in enumerate(split_text):
             self.text_not_align(self.font2, 17, ligne, self.grey1, 510, 625.5 + i * 15)
 
+    # def notification(self): 
+    #     last_login_date = self.load_last_login_date() 
+    #     self.save_last_login_date() 
+
+    #     new_messages = [message for message in self.messages if message[2] > last_login_date]
+
+    #     if new_messages:
+    #         self.display_notification(len(new_messages))
+
+
     def mainPage_run(self):
         while self.main_page_running :
             self.update_message()
@@ -188,4 +201,7 @@ class MainPage(Gui, Client, DiscordManager):
             self.banner() 
             self.event_main_page()
             self.main_page_cursor()
+
+            # self.notification()
+
             self.update()

@@ -18,13 +18,14 @@ INSERT INTO user(surname, name, pseudo, email, password, photo, id_role) VALUES
 ('Ines','Lorquet', 'Inessa', 'ines.lorquet@laplateforme.io', '586447cae9b58ff7e2c0a2b3980caf7f2ac5984bfe92cbb99eb0a5f0a702914d', 1, 1),
 ('Lucas','Martinie', 'LuLu', 'lucas.martinie@laplateforme.io', 'fc96020f4fc3fbbe01b03f6c1ef101a57110b6844511567e2cca087e02c0d4bb', 2, 1),
 ('Vanny','Lamorte', 'VanLauLam', 'vanny.lamorte@laplateforme.io', '5c5bdc4a2ad0deadbd40affb8fe0e359ff6fb3402a38b2a8addbdee2b802d1b5', 3, 2),
-('Gerard','Lamorte', 'GegeDeMars', 'gerard.lamorte@laplateforme.io', 'f8e2f219f007cc3d627bd6841ae18c0e3f8e502bb9d3004877d92522924c4f6f', 3, 2),
-('Lucy','Madec', 'Lucyleony', 'lucy.madec@laplateforme.io', 'bb3841631aa4975e6a2458f7def3a3030e17ecd27c0f2aa443fa94de4342a24b', 4, 1),
-('Camille','Martinie', 'CamCamCam', 'camille.martinie@laplateforme.io', '2674f3c9cee0ecaa024b4cbc53ed34e18fc2dd288e56d9b2f5a6f57d29115119', 2, 1),
-('Claire','Lamorte', 'Cla Loup', 'claire.lamorte@laplateforme.io', '2fea5bafc5c03e90ffa05ae77fcd7c369f15f041f9da2cbb359b760583f10b86', 3, 2),
-('Elise','Martinie', 'Hey lee02', 'elise.martinie@laplateforme.io', '877dec59269bf577868d0043a673249d3bb544047fdd6bd166ec585b6b67fe7d', 2, 2),
-('Julien','Beaurain', 'Ju Bond', 'julien.beaurain@laplateforme.io', 'b69990c682ef8acb1574ab57b656eb997818b0361a4e644b12780bcd09c67839', 1, 2),
-('Alex','Philipot', 'Poupinou', 'alexandre.philipot@laplateforme.io', 'ca978112ca1bbdcafac231b39a23dc4da786eff8147c4e72b9807785afee48bb', 4, 2)
+('Jacque','Dubois', 'Jack', 'jacques.dubois@laplateforme.io', '2f5cede731389f72b1c679168da2258bb21420e12f547c89ab6cd769ba5e8087', 3, 2),
+('Lucy','Madec', 'Lucyleony', 'lucy.madec@laplateforme.io', 'LucyMadec1234!', 4, 1),
+('Lucas','Martinie', 'Lucassa', 'lucas.martinie@laplateforme.io', 'fc96020f4fc3fbbe01b03f6c1ef101a57110b6844511567e2cca087e02c0d4bb', 2, 1),
+('Claire','Lamorte', 'Cla Loup', 'claire.lamorte@laplateforme.io', 'ClaireLamorte1234!', 3, 2),
+('Elise','Martinie', 'Hey lee02', 'elise.martinie@laplateforme.io', 'EliseMartinie01234!', 2, 2),
+('Julien','Beaurain', 'Ju Bond', 'julien.beaurain@laplateforme.io', 'JulienBeaurain01234!', 1, 2),
+('Alex','Philipot', 'Poupinou', 'alexandre.philipot@laplateforme.io', 'Alex.Philipot01234!', 4, 2)
+
 ;
 
 CREATE TABLE role (
@@ -118,16 +119,3 @@ CREATE TABLE password (
     password VARCHAR(255),
     id_user INT
 );
-
-INSERT INTO password(password, id_user) VALUES
-("0", 1),
-("InesLorquet", 2),
-("LucasMartinie2415!",3),
-("VannyLamorte2512!",4),
-("GerardLamorte1234!",5),
-("LucyMadec1234!",6),
-("CamilleMartinie1234!",7),
-("ClaireLamorte1234!",8),
-("EliseMartinie01234!",9),
-("JulienBeaurain01234!",10),
-("AlexPhilipot01234!", 11);

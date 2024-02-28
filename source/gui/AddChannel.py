@@ -1,20 +1,18 @@
 import pygame
-from data.DiscordManager import DiscordManager
 from source.pygame_manager.Gui import Gui
-
-class AddChannel(Gui, DiscordManager):
+from source.Client import Client
+class AddChannel(Gui,Client):
 
     def __init__(self):
         Gui.__init__(self)
-        DiscordManager.__init__(self)
-        self.add_channel_running = True
+        Client.__init__(self)
         self.new_name_channel = ""
         self.entry_new_name = 0
         self.status = None
         self.communication = None
         self.category = None
         self.add = False
-        
+
     def background(self): 
         self.img_background_blur('Background', 600, 350, 1200, 800, 'main_page/main_page8', blur_radius=10)
 
