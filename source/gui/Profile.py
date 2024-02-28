@@ -35,8 +35,11 @@ class Profile( Gui, Client):
         pos_y = 0  
         for i, user_community in enumerate(reversed(self.community_list[-10:])): 
             pos_y = pos_y + 30
-            self.text_not_align(self.font2, 20,str(user_community[3]), self.white, 150, 95 + pos_y)  
-            self.image_not_center("ProfilePicture", 90, pos_y + 90, 35, 35, f'profile/profile{user_community[6]}')
+            self.text_not_align(self.font2, 20,str(user_community[3]), self.white, 150, 95 + pos_y)
+            if user_community[0] == self.user_info[0]:
+                self.image_not_center("ProfilePicture", 90, pos_y + 90, 35, 35, f'profile/profile{self.picture}')
+            else:      
+                self.image_not_center("ProfilePicture", 90, pos_y + 90, 35, 35, f'profile/profile{user_community[6]}')
 
     def design(self):
         # Profile main rectangle
@@ -179,6 +182,7 @@ class Profile( Gui, Client):
     def info_profile_edit(self):
         # Username info 
         self.rect_full_not_centered(self.white, 420, 322, 0 + self.size_username, 20, 12)
+
         if self.username_edit:
             if self.size_username < 240:
                 self.size_username += 15
@@ -229,15 +233,16 @@ class Profile( Gui, Client):
                 self.text_not_align(self.font2, 16, self.profile_password, self.black, 440, 442)
 
         # Quit
-            self.close_profile = self.hover_image("Quit", "Quit", 1120, 70, 50, 50, "profile/profile11", "profile/profile8")
+        self.close_profile = self.hover_image("Quit", "Quit", 1120, 70, 50, 50, "profile/profile11", "profile/profile8")
+        if self.password_edit or self.username_edit or self.email_edit or self.picture_edit or self.status_edit: 
+            self.hover_image("Logo_save", "Logo_save", 995, 220, 80, 80, "profile/profile13","profile/profile14")
 
     def profile_run(self):
         if self.profile_password == "":
             user_id = self.user[0]
             self.profile_password = self.abc_password(user_id) 
-            
-        self.username, self.email, self.picture, self.role = self.user[3], self.user[4], self.user[6], self.user[7]
-        self.password_display = " *" * len(self.profile_password)
+            self.username, self.email, self.picture, self.role = self.user[3], self.user[4], self.user[6], self.user[7]
+            self.password_display = " *" * len(self.profile_password)
 
         if self.profile_running :
             self.design()

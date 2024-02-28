@@ -32,7 +32,7 @@ class Client(DiscordManager):
         self.main_page_running = False
         
         self.main_page_to_profile = False
-        self.creator_to_profile = False
+        self.contact_to_profile = False
         self.profile_running = False
 
         self.profile_to_contact = False
