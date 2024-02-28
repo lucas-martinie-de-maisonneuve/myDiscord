@@ -120,7 +120,7 @@ CREATE TABLE password (
 );
 
 INSERT INTO password(password, id_user) VALUES
-("0", 1),
+("a", 1),
 ("InesLorquet0609!", 2),
 ("LucasMartinie2415!",3),
 ("VannyLamorte2512!",4),

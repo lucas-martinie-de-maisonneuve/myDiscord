@@ -1,10 +1,11 @@
+import time
 from datetime import datetime
 from data.Database import Database
 
 class DiscordManager(Database):
     def __init__(self):
-        # Database.__init__(self, 'localhost', 'root', '$~Bc4gB9', 'discord')
-        Database.__init__(self, 'localhost', 'root', 'VannyLamorte25!', 'discord')
+        Database.__init__(self, 'localhost', 'root', '$~Bc4gB9', 'discord')
+        # Database.__init__(self, 'localhost', 'root', 'VannyLamorte25!', 'discord')
         # Database.__init__(self, 'localhost', 'root', 'azerty', 'discord')
         self.connect()
 
@@ -114,9 +115,9 @@ class DiscordManager(Database):
         self.execute_query(sql, values)
 
     def save_message(self, name, message, id_channel):
-        time = datetime.now()
+        actual_time = datetime.now()
         sql = "INSERT INTO message (name, time, message, id_channel) VALUES (%s, %s, %s, %s)"
-        values = (name, time, message, id_channel)
+        values = (name, actual_time, message, id_channel)
         self.execute_query(sql, values)
         
     def count_message(self,id):

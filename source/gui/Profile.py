@@ -34,7 +34,7 @@ class Profile( Gui, Client):
         self.text_not_align(self.font1, 18,"People You May Know..." , self.white, 90, 85)
 
         pos_y = 0  
-        for i, user_community in enumerate(self.community_list[:10]): 
+        for i, user_community in enumerate(reversed(self.community_list[-10:])): 
             pos_y = pos_y + 30
             self.text_not_align(self.font2, 20,str(user_community[3]), self.white, 150, 95 + pos_y)  
             self.image_not_center("ProfilePicture", 90, pos_y + 90, 35, 35, f'profile/profile{user_community[6]}')

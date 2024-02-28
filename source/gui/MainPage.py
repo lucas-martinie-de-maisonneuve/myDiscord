@@ -13,18 +13,13 @@ class MainPage(Gui, Client, DiscordManager):
         # Notification.__init__(self)
         self.user_info = user_info
         self.input_search = "Search..."
-        self.message = ""
         self.RECT_W = 600
         self.RECT_H= 60 
         self.L_MAX = 80
         self.link_is_clicked = True
         self.entry = 0
         self.scroll = 0
-
-        self.categories = self.display_category()
-        self.channels = self.display_channel()
-        self.messages = self.display_message()
-        self.actual_channel = 7
+        self.channel_rects = []
 
         self.bell = pygame.Rect(1060, 15, 50, 50)
         self.poweroff_c = pygame.Rect(64-115/2, 635-115/2, 115, 115)
@@ -101,14 +96,19 @@ class MainPage(Gui, Client, DiscordManager):
             for channel in self.channels:
                 if channel[4] == category[0]:
                     position_y += 20
-                    self.text_not_align(self.font2, 15, channel[1], self.grey1, 200, position_y)
-                    if channel[4] == 1:
-                        self.img_center("Book about us", 170, position_y + 5, 25, 25, "main_page/main_page12")
-                    elif channel[3] == 1:
-                        self.img_center("Volume logiciel", 170, position_y + 5, 25, 25, "main_page/main_page10")
+                    channel_rect = pygame.Rect(200, position_y, 150, 20)
+                    self.channel_rects.append((channel[0], channel_rect))
+                    if self.is_mouse_over_button(channel_rect):
+                        self.text_not_align(self.font2, 17, channel[1], self.pink, 200, position_y)
                     else:
-                        self.img_center("Hashtags logiciel", 170, position_y + 5, 15, 15, "main_page/main_page14")
-  
+                        self.text_not_align(self.font2, 15, channel[1], self.grey1, 200, position_y)
+                    if channel[4] == 1:
+                        self.img_center("Book about us", 170, position_y + 10, 25, 25, "main_page/main_page12")
+                    elif channel[3] == 1:
+                        self.img_center("Volume logiciel", 170, position_y + 10, 25, 25, "main_page/main_page10")
+                    else:
+                        self.img_center("Hashtags logiciel", 170, position_y + 10, 15, 15, "main_page/main_page14")
+    
     def third_section(self):
         self.rect_full(self.grey10, 795, 385, 775, 610, 10)
         self.display_text_chat()
@@ -153,8 +153,10 @@ class MainPage(Gui, Client, DiscordManager):
                 self.img_center("ProfilePicture", 460, pos_y + 10 + self.scroll, 35, 35, f'profile/profile{self.str_picture}')
         self.img_center("Background",795, 40, 775, 80, "main_page/main_page20")
         self.img_center("Background",795, 660, 775, 80, "main_page/main_page21")
-        self.entry_message = self.rect_full(self.grey1, 795, 650, 650, 60, 10)
-  
+        self.entry_message = self.rect_full(self.grey10, 795, 650, 650, 60, 10)
+        self.rect_border(self.grey4, 795, 650, 650, 60, 2, 10)
+        self.send_button = self.hover_image("send_button", "Send_button", 1080, 650, 45, 45, "main_page/main_page22", "main_page/main_page22")
+        
     def input_write_user(self): 
 
         split_text = []
@@ -169,7 +171,7 @@ class MainPage(Gui, Client, DiscordManager):
         split_text.append(line.strip())
 
         for i, ligne in enumerate(split_text):
-            self.text_not_align(self.font2, 17, ligne, self.black, 510, 620 + i * 15)
+            self.text_not_align(self.font2, 17, ligne, self.grey1, 510, 625.5 + i * 15)
 
     # def notification(self): 
     #     last_login_date = self.load_last_login_date() 
@@ -183,7 +185,7 @@ class MainPage(Gui, Client, DiscordManager):
 
     def mainPage_run(self):
         while self.main_page_running :
-
+            self.update_message()
             self.background()
             self.first_section()
             self.second_section()

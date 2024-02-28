@@ -1,3 +1,4 @@
+import time
 from data.DiscordManager import DiscordManager
 from hashlib import sha256
 
@@ -28,6 +29,12 @@ class Client(DiscordManager):
         self.profile_to_contact = False
         self.contact_running = False
 
+        self.categories = self.display_category()
+        self.channels = self.display_channel()
+        self.messages = self.display_message()
+
+        self.actual_channel = 1
+        self.message = ""
     def login_user(self):
         hashed_password = sha256(self.user_password.encode()).hexdigest()
 
@@ -35,7 +42,6 @@ class Client(DiscordManager):
             self.user_info = self.get_user(self.user_email, hashed_password)
             self.connected = True
             print("Connexion réussie !")
-            print(self.user_info)
             return self.user_info
         else:
             print("Erreur. Connexion échouée.")
@@ -44,3 +50,11 @@ class Client(DiscordManager):
         self.profile_password = self.get_password(user_id)
         return self.profile_password[0][0]
     
+    def update_message(self):
+        self.messages = self.display_message()
+
+    def add_message(self):
+        if self.message != "":
+            self.save_message(self.user_info[3], self.message, self.actual_channel)
+            self.update_message()
+            self.message = ""

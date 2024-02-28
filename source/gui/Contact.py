@@ -126,6 +126,11 @@ class Contact(Gui, Client):
         self.marseille = self.hover_image("Marseille", "Marseille", 990, 500, 25, 25,"laplateforme_contact/contact12", "laplateforme_contact/contact12") # Marseille  
         self.martigues = self.hover_image("Martigues","Martigues", 980, 495, 25, 25,"laplateforme_contact/contact12", "laplateforme_contact/contact12")  # Martigues
 
+        # Quit
+        self.close_about_us = self.hover_image("Quit", "Quit", 1120, 70, 50, 50, "profile/profile11", "profile/profile8")
+        
+
+
     def contact_run(self):        
         if self.contact_running:
             self.event_contact()
