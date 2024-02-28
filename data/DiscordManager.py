@@ -48,10 +48,11 @@ class DiscordManager(Database):
     def display_category(self):
         sql = "SELECT * FROM category"
         return self.fetch(sql)
+
     def display_channel(self):
         sql = "SELECT * FROM channel"
         return self.fetch(sql)
-    
+
     def display_message(self):
         sql = "SELECT * FROM message"
         return self.fetch(sql)
@@ -59,7 +60,7 @@ class DiscordManager(Database):
     def count_category(self):
         sql = "SELECT COUNT(*) AS nb FROM category"
         return self.fetch_one(sql)
-    
+
     def id_category(self):
         sql = "SELECT id FROM category"
         self.cursor.execute(sql)

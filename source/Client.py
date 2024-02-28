@@ -28,7 +28,9 @@ class Client(DiscordManager):
         self.profile_to_contact = False
         self.contact_running = False
         
+        self.add_channel_running = False
         self.main_page_to_add_channel = False
+        self.add_channel_to_main_page = False
         
         self.categories = self.display_category()
         self.channels = self.display_channel()

@@ -95,7 +95,7 @@ class AddChannel(Gui, Client):
         self.img_center("Neon light", 600, 225, 240, 90,"main_page/main_page7")
         
         # Cross quit
-        self.close_profile = self.hover_image("Quit", "Quit", 815, 180, 50, 50, "profile/profile11", "profile/profile8")
+        self.close_add = self.hover_image("Quit", "Quit", 815, 180, 50, 50, "profile/profile11", "profile/profile8")
 
         self.img_center("Neon light", 600, 530, 150, 90,"main_page/main_page7")
         self.img_center("Neon light", 600, 440, 150, 90,"main_page/main_page7")

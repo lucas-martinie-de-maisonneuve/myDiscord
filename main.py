@@ -23,7 +23,7 @@ class Display_test(Gui):
         self.contact = Contact()
         self.add_channel = AddChannel()
         self.connexion.home_running = True
-    
+
     def test(self):
         while True:
             if self.register.register_to_login or self.main_page.main_page_to_login or self.profile.profile_to_login or self.connexion.home_running:
@@ -39,13 +39,13 @@ class Display_test(Gui):
                 self.login_to_register = False
                 self.register.register_run()
 
-            elif self.profile.profile_to_main_page or self.main_page.main_page_running or self.connexion.home_to_main_page:
+            elif self.profile.profile_to_main_page or self.main_page.main_page_running or self.connexion.home_to_main_page or self.add_channel.add_channel_to_main_page:
                 if not self.main_page.main_page_running:
                     self.normal_cursor()
                     self.main_page = MainPage(self.connexion.user_info)
                     self.main_page.main_page_running = True
                 else:
-                    self.profile.profile_to_main_page, self.connexion.home_to_main_page = False, False
+                    self.profile.profile_to_main_page, self.connexion.home_to_main_page, self.add_channel.add_channel_to_main_page = False, False, False
                     self.main_page.mainPage_run()
 
             elif self.main_page.main_page_to_profile or self.profile.profile_running:
@@ -55,17 +55,17 @@ class Display_test(Gui):
                 else:
                     self.main_page.main_page_to_profile = False
                     self.profile.profile_run()
-                    
+
             elif self.main_page.main_page_to_add_channel or self.add_channel.add_channel_running:
                     self.add_channel.add_channel_running = True
                     self.add_channel.addChannel_run()
                     self.main_page.main_page_to_add_channel = False
-                    
+
             elif self.profile.profile_to_contact or self.contact.contact_running:
                 self.contact.contact_running = True
                 self.contact.profile_to_contact = False
                 self.contact.contact_run()
-                
+
             self.update()
 display = Display_test()
 display.test()
