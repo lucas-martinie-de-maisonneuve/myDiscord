@@ -66,5 +66,6 @@ class Display_test(Gui):
                 self.contact.contact_run()         
 
             self.update()
+            
 display = Display_test()
 display.test()

@@ -153,6 +153,11 @@ class DiscordManager(Database):
     def id_channel_message(self):
         sql = "SELECT id_channel FROM message"
         return self.fetch(sql)
+    
+    def get_password(self, user_id):
+        sql = "SELECT password FROM password WHERE id_user = %s"
+        values = (user_id,)
+        return self.fetch(sql, values)
 
     def close_connection(self):
         self.disconnect()
@@ -162,7 +167,7 @@ class DiscordManager(Database):
     #     set_clause = ", ".join([f"{key} = '{value}'" for key, value in new_product.items()])
     #     sql = f"UPDATE product SET {set_clause} WHERE id = %s"
     #     self.cursor.execute(sql, (product_id,))
-    #     self.connection.commit()
-    
+    #     self.connection.commit()       
+
 manager = DiscordManager()
 manager.close_connection()

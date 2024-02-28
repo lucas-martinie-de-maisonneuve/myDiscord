@@ -1,16 +1,14 @@
 import pygame
-from data.DiscordManager import DiscordManager
 from source.pygame_manager.Gui import Gui
 from source.Client import Client
 
-class Profile( Gui, Client, DiscordManager):
+class Profile( Gui, Client):
     
     def __init__(self, user_info):
         Gui.__init__(self)
-        DiscordManager.__init__(self)
         Client.__init__(self)
         self.community_list = self.display_user()  
-        self.user_info = user_info
+        self.user = user_info   
         self.edit = 0
         self.password_edit, self.username_edit, self.email_edit, self.picture_edit, self.status_edit = False, False, False, False, False
         self.theme_color = self.purple4
@@ -58,7 +56,6 @@ class Profile( Gui, Client, DiscordManager):
         # Profile info rectangle
         self.rect_full(self.grey2, 750, 445, 700, 350, 10)
         self.rect_border(self.grey4, 750, 445, 700, 350, 1, 10)
-
         
         # Info profile
         self.info_profile("Username", self.username, 300)
@@ -66,7 +63,6 @@ class Profile( Gui, Client, DiscordManager):
         self.info_profile("Password", self.password_display, 420)
         self.info_profile("Role", self.role, 480)
         self.info_profile("Status", self.role, 540)
-
      
         # Creators button
         self.contact_button = self.lateral_menu_display(475, "profile/profile6", "profile9", "profile9")        
@@ -169,11 +165,11 @@ class Profile( Gui, Client, DiscordManager):
 
     def password_show(self):
         if not self.password_edit:
-            self.show = pygame.Rect(450 + 10 * len(self.password),443,35,15)
+            self.show = pygame.Rect(450 + 10 * len(self.profile_password),443,35,15)
             if self.is_mouse_over_button(self.show):
-                self.text_not_align(self.font2, 16, f"show",self.blue1,450 + 10 * len(self.password), 437)
+                self.text_not_align(self.font2, 16, f"show",self.blue1,450 + 10 * len(self.profile_password), 437)
             else:
-                self.text_not_align(self.font2, 14, f"show",self.grey1,450 + 10 * len(self.password), 438)
+                self.text_not_align(self.font2, 14, f"show",self.grey1,450 + 10 * len(self.profile_password), 438)
 
     def info_profile(self, title, text_info, y):
         self.text_not_align(self.font1, 16, title, self.grey6, 430, y)
@@ -216,28 +212,32 @@ class Profile( Gui, Client, DiscordManager):
         if self.password_edit:
             if self.size_password < 240:
                 self.size_password += 15
-            self.text_not_align(self.font2, 16, self.password, self.black, 440, 442)
+            self.text_not_align(self.font2, 16, self.profile_password, self.black, 440, 442)
         else:
             if self.size_password < 15:
                 self.size_password = 0
             elif self.size_password > 0:
                 self.size_password -= 20
             if self.size_password < 100:
-                if self.show_pass:
-                    self.text_not_align(self.font2, 16, self.password, self.white, 440, 442)
+                if self.show_pass:                    
+        
+                    self.text_not_align(self.font2, 16, self.profile_password, self.white, 440, 442)
                 else:
-                    self.password_display = " *" * len(self.password)
+                    self.password_display = " *" * len(self.profile_password)
                     self.text_not_align(self.font2, 16, self.password_display, self.white, 440, 442)
             else:
-                self.text_not_align(self.font2, 16, self.password, self.black, 440, 442)
+                self.text_not_align(self.font2, 16, self.profile_password, self.black, 440, 442)
 
         # Quit
             self.close_profile = self.hover_image("Quit", "Quit", 1120, 70, 50, 50, "profile/profile11", "profile/profile8")
 
     def profile_run(self):
-        self.user = self.user_info
-        self.username, self.email ,self.password ,self.picture, self.role = self.user[3], self.user[4], self.user[5], self.user[6], self.user[7]
-        self.password_display = " *" * len(self.password)
+        if self.profile_password == "":
+            user_id = self.user[0]
+            self.profile_password = self.abc_password(user_id) 
+            
+        self.username, self.email, self.picture, self.role = self.user[3], self.user[4], self.user[6], self.user[7]
+        self.password_display = " *" * len(self.profile_password)
 
         if self.profile_running :
             self.design()

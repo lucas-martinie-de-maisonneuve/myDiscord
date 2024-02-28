@@ -5,6 +5,7 @@ from hashlib import sha256
 class Client(DiscordManager):
     def __init__(self):
         self.connected = False
+        self.profile_password = ""
         self.home_running = False
         self.user_email = ""
         self.user_password = ""
@@ -54,6 +55,10 @@ class Client(DiscordManager):
         else:
             print("Erreur. Connexion échouée.")
 
+    def abc_password(self, user_id): 
+        self.profile_password = self.get_password(user_id)
+        return self.profile_password[0][0]
+    
     def register_user(self):
             hashed_password = sha256(self.register_password.encode()).hexdigest()
             self.add_user(self.register_surname, self.register_name, self.register_username, self.register_email, hashed_password, self.register_photo, 2)

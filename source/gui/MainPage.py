@@ -2,6 +2,7 @@ import pygame
 from data.DiscordManager import DiscordManager
 from source.pygame_manager.Gui import Gui
 from source.Client import Client
+# from Notification import Notification
 
 class MainPage(Gui, Client, DiscordManager):
     
@@ -9,6 +10,7 @@ class MainPage(Gui, Client, DiscordManager):
         Client.__init__(self)
         DiscordManager.__init__(self)  
         Gui.__init__(self)
+        # Notification.__init__(self)
         self.user_info = user_info
         self.input_search = "Search..."
         self.RECT_W = 600
@@ -156,6 +158,7 @@ class MainPage(Gui, Client, DiscordManager):
         self.send_button = self.hover_image("send_button", "Send_button", 1080, 650, 45, 45, "main_page/main_page22", "main_page/main_page22")
         
     def input_write_user(self): 
+
         split_text = []
         line = ""
         words = self.message.split(" ")
@@ -170,6 +173,16 @@ class MainPage(Gui, Client, DiscordManager):
         for i, ligne in enumerate(split_text):
             self.text_not_align(self.font2, 17, ligne, self.grey1, 510, 625.5 + i * 15)
 
+    # def notification(self): 
+    #     last_login_date = self.load_last_login_date() 
+    #     self.save_last_login_date() 
+
+    #     new_messages = [message for message in self.messages if message[2] > last_login_date]
+
+    #     if new_messages:
+    #         self.display_notification(len(new_messages))
+
+
     def mainPage_run(self):
         while self.main_page_running :
             self.update_message()
@@ -180,4 +193,7 @@ class MainPage(Gui, Client, DiscordManager):
             self.banner() 
             self.event_main_page()
             self.main_page_cursor()
+
+            # self.notification()
+
             self.update()
