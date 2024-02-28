@@ -114,11 +114,6 @@ class DiscordManager(Database):
         params=(password, id_user)
         self.execute_query(sql, params)
 
-    # def update_product(self, name, description, price, quantity, id_category, id):
-    #     sql = 'UPDATE product SET name=%s, description=%s, price=%s, quantity=%s, id_category=%s WHERE id=%s'
-    #     params = (name, description, price, quantity, id_category, id)
-    #     self.execute_query(sql, params)
-
     # Delete User
     def delete_user(self, id):
         sql = "DELETE FROM user WHERE id = %s"
