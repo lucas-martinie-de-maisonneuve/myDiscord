@@ -54,6 +54,7 @@ class Client(DiscordManager):
         self.channels = self.display_channel()
         self.messages = self.display_message()
         
+        # self.emoji_display = self.emoji_react()
 
         self.actual_channel = 1
         self.message = ""

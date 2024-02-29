@@ -25,6 +25,9 @@ class MainPage(Gui, Client, DiscordManager):
         self.settings_c = pygame.Rect( 64-115/2, 540-115/2, 115, 115)
         self.server_c =  pygame.Rect(64-115/2, 170-115/2, 115, 115)
 
+        self.emoji_choice = False
+        self.emoji_display = 0
+        self.emoji_list = []
     def background(self): 
         self.img_background("Background", 600, 350, 1200, 800, "main_page/main_page8")
    
@@ -159,6 +162,37 @@ class MainPage(Gui, Client, DiscordManager):
                 self.text_not_align(self.font1, 10, str(message_time), self.grey1, 590, pos_y + 10 + self.scroll)
                 self.img_center("bubble", 460, pos_y + 10 + self.scroll, 40, 40, "main_page/main_page4")
                 self.img_center("ProfilePicture", 460, pos_y + 10 + self.scroll, 35, 35, f'profile/profile{self.str_picture}')
+                
+                if message[5] is not None:
+                    self.img_center("Heart",460, pos_y + 50 + self.scroll, 30, 30, f"main_page/emoji/emoji{message[5]}")
+                    
+                self.emoji_heart = pygame.draw.circle(self.Window, self.grey10, (710, pos_y + 10 + self.scroll), 9)
+                self.emoji_laugh = pygame.draw.circle(self.Window, self.grey10, (740,  pos_y + 10 + self.scroll), 9)
+                self.emoji_cry = pygame.draw.circle(self.Window, self.grey10, (770, pos_y + 10 + self.scroll), 9)
+                self.emoji_angry = pygame.draw.circle(self.Window, self.grey10, (800, pos_y + 10 + self.scroll), 9)
+        
+                # Emoji Choice
+                if self.emoji_choice:
+                    for i,item in enumerate(self.emoji_list):
+                        if item[0] == message[0]:
+                            del self.emoji_list[i]
+                            
+                    self.rect_emoji = pygame.Rect(700,pos_y + self.scroll,110,20)
+                    self.emoji_list.append((message[0],self.rect_emoji))
+                    
+                    self.rect_full_not_centered(self.red,700,pos_y + self.scroll,110,20,0)
+                    self.emoji_heart = pygame.draw.circle(self.Window, self.grey10, (710, pos_y + 10 + self.scroll), 11)
+                    self.img_center("Heart",710, pos_y + 10 + self.scroll, 20, 20, "main_page/emoji/emoji1")
+                    
+                    self.emoji_laugh = pygame.draw.circle(self.Window, self.grey10, (740,  pos_y + 10 + self.scroll), 11)
+                    self.img_center("Laugh",740, pos_y + 10 + self.scroll, 20, 20, "main_page/emoji/emoji2")
+                    
+                    self.emoji_cry = pygame.draw.circle(self.Window, self.grey10, (770, pos_y + 10 + self.scroll), 11)
+                    self.img_center("Cry",770, pos_y + 10 + self.scroll, 20, 20, "main_page/emoji/emoji3")       
+                    
+                    self.emoji_angry = pygame.draw.circle(self.Window, self.grey10, (800, pos_y + 10 + self.scroll), 11)
+                    self.img_center("Angry",800, pos_y + 10 + self.scroll, 20, 20, "main_page/emoji/emoji4")
+                    
         self.img_center("Background",795, 40, 775, 80, "main_page/main_page20")
         self.img_center("Background",795, 660, 775, 80, "main_page/main_page21")
         self.entry_message = self.rect_full(self.grey10, 795, 650, 650, 60, 10)
@@ -166,7 +200,6 @@ class MainPage(Gui, Client, DiscordManager):
         self.send_button = self.hover_image("send_button", "Send_button", 1080, 650, 45, 45, "main_page/main_page22", "main_page/main_page22")
         
     def input_write_user(self): 
-
         split_text = []
         line = ""
         words = self.message.split(" ")
@@ -180,6 +213,10 @@ class MainPage(Gui, Client, DiscordManager):
 
         for i, ligne in enumerate(split_text):
             self.text_not_align(self.font2, 17, ligne, self.grey1, 510, 625.5 + i * 15)
+    def display_emoji(self):
+        self.emoji_logo = pygame.draw.circle(self.Window, self.grey10, (1150, 650), 20)
+        self.img_center("Logo Emoji",1150, 650, 50, 50, "main_page/main_page27")
+
 
     # def notification(self): 
     #     last_login_date = self.load_last_login_date() 
@@ -199,9 +236,9 @@ class MainPage(Gui, Client, DiscordManager):
             self.second_section()
             self.third_section()
             self.banner() 
+            self.display_emoji()
             self.event_main_page()
             self.main_page_cursor()
-
             # self.notification()
-
+            # print(self.emoji_list)
             self.update()
