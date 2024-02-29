@@ -207,8 +207,11 @@ class DiscordManager(Database):
     def get_last_message_time(self, user_id):
         sql = "SELECT last_message FROM user WHERE id = %s"
         values = (user_id,)
-        return self.fetch(sql, values)
-    
+        result = self.fetch(sql, values)
+        if result: 
+                return result[0][0]
+        else: 
+            return None
 
     
 

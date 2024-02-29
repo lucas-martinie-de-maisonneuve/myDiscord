@@ -35,6 +35,8 @@ class Client(DiscordManager):
 
         self.actual_channel = 1
         self.message = ""
+
+                
         
     def login_user(self):
         hashed_password = sha256(self.user_password.encode()).hexdigest()
@@ -59,3 +61,10 @@ class Client(DiscordManager):
             self.save_message(self.user_info[3], self.message, self.actual_channel)
             self.update_message()
             self.message = ""
+
+        # Notification
+    def load_info_last_message(self, user): 
+        self.last_login_date = self.get_last_message_time(user)
+        return self.last_login_date
+
+    

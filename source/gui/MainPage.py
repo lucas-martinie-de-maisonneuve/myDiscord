@@ -1,4 +1,5 @@
-import pygame, datetime
+import pygame
+from datetime import datetime, timedelta
 from data.DiscordManager import DiscordManager
 from source.pygame_manager.Gui import Gui
 from source.Client import Client
@@ -10,6 +11,7 @@ class MainPage(Gui, Client, DiscordManager):
         DiscordManager.__init__(self)  
         Gui.__init__(self)
         self.user_info = user_info
+        self.last_login_date = ""
         self.input_search = "Search..."
         self.RECT_W = 600
         self.RECT_H= 60 
@@ -23,6 +25,7 @@ class MainPage(Gui, Client, DiscordManager):
         self.poweroff_c = pygame.Rect(64-115/2, 635-115/2, 115, 115)
         self.settings_c = pygame.Rect( 64-115/2, 540-115/2, 115, 115)
         self.server_c =  pygame.Rect(64-115/2, 170-115/2, 115, 115)
+        
 
     def background(self): 
         self.img_background("Background", 600, 350, 1200, 800, "main_page/main_page8")
@@ -173,26 +176,28 @@ class MainPage(Gui, Client, DiscordManager):
 
     def notification(self): 
 
-        # Save info when disconnect 
-        self.user_id = self.user_info[0]
-        self.save_last_message(self.user_id) 
+        if self.last_login_date == "":
+            self.last_login_date = self.load_info_last_message(self.user_info[0])
 
-        # ave info when connect
-        last_login_date = self.get_last_message_time(self.user_id) 
+        # Save info when connect
+        new_message = 0
+        for message in self.messages: 
+            
+            print (message[2], self.last_login_date)
+            if message[2] > self.last_login_date: 
+                new_message = new_message + 1
 
-        if last_login_date: 
-            new_messages = datetime.now() - last_login_date
-
-            if new_messages() > 0: 
-                print("New message: ", new_messages)
-
-        else:
-            print("No new message")
+        if new_message > 0: 
+            self.text_center(self.font1, 12, str(new_message), self.white, 900, 60)
        
-        # if new_messages:
-        #     self.display_notification(len(new_messages))
+            print ("Number of new messages : ", new_message)
+        else:
+            self.text_center(self.font1, 12, str(new_message), self.white, 900, 60)
+            print("0")
 
 
+
+ 
     def mainPage_run(self):
         while self.main_page_running :
             self.update_message()

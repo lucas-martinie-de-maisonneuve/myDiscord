@@ -285,8 +285,13 @@ class EventHandler():
                     self.main_page_running = False
 
                 elif self.circle3.collidepoint(event.pos):
+                    self.save_last_message(self.user_info[0]) # Save info when disconnect 
                     self.main_page_to_login = True
-                    self.main_page_running = False                                          
+                    self.main_page_running = False   
+
+
+
+                                                   
 
             elif event.type == pygame.MOUSEBUTTONUP:
                  if self.link_logo_rect.collidepoint(event.pos):
