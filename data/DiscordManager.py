@@ -195,8 +195,7 @@ class DiscordManager(Database):
     #     set_clause = ", ".join([f"{key} = '{value}'" for key, value in new_product.items()])
     #     sql = f"UPDATE product SET {set_clause} WHERE id = %s"
     #     self.cursor.execute(sql, (product_id,))
-    #     self.connection.commit()  
-
+    #     self.connection.commit() 
 
     # Notification   
     def save_last_message (self, user_id): 

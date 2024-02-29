@@ -1,4 +1,4 @@
-import pygame
+import pygame, datetime
 from data.DiscordManager import DiscordManager
 from source.pygame_manager.Gui import Gui
 from source.Client import Client
@@ -172,15 +172,25 @@ class MainPage(Gui, Client, DiscordManager):
             self.text_not_align(self.font2, 17, ligne, self.grey1, 510, 625.5 + i * 15)
 
     def notification(self): 
-        self.user_id = self.user[0]
 
-        last_login_date = self.load_last_login_date() 
-        self.save_last_login_date() 
+        # Save info when disconnect 
+        self.user_id = self.user_info[0]
+        self.save_last_message(self.user_id) 
 
-        new_messages = [message for message in self.messages if message[2] > last_login_date]
+        # ave info when connect
+        last_login_date = self.get_last_message_time(self.user_id) 
 
-        if new_messages:
-            self.display_notification(len(new_messages))
+        if last_login_date: 
+            new_messages = datetime.now() - last_login_date
+
+            if new_messages() > 0: 
+                print("New message: ", new_messages)
+
+        else:
+            print("No new message")
+       
+        # if new_messages:
+        #     self.display_notification(len(new_messages))
 
 
     def mainPage_run(self):
@@ -194,6 +204,6 @@ class MainPage(Gui, Client, DiscordManager):
             self.event_main_page()
             self.main_page_cursor()
 
-            # self.notification()
+            self.notification()
 
             self.update()

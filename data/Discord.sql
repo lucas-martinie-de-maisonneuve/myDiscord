@@ -9,6 +9,7 @@ CREATE TABLE user (
     pseudo VARCHAR(255),
     email VARCHAR(255),
     password VARCHAR(255),
+    
     photo INT,
     id_role INT,
     change_role BOOLEAN,
