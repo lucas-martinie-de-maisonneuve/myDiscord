@@ -1,4 +1,3 @@
-import time
 from datetime import datetime
 from data.Database import Database
 
@@ -100,17 +99,17 @@ class DiscordManager(Database):
     
     # Update
     def update_user(self, pseudo, email, password,photo, id):
-        sql = 'UPDATE user SET pseudo = %s, email = %s, password = %s, photo= %s, WHERE = %s'
+        sql = 'UPDATE user SET pseudo = %s, email = %s, password = %s, photo= %s WHERE id= %s'
         params = (pseudo, email, password, photo, id)
         self.execute_query(sql, params)     
 
-    def update_message(self, name): 
-        sql = 'UPDATE message SET name = %s, WHERE name =%s'
-        params = (name)
+    def update_message(self, name, user): 
+        sql = 'UPDATE message SET name = %s WHERE name =%s'
+        params = (name, user)
         self.execute_query(sql, params)        
      
     def update_abc_password(self, password, id_user): 
-        sql = 'UPDATE password SET password = %s, WHERE id_user =%s'
+        sql = 'UPDATE password SET password = %s WHERE id_user =%s'
         params=(password, id_user)
         self.execute_query(sql, params)
 
@@ -196,7 +195,25 @@ class DiscordManager(Database):
     #     set_clause = ", ".join([f"{key} = '{value}'" for key, value in new_product.items()])
     #     sql = f"UPDATE product SET {set_clause} WHERE id = %s"
     #     self.cursor.execute(sql, (product_id,))
-    #     self.connection.commit()       
+    #     self.connection.commit()  
+
+
+    # Notification   
+    def save_last_message (self, user_id): 
+        current_time = datetime.now()
+        sql = "UPDATE user SET last_message = %s WHERE id = %s"
+        values = (current_time, user_id,)
+        self.execute_query(sql, values)
+
+    def get_last_message_time(self, user_id):
+        sql = "SELECT last_message FROM user WHERE id = %s"
+        values = (user_id,)
+        return self.fetch(sql, values)
+    
+
+    
+
+
 
 manager = DiscordManager()
 manager.close_connection()
