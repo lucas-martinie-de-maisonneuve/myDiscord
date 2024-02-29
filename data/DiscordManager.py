@@ -22,7 +22,7 @@ class DiscordManager(Database):
         return user
     
     def add_user(self, surname, name, pseudo, email, password, photo, id_role):
-        sql = "INSERT INTO user (surname, name, pseudo, email, password, photo, id_role) VALUES (%s, %s, %s, %s, %s, %s, %s)"
+        sql = "INSERT INTO product (surname, name, pseudo, email, password, photo, id_role) VALUES (%s, %s, %s, %s, %s, %s, %s)"
         values = (surname, name, pseudo, email, password, photo, id_role)
         self.execute_query(sql, values)
 
@@ -97,6 +97,23 @@ class DiscordManager(Database):
         sql = "SELECT communication FROM channel WHERE id_category = %s"
         values = (id,)
         return self.fetch(sql, values) 
+    
+    # Update
+    def update_user(self, pseudo, email, password, photo, id):
+        sql = 'UPDATE user SET pseudo=%s, email=%s, password=%s, photo=%s WHERE id=%s'
+        params = (pseudo, email, password, photo, id)
+        self.execute_query(sql, params)     
+
+    def update_message_author(self, pseudo, user):
+        sql = 'UPDATE message SET name=%s WHERE name=%s'
+        params = (pseudo, user)
+        self.execute_query(sql, params)
+    
+    def update_abc_password(self, password, id_user): 
+        sql = 'UPDATE password SET password=%s WHERE id_user=%s'
+        params = (password, id_user)
+        self.execute_query(sql, params)
+
 
     # Delete User
     def delete_user(self, id):
@@ -158,14 +175,22 @@ class DiscordManager(Database):
         sql = "SELECT password FROM password WHERE id_user = %s"
         values = (user_id,)
         return self.fetch(sql, values)
-    
+
+    def close_connection(self):
+        self.disconnect()
+
     def add_abc_password (self, password, id_user):
         sql = "INSERT INTO password (password, id_user) VALUES (%s, %s)"
         values = (password, id_user)
         self.execute_query(sql, values)
 
-    def close_connection(self):
-        self.disconnect()
+
+    def save_last_login_date(self): 
+        pass
+
+    def load_last_login_date(self):
+        pass
+   
 
     # Modifier Role
     # def modify_role(self, user_id, id_role):

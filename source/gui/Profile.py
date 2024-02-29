@@ -1,8 +1,7 @@
 import pygame
 from source.pygame_manager.Gui import Gui
 from source.Client import Client
-
-class Profile( Gui, Client):
+class Profile(Gui, Client):
     
     def __init__(self, user_info):
         Gui.__init__(self)
@@ -21,6 +20,7 @@ class Profile( Gui, Client):
         self.picture1 = pygame.Rect(0, 0, 0, 0)
         self.picture2 = pygame.Rect(0, 0, 0, 0)
         self.picture3 = pygame.Rect(0, 0, 0, 0)
+        self.save_edit_profile = pygame.Rect(0, 0, 0, 0)
         self.username_rect = pygame.Rect(960, 300, 80, 30)
         self.email_rect = pygame.Rect(960, 360, 80, 30)
         self.password_rect = pygame.Rect(960, 420, 80, 30)
@@ -234,8 +234,8 @@ class Profile( Gui, Client):
 
         # Quit
         self.close_profile = self.hover_image("Quit", "Quit", 1120, 70, 50, 50, "profile/profile11", "profile/profile8")
-        if self.password_edit or self.username_edit or self.email_edit or self.picture_edit or self.status_edit: 
-            self.hover_image("Logo_save", "Logo_save", 995, 220, 80, 80, "profile/profile13","profile/profile14")
+        if self.profile_password != self.profile_password or self.username != self.user[3] or self.email != self.user[4]or self.picture != self.user[6]:
+            self.save_edit_profile = self.hover_image("Logo_save", "Logo_save", 995, 220, 80, 80, "profile/profile13","profile/profile14")
 
     def profile_run(self):
         if self.profile_password == "":

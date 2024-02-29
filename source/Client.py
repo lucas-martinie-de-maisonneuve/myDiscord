@@ -74,3 +74,12 @@ class Client(DiscordManager):
             self.save_message(self.user_info[3], self.message, self.actual_channel)
             self.update_message()
             self.message = ""
+
+    def modify_user(self, pseudo, email, password,photo, id, user):
+
+        hashed_password = sha256(password.encode()).hexdigest()
+
+        self.update_user(pseudo, email, hashed_password, photo, id)
+        self.update_message_author(pseudo, user)
+        self.update_abc_password(password, id)
+        

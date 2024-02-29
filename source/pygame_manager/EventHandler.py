@@ -73,6 +73,9 @@ class EventHandler():
                 elif self.close_profile.collidepoint(event.pos):
                     self.profile_to_main_page = True
                     self.profile_running = False
+                elif self.save_edit_profile.collidepoint(event.pos):
+                    print(self.username, self.email, self.profile_password,self.picture, self.user[0])
+                    self.modify_user(self.username, self.email, self.profile_password,self.picture, self.user[0],self.user[3])
 
             elif event.type == pygame.MOUSEBUTTONUP:
                 if self.show.collidepoint(event.pos):
