@@ -261,24 +261,23 @@ class EventHandler():
                     self.emoji_choice = True
                     
                 if self.emoji_choice:
-                    for id_message, rect in self.emoji_list:       
-                        print(id_message,self.emoji_list)             
-                        if self.emoji_heart.collidepoint(event.pos):
-                            self.add_emoji(id_message,1)
-                            print("ajout emoji")
+                    for id_message,rect1, rect2, rect3, rect4 in self.emoji_list:      
+                        print(self.emoji_list) 
+                        if rect1.collidepoint(event.pos):
+                            self.add_emoji(1,id_message)
+                            self.emoji_choice = False
                             
-                        elif self.emoji_laugh.collidepoint(event.pos):
-                            self.add_emoji(id_message,2)
-                            print("ajout emoji")
-
-                        elif self.emoji_cry.collidepoint(event.pos):
-                            self.add_emoji(id_message,3)
-                            print("ajout emoji")
-
-                        elif self.emoji_angry.collidepoint(event.pos):
-                            self.add_emoji(id_message,4)
-                            print("ajout emoji")
-
+                        elif rect2.collidepoint(event.pos):
+                            self.add_emoji(2,id_message)
+                            self.emoji_choice = False
+                            
+                        elif rect3.collidepoint(event.pos):
+                            self.add_emoji(3,id_message)
+                            self.emoji_choice = False
+                            
+                        elif rect4.collidepoint(event.pos):
+                            self.add_emoji(4,id_message)
+                            self.emoji_choice = False
 
                 if event.button == 4:
                     self.scroll += 15

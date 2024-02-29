@@ -169,12 +169,8 @@ class MainPage(Gui, Client, DiscordManager):
                 self.img_center("ProfilePicture", 460, pos_y + 10 + self.scroll, 35, 35, f'profile/profile{self.str_picture}')
                 
                 if message[5] is not None:
-                    self.img_center("Heart",460, pos_y + 50 + self.scroll, 30, 30, f"main_page/emoji/emoji{message[5]}")
+                    self.img_center("Emoji choose",460, pos_y + 50 + self.scroll, 30, 30, f"main_page/emoji/emoji{message[5]}")
                     
-                self.emoji_heart = pygame.draw.circle(self.Window, self.grey10, (710, pos_y + 10 + self.scroll), 9)
-                self.emoji_laugh = pygame.draw.circle(self.Window, self.grey10, (740,  pos_y + 10 + self.scroll), 9)
-                self.emoji_cry = pygame.draw.circle(self.Window, self.grey10, (770, pos_y + 10 + self.scroll), 9)
-                self.emoji_angry = pygame.draw.circle(self.Window, self.grey10, (800, pos_y + 10 + self.scroll), 9)
         
                 # Emoji Choice
                 if self.emoji_choice:
@@ -182,20 +178,27 @@ class MainPage(Gui, Client, DiscordManager):
                         if item[0] == message[0]:
                             del self.emoji_list[i]
                             
-                    self.rect_emoji = pygame.Rect(700,pos_y + self.scroll,110,20)
-                    self.emoji_list.append((message[0],self.rect_emoji))
+                    self.rect_emoji1 = pygame.Rect(710,pos_y + self.scroll,11,11)
+                    self.rect_emoji2 = pygame.Rect(740,pos_y + self.scroll,11,11)
+                    self.rect_emoji3 = pygame.Rect(770,pos_y + self.scroll,11,11)
+                    self.rect_emoji4 = pygame.Rect(800,pos_y + self.scroll,11,11)
+                    self.emoji_list.append((message[0],self.rect_emoji1,self.rect_emoji2,self.rect_emoji3,self.rect_emoji4))
                     
-                    self.rect_full_not_centered(self.red,700,pos_y + self.scroll,110,20,0)
-                    self.emoji_heart = pygame.draw.circle(self.Window, self.grey10, (710, pos_y + 10 + self.scroll), 11)
+                    self.rect_full_not_centered(self.red,700,pos_y + self.scroll,20,20,0)
+                    self.rect_full_not_centered(self.blue,730,pos_y + self.scroll,20,20,0)
+                    self.rect_full_not_centered(self.green,760,pos_y + self.scroll,20,20,0)
+                    self.rect_full_not_centered(self.yellow,790,pos_y + self.scroll,20,20,0)
+                    
+                    # self.emoji_heart = pygame.draw.circle(self.Window, self.grey10, (710, pos_y + 10 + self.scroll), 11)
                     self.img_center("Heart",710, pos_y + 10 + self.scroll, 20, 20, "main_page/emoji/emoji1")
                     
-                    self.emoji_laugh = pygame.draw.circle(self.Window, self.grey10, (740,  pos_y + 10 + self.scroll), 11)
+                    # self.emoji_laugh = pygame.draw.circle(self.Window, self.grey10, (740,  pos_y + 10 + self.scroll), 11)
                     self.img_center("Laugh",740, pos_y + 10 + self.scroll, 20, 20, "main_page/emoji/emoji2")
                     
-                    self.emoji_cry = pygame.draw.circle(self.Window, self.grey10, (770, pos_y + 10 + self.scroll), 11)
-                    self.img_center("Cry",770, pos_y + 10 + self.scroll, 20, 20, "main_page/emoji/emoji3")       
+                    # self.emoji_cry = pygame.draw.circle(self.Window, self.grey10, (770, pos_y + 10 + self.scroll), 11)
+                    self.img_center("Cry",770, pos_y + 10 + self.scroll, 20, 20, "main_page/emoji/emoji3")
                     
-                    self.emoji_angry = pygame.draw.circle(self.Window, self.grey10, (800, pos_y + 10 + self.scroll), 11)
+                    # self.emoji_angry = pygame.draw.circle(self.Window, self.grey10, (800, pos_y + 10 + self.scroll), 11)
                     self.img_center("Angry",800, pos_y + 10 + self.scroll, 20, 20, "main_page/emoji/emoji4")
                     
         self.img_center("Background",795, 40, 775, 80, "main_page/main_page20")
