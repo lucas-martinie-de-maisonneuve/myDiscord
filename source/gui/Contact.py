@@ -43,12 +43,12 @@ class Contact(Gui, Client):
 
     def creator_contact(self, creator_name, name, linkedin, github, email, y_name, y_neon, y_logo, y_text): 
         self.text_not_align(self.font1, 13, name, self.grey6, 110, y_name)
-        self.image_not_center(creator_name, 55, y_neon, 50, 50,"laplateforme_contact/contact1")
-        self.hover_image("LinkedIn", "LinkedIn", 110, y_logo, 25, 25,"laplateforme_contact/contact4","laplateforme_contact/contact4")
+        self.image_not_center(creator_name, 55, y_neon, 50, 50,"contact/contact1")
+        self.hover_image("LinkedIn", "LinkedIn", 110, y_logo, 25, 25,"contact/contact4","contact/contact4")
         self.text_not_align(self.font4, 13, linkedin, self.grey6, 130, y_text)      
-        self.hover_image("Github", "Github", 110, y_logo+35, 25, 25,"laplateforme_contact/contact2","laplateforme_contact/contact2")
+        self.hover_image("Github", "Github", 110, y_logo+35, 25, 25,"contact/contact2","contact/contact2")
         self.text_not_align(self.font4, 13, github, self.grey6, 130, y_text + 35)
-        self.hover_image("Github", "Github", 110, y_logo+70, 25, 25,"laplateforme_contact/contact3","laplateforme_contact/contact3")
+        self.hover_image("Github", "Github", 110, y_logo+70, 25, 25,"contact/contact3","contact/contact3")
         self.text_not_align(self.font4, 13, email, self.grey6, 130, y_text + 70)   
 
     def address(self, name_rect, x, y, addr, addr_x, addr_y ):  
@@ -75,7 +75,7 @@ class Contact(Gui, Client):
         #--- Right rectangle ---#
 
         self.rect_full(self.grey5,750, 350, 800, 620, 10) 
-        self.image_not_center("Logo LaPlateforme", 540, 45, 400, 66,"laplateforme_contact/contact5")
+        self.image_not_center("Logo LaPlateforme", 540, 45, 400, 66,"contact/contact5")
         self.text_not_align(self.font3, 18,"La grande école du numérique pour tous", self.grey1, 560, 115)
 
         # Information section
@@ -105,11 +105,11 @@ class Contact(Gui, Client):
         # Social Media section
         self.rect_full(self.grey6, 555, 565, 350, 140, 10) 
         self.rect_border(self.white, 555, 565, 350, 140, 3, 10)
-        self.hover_image("Facebook","Facebook", 450, 530, 40, 40,"laplateforme_contact/contact6","laplateforme_contact/contact6") # Facebook
-        self.hover_image("LinkedIn","LinkedIn", 500, 530, 40, 40,"laplateforme_contact/contact7","laplateforme_contact/contact7") # LinkedIn
-        self.hover_image("Twitter","Twitter", 550, 530, 40, 40,"laplateforme_contact/contact8","laplateforme_contact/contact8") # Twitter
-        self.hover_image("Instagram","Instagram", 600, 530, 43, 43,"laplateforme_contact/contact9","laplateforme_contact/contact9") # Instagram
-        self.hover_image("Youtube","Youtube", 650, 530, 45, 45,"laplateforme_contact/contact10","laplateforme_contact/contact10") # Youtube
+        self.hover_image("Facebook","Facebook", 450, 530, 40, 40,"contact/contact6","contact/contact6") # Facebook
+        self.hover_image("LinkedIn","LinkedIn", 500, 530, 40, 40,"contact/contact7","contact/contact7") # LinkedIn
+        self.hover_image("Twitter","Twitter", 550, 530, 40, 40,"contact/contact8","contact/contact8") # Twitter
+        self.hover_image("Instagram","Instagram", 600, 530, 43, 43,"contact/contact9","contact/contact9") # Instagram
+        self.hover_image("Youtube","Youtube", 650, 530, 45, 45,"contact/contact10","contact/contact10") # Youtube
 
         # Brochure section
         self.button_hover("Brochure", 550, 590, 240, 40, self.grey6, self.white, self.white, self.white,"download the brochure", self.font1, self.grey7,14, 2, 5)
@@ -118,13 +118,16 @@ class Contact(Gui, Client):
         self.rect_full(self.grey6, 940, 395, 365, 475, 10)
         self.rect_border(self.white, 940, 395, 365, 475, 3, 10)
         self.text_not_align(self.font1, 20,"LaPlateforme Locations" , self.grey4, 810, 185) # Title maps
-        self.image_not_center("Maps", 750, 220, 380, 380,"laplateforme_contact/contact11") # Maps  
+        self.image_not_center("Maps", 750, 220, 380, 380,"contact/contact11") # Maps  
 
         # Pin section
-        self.cannes = self.hover_image("Cannes","Cannes", 1045, 495, 25, 25,"laplateforme_contact/contact12", "laplateforme_contact/contact12") # Cannes
-        self.toulon = self.hover_image("Toulon","Toulon", 1020, 510, 25, 25,"laplateforme_contact/contact12","laplateforme_contact/contact12") # Toulon
-        self.marseille = self.hover_image("Marseille", "Marseille", 990, 500, 25, 25,"laplateforme_contact/contact12", "laplateforme_contact/contact12") # Marseille  
-        self.martigues = self.hover_image("Martigues","Martigues", 980, 495, 25, 25,"laplateforme_contact/contact12", "laplateforme_contact/contact12")  # Martigues
+        self.cannes = self.hover_image("Cannes","Cannes", 1045, 495, 25, 25,"contact/contact12", "contact/contact12") # Cannes
+        self.toulon = self.hover_image("Toulon","Toulon", 1020, 510, 25, 25,"contact/contact12","contact/contact12") # Toulon
+        self.marseille = self.hover_image("Marseille", "Marseille", 990, 500, 25, 25,"contact/contact12", "contact/contact12") # Marseille  
+        self.martigues = self.hover_image("Martigues","Martigues", 980, 495, 25, 25,"contact/contact12", "contact/contact12")  # Martigues
+
+        # Quit
+        self.close_about_us = self.hover_image("Quit", "Quit", 1120, 70, 50, 50, "profile/profile11", "profile/profile8")
 
     def contact_run(self):        
         if self.contact_running:
