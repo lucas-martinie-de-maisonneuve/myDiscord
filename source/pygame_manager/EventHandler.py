@@ -259,6 +259,30 @@ class EventHandler():
                         self.input_search  += event.unicode 
 
             elif event.type == pygame.MOUSEBUTTONDOWN:
+                # Event Emoji
+                if self.emoji_logo.collidepoint(event.pos):
+                    self.emoji_choice = True
+                    
+                if self.emoji_choice:
+                    for id_message, rect in self.emoji_list:       
+                        print(id_message,self.emoji_list)             
+                        if self.emoji_heart.collidepoint(event.pos):
+                            self.add_emoji(id_message,1)
+                            print("ajout emoji")
+                            
+                        elif self.emoji_laugh.collidepoint(event.pos):
+                            self.add_emoji(id_message,2)
+                            print("ajout emoji")
+
+                        elif self.emoji_cry.collidepoint(event.pos):
+                            self.add_emoji(id_message,3)
+                            print("ajout emoji")
+
+                        elif self.emoji_angry.collidepoint(event.pos):
+                            self.add_emoji(id_message,4)
+                            print("ajout emoji")
+
+
                 if event.button == 4:
                     self.scroll += 15
                 elif event.button == 5 and self.scroll >0 :
@@ -277,6 +301,7 @@ class EventHandler():
                     if self.link_is_clicked:
                         webbrowser.open(self.url)
                         self.link_is_clicked = False
+                        
 
                 elif self.input_search_rect.collidepoint(event.pos):  
                     self.input_search = ""
@@ -294,7 +319,9 @@ class EventHandler():
                     self.main_page_to_add_channel = True
                     self.add_channel_running = True
                     self.main_page_running = False
+                    
 
+                
             elif event.type == pygame.MOUSEBUTTONUP:
                  if self.link_logo_rect.collidepoint(event.pos):
                     self.link_is_clicked = True  

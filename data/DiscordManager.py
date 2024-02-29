@@ -185,6 +185,12 @@ class DiscordManager(Database):
         values = (password, id_user)
         self.execute_query(sql, values)
 
+    
+    def add_emoji(self, id_mes,nb_react):
+        sql = 'UPDATE message SET react=%s WHERE id=%s'
+        values = (id_mes, nb_react)
+        self.execute_query(sql, values)
+        
 
     def save_last_login_date(self): 
         pass
