@@ -199,6 +199,7 @@ class EventHandler():
                         self.register_to_main_page = True
                         self.registered = True
                         self.register_running = False
+                        
                 elif self.sign.collidepoint(event.pos):
                     self.register_to_login = True
                     self.register_running = False
@@ -284,15 +285,20 @@ class EventHandler():
                 elif self.circle2.collidepoint(event.pos):
                     self.main_page_to_profile = True
                     self.main_page_running = False
-
+                    
                 elif self.circle3.collidepoint(event.pos):
                     self.main_page_to_login = True
-                    self.main_page_running = False                                          
+                    self.main_page_running = False
+
+                elif self.circle4.collidepoint(event.pos):
+                    self.main_page_to_add_channel = True
+                    self.add_channel_running = True
+                    self.main_page_running = False
 
             elif event.type == pygame.MOUSEBUTTONUP:
                  if self.link_logo_rect.collidepoint(event.pos):
                     self.link_is_clicked = True  
-                    
+
     def event_add(self):
         for event in pygame.event.get():
                 if event.type == pygame.QUIT:
@@ -302,7 +308,7 @@ class EventHandler():
                         self.category = 2
                     elif self.but_talk.collidepoint(event.pos):
                         self.category = 3
-                        
+
                     if self.but_text.collidepoint(event.pos):
                         self.communication = 0
                     elif self.but_voval.collidepoint(event.pos):
@@ -312,18 +318,21 @@ class EventHandler():
                         self.status = 0
                     elif self.but_private.collidepoint(event.pos):
                         self.status = 1
+                        
                     elif self.but_name.collidepoint(event.pos):
                         self.entry_new_name = 1
-                    elif self.close_profile.collidepoint(event.pos):
-                        self.profile_to_main_page = True
-                        self.add_channel_running = False
-                    if self.but_add.collidepoint(event.pos) and self.add == True:
-                        self.add_channel(self.new_name_channel,self.status,self.communication,self.category)
-                        self.add = False       
-                        
+
+                    elif self.close_add.collidepoint(event.pos):
+                        self.add_channel_to_main_page = True
+                        self.add_channel_running = False   
+
+                    elif self.but_add.collidepoint(event.pos):
+                        if self.new_name_channel != "" and self.status != None and self.communication != None and self.category != None:
+                            self.add_chan = self.add_channel_client()
+                            self.add = False
+
                 if self.entry_new_name != 0 and self.status != None and self.communication != None and self.category != None:
                     self.add=True
-              
                 elif event.type == pygame.KEYDOWN:
                     if event.key == pygame.K_BACKSPACE:
                         if self.entry_new_name==1:
@@ -332,7 +341,6 @@ class EventHandler():
                         if self.entry_new_name==1:
                             if event.unicode.isalpha():
                                 self.new_name_channel += event.unicode
-                        
     def event_contact(self):
         for event in pygame.event.get():
                 if event.type == pygame.QUIT:

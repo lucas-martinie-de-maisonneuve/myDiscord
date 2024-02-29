@@ -13,8 +13,7 @@ class MainPage(Gui, Client, DiscordManager):
         # Notification.__init__(self)
         self.user_info = user_info
         self.input_search = "Search..."
-        self.RECT_W = 600
-        self.RECT_H= 60 
+        self.message = ""
         self.L_MAX = 80
         self.link_is_clicked = True
         self.entry = 0
@@ -65,25 +64,34 @@ class MainPage(Gui, Client, DiscordManager):
         else:          
             self.img_center("Logo principal", 64, 170, 70, 70,"main_page/main_page2")
             self.img_center("Neon circle", 64, 170, 110, 110,"main_page/main_page4")
-               
-        # Hover settings
-        self.circle2 = pygame.draw.circle(self.Window, self.grey10, (64, 540), 35)
-        if self.is_mouse_over_button(self.circle2):           
-            self.img_center("Neon server", 64, 540, 85, 85,"main_page/main_page5")
-            self.img_center("Neon circle", 64, 540, 115, 115,"main_page/main_page4")   
+            
+        # Hover Add Channel
+        self.circle4 = pygame.draw.circle(self.Window, self.grey10, (64, 485), 35)
+        if self.is_mouse_over_button(self.circle4):
+            self.img_center("Add Channel", 65, 485, 45, 45,"main_page/main_page13")
+            self.img_center("Neon circle", 64, 485, 95 , 95,"main_page/main_page4")   
         else:      
-            self.img_center("Neon server", 64, 540, 85, 85,"main_page/main_page5")
-            self.img_center("Neon circle", 64, 540, 110, 110,"main_page/main_page4") 
+            self.img_center("Add Channel", 65, 485, 45, 45,"main_page/main_page13")
+            self.img_center("Neon circle", 64, 485, 90, 90,"main_page/main_page4")
+            
+        # Hover settings
+        self.circle2 = pygame.draw.circle(self.Window, self.grey10, (64, 565), 35)
+        if self.is_mouse_over_button(self.circle2):           
+            self.img_center("Neon server", 64, 565, 85, 85,"main_page/main_page5")
+            self.img_center("Neon circle", 64, 565, 95, 95,"main_page/main_page4")   
+        else:      
+            self.img_center("Neon server", 64, 565, 85, 85,"main_page/main_page5")
+            self.img_center("Neon circle", 64, 565, 90, 90,"main_page/main_page4") 
 
         # Hover Power Off
-        self.circle3 = pygame.draw.circle(self.Window, self.grey10, (64, 635), 35)
+        self.circle3 = pygame.draw.circle(self.Window, self.grey10, (64, 645), 35)
         if self.is_mouse_over_button(self.circle3):     
-            self.img_center("Power Off", 64, 635, 60, 60,"main_page/main_page9")
-            self.img_center("Neon circle", 64, 635, 115, 115,"main_page/main_page4")   
+            self.img_center("Power Off", 64, 645, 55, 55,"main_page/main_page9")
+            self.img_center("Neon circle", 64, 645, 95, 95,"main_page/main_page4")   
         else:      
-            self.img_center("Power Off", 64, 635, 60, 60,"main_page/main_page9")
-            self.img_center("Neon circle", 64, 635, 110, 110,"main_page/main_page4") 
-        
+            self.img_center("Power Off", 64, 645, 55, 55,"main_page/main_page9")
+            self.img_center("Neon circle", 64, 645, 90, 90,"main_page/main_page4")
+
     def second_section(self):
         self.rect_full(self.grey10, 257, 385, 260, 610, 10)
 

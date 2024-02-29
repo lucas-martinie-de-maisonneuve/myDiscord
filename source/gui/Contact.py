@@ -128,8 +128,6 @@ class Contact(Gui, Client):
 
         # Quit
         self.close_about_us = self.hover_image("Quit", "Quit", 1120, 70, 50, 50, "profile/profile11", "profile/profile8")
-        
-
 
     def contact_run(self):        
         if self.contact_running:
