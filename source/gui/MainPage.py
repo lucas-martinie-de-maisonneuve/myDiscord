@@ -110,10 +110,15 @@ class MainPage(Gui, Client, DiscordManager):
                         self.text_not_align(self.font2, 17, channel[1], self.pink, 200, position_y)
                     else:
                         self.text_not_align(self.font2, 15, channel[1], self.grey1, 200, position_y)
+                    if channel[2] == 1:
+                        self.img_center("Lock", 150, position_y + 10, 25, 25, "main_page/main_page11")
+                        
                     if channel[4] == 1:
                         self.img_center("Book about us", 170, position_y + 10, 25, 25, "main_page/main_page12")
+ 
                     elif channel[3] == 1:
                         self.img_center("Volume logiciel", 170, position_y + 10, 25, 25, "main_page/main_page10")
+
                     else:
                         self.img_center("Hashtags logiciel", 170, position_y + 10, 15, 15, "main_page/main_page14")
     
