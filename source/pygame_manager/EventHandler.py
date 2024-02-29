@@ -196,6 +196,7 @@ class EventHandler():
                         self.register_to_main_page = True
                         self.registered = True
                         self.register_running = False
+                        
                 elif self.sign.collidepoint(event.pos):
                     self.register_to_login = True
                     self.register_running = False
@@ -324,7 +325,7 @@ class EventHandler():
 
                     elif self.but_add.collidepoint(event.pos):
                         if self.new_name_channel != "" and self.status != None and self.communication != None and self.category != None:
-                            self.add_channel(self.new_name_channel,self.status,self.communication,self.category)
+                            self.add_chan = self.add_channel_client()
                             self.add = False
 
                 if self.entry_new_name != 0 and self.status != None and self.communication != None and self.category != None:
