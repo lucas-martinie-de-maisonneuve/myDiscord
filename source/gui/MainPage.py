@@ -21,12 +21,12 @@ class MainPage(Gui, Client, DiscordManager):
         self.scroll = 0
         self.channel_rects = []
 
-        self.bell = pygame.Rect(1060, 15, 50, 50)
+        self.bell = pygame.Rect(1075, 15, 50, 50)
         self.poweroff_c = pygame.Rect(64-115/2, 635-115/2, 115, 115)
         self.settings_c = pygame.Rect( 64-115/2, 540-115/2, 115, 115)
         self.server_c =  pygame.Rect(64-115/2, 170-115/2, 115, 115)
+        self.notification_c= pygame.Rect(1052, 25, 30, 30)
         
-
     def background(self): 
         self.img_background("Background", 600, 350, 1200, 800, "main_page/main_page8")
    
@@ -44,7 +44,7 @@ class MainPage(Gui, Client, DiscordManager):
         self.image_not_center("Search logo", 1000, 25, 30, 30,"main_page/main_page16")
 
         # Logo bell
-        self.image_not_center("Bell logo", 1060, 15, 50, 50,"main_page/main_page19") 
+        self.image_not_center("Bell logo", 1075, 15, 50, 50,"main_page/main_page19") 
 
         # Link to the LaPlateforme website  
         self.image_not_center("Question mark", 1120, 15, 50, 50,"main_page/main_page15")    
@@ -175,29 +175,18 @@ class MainPage(Gui, Client, DiscordManager):
             self.text_not_align(self.font2, 17, ligne, self.grey1, 510, 625.5 + i * 15)
 
     def notification(self): 
-
         if self.last_login_date == "":
             self.last_login_date = self.load_info_last_message(self.user_info[0])
 
         # Save info when connect
-        new_message = 0
-        for message in self.messages: 
-            
-            print (message[2], self.last_login_date)
-            if message[2] > self.last_login_date: 
-                new_message = new_message + 1
+            for message in self.messages: 
+                
+                if message[2] > self.last_login_date: 
+                    self.new_message = self.new_message + 1
 
-        if new_message > 0: 
-            self.text_center(self.font1, 12, str(new_message), self.white, 900, 60)
-       
-            print ("Number of new messages : ", new_message)
-        else:
-            self.text_center(self.font1, 12, str(new_message), self.white, 900, 60)
-            print("0")
-
-
-
- 
+        self.text_center(self.font1, 20, str(self.new_message), self.pink1, 1067, 42)
+        self.image_not_center("Circle notification",1052, 25, 30, 30,"main_page/main_page23")
+        
     def mainPage_run(self):
         while self.main_page_running :
             self.update_message()

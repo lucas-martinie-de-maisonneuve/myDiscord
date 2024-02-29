@@ -40,6 +40,7 @@ class Element():
         self.alpha_none =(0,0,0,0)
 
         self.pink = (222, 50, 79)
+        self.pink1 = (254, 0, 135) # Notif number
       
         self.yellow = (233, 164, 41)   
 

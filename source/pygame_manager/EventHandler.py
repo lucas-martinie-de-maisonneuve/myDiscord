@@ -289,9 +289,8 @@ class EventHandler():
                     self.main_page_to_login = True
                     self.main_page_running = False   
 
-
-
-                                                   
+                elif self.notification_c.collidepoint(event.pos): 
+                    self.reset_new_message_counter()
 
             elif event.type == pygame.MOUSEBUTTONUP:
                  if self.link_logo_rect.collidepoint(event.pos):
