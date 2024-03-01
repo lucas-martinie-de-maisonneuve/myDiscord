@@ -43,7 +43,8 @@ class Profile(Gui, Client):
 
     def design(self):
         # Profile main rectangle
-        self.img_background_blur("Background",600, 350, 1200, 700, "main_page/main_page8", blur_radius=5)
+        self.img_background("Background", 600, 350, 1200, 800, "main_page/main_page8")
+
         self.rect_radius_top(self.theme_color, 750, 90, 800, 100, 10)
         self.rect_radius_bot(self.grey5, 750, 400, 800, 520, 10)
         
@@ -263,7 +264,6 @@ class Profile(Gui, Client):
             self.password_display = " *" * len(self.profile_password)
 
         if self.profile_running :
-            print(self.old_password, self.profile_password)
             self.design()
             self.display_user_community()
             self.profile_picture_edit()

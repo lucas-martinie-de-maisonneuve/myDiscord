@@ -319,14 +319,14 @@ class EventHandler():
                     self.main_page_running = False
 
                 elif self.circle4.collidepoint(event.pos):
-                    self.main_page_to_add_channel = True
-                    self.add_channel_running = True
-                    self.main_page_running = False
+                    if self.user_info[7] == 1:
+                        self.main_page_to_add_channel = True
+                        self.add_channel_running = True
+                        self.main_page_running = False
 
                 elif self.notification_c.collidepoint(event.pos): 
                     self.reset_new_message_counter()                   
 
-                
             elif event.type == pygame.MOUSEBUTTONUP:
                  if self.link_logo_rect.collidepoint(event.pos):
                     self.link_is_clicked = True  
