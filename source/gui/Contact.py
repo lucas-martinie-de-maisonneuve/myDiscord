@@ -8,6 +8,7 @@ class Contact(Gui, Client):
 
         Gui.__init__(self)
         Client.__init__(self)
+        
         self.link_is_clicked = True     
 
         self.linkedinI, self.githubI, self.mailI = pygame.Rect(110-13, 125-13, 25, 25), pygame.Rect(110-13, 160-13, 25, 25), pygame.Rect(110-13, 195-13, 25, 25)
