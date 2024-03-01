@@ -17,13 +17,13 @@ CREATE TABLE user (
 );
 
 INSERT INTO user(surname, name, pseudo, email, password, photo, id_role, change_role) VALUES
-('ILV','LLM', 'Super User', 'a', 'ca978112ca1bbdcafac231b39a23dc4da786eff8147c4e72b9807785afee48bb', 3, 2, False ),
+('ILV','LLM', 'Super User', 'a', 'ca978112ca1bbdcafac231b39a23dc4da786eff8147c4e72b9807785afee48bb', 3, 1, False ),
 ('Ines','Lorquet', 'Inessa', 'ines.lorquet@laplateforme.io', '586447cae9b58ff7e2c0a2b3980caf7f2ac5984bfe92cbb99eb0a5f0a702914d', 1, 1, False),
 ('Lucas','Martinie', 'LuLu', 'lucas.martinie@laplateforme.io', 'fc96020f4fc3fbbe01b03f6c1ef101a57110b6844511567e2cca087e02c0d4bb', 2, 1, False),
-('Vanny','Lamorte', 'VanLauLam', 'vanny.lamorte@laplateforme.io', '5c5bdc4a2ad0deadbd40affb8fe0e359ff6fb3402a38b2a8addbdee2b802d1b5', 3, 2, False),
+('Vanny','Lamorte', 'VanLauLam', 'vanny.lamorte@laplateforme.io', '5c5bdc4a2ad0deadbd40affb8fe0e359ff6fb3402a38b2a8addbdee2b802d1b5', 3, 1, False),
 ('Gerard','Lamorte', 'GegeDeMars', 'gerard.lamorte@laplateforme.io', 'f8e2f219f007cc3d627bd6841ae18c0e3f8e502bb9d3004877d92522924c4f6f', 3, 2, False),
-('Lucy','Madec', 'Lucyleony', 'lucy.madec@laplateforme.io', 'bb3841631aa4975e6a2458f7def3a3030e17ecd27c0f2aa443fa94de4342a24b', 4, 1, True),
-('Camille','Martinie', 'CamCamCam', 'camille.martinie@laplateforme.io', '2674f3c9cee0ecaa024b4cbc53ed34e18fc2dd288e56d9b2f5a6f57d29115119', 2, 1, False),
+('Lucy','Madec', 'Lucyleony', 'lucy.madec@laplateforme.io', 'bb3841631aa4975e6a2458f7def3a3030e17ecd27c0f2aa443fa94de4342a24b', 4, 2, True),
+('Camille','Martinie', 'CamCamCam', 'camille.martinie@laplateforme.io', '2674f3c9cee0ecaa024b4cbc53ed34e18fc2dd288e56d9b2f5a6f57d29115119', 2, 2, False),
 ('Claire','Lamorte', 'Cla Loup', 'claire.lamorte@laplateforme.io', '2fea5bafc5c03e90ffa05ae77fcd7c369f15f041f9da2cbb359b760583f10b86', 3, 2, False),
 ('Elise','Martinie', 'Hey lee02', 'elise.martinie@laplateforme.io', '877dec59269bf577868d0043a673249d3bb544047fdd6bd166ec585b6b67fe7d', 2, 2, False),
 ('Julien','Beaurain', 'Ju Bond', 'julien.beaurain@laplateforme.io', 'b69990c682ef8acb1574ab57b656eb997818b0361a4e644b12780bcd09c67839', 1, 2, True),

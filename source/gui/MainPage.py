@@ -29,6 +29,7 @@ class MainPage(Gui, Client, DiscordManager):
         self.emoji_choice = False
         self.emoji_display = 0
         self.emoji_list = []
+
     def background(self): 
         self.img_background("Background", 600, 350, 1200, 800, "main_page/main_page8")
    
@@ -222,7 +223,6 @@ class MainPage(Gui, Client, DiscordManager):
     def display_emoji(self):
         self.emoji_logo = pygame.draw.circle(self.Window, self.grey10, (1150, 650), 20)
         self.img_center("Logo Emoji",1150, 650, 50, 50, "main_page/main_page27")
-
 
     def notification(self): 
         if self.last_login_date == "":

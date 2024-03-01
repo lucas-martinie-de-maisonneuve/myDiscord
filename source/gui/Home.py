@@ -7,6 +7,7 @@ class Home(Gui, Client):
     def __init__(self):
         Gui.__init__(self)
         Client.__init__(self)
+        
         self.input_email = ""
         self.input_password = ""
         self.password_display = " *" * len(self.input_password)
@@ -14,6 +15,7 @@ class Home(Gui, Client):
         self.entry = 0
         self.anim_pass = False 
         self.anim_email = False
+
     def design(self): 
         self.screen_color(self.grey)
 
