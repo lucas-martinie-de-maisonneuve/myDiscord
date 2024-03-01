@@ -1,22 +1,14 @@
 import pygame
-from data.DiscordManager import DiscordManager
 from source.pygame_manager.Gui import Gui
 from source.Client import Client
 
-class Register(Gui, Client, DiscordManager):
+class Register(Gui, Client):
     def __init__(self):
         Gui.__init__(self)
         Client.__init__(self)
-        self.username = ""
-        self.email = ""
-        self.surname = ""
-        self.name = ""
-        self.password = ""
         self.entry = 0
-        self.photo = 0
         self.profile_hovered = None
         self.entry = 0
-        self.register_to_login = False
         
     def background(self):
         self.img_background("Background", 600,350,1200,700,"register/background_register")
@@ -32,28 +24,28 @@ class Register(Gui, Client, DiscordManager):
         # Username, Email address, Surname, Name, Password
         # Username
         self.username_rect = self.rect_full(self.grey2, 600, 240, 400, 40, 5)
-        self.button_hover("username", 600, 240, 400, 40, self.grey2, self.grey2, self.grey2, self.grey2,self.username, self.font2, self.white, 15, 4, 5)
-        self.text_input(self.username_rect, self.username, "Username", 600, 240, 400, 40, id="username")
+        self.button_hover("username", 600, 240, 400, 40, self.grey2, self.grey2, self.grey2, self.grey2,self.register_username, self.font2, self.white, 15, 4, 5)
+        self.text_input(self.username_rect, self.register_username, "Username", 600, 240, 400, 40, id="username")
 
         # Email
         self.email_rect = self.rect_full(self.grey2, 600, 300, 400, 40, 5)
-        self.button_hover("email", 600, 300, 400, 40, self.grey2, self.grey2, self.grey2, self.grey2,self.email, self.font2, self.white, 15, 4, 5)
-        self.text_input(self.email_rect, self.email, "Email address", 600, 300, 400, 40, id="email")
+        self.button_hover("email", 600, 300, 400, 40, self.grey2, self.grey2, self.grey2, self.grey2,self.register_email, self.font2, self.white, 15, 4, 5)
+        self.text_input(self.email_rect, self.register_email, "Email address", 600, 300, 400, 40, id="email")
 
         # Surname
         self.surname_rect = self.rect_full(self.grey2, 600, 360, 400, 40, 5)
-        self.button_hover("Surname", 600, 360, 400, 40, self.grey2, self.grey2, self.grey2, self.grey2,self.surname, self.font2, self.white, 15, 4, 5)
-        self.text_input(self.surname_rect, self.surname, "Surname", 600, 360, 400, 40, id="surname")
+        self.button_hover("Surname", 600, 360, 400, 40, self.grey2, self.grey2, self.grey2, self.grey2,self.register_surname, self.font2, self.white, 15, 4, 5)
+        self.text_input(self.surname_rect, self.register_surname, "Surname", 600, 360, 400, 40, id="surname")
 
         # Name
         self.name_rect = self.rect_full(self.grey2, 600, 420, 400, 40, 5)
-        self.button_hover("Name", 600, 420, 400, 40, self.grey2, self.grey2, self.grey2, self.grey2,self.name, self.font2, self.white, 15, 4, 5)
-        self.text_input(self.name_rect, self.name, "Name", 600, 420, 400, 40, id="name")
+        self.button_hover("Name", 600, 420, 400, 40, self.grey2, self.grey2, self.grey2, self.grey2,self.register_name, self.font2, self.white, 15, 4, 5)
+        self.text_input(self.name_rect, self.register_name, "Name", 600, 420, 400, 40, id="name")
 
         # Password
         self.password_rect = self.rect_full(self.grey2, 600, 480, 400, 40, 5)
-        self.button_hover("Password", 600, 480, 400, 40, self.grey2, self.grey2, self.grey2, self.grey2,self.password, self.font2, self.white, 15, 4, 5)
-        self.text_input(self.password_rect, self.password, "Password", 600, 480, 400, 40, id="password")
+        self.button_hover("Password", 600, 480, 400, 40, self.grey2, self.grey2, self.grey2, self.grey2,self.register_password, self.font2, self.white, 15, 4, 5)
+        self.text_input(self.password_rect, self.register_password, "Password", 600, 480, 400, 40, id="password")
 
         # Button Sign Up
         self.sign_up = self.rect_full(self.blue, 600, 560, 350, 50,5)

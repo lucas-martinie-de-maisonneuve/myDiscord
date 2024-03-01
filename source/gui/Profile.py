@@ -7,7 +7,6 @@ class Profile( Gui, Client):
     def __init__(self, user_info):
         Gui.__init__(self)
         Client.__init__(self)
-
         self.community_list = self.display_user()  
         self.user = user_info   
         self.edit = 0
@@ -248,3 +247,4 @@ class Profile( Gui, Client):
             self.password_show()
             self.event_profile()
             self.profile_page_cursor()
+            print(self.main_page_running)

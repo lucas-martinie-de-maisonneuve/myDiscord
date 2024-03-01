@@ -21,7 +21,7 @@ class DiscordManager(Database):
         return user
     
     def add_user(self, surname, name, pseudo, email, password, photo, id_role):
-        sql = "INSERT INTO product (surname, name, pseudo, email, password, photo, id_role) VALUES (%s, %s, %s, %s, %s, %s, %s)"
+        sql = "INSERT INTO user (surname, name, pseudo, email, password, photo, id_role) VALUES (%s, %s, %s, %s, %s, %s, %s)"
         values = (surname, name, pseudo, email, password, photo, id_role)
         self.execute_query(sql, values)
 
@@ -47,10 +47,11 @@ class DiscordManager(Database):
     def display_category(self):
         sql = "SELECT * FROM category"
         return self.fetch(sql)
+
     def display_channel(self):
         sql = "SELECT * FROM channel"
         return self.fetch(sql)
-    
+
     def display_message(self):
         sql = "SELECT * FROM message"
         return self.fetch(sql)
@@ -58,7 +59,7 @@ class DiscordManager(Database):
     def count_category(self):
         sql = "SELECT COUNT(*) AS nb FROM category"
         return self.fetch_one(sql)
-    
+
     def id_category(self):
         sql = "SELECT id FROM category"
         self.cursor.execute(sql)
@@ -173,7 +174,18 @@ class DiscordManager(Database):
         sql = "SELECT password FROM password WHERE id_user = %s"
         values = (user_id,)
         return self.fetch(sql, values)
+    
+    def add_abc_password (self, password, id_user):
+        sql = "INSERT INTO password (password, id_user) VALUES (%s, %s)"
+        values = (password, id_user)
+        self.execute_query(sql, values)
 
+    
+    def add_emoji(self, id_mes,nb_react):
+        sql = 'UPDATE message SET react=%s WHERE id=%s'
+        values = (id_mes, nb_react)
+        self.execute_query(sql, values)
+        
     def close_connection(self):
         self.disconnect()
 

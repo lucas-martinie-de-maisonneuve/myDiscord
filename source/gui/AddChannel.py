@@ -1,20 +1,15 @@
 import pygame
-from data.DiscordManager import DiscordManager
 from source.pygame_manager.Gui import Gui
-
-class AddChannel(Gui, DiscordManager):
+from source.Client import Client
+from data.DiscordManager import DiscordManager
+class AddChannel(Gui,Client,DiscordManager):
 
     def __init__(self):
         Gui.__init__(self)
+        Client.__init__(self)
         DiscordManager.__init__(self)
-        self.add_channel_running = True
-        self.new_name_channel = ""
         self.entry_new_name = 0
-        self.status = None
-        self.communication = None
-        self.category = None
-        self.add = False
-        
+
     def background(self): 
         self.img_background_blur('Background', 600, 350, 1200, 800, 'main_page/main_page8', blur_radius=10)
 
@@ -96,7 +91,7 @@ class AddChannel(Gui, DiscordManager):
         self.img_center("Neon light", 600, 225, 240, 90,"main_page/main_page7")
         
         # Cross quit
-        self.close_profile = self.hover_image("Quit", "Quit", 815, 180, 50, 50, "profile/profile11", "profile/profile8")
+        self.close_add = self.hover_image("Quit", "Quit", 815, 180, 50, 50, "profile/profile11", "profile/profile8")
 
         self.img_center("Neon light", 600, 530, 150, 90,"main_page/main_page7")
         self.img_center("Neon light", 600, 440, 150, 90,"main_page/main_page7")
@@ -108,7 +103,4 @@ class AddChannel(Gui, DiscordManager):
             self.event_add()
             self.add_section()
             self.update()
-        
-                        
-test = AddChannel()
-test.addChannel_run()
+            
