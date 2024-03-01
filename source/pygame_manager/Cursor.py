@@ -51,6 +51,7 @@ class Cursor:
         self.server_c_cursor = False
         self.settings_c_cursor = False
         self.poweroff_c_cursor = False
+        self.add_channel_cursor = False
         self.input_search_rect_cursor = False
     
     def set_cursor(self, rect, button):
@@ -74,7 +75,7 @@ class Cursor:
             self.status_active_cursor, self.login_cursor, self.google_cursor,
             self.facebook_cursor, self.instagram_cursor, self.forgot_p_cursor, self.sign_cursor,
             self.profile1_cursor, self.profile2_cursor, self.profile3_cursor, self.profile4_cursor,
-            self.surname_cursor, self.name_cursor, self.linkedinI_cursor, self.linkedinI_cursor, self.githubI_cursor, self.mailI_cursor, self.linkedinL_cursor, self.githubL_cursor, self.mailL_cursor, self.linkedinV_cursor, self.githubV_cursor, self.mailV_cursor, self.FacebookP_cursor, self.linkedinP_cursor, self.twitterP_cursor, self.instagramP_cursor, self.youtubeP_cursor, self.brochureP_cursor, self.cannes_cursor, self.toulon_cursor, self.marseille_cursor, self.martigues_cursor, self.bell_cursor,   self.link_logo_rect_cursor, self.server_c_cursor, self.settings_c_cursor, self.poweroff_c_cursor, self.input_search_rect_cursor
+            self.surname_cursor, self.name_cursor, self.linkedinI_cursor, self.linkedinI_cursor, self.githubI_cursor, self.mailI_cursor, self.linkedinL_cursor, self.githubL_cursor, self.mailL_cursor, self.linkedinV_cursor, self.githubV_cursor, self.mailV_cursor, self.FacebookP_cursor, self.linkedinP_cursor, self.twitterP_cursor, self.instagramP_cursor, self.youtubeP_cursor, self.brochureP_cursor, self.cannes_cursor, self.toulon_cursor, self.marseille_cursor, self.martigues_cursor, self.bell_cursor,   self.link_logo_rect_cursor, self.server_c_cursor, self.settings_c_cursor, self.poweroff_c_cursor, self.input_search_rect_cursor, self.add_channel_cursor
         ])
 
     def profile_page_cursor(self):
@@ -105,9 +106,10 @@ class Cursor:
     def  main_page_cursor(self):
         self.bell_cursor = self.set_cursor(self.bell, self.bell_cursor)
         self.link_logo_rect_cursor = self.set_cursor(self.link_logo_rect, self.link_logo_rect_cursor)
-        self.server_c_cursor = self.set_cursor(self.server_c, self.server_c_cursor)
-        self.settings_c_cursor = self.set_cursor(self.settings_c, self.settings_c_cursor)
-        self.poweroff_c_cursor = self.set_cursor(self.poweroff_c, self.poweroff_c_cursor)
+        self.server_c_cursor = self.set_cursor(self.circle1, self.server_c_cursor)
+        self.settings_c_cursor = self.set_cursor(self.circle2, self.settings_c_cursor)
+        self.poweroff_c_cursor = self.set_cursor(self.circle3, self.poweroff_c_cursor)
+        self.add_channel_cursor = self.set_cursor(self.circle4, self.add_channel_cursor)
         self.input_search_rect_cursor = self.set_cursor(self.input_search_rect, self.input_search_rect)
 
     def register_cursor(self):

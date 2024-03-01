@@ -178,51 +178,22 @@ class DiscordManager(Database):
 
     def close_connection(self):
         self.disconnect()
-
-    def add_abc_password (self, password, id_user):
-        sql = "INSERT INTO password (password, id_user) VALUES (%s, %s)"
-        values = (password, id_user)
-        self.execute_query(sql, values)
-
     
     def add_emoji(self, id_mes,nb_react):
         sql = 'UPDATE message SET react=%s WHERE id=%s'
-        values = (id_mes, nb_react)
+        values = (nb_react, id_mes)
         self.execute_query(sql, values)
-        
-
-    def save_last_login_date(self): 
-        pass
-
-    def load_last_login_date(self):
-        pass
-   
 
     def add_abc_password (self, password, id_user):
         sql = "INSERT INTO password (password, id_user) VALUES (%s, %s)"
         values = (password, id_user)
         self.execute_query(sql, values)
 
-
     def save_last_login_date(self): 
         pass
 
     def load_last_login_date(self):
         pass
-   
-
-    def add_abc_password (self, password, id_user):
-        sql = "INSERT INTO password (password, id_user) VALUES (%s, %s)"
-        values = (password, id_user)
-        self.execute_query(sql, values)
-
-
-    def save_last_login_date(self): 
-        pass
-
-    def load_last_login_date(self):
-        pass
-   
 
     # Modifier Role
     # def modify_role(self, user_id, id_role):
