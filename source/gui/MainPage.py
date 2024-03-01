@@ -239,7 +239,6 @@ class MainPage(Gui, Client, DiscordManager):
         
     def mainPage_run(self):
         while self.main_page_running :
-            self.update_message()
             self.background()
             self.first_section()
             self.second_section()
@@ -249,5 +248,6 @@ class MainPage(Gui, Client, DiscordManager):
             self.event_main_page()
             self.main_page_cursor()
             self.notification()
-            # print(self.emoji_list)
+            self.update_message()
+            # (self.emoji_list)
             self.update()

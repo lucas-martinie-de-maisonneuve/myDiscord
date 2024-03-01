@@ -53,7 +53,8 @@ class Client(DiscordManager):
         self.categories = self.display_category()
         self.channels = self.display_channel()
         self.messages = self.display_message()
-        
+        self.community_list = self.display_user()  
+
         # self.emoji_display = self.emoji_react()
 
         self.actual_channel = 1
@@ -68,10 +69,10 @@ class Client(DiscordManager):
         if self.check_credentials(self.user_email, hashed_password):
             self.user_info = self.get_user(self.user_email, hashed_password)
             self.connected = True
-            print("Connexion réussie !")
+            ("Connexion réussie !")
             return self.user_info
         else:
-            print("Erreur. Connexion échouée.")
+            ("Erreur. Connexion échouée.")
 
     def abc_password(self, user_id): 
         self.profile_password = self.get_password(user_id)

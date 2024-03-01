@@ -74,8 +74,16 @@ class EventHandler():
                     self.profile_to_main_page = True
                     self.profile_running = False
                 elif self.save_edit_profile.collidepoint(event.pos):
-                    print(self.username, self.email, self.profile_password,self.picture, self.user[0])
                     self.modify_user(self.username, self.email, self.profile_password,self.picture, self.user[0],self.user[3])
+                    if self.old_password != self.profile_password:
+                        self.password_modified = True
+                        self.password_edit = False
+                    if self.username != self.user[3]:
+                        self.username_modified = True
+                        self.username_edit = False
+                    if self.email != self.user[4]:
+                        self.email_modified = True
+                        self.email_edit
 
             elif event.type == pygame.MOUSEBUTTONUP:
                 if self.show.collidepoint(event.pos):
@@ -265,22 +273,22 @@ class EventHandler():
                     
                 if self.emoji_choice:
                     for id_message, rect in self.emoji_list:       
-                        print(id_message,self.emoji_list)             
+                        (id_message,self.emoji_list)             
                         if self.emoji_heart.collidepoint(event.pos):
                             self.add_emoji(id_message,1)
-                            print("ajout emoji")
+                            ("ajout emoji")
                             
                         elif self.emoji_laugh.collidepoint(event.pos):
                             self.add_emoji(id_message,2)
-                            print("ajout emoji")
+                            ("ajout emoji")
 
                         elif self.emoji_cry.collidepoint(event.pos):
                             self.add_emoji(id_message,3)
-                            print("ajout emoji")
+                            ("ajout emoji")
 
                         elif self.emoji_angry.collidepoint(event.pos):
                             self.add_emoji(id_message,4)
-                            print("ajout emoji")
+                            ("ajout emoji")
 
 
                 if event.button == 4:

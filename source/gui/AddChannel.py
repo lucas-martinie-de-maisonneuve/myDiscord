@@ -101,6 +101,4 @@ class AddChannel(Gui,Client,DiscordManager):
         while self.add_channel_running :
             self.background()
             self.event_add()
-            self.add_section()
-            self.update()
-            
+            self.add_section()            
