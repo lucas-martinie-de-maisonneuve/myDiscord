@@ -214,8 +214,9 @@ class EventHandler():
                         self.register_password = self.register_password[:-1]
                 else:
                     if self.entry == 1:
-                        if event.unicode.isalpha() or event.unicode.isdigit():
-                            self.register_username += event.unicode
+                        if len(self.register_username)<10:
+                            if event.unicode.isalpha() or event.unicode.isdigit():
+                                self.register_username += event.unicode
                         
                     elif self.entry == 2:
                         if event.unicode:
