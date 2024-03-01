@@ -41,7 +41,7 @@ class Client(DiscordManager):
         self.main_page_running = False
         
         self.main_page_to_profile = False
-        self.creator_to_profile = False
+        self.contact_to_profile = False
         self.profile_running = False
 
         self.profile_to_contact = False
@@ -54,7 +54,8 @@ class Client(DiscordManager):
         self.categories = self.display_category()
         self.channels = self.display_channel()
         self.messages = self.display_message()
-        
+        self.community_list = self.display_user()  
+
         # self.emoji_display = self.emoji_react()
 
         self.actual_channel = 1
@@ -94,6 +95,14 @@ class Client(DiscordManager):
             self.update_message()
             self.message = ""
 
+    def modify_user(self, pseudo, email, password,photo, id, user):
+
+        hashed_password = sha256(password.encode()).hexdigest()
+
+        self.update_user(pseudo, email, hashed_password, photo, id)
+        self.update_message_author(pseudo, user)
+        self.update_abc_password(password, id)
+        
         # Notification
     def load_info_last_message(self, user): 
         self.last_login_date = self.get_last_message_time(user)

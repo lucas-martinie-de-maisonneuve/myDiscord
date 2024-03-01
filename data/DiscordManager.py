@@ -3,8 +3,8 @@ from data.Database import Database
 
 class DiscordManager(Database):
     def __init__(self):
-        # Database.__init__(self, 'localhost', 'root', '$~Bc4gB9', 'discord')
-        Database.__init__(self, 'localhost', 'root', 'VannyLamorte25!', 'discord')
+        Database.__init__(self, 'localhost', 'root', '$~Bc4gB9', 'discord')
+        # Database.__init__(self, 'localhost', 'root', 'VannyLamorte25!', 'discord')
         # Database.__init__(self, 'localhost', 'root', 'azerty', 'discord')
         self.connect()
 
@@ -21,7 +21,7 @@ class DiscordManager(Database):
         return user
     
     def add_user(self, surname, name, pseudo, email, password, photo, id_role):
-        sql = "INSERT INTO user (surname, name, pseudo, email, password, photo, id_role) VALUES (%s, %s, %s, %s, %s, %s, %s)"
+        sql = "INSERT INTO product (surname, name, pseudo, email, password, photo, id_role) VALUES (%s, %s, %s, %s, %s, %s, %s)"
         values = (surname, name, pseudo, email, password, photo, id_role)
         self.execute_query(sql, values)
 
@@ -99,20 +99,21 @@ class DiscordManager(Database):
         return self.fetch(sql, values) 
     
     # Update
-    def update_user(self, pseudo, email, password,photo, id):
-        sql = 'UPDATE user SET pseudo = %s, email = %s, password = %s, photo= %s WHERE id= %s'
+    def update_user(self, pseudo, email, password, photo, id):
+        sql = 'UPDATE user SET pseudo=%s, email=%s, password=%s, photo=%s WHERE id=%s'
         params = (pseudo, email, password, photo, id)
         self.execute_query(sql, params)     
 
-    def update_message(self, name, user): 
-        sql = 'UPDATE message SET name = %s WHERE name =%s'
+    def update_message_author(self, name, user):
+        sql = 'UPDATE message SET name=%s WHERE name=%s'
         params = (name, user)
-        self.execute_query(sql, params)        
-     
-    def update_abc_password(self, password, id_user): 
-        sql = 'UPDATE password SET password = %s WHERE id_user =%s'
-        params=(password, id_user)
         self.execute_query(sql, params)
+    
+    def update_abc_password(self, password, id_user): 
+        sql = 'UPDATE password SET password=%s WHERE id_user=%s'
+        params = (password, id_user)
+        self.execute_query(sql, params)
+
 
     # Delete User
     def delete_user(self, id):
@@ -174,7 +175,10 @@ class DiscordManager(Database):
         sql = "SELECT password FROM password WHERE id_user = %s"
         values = (user_id,)
         return self.fetch(sql, values)
-    
+
+    def close_connection(self):
+        self.disconnect()
+
     def add_abc_password (self, password, id_user):
         sql = "INSERT INTO password (password, id_user) VALUES (%s, %s)"
         values = (password, id_user)
@@ -186,8 +190,26 @@ class DiscordManager(Database):
         values = (id_mes, nb_react)
         self.execute_query(sql, values)
         
-    def close_connection(self):
-        self.disconnect()
+
+    def save_last_login_date(self): 
+        pass
+
+    def load_last_login_date(self):
+        pass
+   
+
+    def add_abc_password (self, password, id_user):
+        sql = "INSERT INTO password (password, id_user) VALUES (%s, %s)"
+        values = (password, id_user)
+        self.execute_query(sql, values)
+
+
+    def save_last_login_date(self): 
+        pass
+
+    def load_last_login_date(self):
+        pass
+   
 
     def add_abc_password (self, password, id_user):
         sql = "INSERT INTO password (password, id_user) VALUES (%s, %s)"

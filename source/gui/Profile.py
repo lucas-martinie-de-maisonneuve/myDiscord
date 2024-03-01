@@ -1,18 +1,16 @@
 import pygame
 from source.pygame_manager.Gui import Gui
 from source.Client import Client
-
-class Profile( Gui, Client):
+class Profile(Gui, Client):
     
     def __init__(self, user_info):
         Gui.__init__(self)
         Client.__init__(self)
-        self.community_list = self.display_user()  
         self.user = user_info   
         self.edit = 0
         self.password_edit, self.username_edit, self.email_edit, self.picture_edit, self.status_edit = False, False, False, False, False
         self.theme_color = self.purple4
-
+        
         self.show_pass = False
         self.status = "Online"
         self.status_color = self.green
@@ -21,12 +19,14 @@ class Profile( Gui, Client):
         self.picture1 = pygame.Rect(0, 0, 0, 0)
         self.picture2 = pygame.Rect(0, 0, 0, 0)
         self.picture3 = pygame.Rect(0, 0, 0, 0)
+        self.save_edit_profile = pygame.Rect(0, 0, 0, 0)
         self.username_rect = pygame.Rect(960, 300, 80, 30)
         self.email_rect = pygame.Rect(960, 360, 80, 30)
         self.password_rect = pygame.Rect(960, 420, 80, 30)
         self.role_rect = pygame.Rect(960, 480, 80, 30)
         self.status_rect = pygame.Rect(960, 540, 80, 30)
-
+        self.username_modified, self.password_modified, self.email_modified = False, False, False
+        self.old_password = ""
     def display_user_community(self):
         self.rect_full(self.grey2, 195, 250, 250, 380, 10)
         self.rect_border(self.grey4, 195, 250, 250, 380, 1, 10)
@@ -35,12 +35,15 @@ class Profile( Gui, Client):
         pos_y = 0  
         for i, user_community in enumerate(reversed(self.community_list[-10:])): 
             pos_y = pos_y + 30
-            self.text_not_align(self.font2, 20,str(user_community[3]), self.white, 150, 95 + pos_y)  
-            self.image_not_center("ProfilePicture", 90, pos_y + 90, 35, 35, f'profile/profile{user_community[6]}')
+            self.text_not_align(self.font2, 20,str(user_community[3]), self.white, 150, 95 + pos_y)
+            if user_community[0] == self.user_info[0]:
+                self.image_not_center("ProfilePicture", 90, pos_y + 90, 35, 35, f'profile/profile{self.picture}')
+            else:      
+                self.image_not_center("ProfilePicture", 90, pos_y + 90, 35, 35, f'profile/profile{user_community[6]}')
 
     def design(self):
         # Profile main rectangle
-        self.img_background("Background", 600, 350, 1200, 700, "main_page/main_page8")
+        self.img_background_blur("Background",600, 350, 1200, 700, "main_page/main_page8", blur_radius=5)
         self.rect_radius_top(self.theme_color, 750, 90, 800, 100, 10)
         self.rect_radius_bot(self.grey5, 750, 400, 800, 520, 10)
         
@@ -56,13 +59,13 @@ class Profile( Gui, Client):
         # Profile info rectangle
         self.rect_full(self.grey2, 750, 445, 700, 350, 10)
         self.rect_border(self.grey4, 750, 445, 700, 350, 1, 10)
-        
+
         # Info profile
-        self.info_profile("Username", self.username, 300)
-        self.info_profile("E-mail", self.email, 360)
-        self.info_profile("Password", self.password_display, 420)
-        self.info_profile("Role", self.role, 480)
-        self.info_profile("Status", self.role, 540)
+        self.info_profile("Username", "Edit", 300)
+        self.info_profile("E-mail", "Edit", 360)
+        self.info_profile("Password", "Edit", 420)
+        self.info_profile("Role", "Upgrade", 480)
+        self.info_profile("Status", "Edit", 540)
      
         # Creators button
         self.contact_button = self.lateral_menu_display(475, "profile/profile6", "profile9", "profile9")        
@@ -122,6 +125,7 @@ class Profile( Gui, Client):
         self.circle(self.grey5, 500, 230, 15)
         self.circle(self.status_color, 500, 230, 9)
 
+    # Animation to display pictures when editing profile pictures
     def profile_picture_edit(self):
         if self.picture == 1: 
             self.pict = [2, 3, 4]
@@ -137,10 +141,10 @@ class Profile( Gui, Client):
             self.theme_color = self.blue3
         if self.picture_edit:
             if self.size_profile_picture < 400:
-                self.size_profile_picture += 10
+                self.size_profile_picture += 30
         else:
             if self.size_profile_picture > 0:
-                self.size_profile_picture -=10
+                self.size_profile_picture -=30
         self.rect_full_not_centered(self.grey3, 440, 120, 0 + self.size_profile_picture, 100, 50)
         if self.size_profile_picture > 170:
             self.picture1 = pygame.draw.circle(self.Window, self.theme_color, (570,170), 45)
@@ -163,6 +167,12 @@ class Profile( Gui, Client):
         self.hover_profile_picture()
         self.status_circle()
 
+    # Modified check and text
+    def modified(self,x, y):
+        self.img_center("Check", x + 60, y + 3, 15, 15, "profile/profile15")
+        self.text_not_align(self.font1, 12, "modified", self.dark_green, x, y)
+
+    # Display show button 
     def password_show(self):
         if not self.password_edit:
             self.show = pygame.Rect(450 + 10 * len(self.profile_password),443,35,15)
@@ -171,24 +181,26 @@ class Profile( Gui, Client):
             else:
                 self.text_not_align(self.font2, 14, f"show",self.grey1,450 + 10 * len(self.profile_password), 438)
 
-    def info_profile(self, title, text_info, y):
+    # Display buttons to modify
+    def info_profile(self, title, text, y):
         self.text_not_align(self.font1, 16, title, self.grey6, 430, y)
-        self.button_hover(title, 1000, y + 15, 80, 30, self.pink, self.pink, self.purple2, self.purple2, "Edit", self.font5, self.white, 17, 0, 4)
+        self.button_hover(title, 1000, y + 15, 80, 30, self.pink, self.pink, self.purple2, self.purple2, text, self.font5, self.white, 17, 0, 4)
 
     # White rectangle when 'Edit' is pressed
     def info_profile_edit(self):
         # Username info 
         self.rect_full_not_centered(self.white, 420, 322, 0 + self.size_username, 20, 12)
+
         if self.username_edit:
             if self.size_username < 240:
-                self.size_username += 15
+                self.size_username += 30
             self.text_not_align(self.font2, 16, self.username, self.black, 440, 322)
         else:
-            if self.size_username < 15:
+            if self.size_username < 30:
                 self.size_username = 0
             if self.size_username > 0:
                 self.text_not_align(self.font2, 16, self.username, self.black, 440, 322)
-                self.size_username -= 20
+                self.size_username -= 40
             else: 
                 self.text_not_align(self.font2, 16, self.username, self.white, 440, 322)
 
@@ -196,14 +208,14 @@ class Profile( Gui, Client):
         self.rect_full_not_centered(self.white, 420, 382, 0 + self.size_email, 20, 12)
         if self.email_edit:
             if self.size_email < 240:
-                self.size_email += 15
+                self.size_email += 30
             self.text_not_align(self.font2, 16, self.email, self.black, 440, 382)
         else:
-            if self.size_email < 15:
+            if self.size_email < 30:
                 self.size_email = 0
             if self.size_email > 0:
                 self.text_not_align(self.font2, 16, self.email, self.black, 440, 382)
-                self.size_email -= 20
+                self.size_email -= 40
             else: 
                 self.text_not_align(self.font2, 16, self.email, self.white, 440, 382)
 
@@ -211,13 +223,13 @@ class Profile( Gui, Client):
         self.rect_full_not_centered(self.white, 420, 442, 0 + self.size_password, 20, 12)
         if self.password_edit:
             if self.size_password < 240:
-                self.size_password += 15
+                self.size_password += 30
             self.text_not_align(self.font2, 16, self.profile_password, self.black, 440, 442)
         else:
-            if self.size_password < 15:
+            if self.size_password < 30:
                 self.size_password = 0
             elif self.size_password > 0:
-                self.size_password -= 20
+                self.size_password -= 40
             if self.size_password < 100:
                 if self.show_pass:                    
         
@@ -229,17 +241,29 @@ class Profile( Gui, Client):
                 self.text_not_align(self.font2, 16, self.profile_password, self.black, 440, 442)
 
         # Quit
-            self.close_profile = self.hover_image("Quit", "Quit", 1120, 70, 50, 50, "profile/profile11", "profile/profile8")
+        self.close_profile = self.hover_image("Quit", "Quit", 1120, 70, 50, 50, "profile/profile11", "profile/profile8")
+
+        # Display save logo if an edit has been made
+        if self.old_password != self.profile_password or self.username != self.user[3] or self.email != self.user[4] or self.picture != self.user[6]:
+            self.save_edit_profile = self.hover_image("Logo_save", "Logo_save", 995, 220, 80, 80, "profile/profile13","profile/profile14")
+
+        #Display check and text if informations has been modified
+        if self.username_modified:
+            self.modified(525, 300)
+        if self.email_modified:
+            self.modified(490, 360)
+        if self.password_modified:
+            self.modified(525, 420)
 
     def profile_run(self):
-        if self.profile_password == "":
-            user_id = self.user[0]
-            self.profile_password = self.abc_password(user_id) 
-            
-        self.username, self.email, self.picture, self.role = self.user[3], self.user[4], self.user[6], self.user[7]
-        self.password_display = " *" * len(self.profile_password)
+        if self.old_password == "":
+            self.profile_password = self.abc_password(self.user[0]) 
+            self.old_password = self.profile_password
+            self.username, self.email, self.picture, self.role = self.user[3], self.user[4], self.user[6], self.user[7]
+            self.password_display = " *" * len(self.profile_password)
 
         if self.profile_running :
+            print(self.old_password, self.profile_password)
             self.design()
             self.display_user_community()
             self.profile_picture_edit()

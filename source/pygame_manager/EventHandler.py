@@ -73,6 +73,17 @@ class EventHandler():
                 elif self.close_profile.collidepoint(event.pos):
                     self.profile_to_main_page = True
                     self.profile_running = False
+                elif self.save_edit_profile.collidepoint(event.pos):
+                    self.modify_user(self.username, self.email, self.profile_password,self.picture, self.user[0],self.user[3])
+                    if self.old_password != self.profile_password:
+                        self.password_modified = True
+                        self.password_edit = False
+                    if self.username != self.user[3]:
+                        self.username_modified = True
+                        self.username_edit = False
+                    if self.email != self.user[4]:
+                        self.email_modified = True
+                        self.email_edit
 
             elif event.type == pygame.MOUSEBUTTONUP:
                 if self.show.collidepoint(event.pos):
@@ -273,7 +284,6 @@ class EventHandler():
 
                         elif self.emoji_angry.collidepoint(event.pos):
                             self.add_emoji(id_message,4)
-
 
                 if event.button == 4:
                     self.scroll += 15

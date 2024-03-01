@@ -239,7 +239,6 @@ class MainPage(Gui, Client, DiscordManager):
         
     def mainPage_run(self):
         while self.main_page_running :
-            self.update_message()
             self.background()
             self.first_section()
             self.second_section()
