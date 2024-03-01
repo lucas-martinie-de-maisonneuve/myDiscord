@@ -63,9 +63,9 @@ class Display_test(Gui):
                     self.profile.profile_run()
 
             elif self.main_page.main_page_to_add_channel or self.add_channel.add_channel_running:
-                    self.add_channel.add_channel_running = True
-                    self.add_channel.addChannel_run()
-                    self.main_page.main_page_to_add_channel = False
+                self.add_channel.add_channel_running = True
+                self.add_channel.addChannel_run()
+                self.main_page.main_page_to_add_channel = False
 
             elif self.profile.profile_to_contact or self.contact.contact_running:
                 self.contact.contact_running = True

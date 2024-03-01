@@ -102,3 +102,4 @@ class AddChannel(Gui,Client,DiscordManager):
             self.background()
             self.event_add()
             self.add_section()            
+            self.update()
