@@ -1,8 +1,8 @@
 import pygame
+from datetime import datetime, timedelta
 from data.DiscordManager import DiscordManager
 from source.pygame_manager.Gui import Gui
 from source.Client import Client
-# from Notification import Notification
 
 class MainPage(Gui, Client, DiscordManager):
     
@@ -10,8 +10,8 @@ class MainPage(Gui, Client, DiscordManager):
         Client.__init__(self)
         DiscordManager.__init__(self)  
         Gui.__init__(self)
-        # Notification.__init__(self)
         self.user_info = user_info
+        self.last_login_date = ""
         self.input_search = "Search..."
         self.message = ""
         self.L_MAX = 80
@@ -20,11 +20,12 @@ class MainPage(Gui, Client, DiscordManager):
         self.scroll = 0
         self.channel_rects = []
 
-        self.bell = pygame.Rect(1060, 15, 50, 50)
+        self.bell = pygame.Rect(1075, 15, 50, 50)
         self.poweroff_c = pygame.Rect(64-115/2, 635-115/2, 115, 115)
         self.settings_c = pygame.Rect( 64-115/2, 540-115/2, 115, 115)
         self.server_c =  pygame.Rect(64-115/2, 170-115/2, 115, 115)
-
+        self.notification_c= pygame.Rect(1052, 25, 30, 30)
+        
         self.emoji_choice = False
         self.emoji_display = 0
         self.emoji_list = []
@@ -45,7 +46,7 @@ class MainPage(Gui, Client, DiscordManager):
         self.image_not_center("Search logo", 1000, 25, 30, 30,"main_page/main_page16")
 
         # Logo bell
-        self.image_not_center("Bell logo", 1060, 15, 50, 50,"main_page/main_page19") 
+        self.image_not_center("Bell logo", 1075, 15, 50, 50,"main_page/main_page19") 
 
         # Link to the LaPlateforme website  
         self.image_not_center("Question mark", 1120, 15, 50, 50,"main_page/main_page15")    
@@ -223,16 +224,19 @@ class MainPage(Gui, Client, DiscordManager):
         self.img_center("Logo Emoji",1150, 650, 50, 50, "main_page/main_page27")
 
 
-    # def notification(self): 
-    #     last_login_date = self.load_last_login_date() 
-    #     self.save_last_login_date() 
+    def notification(self): 
+        if self.last_login_date == "":
+            self.last_login_date = self.load_info_last_message(self.user_info[0])
 
-    #     new_messages = [message for message in self.messages if message[2] > last_login_date]
+        # Save info when connect
+            for message in self.messages: 
+                
+                if message[2] > self.last_login_date: 
+                    self.new_message = self.new_message + 1
 
-    #     if new_messages:
-    #         self.display_notification(len(new_messages))
-
-
+        self.text_center(self.font1, 20, str(self.new_message), self.pink1, 1067, 42)
+        self.image_not_center("Circle notification",1052, 25, 30, 30,"main_page/main_page23")
+        
     def mainPage_run(self):
         while self.main_page_running :
             self.update_message()
@@ -244,6 +248,6 @@ class MainPage(Gui, Client, DiscordManager):
             self.display_emoji()
             self.event_main_page()
             self.main_page_cursor()
-            # self.notification()
+            self.notification()
             # print(self.emoji_list)
             self.update()

@@ -1,12 +1,11 @@
-import time
 from datetime import datetime
 from data.Database import Database
 
 class DiscordManager(Database):
     def __init__(self):
         # Database.__init__(self, 'localhost', 'root', '$~Bc4gB9', 'discord')
-        # Database.__init__(self, 'localhost', 'root', 'VannyLamorte25!', 'discord')
-        Database.__init__(self, 'localhost', 'root', 'azerty', 'discord')
+        Database.__init__(self, 'localhost', 'root', 'VannyLamorte25!', 'discord')
+        # Database.__init__(self, 'localhost', 'root', 'azerty', 'discord')
         self.connect()
 
     def check_credentials(self, email, password):
@@ -105,9 +104,9 @@ class DiscordManager(Database):
         params = (pseudo, email, password, photo, id)
         self.execute_query(sql, params)     
 
-    def update_message_author(self, pseudo, user):
+    def update_message_author(self, name, user):
         sql = 'UPDATE message SET name=%s WHERE name=%s'
-        params = (pseudo, user)
+        params = (name, user)
         self.execute_query(sql, params)
     
     def update_abc_password(self, password, id_user): 
@@ -199,12 +198,58 @@ class DiscordManager(Database):
         pass
    
 
+    def add_abc_password (self, password, id_user):
+        sql = "INSERT INTO password (password, id_user) VALUES (%s, %s)"
+        values = (password, id_user)
+        self.execute_query(sql, values)
+
+
+    def save_last_login_date(self): 
+        pass
+
+    def load_last_login_date(self):
+        pass
+   
+
+    def add_abc_password (self, password, id_user):
+        sql = "INSERT INTO password (password, id_user) VALUES (%s, %s)"
+        values = (password, id_user)
+        self.execute_query(sql, values)
+
+
+    def save_last_login_date(self): 
+        pass
+
+    def load_last_login_date(self):
+        pass
+   
+
     # Modifier Role
     # def modify_role(self, user_id, id_role):
     #     set_clause = ", ".join([f"{key} = '{value}'" for key, value in new_product.items()])
     #     sql = f"UPDATE product SET {set_clause} WHERE id = %s"
     #     self.cursor.execute(sql, (product_id,))
-    #     self.connection.commit()       
+    #     self.connection.commit() 
+
+    # Notification   
+    def save_last_message (self, user_id): 
+        current_time = datetime.now()
+        sql = "UPDATE user SET last_message = %s WHERE id = %s"
+        values = (current_time, user_id,)
+        self.execute_query(sql, values)
+
+    def get_last_message_time(self, user_id):
+        sql = "SELECT last_message FROM user WHERE id = %s"
+        values = (user_id,)
+        result = self.fetch(sql, values)
+        if result: 
+                return result[0][0]
+        else: 
+            return None
+
+    
+
+
 
 manager = DiscordManager()
 manager.close_connection()

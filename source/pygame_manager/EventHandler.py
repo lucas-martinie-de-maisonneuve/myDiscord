@@ -312,6 +312,7 @@ class EventHandler():
                     self.main_page_running = False
                     
                 elif self.circle3.collidepoint(event.pos):
+                    self.save_last_message(self.user_info[0]) # Save info when disconnect 
                     self.main_page_to_login = True
                     self.main_page_running = False
 
@@ -319,7 +320,9 @@ class EventHandler():
                     self.main_page_to_add_channel = True
                     self.add_channel_running = True
                     self.main_page_running = False
-                    
+
+                elif self.notification_c.collidepoint(event.pos): 
+                    self.reset_new_message_counter()                   
 
                 
             elif event.type == pygame.MOUSEBUTTONUP:
