@@ -257,14 +257,15 @@ class EventHandler():
 
             elif event.type == pygame.MOUSEBUTTONDOWN:
                 # Event Emoji
+                # self.update_message()
                 if self.emoji_logo.collidepoint(event.pos):
                     self.emoji_choice = True
                     
                 if self.emoji_choice:
                     for id_message,rect1, rect2, rect3, rect4 in self.emoji_list:      
-                        print(self.emoji_list) 
                         if rect1.collidepoint(event.pos):
                             self.add_emoji(1,id_message)
+                            print('ok')
                             self.emoji_choice = False
                             
                         elif rect2.collidepoint(event.pos):
