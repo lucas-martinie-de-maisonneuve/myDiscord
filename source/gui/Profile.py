@@ -247,4 +247,3 @@ class Profile( Gui, Client):
             self.password_show()
             self.event_profile()
             self.profile_page_cursor()
-            print(self.main_page_running)

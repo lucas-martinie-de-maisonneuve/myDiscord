@@ -249,5 +249,4 @@ class MainPage(Gui, Client, DiscordManager):
             self.event_main_page()
             self.main_page_cursor()
             self.notification()
-            # print(self.emoji_list)
             self.update()

@@ -24,7 +24,7 @@ class Display_test(Gui):
         self.add_channel = AddChannel()
         self.connexion.home_running = True
 
-    def test(self):
+    def discord_run(self):
         while True:
             if self.register.register_to_login or self.main_page.main_page_to_login or self.profile.profile_to_login or self.connexion.home_running:
                 if not self.connexion.home_running:
@@ -75,4 +75,4 @@ class Display_test(Gui):
             self.update()
             
 display = Display_test()
-display.test()
+display.discord_run()

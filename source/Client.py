@@ -4,13 +4,14 @@ from hashlib import sha256
 
 class Client(DiscordManager):
     def __init__(self):
+        super().__init__()
+        
         self.connected = False
         self.profile_password = ""
         self.home_running = False
         self.user_email = ""
         self.user_password = ""
         self.user_info = (0, '', '', '', '', '', 0, 0)
-        super().__init__()
         self.register_username = ""
         self.register_email = ""
         self.register_surname = ""
@@ -68,11 +69,8 @@ class Client(DiscordManager):
         if self.check_credentials(self.user_email, hashed_password):
             self.user_info = self.get_user(self.user_email, hashed_password)
             self.connected = True
-            print("Connexion réussie !")
             return self.user_info
-        else:
-            print("Erreur. Connexion échouée.")
-
+        
     def abc_password(self, user_id): 
         self.profile_password = self.get_password(user_id)
         return self.profile_password[0][0]

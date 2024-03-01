@@ -262,22 +262,17 @@ class EventHandler():
                     
                 if self.emoji_choice:
                     for id_message, rect in self.emoji_list:       
-                        print(id_message,self.emoji_list)             
                         if self.emoji_heart.collidepoint(event.pos):
                             self.add_emoji(id_message,1)
-                            print("ajout emoji")
                             
                         elif self.emoji_laugh.collidepoint(event.pos):
                             self.add_emoji(id_message,2)
-                            print("ajout emoji")
 
                         elif self.emoji_cry.collidepoint(event.pos):
                             self.add_emoji(id_message,3)
-                            print("ajout emoji")
 
                         elif self.emoji_angry.collidepoint(event.pos):
                             self.add_emoji(id_message,4)
-                            print("ajout emoji")
 
 
                 if event.button == 4:
