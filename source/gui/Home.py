@@ -100,8 +100,6 @@ class Home(Gui, Client):
         if self.connected:
             self.home_to_main_page = True
             self.home_running = False
-            self.connected = False
-
         if self.user_info is None:
             self.text_center(self.font1, 11, "Wrong password or Email", self.darkred, 825, 360)
         

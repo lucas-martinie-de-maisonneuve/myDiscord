@@ -113,7 +113,11 @@ class DiscordManager(Database):
         sql = 'UPDATE password SET password=%s WHERE id_user=%s'
         params = (password, id_user)
         self.execute_query(sql, params)
-
+    
+    def update_role_request(self, email):
+        sql = 'UPDATE user SET change_role=1 WHERE email=%s'
+        params = (email,)
+        self.execute_query(sql, params)
 
     # Delete User
     def delete_user(self, id):

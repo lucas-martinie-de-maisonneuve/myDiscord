@@ -12,6 +12,8 @@ class Client(DiscordManager):
         self.user_email = ""
         self.user_password = ""
         self.user_info = (0, '', '', '', '', '', 0, 0)
+        self.user = (0, '', '', '', '', '', 0, 0)   
+
         self.register_username = ""
         self.register_email = ""
         self.register_surname = ""
@@ -19,8 +21,8 @@ class Client(DiscordManager):
         self.register_password = ""
         self.register_photo = 0
         self.registered = False
-        
-        
+        self.username, self.email, self.picture, self.hashed_password = "", "", 0, ""
+
         self.new_name_channel = ""
         self.status = None
         self.communication = None
@@ -35,6 +37,7 @@ class Client(DiscordManager):
         self.login_to_register = False
         self.register_running = False
 
+        self.profile_modified = False
         self.register_to_main_page = False
         self.profile_to_main_page = False
         self.home_to_main_page = False
@@ -102,6 +105,8 @@ class Client(DiscordManager):
         self.update_user(pseudo, email, hashed_password, photo, id)
         self.update_message_author(pseudo, user)
         self.update_abc_password(password, id)
+        self.user = self.get_user(self.email, self.hashed_password)
+        return self.user
         
         # Notification
     def load_info_last_message(self, user): 
@@ -111,4 +116,8 @@ class Client(DiscordManager):
     def reset_new_message_counter(self):
         self.new_message = 0
 
+    def change_role_request(self):
+        self.update_role_request(self.email)
+        self.user = self.get_user(self.email, self.hashed_password)
+        return self.user
     

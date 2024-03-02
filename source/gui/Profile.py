@@ -19,14 +19,11 @@ class Profile(Gui, Client):
         self.picture1 = pygame.Rect(0, 0, 0, 0)
         self.picture2 = pygame.Rect(0, 0, 0, 0)
         self.picture3 = pygame.Rect(0, 0, 0, 0)
+        self.role_rect = pygame.Rect(0, 0, 0, 0)
         self.save_edit_profile = pygame.Rect(0, 0, 0, 0)
-        self.username_rect = pygame.Rect(960, 300, 80, 30)
-        self.email_rect = pygame.Rect(960, 360, 80, 30)
-        self.password_rect = pygame.Rect(960, 420, 80, 30)
-        self.role_rect = pygame.Rect(960, 480, 80, 30)
-        self.status_rect = pygame.Rect(960, 540, 80, 30)
         self.username_modified, self.password_modified, self.email_modified = False, False, False
         self.old_password = ""
+
     def display_user_community(self):
         self.rect_full(self.grey2, 195, 250, 250, 380, 10)
         self.rect_border(self.grey4, 195, 250, 250, 380, 1, 10)
@@ -62,12 +59,21 @@ class Profile(Gui, Client):
         self.rect_border(self.grey4, 750, 445, 700, 350, 1, 10)
 
         # Info profile
-        self.info_profile("Username", "Edit", 300)
-        self.info_profile("E-mail", "Edit", 360)
-        self.info_profile("Password", "Edit", 420)
-        self.info_profile("Role", "Upgrade", 480)
-        self.info_profile("Status", "Edit", 540)
-     
+        self.username_rect = self.info_profile("Username", "Edit", 300)
+        self.email_rect = self.info_profile("E-mail", "Edit", 360)
+        self.password_rect = self.info_profile("Password", "Edit", 420)
+        self.status_rect = self.info_profile("Status", "Edit", 540)
+        if self.user[7] == 2 and self.user[8] == 0:
+            self.role_rect = self.info_profile("Role", "Upgrade", 480)
+        elif self.user[7] == 2 and self.user[8] == 1:
+            self.rect_full(self.grey6, 1000, 495, 80, 30, 4)
+            self.text_not_align(self.font5, 17, "Pending", self.white, 973, 481)
+            self.text_not_align(self.font1, 16, "Role", self.grey6, 430, 480)
+        else:
+            self.role_rect = self.info_profile("Role", "Request", 480)
+        self.text_not_align(self.font2, 16, self.role, self.white, 440, 502)
+
+
         # Creators button
         self.contact_button = self.lateral_menu_display(475, "profile/profile6", "profile9", "profile9")        
 
@@ -101,7 +107,8 @@ class Profile(Gui, Client):
             self.picture_cursor = False
             self.circle(self.theme_color, 450, 180, 65)
             self.img_center("profile_picture", 450,180,130,130,f"profile/profile{self.picture}")
-        # Status color 
+
+    # Status color 
     def status_display(self, x, y, texte, texte2, color, color2):
         self.status_edit_rect = pygame.Rect(540, 570, 80, 20)
         self.status_active_rect = pygame.Rect(440, 570, 80, 20)
@@ -185,7 +192,8 @@ class Profile(Gui, Client):
     # Display buttons to modify
     def info_profile(self, title, text, y):
         self.text_not_align(self.font1, 16, title, self.grey6, 430, y)
-        self.button_hover(title, 1000, y + 15, 80, 30, self.pink, self.pink, self.purple2, self.purple2, text, self.font5, self.white, 17, 0, 4)
+        title = self.button_hover(title, 1000, y + 15, 80, 30, self.pink, self.pink, self.purple2, self.purple2, text, self.font5, self.white, 17, 0, 4)
+        return title
 
     # White rectangle when 'Edit' is pressed
     def info_profile_edit(self):
@@ -259,8 +267,9 @@ class Profile(Gui, Client):
     def profile_run(self):
         if self.old_password == "":
             self.profile_password = self.abc_password(self.user[0]) 
-            self.old_password = self.profile_password
-            self.username, self.email, self.picture, self.role = self.user[3], self.user[4], self.user[6], self.user[7]
+            self.username, self.email, self.hashed_password, self.picture = self.user[3], self.user[4], self.user[5], self.user[6]
+            self.old_password, self.old_username, self.old_email = self.profile_password, self.username, self.email
+            self.role = "Regular User" if self.user[7] == 2 else "Administrator"
             self.password_display = " *" * len(self.profile_password)
 
         if self.profile_running :

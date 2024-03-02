@@ -46,11 +46,18 @@ class Display_test(Gui):
                         self.main_page = MainPage(self.register.user_info)
                         self.main_page.main_page_running = True
                         self.register.register_running = False
+                    elif self.profile.profile_modified:
+                        self.main_page = MainPage(self.profile.user)
+                        self.main_page.main_page_running = True
+                    elif self.connexion.connected:
+                        self.main_page = MainPage(self.connexion.user_info)
+                        self.main_page.main_page_running = True
                     else:
                         self.main_page = MainPage(self.connexion.user_info)
                         self.main_page.main_page_running = True
+
                 else:
-                    self.profile.profile_to_main_page, self.connexion.home_to_main_page, self.register.registered, self.register.register_to_main_page,self.add_channel.add_channel_to_main_page = False, False, False, False,False
+                    self.profile.profile_to_main_page, self.connexion.home_to_main_page, self.register.registered, self.register.register_to_main_page,self.add_channel.add_channel_to_main_page, self.connexion.connected, self.profile.profile_modified = False, False, False, False,False, False, False
                     self.main_page.mainPage_run()
 
             elif self.main_page.main_page_to_profile or self.contact.contact_to_profile or self.profile.profile_running:

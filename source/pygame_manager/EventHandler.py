@@ -74,16 +74,22 @@ class EventHandler():
                     self.profile_to_main_page = True
                     self.profile_running = False
                 elif self.save_edit_profile.collidepoint(event.pos):
-                    self.modify_user(self.username, self.email, self.profile_password,self.picture, self.user[0],self.user[3])
+                    self.user = self.modify_user(self.username, self.email, self.profile_password,self.picture, self.user[0],self.user[3])
                     if self.old_password != self.profile_password:
                         self.password_modified = True
                         self.password_edit = False
-                    if self.username != self.user[3]:
+                    if self.old_username != self.username:
                         self.username_modified = True
                         self.username_edit = False
-                    if self.email != self.user[4]:
+                    if self.old_email != self.email:
                         self.email_modified = True
                         self.email_edit
+                    self.profile_modified = True
+                elif self.role_rect.collidepoint(event.pos):
+                    if self.user[7] == 2:
+                        self.user = self.change_role_request()
+                        self.profile_modified = True
+                        self.role_rect = pygame.Rect(0, 0, 0, 0)
 
             elif event.type == pygame.MOUSEBUTTONUP:
                 if self.show.collidepoint(event.pos):
