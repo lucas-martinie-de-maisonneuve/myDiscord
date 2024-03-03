@@ -61,12 +61,15 @@ class Display_test(Gui):
                     self.main_page.mainPage_run()
 
             elif self.main_page.main_page_to_profile or self.contact.contact_to_profile or self.profile.profile_running:
-                if not self.profile.profile_running:
+                if self.main_page.main_page_to_profile:
                     self.profile = Profile(self.main_page.user_info)
                     self.profile.profile_running = True
-                else:
                     self.main_page.main_page_to_profile = False
+                elif self.contact.contact_to_profile : 
+                    self.profile = Profile(self.profile.user)
                     self.contact.contact_to_profile = False
+                    self.profile.profile_running = True
+                else:
                     self.profile.profile_run()
 
             elif self.main_page.main_page_to_add_channel or self.add_channel.add_channel_running:

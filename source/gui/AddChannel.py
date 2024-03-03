@@ -1,4 +1,3 @@
-import pygame
 from source.pygame_manager.Gui import Gui
 from source.Client import Client
 from data.DiscordManager import DiscordManager
@@ -98,8 +97,7 @@ class AddChannel(Gui,Client,DiscordManager):
         self.img_center("Neon light", 600, 350, 150, 90,"main_page/main_page7")
         
     def addChannel_run(self):
-        while self.add_channel_running :
+        if self.add_channel_running :
             self.background()
             self.event_add()
             self.add_section()            
-            self.update()

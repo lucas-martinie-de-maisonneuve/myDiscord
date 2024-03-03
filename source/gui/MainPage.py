@@ -1,14 +1,11 @@
 import pygame
-from datetime import datetime, timedelta
-from data.DiscordManager import DiscordManager
 from source.pygame_manager.Gui import Gui
 from source.Client import Client
 
-class MainPage(Gui, Client, DiscordManager):
+class MainPage(Gui, Client):
     
     def __init__(self, user_info):
         Client.__init__(self)
-        DiscordManager.__init__(self)  
         Gui.__init__(self)
         self.user_info = user_info
         self.last_login_date = ""
@@ -241,7 +238,7 @@ class MainPage(Gui, Client, DiscordManager):
         self.image_not_center("Circle notification",1052, 25, 30, 30,"main_page/main_page23")
         
     def mainPage_run(self):
-        while self.main_page_running :
+        if self.main_page_running :
             self.background()
             self.first_section()
             self.second_section()
@@ -251,4 +248,3 @@ class MainPage(Gui, Client, DiscordManager):
             self.event_main_page()
             self.main_page_cursor()
             self.notification()
-            self.update()

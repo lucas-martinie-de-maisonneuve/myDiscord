@@ -32,7 +32,11 @@ class DiscordManager(Database):
     def display_user(self):
         sql = "SELECT * FROM user"
         return self.fetch(sql)
-
+    
+    def display_admin_request(self):
+        sql = "SELECT * FROM user WHERE change_role=1"
+        return self.fetch(sql)
+    
     def display_role_name(self):
         sql = "SELECT role.name FROM role LEFT JOIN user ON user.id_role = role.id"
         return self.fetch(sql)
@@ -118,6 +122,16 @@ class DiscordManager(Database):
         sql = 'UPDATE user SET change_role=1 WHERE email=%s'
         params = (email,)
         self.execute_query(sql, params)
+
+    def upgrade_role(self, id_user):
+        sql = 'UPDATE user SET change_role=0, id_role=1 WHERE id =%s'
+        values = (id_user,)
+        self.execute_query(sql, values)
+
+    def deny_upgrade_role(self, id_user):
+        sql = 'UPDATE user SET change_role=0 WHERE id =%s'
+        values = (id_user,)
+        self.execute_query(sql, values)
 
     # Delete User
     def delete_user(self, id):

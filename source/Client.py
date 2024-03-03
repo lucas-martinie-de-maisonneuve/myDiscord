@@ -58,7 +58,7 @@ class Client(DiscordManager):
         self.channels = self.display_channel()
         self.messages = self.display_message()
         self.community_list = self.display_user()  
-
+        self.request = self.display_admin_request()
         # self.emoji_display = self.emoji_react()
 
         self.actual_channel = 1
@@ -105,7 +105,8 @@ class Client(DiscordManager):
         self.update_user(pseudo, email, hashed_password, photo, id)
         self.update_message_author(pseudo, user)
         self.update_abc_password(password, id)
-        self.user = self.get_user(self.email, self.hashed_password)
+        self.user = self.get_user(self.email, hashed_password)
+        print (self.user)
         return self.user
         
         # Notification
@@ -121,3 +122,12 @@ class Client(DiscordManager):
         self.user = self.get_user(self.email, self.hashed_password)
         return self.user
     
+    def  change_role_validate(self, user_id):
+        self.upgrade_role(user_id)
+        self.request = self.display_admin_request()
+        return self.request
+
+    def  change_role_denyed(self, user_id):
+        self.deny_upgrade_role(user_id)
+        self.request = self.display_admin_request()
+        return self.request

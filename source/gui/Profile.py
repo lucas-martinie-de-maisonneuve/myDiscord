@@ -16,6 +16,7 @@ class Profile(Gui, Client):
         self.status_color = self.green
         self.size_username, self.size_email ,self.size_password, self.size_profile_picture= 0, 0, 0, 0
         self.pict = []
+        self.request_rects = []
         self.picture1 = pygame.Rect(0, 0, 0, 0)
         self.picture2 = pygame.Rect(0, 0, 0, 0)
         self.picture3 = pygame.Rect(0, 0, 0, 0)
@@ -23,6 +24,7 @@ class Profile(Gui, Client):
         self.save_edit_profile = pygame.Rect(0, 0, 0, 0)
         self.username_modified, self.password_modified, self.email_modified = False, False, False
         self.old_password = ""
+        self.display_request = False
 
     def display_user_community(self):
         self.rect_full(self.grey2, 195, 250, 250, 380, 10)
@@ -37,6 +39,21 @@ class Profile(Gui, Client):
                 self.image_not_center("ProfilePicture", 90, pos_y + 90, 35, 35, f'profile/profile{self.picture}')
             else:      
                 self.image_not_center("ProfilePicture", 90, pos_y + 90, 35, 35, f'profile/profile{user_community[6]}')
+
+    def display_user_request(self):
+        self.rect_full(self.grey2, 195, 250, 250, 380, 10)
+        self.rect_border(self.grey4, 195, 250, 250, 380, 1, 10)
+        self.text_not_align(self.font1, 18,"Upgrade request :", self.white, 90, 85)
+        pos_y = 0  
+
+        for i, request in enumerate(self.request): 
+            pos_y = pos_y + 40
+            self.text_not_align(self.font2, 20, str(request[3]), self.white, 100, 95 + pos_y)
+            validate_rect = self.hover_image("validate", "validate", 240, 107 + pos_y, 34, 34, "profile/profile16", "profile/profile16")
+            deny_rect = self.hover_image("deny", "deny", 277, 107 + pos_y, 34, 34, "profile/profile17", "profile/profile17")
+            # Vérification si le rectangle existe déjà dans la liste
+            if (request[0], validate_rect, deny_rect) not in self.request_rects:
+                self.request_rects.append((request[0], validate_rect, deny_rect))                
 
     def design(self):
         # Profile main rectangle
@@ -59,18 +76,22 @@ class Profile(Gui, Client):
         self.rect_border(self.grey4, 750, 445, 700, 350, 1, 10)
 
         # Info profile
-        self.username_rect = self.info_profile("Username", "Edit", 300)
-        self.email_rect = self.info_profile("E-mail", "Edit", 360)
-        self.password_rect = self.info_profile("Password", "Edit", 420)
-        self.status_rect = self.info_profile("Status", "Edit", 540)
+        self.username_rect = self.info_profile("Username", "Edit", "Edit username", 300)
+        self.email_rect = self.info_profile("E-mail", "Edit", "Edit email", 360)
+        self.password_rect = self.info_profile("Password", "Edit", "Edit password", 420)
+        self.status_rect = self.info_profile("Status", "Edit", "Change status", 540)
         if self.user[7] == 2 and self.user[8] == 0:
-            self.role_rect = self.info_profile("Role", "Upgrade", 480)
+            self.role_rect = self.info_profile("Role", "Upgrade", "Request promotion",480)
         elif self.user[7] == 2 and self.user[8] == 1:
             self.rect_full(self.grey6, 1000, 495, 80, 30, 4)
             self.text_not_align(self.font5, 17, "Pending", self.white, 973, 481)
             self.text_not_align(self.font1, 16, "Role", self.grey6, 430, 480)
         else:
-            self.role_rect = self.info_profile("Role", "Request", 480)
+            if self.display_request:
+                self.role_rect = self.info_profile("Role", "Request", "Hide pending request", 480)
+            else:
+                self.role_rect = self.info_profile("Role", "Request", "Display pending request", 480)
+
         self.text_not_align(self.font2, 16, self.role, self.white, 440, 502)
 
 
@@ -190,9 +211,11 @@ class Profile(Gui, Client):
                 self.text_not_align(self.font2, 14, f"show",self.grey1,450 + 10 * len(self.profile_password), 438)
 
     # Display buttons to modify
-    def info_profile(self, title, text, y):
+    def info_profile(self, title, text, description,y):
         self.text_not_align(self.font1, 16, title, self.grey6, 430, y)
+        self.text_center_italic(self.font2, 12, description, self.grey11, 885, y + 15)
         title = self.button_hover(title, 1000, y + 15, 80, 30, self.pink, self.pink, self.purple2, self.purple2, text, self.font5, self.white, 17, 0, 4)
+
         return title
 
     # White rectangle when 'Edit' is pressed
@@ -274,7 +297,7 @@ class Profile(Gui, Client):
 
         if self.profile_running :
             self.design()
-            self.display_user_community()
+            self.display_user_request() if self.display_request else self.display_user_community()
             self.profile_picture_edit()
             self.info_profile_edit()
             self.password_show()

@@ -22,6 +22,7 @@ class Element():
         self.grey8 = (51, 55, 62) # Banner principal page
         self.grey9 = (17, 18, 20) # Second section principal page
         self.grey10 = (29,30,33) # Rect principal page
+        self.grey11 = (155,155,155)
         self.dark_grey = (34, 31, 37)
 
         self.dark_green = (43, 147, 72)
@@ -87,6 +88,15 @@ class Element():
         text = pygame.font.Font(f"{font}", text_size).render(text_content, True, color)
         text_rect = text.get_rect(topleft=(x, y))
         self.Window.blit(text, text_rect)
+
+    def text_center_italic(self, font, text_size, text_content, color, x, y):
+        pygame.font.init()
+        font_obj = pygame.font.Font(f"{font}", text_size)
+        text = font_obj.render(text_content, True, color)
+        text_rect = text.get_rect(center=(x, y))
+        self.Window.blit(text, text_rect)
+
+
 
 # Def image
 

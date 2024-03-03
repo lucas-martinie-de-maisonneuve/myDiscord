@@ -90,6 +90,20 @@ class EventHandler():
                         self.user = self.change_role_request()
                         self.profile_modified = True
                         self.role_rect = pygame.Rect(0, 0, 0, 0)
+                    else:
+                        if not self.display_request:
+                            self.display_request = True
+                        else:
+                            self.display_request = False
+
+                elif event.button == 1:
+                    for request, validate, deny in self.request_rects:
+                        if validate.collidepoint(event.pos):
+                            self.request = self.change_role_validate(request)
+                            self.request_rects = []
+                        elif deny.collidepoint(event.pos):
+                            self.request = self.change_role_denyed(request)
+                            self.request_rects = []
 
             elif event.type == pygame.MOUSEBUTTONUP:
                 if self.show.collidepoint(event.pos):
