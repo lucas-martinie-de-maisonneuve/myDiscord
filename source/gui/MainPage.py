@@ -2,6 +2,7 @@ import pygame
 from data.DiscordManager import DiscordManager
 from source.pygame_manager.Gui import Gui
 from source.Client import Client
+# from Notification import Notification
 
 class MainPage(Gui, Client, DiscordManager):
     
@@ -9,26 +10,21 @@ class MainPage(Gui, Client, DiscordManager):
         Client.__init__(self)
         DiscordManager.__init__(self)  
         Gui.__init__(self)
+        # Notification.__init__(self)
         self.user_info = user_info
         self.input_search = "Search..."
         self.message = ""
-        self.RECT_W = 600
-        self.RECT_H= 60 
         self.L_MAX = 80
         self.link_is_clicked = True
         self.entry = 0
         self.scroll = 0
         self.channel_rects = []
 
-        self.categories = self.display_category()
-        self.channels = self.display_channel()
-        self.messages = self.display_message()
-        self.actual_channel = 1
-
         self.bell = pygame.Rect(1060, 15, 50, 50)
         self.poweroff_c = pygame.Rect(64-115/2, 635-115/2, 115, 115)
         self.settings_c = pygame.Rect( 64-115/2, 540-115/2, 115, 115)
         self.server_c =  pygame.Rect(64-115/2, 170-115/2, 115, 115)
+        self.private = False
 
     def background(self): 
         self.img_background("Background", 600, 350, 1200, 800, "main_page/main_page8")
@@ -39,7 +35,7 @@ class MainPage(Gui, Client, DiscordManager):
 
         # Logo Names
         self.image_not_center("Names", 155, 15, 200, 57,"main_page/main_page17") 
-        self.image_not_center("Rectangle logo", 120, 12, 270, 55,"main_page/main_page18") 
+        self.image_not_center("Rectangle logo", 120, 1, 270, 75,"main_page/main_page18") 
 
         # Search bar
         self.input_search_rect = self.rect_full(self.grey2, 920, 40, 240, 35, 80)
@@ -69,25 +65,34 @@ class MainPage(Gui, Client, DiscordManager):
         else:          
             self.img_center("Logo principal", 64, 170, 70, 70,"main_page/main_page2")
             self.img_center("Neon circle", 64, 170, 110, 110,"main_page/main_page4")
-               
-        # Hover settings
-        self.circle2 = pygame.draw.circle(self.Window, self.grey10, (64, 540), 35)
-        if self.is_mouse_over_button(self.circle2):           
-            self.img_center("Neon server", 64, 540, 85, 85,"main_page/main_page5")
-            self.img_center("Neon circle", 64, 540, 115, 115,"main_page/main_page4")   
+            
+        # Hover Add Channel
+        self.circle4 = pygame.draw.circle(self.Window, self.grey10, (64, 485), 35)
+        if self.is_mouse_over_button(self.circle4):
+            self.img_center("Add Channel", 65, 485, 45, 45,"main_page/main_page13")
+            self.img_center("Neon circle", 64, 485, 95 , 95,"main_page/main_page4")   
         else:      
-            self.img_center("Neon server", 64, 540, 85, 85,"main_page/main_page5")
-            self.img_center("Neon circle", 64, 540, 110, 110,"main_page/main_page4") 
+            self.img_center("Add Channel", 65, 485, 45, 45,"main_page/main_page13")
+            self.img_center("Neon circle", 64, 485, 90, 90,"main_page/main_page4")
+            
+        # Hover settings
+        self.circle2 = pygame.draw.circle(self.Window, self.grey10, (64, 565), 35)
+        if self.is_mouse_over_button(self.circle2):           
+            self.img_center("Neon server", 64, 565, 85, 85,"main_page/main_page5")
+            self.img_center("Neon circle", 64, 565, 95, 95,"main_page/main_page4")   
+        else:      
+            self.img_center("Neon server", 64, 565, 85, 85,"main_page/main_page5")
+            self.img_center("Neon circle", 64, 565, 90, 90,"main_page/main_page4") 
 
         # Hover Power Off
-        self.circle3 = pygame.draw.circle(self.Window, self.grey10, (64, 635), 35)
+        self.circle3 = pygame.draw.circle(self.Window, self.grey10, (64, 645), 35)
         if self.is_mouse_over_button(self.circle3):     
-            self.img_center("Power Off", 64, 635, 60, 60,"main_page/main_page9")
-            self.img_center("Neon circle", 64, 635, 115, 115,"main_page/main_page4")   
+            self.img_center("Power Off", 64, 645, 55, 55,"main_page/main_page9")
+            self.img_center("Neon circle", 64, 645, 95, 95,"main_page/main_page4")   
         else:      
-            self.img_center("Power Off", 64, 635, 60, 60,"main_page/main_page9")
-            self.img_center("Neon circle", 64, 635, 110, 110,"main_page/main_page4") 
-        
+            self.img_center("Power Off", 64, 645, 55, 55,"main_page/main_page9")
+            self.img_center("Neon circle", 64, 645, 90, 90,"main_page/main_page4")
+
     def second_section(self):
         self.rect_full(self.grey10, 257, 385, 260, 610, 10)
 
@@ -102,16 +107,23 @@ class MainPage(Gui, Client, DiscordManager):
                     position_y += 20
                     channel_rect = pygame.Rect(200, position_y, 150, 20)
                     self.channel_rects.append((channel[0], channel_rect))
+                    print (self.channel_rects)
                     if self.is_mouse_over_button(channel_rect):
                         self.text_not_align(self.font2, 17, channel[1], self.pink, 200, position_y)
                     else:
                         self.text_not_align(self.font2, 15, channel[1], self.grey1, 200, position_y)
+                    if channel[2] == 1:
+                        self.private = True
+                        self.img_center("Lock", 150, position_y + 10, 25, 25, "main_page/main_page11")
+                        
                     if channel[4] == 1:
-                        self.img_center("Book about us", 170, position_y + 5, 25, 25, "main_page/main_page12")
+                        self.img_center("Book about us", 170, position_y + 10, 25, 25, "main_page/main_page12")
+ 
                     elif channel[3] == 1:
-                        self.img_center("Volume logiciel", 170, position_y + 5, 25, 25, "main_page/main_page10")
+                        self.img_center("Volume logiciel", 170, position_y + 10, 25, 25, "main_page/main_page10")
+
                     else:
-                        self.img_center("Hashtags logiciel", 170, position_y + 5, 15, 15, "main_page/main_page14")
+                        self.img_center("Hashtags logiciel", 170, position_y + 10, 15, 15, "main_page/main_page14")
     
     def third_section(self):
         self.rect_full(self.grey10, 795, 385, 775, 610, 10)
@@ -157,9 +169,12 @@ class MainPage(Gui, Client, DiscordManager):
                 self.img_center("ProfilePicture", 460, pos_y + 10 + self.scroll, 35, 35, f'profile/profile{self.str_picture}')
         self.img_center("Background",795, 40, 775, 80, "main_page/main_page20")
         self.img_center("Background",795, 660, 775, 80, "main_page/main_page21")
-        self.entry_message = self.rect_full(self.grey1, 795, 650, 650, 60, 10)
-
+        self.entry_message = self.rect_full(self.grey10, 795, 650, 650, 60, 10)
+        self.rect_border(self.grey4, 795, 650, 650, 60, 2, 10)
+        self.send_button = self.hover_image("send_button", "Send_button", 1080, 650, 45, 45, "main_page/main_page22", "main_page/main_page22")
+        
     def input_write_user(self): 
+
         split_text = []
         line = ""
         words = self.message.split(" ")
@@ -172,10 +187,21 @@ class MainPage(Gui, Client, DiscordManager):
         split_text.append(line.strip())
 
         for i, ligne in enumerate(split_text):
-            self.text_not_align(self.font2, 17, ligne, self.black, 510, 620 + i * 15)
+            self.text_not_align(self.font2, 17, ligne, self.grey1, 510, 625.5 + i * 15)
+
+    # def notification(self): 
+    #     last_login_date = self.load_last_login_date() 
+    #     self.save_last_login_date() 
+
+    #     new_messages = [message for message in self.messages if message[2] > last_login_date]
+
+    #     if new_messages:
+    #         self.display_notification(len(new_messages))
+
 
     def mainPage_run(self):
         while self.main_page_running :
+            self.update_message()
             self.background()
             self.first_section()
             self.second_section()
@@ -183,4 +209,7 @@ class MainPage(Gui, Client, DiscordManager):
             self.banner() 
             self.event_main_page()
             self.main_page_cursor()
+
+            # self.notification()
+
             self.update()

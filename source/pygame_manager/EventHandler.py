@@ -19,7 +19,7 @@ class EventHandler():
             if event.type == pygame.MOUSEBUTTONDOWN:
                 if self.show.collidepoint(event.pos):
                     self.show_pass = True
-                    self.password_display = self.password
+                    self.password_display = str(self.profile_password[0])
                 elif self.username_rect.collidepoint(event.pos):
                     if not self.username_edit:
                         self.username_edit = True
@@ -77,7 +77,7 @@ class EventHandler():
             elif event.type == pygame.MOUSEBUTTONUP:
                 if self.show.collidepoint(event.pos):
                      self.show_pass = False
-                     self.password_display = " *" * len(self.password)
+                     self.password_display = " *" * len(self.profile_password)
 
             elif event.type == pygame.KEYDOWN:
                 if event.key == pygame.K_BACKSPACE:
@@ -86,7 +86,7 @@ class EventHandler():
                     if self.email_edit:
                         self.email = self.email[:-1]
                     if self.password_edit:
-                        self.password = self.password[:-1]
+                        self.profile_password = self.profile_password[:-1]
                 else:
                     if self.username_edit:
                         if event.unicode:
@@ -96,7 +96,7 @@ class EventHandler():
                                 self.email += event.unicode
                     elif self.password_edit:
                             if event.unicode:
-                                self.password += event.unicode
+                                self.profile_password += event.unicode
                           
     def event_home(self): 
         for event in pygame.event.get():
@@ -159,22 +159,20 @@ class EventHandler():
             if event.type == pygame.QUIT:
                 pygame.quit()
             elif event.type == pygame.MOUSEBUTTONDOWN:
-                if self.sign_up.collidepoint(event.pos):
-                    self.inscription_running = False
-                elif self.profile1_circle.collidepoint(event.pos):
-                    self.photo = 1
+                if self.profile1_circle.collidepoint(event.pos):
+                    self.register_photo = 1
                     self.profile_hovered = self.profile1_circle
 
                 elif self.profile2_circle.collidepoint(event.pos):
-                    self.photo = 2
+                    self.register_photo = 2
                     self.profile_hovered = self.profile2_circle
 
                 elif self.profile3_circle.collidepoint(event.pos):
-                    self.photo = 3
+                    self.register_photo = 3
                     self.profile_hovered = self.profile3_circle
 
                 elif self.profile4_circle.collidepoint(event.pos):
-                    self.photo = 4
+                    self.register_photo = 4
                     self.profile_hovered = self.profile4_circle
 
                 elif self.username_rect.collidepoint(event.pos):
@@ -193,10 +191,12 @@ class EventHandler():
                     self.entry = 5
 
                 elif self.sign_up.collidepoint(event.pos):
-                    if self.username!="" and self.email!="" and self.surname != "" and self.name != "" and self.password != "" and self.photo != 0:
-                        self.add_user(self.surname,self.name,self.username,self.email,self.password,self.photo,2)
-                        print("ajouter")
-
+                    if self.register_username!="" and self.register_email!="" and self.register_surname != "" and self.register_name != "" and self.register_password != "" and self.register_photo != 0:
+                        self.user_info = self.register_user()
+                        self.register_to_main_page = True
+                        self.registered = True
+                        self.register_running = False
+                        
                 elif self.sign.collidepoint(event.pos):
                     self.register_to_login = True
                     self.register_running = False
@@ -204,37 +204,36 @@ class EventHandler():
             elif event.type == pygame.KEYDOWN:
                 if event.key == pygame.K_BACKSPACE:
                     if self.entry ==1:
-                        self.username = self.username[:-1]
+                        self.register_username = self.register_username[:-1]
                     elif self.entry == 2:
-                        self.email = self.email[:-1]
+                        self.register_email = self.register_email[:-1]
                     elif self.entry == 3:
-                        self.surname = self.surname[:-1]
+                        self.register_surname = self.register_surname[:-1]
                     elif self.entry == 4:
-                        self.name = self.name[:-1]
+                        self.register_name = self.register_name[:-1]
                     elif self.entry == 5:
-                        self.password = self.password[:-1]
+                        self.register_password = self.register_password[:-1]
                 else:
                     if self.entry == 1:
                         if event.unicode.isalpha() or event.unicode.isdigit():
-                            self.username += event.unicode
+                            self.register_username += event.unicode
                         
                     elif self.entry == 2:
                         if event.unicode:
-                            self.email = self.email + event.unicode
-
+                            self.register_email = self.register_email + event.unicode
                     elif self.entry == 3:
                         if event.unicode.isalpha():
-                            self.surname = self.surname + event.unicode
-                            self.surname = self.surname.capitalize()
+                            self.register_surname = self.register_surname + event.unicode
+                            self.register_surname = self.register_surname.capitalize()
 
                     elif self.entry == 4:
                         if event.unicode.isalpha():
-                            self.name = self.name + event.unicode
-                            self.name = self.name.capitalize()
+                            self.register_name = self.register_name + event.unicode
+                            self.register_name = self.register_name.capitalize()
 
                     elif self.entry == 5:
                         if event.unicode:
-                            self.password = self.password + event.unicode
+                            self.register_password = self.register_password + event.unicode
 
     def event_main_page(self):
         for event in pygame.event.get():
@@ -243,8 +242,8 @@ class EventHandler():
             elif event.type == pygame.KEYDOWN:
                
                 if event.key == pygame.K_RETURN:
-                    pass
-
+                    if self.entry == 1 and self.message != "":
+                        self.add_message()
                 elif event.key == pygame.K_BACKSPACE:
                     if self.entry == 1 :
                         self.message = self.message[:-1]
@@ -264,10 +263,19 @@ class EventHandler():
                 elif event.button == 1:
                     for channel_id, rect in self.channel_rects:
                         if rect.collidepoint(event.pos):
-                            self.actual_channel = channel_id
-                            self.scroll = 0
+                            for channel in self.channels:
+                                if channel[2] == 0:
+                                    self.actual_channel = channel_id 
+                                elif channel[2] == 1:
+                                    if self.user_info[7] == 2:
+                                        self.actual_channel = self.actual_channel
+                                    else:
+                                        self.actual_channel = channel_id 
+                                self.scroll = 0
 
-                if self.entry_message.collidepoint(event.pos): 
+                if self.send_button.collidepoint(event.pos):
+                    self.add_message()
+                elif self.entry_message.collidepoint(event.pos): 
                     self.entry = 1
                 elif self.link_logo_rect.collidepoint(event.pos):
                     if self.link_is_clicked:
@@ -281,24 +289,73 @@ class EventHandler():
                 elif self.circle2.collidepoint(event.pos):
                     self.main_page_to_profile = True
                     self.main_page_running = False
-
+                    
                 elif self.circle3.collidepoint(event.pos):
                     self.main_page_to_login = True
                     self.main_page_running = False
-                                             
 
-
+                elif self.circle4.collidepoint(event.pos):
+                    self.main_page_to_add_channel = True
+                    self.add_channel_running = True
+                    self.main_page_running = False
 
             elif event.type == pygame.MOUSEBUTTONUP:
                  if self.link_logo_rect.collidepoint(event.pos):
                     self.link_is_clicked = True  
 
+    def event_add(self):
+        for event in pygame.event.get():
+                if event.type == pygame.QUIT:
+                    self.add_channel_running = False 
+                elif event.type == pygame.MOUSEBUTTONDOWN:
+                    if self.but_bachelor.collidepoint(event.pos):
+                        self.category = 2
+                    elif self.but_talk.collidepoint(event.pos):
+                        self.category = 3
+
+                    if self.but_text.collidepoint(event.pos):
+                        self.communication = 0
+                    elif self.but_voval.collidepoint(event.pos):
+                        self.communication = 1
+                                              
+                    if self.but_public.collidepoint(event.pos):
+                        self.status = 0
+                    elif self.but_private.collidepoint(event.pos):
+                        self.status = 1
+                        
+                    elif self.but_name.collidepoint(event.pos):
+                        self.entry_new_name = 1
+
+                    elif self.close_add.collidepoint(event.pos):
+                        self.add_channel_to_main_page = True
+                        self.add_channel_running = False   
+
+                    elif self.but_add.collidepoint(event.pos):
+                        if self.new_name_channel != "" and self.status != None and self.communication != None and self.category != None:
+                            self.add_chan = self.add_channel_client()
+                            self.add = False
+
+                if self.entry_new_name != 0 and self.status != None and self.communication != None and self.category != None:
+                    self.add=True
+                elif event.type == pygame.KEYDOWN:
+                    if event.key == pygame.K_BACKSPACE:
+                        if self.entry_new_name==1:
+                            self.new_name_channel = self.new_name_channel[:-1]
+                    else:
+                        if self.entry_new_name==1:
+                            if event.unicode.isalpha():
+                                self.new_name_channel += event.unicode
     def event_contact(self):
         for event in pygame.event.get():
                 if event.type == pygame.QUIT:
                     pygame.quit()
                 if event.type == pygame.MOUSEBUTTONDOWN:
-                    if event.button == 1: 
+                    if self.close_about_us.collidepoint(event.pos):
+                        self.contact_to_profile = True
+                        self.contact_running = False 
+                        
+                    elif event.button == 1: 
                         for link_rect, url in self.link_data:
                             if link_rect.collidepoint(event.pos):
-                                webbrowser.open(url)   
+                                webbrowser.open(url)  
+
