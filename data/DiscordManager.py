@@ -33,7 +33,11 @@ class DiscordManager(Database):
     def display_user(self):
         sql = "SELECT * FROM user"
         return self.fetch(sql)
-
+    
+    def display_admin_request(self):
+        sql = "SELECT * FROM user WHERE change_role=1"
+        return self.fetch(sql)
+    
     def display_role_name(self):
         sql = "SELECT role.name FROM role LEFT JOIN user ON user.id_role = role.id"
         return self.fetch(sql)
@@ -98,6 +102,37 @@ class DiscordManager(Database):
         sql = "SELECT communication FROM channel WHERE id_category = %s"
         values = (id,)
         return self.fetch(sql, values) 
+    
+    # Update
+    def update_user(self, pseudo, email, password, photo, id):
+        sql = 'UPDATE user SET pseudo=%s, email=%s, password=%s, photo=%s WHERE id=%s'
+        params = (pseudo, email, password, photo, id)
+        self.execute_query(sql, params)     
+
+    def update_message_author(self, name, user):
+        sql = 'UPDATE message SET name=%s WHERE name=%s'
+        params = (name, user)
+        self.execute_query(sql, params)
+    
+    def update_abc_password(self, password, id_user): 
+        sql = 'UPDATE password SET password=%s WHERE id_user=%s'
+        params = (password, id_user)
+        self.execute_query(sql, params)
+    
+    def update_role_request(self, email):
+        sql = 'UPDATE user SET change_role=1 WHERE email=%s'
+        params = (email,)
+        self.execute_query(sql, params)
+
+    def upgrade_role(self, id_user):
+        sql = 'UPDATE user SET change_role=0, id_role=1 WHERE id =%s'
+        values = (id_user,)
+        self.execute_query(sql, values)
+
+    def deny_upgrade_role(self, id_user):
+        sql = 'UPDATE user SET change_role=0 WHERE id =%s'
+        values = (id_user,)
+        self.execute_query(sql, values)
 
     # Delete User
     def delete_user(self, id):
@@ -112,6 +147,11 @@ class DiscordManager(Database):
 
     def delete_channel(self, id):
         sql = "DELETE FROM channel WHERE id = %s"
+        values = (id,)
+        self.execute_query(sql, values)
+
+    def delete_channel_message(self, id):
+        sql = "DELETE FROM message WHERE id_channel = %s"
         values = (id,)
         self.execute_query(sql, values)
 
@@ -159,21 +199,52 @@ class DiscordManager(Database):
         sql = "SELECT password FROM password WHERE id_user = %s"
         values = (user_id,)
         return self.fetch(sql, values)
+
+    def close_connection(self):
+        self.disconnect()
     
+    def add_emoji(self, id_mes,nb_react):
+        sql = 'UPDATE message SET react=%s WHERE id=%s'
+        values = (nb_react, id_mes)
+        self.execute_query(sql, values)
+
     def add_abc_password (self, password, id_user):
         sql = "INSERT INTO password (password, id_user) VALUES (%s, %s)"
         values = (password, id_user)
         self.execute_query(sql, values)
 
-    def close_connection(self):
-        self.disconnect()
+    def save_last_login_date(self): 
+        pass
+
+    def load_last_login_date(self):
+        pass
 
     # Modifier Role
     # def modify_role(self, user_id, id_role):
     #     set_clause = ", ".join([f"{key} = '{value}'" for key, value in new_product.items()])
     #     sql = f"UPDATE product SET {set_clause} WHERE id = %s"
     #     self.cursor.execute(sql, (product_id,))
-    #     self.connection.commit()       
+    #     self.connection.commit() 
+
+    # Notification   
+    def save_last_message (self, user_id): 
+        current_time = datetime.now()
+        sql = "UPDATE user SET last_message = %s WHERE id = %s"
+        values = (current_time, user_id,)
+        self.execute_query(sql, values)
+
+    def get_last_message_time(self, user_id):
+        sql = "SELECT last_message FROM user WHERE id = %s"
+        values = (user_id,)
+        result = self.fetch(sql, values)
+        if result: 
+                return result[0][0]
+        else: 
+            return None
+
+    
+
+
 
 manager = DiscordManager()
 manager.close_connection()

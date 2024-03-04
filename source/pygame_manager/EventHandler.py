@@ -2,15 +2,6 @@ import pygame
 import webbrowser
 
 class EventHandler():
-    # def main_event(self):
-    #     for event in pygame.event.get():
-    #         if event.type == pygame.QUIT:
-    #             self.home_running = False
-    #             self.register_running = False
-    #             self.main_page_running = False
-    #             self.profile_running = False
-    #             self.contact_running = False
-    #             self.main_running = False
 
     def event_profile(self):
         for event in pygame.event.get():
@@ -73,6 +64,37 @@ class EventHandler():
                 elif self.close_profile.collidepoint(event.pos):
                     self.profile_to_main_page = True
                     self.profile_running = False
+                elif self.save_edit_profile.collidepoint(event.pos):
+                    self.user = self.modify_user(self.username, self.email, self.profile_password,self.picture, self.user[0],self.user[3])
+                    if self.old_password != self.profile_password:
+                        self.password_modified = True
+                        self.password_edit = False
+                    if self.old_username != self.username:
+                        self.username_modified = True
+                        self.username_edit = False
+                    if self.old_email != self.email:
+                        self.email_modified = True
+                        self.email_edit
+                    self.profile_modified = True
+                elif self.role_rect.collidepoint(event.pos):
+                    if self.user[7] == 2:
+                        self.user = self.change_role_request()
+                        self.profile_modified = True
+                        self.role_rect = pygame.Rect(0, 0, 0, 0)
+                    else:
+                        if not self.display_request:
+                            self.display_request = True
+                        else:
+                            self.display_request = False
+
+                elif event.button == 1:
+                    for request, validate, deny in self.request_rects:
+                        if validate.collidepoint(event.pos):
+                            self.request = self.change_role_validate(request)
+                            self.request_rects = []
+                        elif deny.collidepoint(event.pos):
+                            self.request = self.change_role_denyed(request)
+                            self.request_rects = []
 
             elif event.type == pygame.MOUSEBUTTONUP:
                 if self.show.collidepoint(event.pos):
@@ -191,13 +213,14 @@ class EventHandler():
                     self.entry = 5
 
                 elif self.sign_up.collidepoint(event.pos):
-                    if self.register_username!="" and self.register_email!="" and self.register_surname != "" and self.register_name != "" and self.register_password != "" and self.register_photo != 0:
+                    if self.register_username!="" and self.register_surname != "" and self.register_name != "" and self.register_photo != 0 and "@" in self.register_email and "." in self.register_email and (len(self.register_password) >= 8 and any(char.isdigit() for char in self.register_password) and any(char.isupper() for char in self.register_password)):
                         self.user_info = self.register_user()
                         self.register_to_main_page = True
                         self.registered = True
                         self.register_running = False
                         
                 elif self.sign.collidepoint(event.pos):
+                    self.register_surname, self.register_name, self.register_username, self.register_email, self.register_password, self.register_photo, self.profile_hovered = "", "", "", "", "", 0, None
                     self.register_to_login = True
                     self.register_running = False
 
@@ -256,6 +279,28 @@ class EventHandler():
                         self.input_search  += event.unicode 
 
             elif event.type == pygame.MOUSEBUTTONDOWN:
+                # Event Emoji
+                if self.emoji_logo.collidepoint(event.pos):
+                    self.emoji_choice = True
+                    
+                if self.emoji_choice:
+                    for id_message, rect in self.emoji_list:       
+                        if self.emoji_heart.collidepoint(event.pos):
+                            self.add_emoji(id_message,1)
+                            
+                        elif self.emoji_laugh.collidepoint(event.pos):
+                            self.add_emoji(id_message,2)
+
+                        elif self.emoji_cry.collidepoint(event.pos):
+                            self.add_emoji(id_message,3)
+
+                        elif self.emoji_angry.collidepoint(event.pos):
+                            self.add_emoji(id_message,4)
+                if self.deleting_channel:
+                    for channel_id, rect in self.channel_rects:
+                        if rect.collidepoint(event.pos):
+                            self.channels = self.channel_deleted(channel_id)
+                            
                 if event.button == 4:
                     self.scroll += 15
                 elif event.button == 5 and self.scroll >0 :
@@ -263,15 +308,10 @@ class EventHandler():
                 elif event.button == 1:
                     for channel_id, rect in self.channel_rects:
                         if rect.collidepoint(event.pos):
-                            for channel in self.channels:
-                                if channel[2] == 0:
-                                    self.actual_channel = channel_id 
-                                elif channel[2] == 1:
-                                    if self.user_info[7] == 2:
-                                        self.actual_channel = self.actual_channel
-                                    else:
-                                        self.actual_channel = channel_id 
-                                self.scroll = 0
+                            self.actual_channel = channel_id
+                            self.emoji_list = []
+                            self.messages = self.get_message(self.actual_channel)
+                            self.scroll = 0
 
                 if self.send_button.collidepoint(event.pos):
                     self.add_message()
@@ -281,6 +321,7 @@ class EventHandler():
                     if self.link_is_clicked:
                         webbrowser.open(self.url)
                         self.link_is_clicked = False
+                        
 
                 elif self.input_search_rect.collidepoint(event.pos):  
                     self.input_search = ""
@@ -291,13 +332,22 @@ class EventHandler():
                     self.main_page_running = False
                     
                 elif self.circle3.collidepoint(event.pos):
+                    self.save_last_message(self.user_info[0]) # Save info when disconnect 
                     self.main_page_to_login = True
                     self.main_page_running = False
 
                 elif self.circle4.collidepoint(event.pos):
-                    self.main_page_to_add_channel = True
-                    self.add_channel_running = True
-                    self.main_page_running = False
+                    if self.user_info[7] == 1:
+                        self.main_page_to_add_channel = True
+                        self.add_channel_running = True
+                        self.main_page_running = False
+
+                elif self.circle5.collidepoint(event.pos):
+                    if self.user_info[7] == 1:
+                        self.deleting_channel = not self.deleting_channel
+
+                elif self.notification_c.collidepoint(event.pos): 
+                    self.reset_new_message_counter()                   
 
             elif event.type == pygame.MOUSEBUTTONUP:
                  if self.link_logo_rect.collidepoint(event.pos):
@@ -333,6 +383,8 @@ class EventHandler():
                     elif self.but_add.collidepoint(event.pos):
                         if self.new_name_channel != "" and self.status != None and self.communication != None and self.category != None:
                             self.add_chan = self.add_channel_client()
+                            self.channel_added = True
+                            self.new_name_channel, self.status, self.communication, self.category = "", None, None, None
                             self.add = False
 
                 if self.entry_new_name != 0 and self.status != None and self.communication != None and self.category != None:
@@ -343,8 +395,9 @@ class EventHandler():
                             self.new_name_channel = self.new_name_channel[:-1]
                     else:
                         if self.entry_new_name==1:
-                            if event.unicode.isalpha():
+                            if event.unicode:
                                 self.new_name_channel += event.unicode
+
     def event_contact(self):
         for event in pygame.event.get():
                 if event.type == pygame.QUIT:
@@ -356,6 +409,5 @@ class EventHandler():
                         
                     elif event.button == 1: 
                         for link_rect, url in self.link_data:
-                            if link_rect.collidepoint(event.pos):
                                 webbrowser.open(url)  
 

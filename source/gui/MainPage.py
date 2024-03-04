@@ -1,17 +1,16 @@
 import pygame
-from data.DiscordManager import DiscordManager
 from source.pygame_manager.Gui import Gui
 from source.Client import Client
 # from Notification import Notification
 
-class MainPage(Gui, Client, DiscordManager):
+class MainPage(Gui, Client):
     
     def __init__(self, user_info):
         Client.__init__(self)
-        DiscordManager.__init__(self)  
         Gui.__init__(self)
         # Notification.__init__(self)
         self.user_info = user_info
+        self.last_login_date = ""
         self.input_search = "Search..."
         self.message = ""
         self.L_MAX = 80
@@ -20,11 +19,15 @@ class MainPage(Gui, Client, DiscordManager):
         self.scroll = 0
         self.channel_rects = []
 
-        self.bell = pygame.Rect(1060, 15, 50, 50)
+        self.bell = pygame.Rect(1075, 15, 50, 50)
         self.poweroff_c = pygame.Rect(64-115/2, 635-115/2, 115, 115)
         self.settings_c = pygame.Rect( 64-115/2, 540-115/2, 115, 115)
         self.server_c =  pygame.Rect(64-115/2, 170-115/2, 115, 115)
-        self.private = False
+        self.notification_c= pygame.Rect(1052, 25, 30, 30)
+        self.deleting_channel = False
+        self.emoji_choice = False
+        self.emoji_display = 0
+        self.emoji_list = []
 
     def background(self): 
         self.img_background("Background", 600, 350, 1200, 800, "main_page/main_page8")
@@ -43,7 +46,7 @@ class MainPage(Gui, Client, DiscordManager):
         self.image_not_center("Search logo", 1000, 25, 30, 30,"main_page/main_page16")
 
         # Logo bell
-        self.image_not_center("Bell logo", 1060, 15, 50, 50,"main_page/main_page19") 
+        self.image_not_center("Bell logo", 1075, 15, 50, 50,"main_page/main_page19") 
 
         # Link to the LaPlateforme website  
         self.image_not_center("Question mark", 1120, 15, 50, 50,"main_page/main_page15")    
@@ -66,14 +69,6 @@ class MainPage(Gui, Client, DiscordManager):
             self.img_center("Logo principal", 64, 170, 70, 70,"main_page/main_page2")
             self.img_center("Neon circle", 64, 170, 110, 110,"main_page/main_page4")
             
-        # Hover Add Channel
-        self.circle4 = pygame.draw.circle(self.Window, self.grey10, (64, 485), 35)
-        if self.is_mouse_over_button(self.circle4):
-            self.img_center("Add Channel", 65, 485, 45, 45,"main_page/main_page13")
-            self.img_center("Neon circle", 64, 485, 95 , 95,"main_page/main_page4")   
-        else:      
-            self.img_center("Add Channel", 65, 485, 45, 45,"main_page/main_page13")
-            self.img_center("Neon circle", 64, 485, 90, 90,"main_page/main_page4")
             
         # Hover settings
         self.circle2 = pygame.draw.circle(self.Window, self.grey10, (64, 565), 35)
@@ -92,6 +87,28 @@ class MainPage(Gui, Client, DiscordManager):
         else:      
             self.img_center("Power Off", 64, 645, 55, 55,"main_page/main_page9")
             self.img_center("Neon circle", 64, 645, 90, 90,"main_page/main_page4")
+
+        # Hover Add Channel
+        self.circle4 = pygame.draw.circle(self.Window, self.grey10, (64, 485), 35)
+        if self.is_mouse_over_button(self.circle4):
+            self.img_center("Add Channel", 65, 485, 45, 45,"main_page/main_page13")
+            self.img_center("Neon circle", 64, 485, 95 , 95,"main_page/main_page4")   
+        else:      
+            self.img_center("Add Channel", 65, 485, 45, 45,"main_page/main_page13")
+            self.img_center("Neon circle", 64, 485, 90, 90,"main_page/main_page4")
+        if self.user_info[7] == 2:
+            self.img_center("NoAccess", 65, 485, 45, 45, "main_page/main_page1")
+
+        # Delete Channel
+        self.circle5 = pygame.draw.circle(self.Window, self.grey10, (64, 405), 35)
+        if self.is_mouse_over_button(self.circle5):
+            self.img_center("Delete Channel", 65, 405, 45, 45,"main_page/main_page6")
+            self.img_center("Neon circle", 64, 405, 95 , 95,"main_page/main_page4")   
+        else:      
+            self.img_center("Delete Channel", 65, 405, 45, 45,"main_page/main_page6")
+            self.img_center("Neon circle", 64, 405, 90, 90,"main_page/main_page4")
+        if self.user_info[7] == 2:
+            self.img_center("NoAccess", 65, 405, 45, 45, "main_page/main_page1")
 
     def second_section(self):
         self.rect_full(self.grey10, 257, 385, 260, 610, 10)
@@ -113,7 +130,6 @@ class MainPage(Gui, Client, DiscordManager):
                     else:
                         self.text_not_align(self.font2, 15, channel[1], self.grey1, 200, position_y)
                     if channel[2] == 1:
-                        self.private = True
                         self.img_center("Lock", 150, position_y + 10, 25, 25, "main_page/main_page11")
                         
                     if channel[4] == 1:
@@ -124,6 +140,8 @@ class MainPage(Gui, Client, DiscordManager):
 
                     else:
                         self.img_center("Hashtags logiciel", 170, position_y + 10, 15, 15, "main_page/main_page14")
+                    if self.user_info[7] == 1 and self.deleting_channel: 
+                        self.img_center("Delete", 365, position_y + 10, 25, 25, "main_page/main_page24")
     
     def third_section(self):
         self.rect_full(self.grey10, 795, 385, 775, 610, 10)
@@ -167,6 +185,37 @@ class MainPage(Gui, Client, DiscordManager):
                 self.text_not_align(self.font1, 10, str(message_time), self.grey1, 590, pos_y + 10 + self.scroll)
                 self.img_center("bubble", 460, pos_y + 10 + self.scroll, 40, 40, "main_page/main_page4")
                 self.img_center("ProfilePicture", 460, pos_y + 10 + self.scroll, 35, 35, f'profile/profile{self.str_picture}')
+                
+                if message[5] is not None:
+                    self.img_center("Heart",460, pos_y + 50 + self.scroll, 30, 30, f"main_page/emoji/emoji{message[5]}")
+                    
+                self.emoji_heart = pygame.draw.circle(self.Window, self.grey10, (710, pos_y + 10 + self.scroll), 9)
+                self.emoji_laugh = pygame.draw.circle(self.Window, self.grey10, (740,  pos_y + 10 + self.scroll), 9)
+                self.emoji_cry = pygame.draw.circle(self.Window, self.grey10, (770, pos_y + 10 + self.scroll), 9)
+                self.emoji_angry = pygame.draw.circle(self.Window, self.grey10, (800, pos_y + 10 + self.scroll), 9)
+        
+                # Emoji Choice
+                if self.emoji_choice:
+                    for i,item in enumerate(self.emoji_list):
+                        if item[0] == message[0]:
+                            del self.emoji_list[i]
+                            
+                    self.rect_emoji = pygame.Rect(700,pos_y + self.scroll,110,20)
+                    self.emoji_list.append((message[0],self.rect_emoji))
+                    
+                    self.rect_full_not_centered(self.red,700,pos_y + self.scroll,110,20,0)
+                    self.emoji_heart = pygame.draw.circle(self.Window, self.grey10, (710, pos_y + 10 + self.scroll), 11)
+                    self.img_center("Heart",710, pos_y + 10 + self.scroll, 20, 20, "main_page/emoji/emoji1")
+                    
+                    self.emoji_laugh = pygame.draw.circle(self.Window, self.grey10, (740,  pos_y + 10 + self.scroll), 11)
+                    self.img_center("Laugh",740, pos_y + 10 + self.scroll, 20, 20, "main_page/emoji/emoji2")
+                    
+                    self.emoji_cry = pygame.draw.circle(self.Window, self.grey10, (770, pos_y + 10 + self.scroll), 11)
+                    self.img_center("Cry",770, pos_y + 10 + self.scroll, 20, 20, "main_page/emoji/emoji3")       
+                    
+                    self.emoji_angry = pygame.draw.circle(self.Window, self.grey10, (800, pos_y + 10 + self.scroll), 11)
+                    self.img_center("Angry",800, pos_y + 10 + self.scroll, 20, 20, "main_page/emoji/emoji4")
+
         self.img_center("Background",795, 40, 775, 80, "main_page/main_page20")
         self.img_center("Background",795, 660, 775, 80, "main_page/main_page21")
         self.entry_message = self.rect_full(self.grey10, 795, 650, 650, 60, 10)
@@ -188,28 +237,31 @@ class MainPage(Gui, Client, DiscordManager):
 
         for i, ligne in enumerate(split_text):
             self.text_not_align(self.font2, 17, ligne, self.grey1, 510, 625.5 + i * 15)
+    def display_emoji(self):
+        self.emoji_logo = pygame.draw.circle(self.Window, self.grey10, (1150, 650), 20)
+        self.img_center("Logo Emoji",1150, 650, 50, 50, "main_page/main_page27")
 
-    # def notification(self): 
-    #     last_login_date = self.load_last_login_date() 
-    #     self.save_last_login_date() 
+    def notification(self): 
+        if self.last_login_date == "":
+            self.last_login_date = self.load_info_last_message(self.user_info[0])
 
-    #     new_messages = [message for message in self.messages if message[2] > last_login_date]
+        # Save info when connect
+            for message in self.messages: 
+                
+                if message[2] > self.last_login_date: 
+                    self.new_message = self.new_message + 1
 
-    #     if new_messages:
-    #         self.display_notification(len(new_messages))
-
-
+        self.text_center(self.font1, 20, str(self.new_message), self.pink1, 1067, 42)
+        self.image_not_center("Circle notification",1052, 25, 30, 30,"main_page/main_page23")
+        
     def mainPage_run(self):
-        while self.main_page_running :
-            self.update_message()
+        if self.main_page_running :
             self.background()
             self.first_section()
             self.second_section()
             self.third_section()
             self.banner() 
+            self.display_emoji()
             self.event_main_page()
             self.main_page_cursor()
-
-            # self.notification()
-
-            self.update()
+            self.notification()
