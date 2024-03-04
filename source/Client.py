@@ -53,16 +53,16 @@ class Client(DiscordManager):
         self.add_channel_running = False
         self.main_page_to_add_channel = False
         self.add_channel_to_main_page = False
-        
-        self.categories = self.display_category()
-        self.channels = self.display_channel()
-        self.messages = self.display_message()
-        self.community_list = self.display_user()  
-        self.request = self.display_admin_request()
-        # self.emoji_display = self.emoji_react()
 
         self.actual_channel = 1
         self.message = ""
+        
+        self.categories = self.display_category()
+        self.channels = self.display_channel()
+        self.messages = self.get_message(self.actual_channel)
+        self.community_list = self.display_user()  
+        self.request = self.display_admin_request()
+        # self.emoji_display = self.emoji_react()
 
         # Notification
         self.new_message = 0                
@@ -90,12 +90,12 @@ class Client(DiscordManager):
         self.add_channel(self.new_name_channel,self.status,self.communication,self.category)
         
     def update_message(self):
-        self.messages = self.display_message()
+        self.messages = self.get_message(self.actual_channel)
 
     def add_message(self):
         if self.message != "":
             self.save_message(self.user_info[3], self.message, self.actual_channel)
-            self.update_message()
+            self.messages = self.get_message(self.actual_channel)
             self.message = ""
 
     def modify_user(self, pseudo, email, password,photo, id, user):
@@ -106,7 +106,6 @@ class Client(DiscordManager):
         self.update_message_author(pseudo, user)
         self.update_abc_password(password, id)
         self.user = self.get_user(self.email, hashed_password)
-        print (self.user)
         return self.user
         
         # Notification

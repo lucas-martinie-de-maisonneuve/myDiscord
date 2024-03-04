@@ -21,7 +21,7 @@ class DiscordManager(Database):
         return user
     
     def add_user(self, surname, name, pseudo, email, password, photo, id_role):
-        sql = "INSERT INTO product (surname, name, pseudo, email, password, photo, id_role) VALUES (%s, %s, %s, %s, %s, %s, %s)"
+        sql = "INSERT INTO user (surname, name, pseudo, email, password, photo, id_role) VALUES (%s, %s, %s, %s, %s, %s, %s)"
         values = (surname, name, pseudo, email, password, photo, id_role)
         self.execute_query(sql, values)
 

@@ -8,6 +8,7 @@ class AddChannel(Gui,Client,DiscordManager):
         Client.__init__(self)
         DiscordManager.__init__(self)
         self.entry_new_name = 0
+        self.channel_added = False
 
     def background(self): 
         self.img_background("Background", 600, 350, 1200, 800, "main_page/main_page8")
@@ -95,6 +96,13 @@ class AddChannel(Gui,Client,DiscordManager):
         self.img_center("Neon light", 600, 530, 150, 90,"main_page/main_page7")
         self.img_center("Neon light", 600, 440, 150, 90,"main_page/main_page7")
         self.img_center("Neon light", 600, 350, 150, 90,"main_page/main_page7")
+
+
+
+        if self.channel_added:
+            self.text_not_align(self.font1, 12, "channel   added", self.dark_green, 740, 630)
+            if self.new_name_channel != "" or self.status != None or self.communication != None or self.category != None:
+                self.channel_added = False            
         
     def addChannel_run(self):
         if self.add_channel_running :

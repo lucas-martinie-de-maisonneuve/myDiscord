@@ -39,13 +39,13 @@ class Display_test(Gui):
                 self.connexion.login_to_register = False
                 self.register.register_run()
 
-            elif self.profile.profile_to_main_page or self.main_page.main_page_running or self.connexion.home_to_main_page or self.add_channel.add_channel_to_main_page or self.connexion.home_to_main_page:
+            elif self.profile.profile_to_main_page or self.main_page.main_page_running or self.connexion.home_to_main_page or self.add_channel.add_channel_to_main_page or self.register.register_to_main_page:
                 if not self.main_page.main_page_running:
                     self.normal_cursor()
                     if self.register.registered:
                         self.main_page = MainPage(self.register.user_info)
+                        self.connexion.user_info = self.register.user_info
                         self.main_page.main_page_running = True
-                        self.register.register_running = False
                     elif self.profile.profile_modified:
                         self.main_page = MainPage(self.profile.user)
                         self.main_page.main_page_running = True

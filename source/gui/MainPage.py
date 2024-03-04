@@ -210,7 +210,7 @@ class MainPage(Gui, Client):
                     
                     self.emoji_angry = pygame.draw.circle(self.Window, self.grey10, (800, pos_y + 10 + self.scroll), 11)
                     self.img_center("Angry",800, pos_y + 10 + self.scroll, 20, 20, "main_page/emoji/emoji4")
-                    
+
         self.img_center("Background",795, 40, 775, 80, "main_page/main_page20")
         self.img_center("Background",795, 660, 775, 80, "main_page/main_page21")
         self.entry_message = self.rect_full(self.grey10, 795, 650, 650, 60, 10)

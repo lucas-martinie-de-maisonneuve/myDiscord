@@ -317,6 +317,8 @@ class EventHandler():
                     for channel_id, rect in self.channel_rects:
                         if rect.collidepoint(event.pos):
                             self.actual_channel = channel_id
+                            self.emoji_list = []
+                            self.messages = self.get_message(self.actual_channel)
                             self.scroll = 0
 
                 if self.send_button.collidepoint(event.pos):
@@ -389,6 +391,8 @@ class EventHandler():
                     elif self.but_add.collidepoint(event.pos):
                         if self.new_name_channel != "" and self.status != None and self.communication != None and self.category != None:
                             self.add_chan = self.add_channel_client()
+                            self.channel_added = True
+                            self.new_name_channel, self.status, self.communication, self.category = "", None, None, None
                             self.add = False
 
                 if self.entry_new_name != 0 and self.status != None and self.communication != None and self.category != None:
@@ -399,7 +403,7 @@ class EventHandler():
                             self.new_name_channel = self.new_name_channel[:-1]
                     else:
                         if self.entry_new_name==1:
-                            if event.unicode.isalpha():
+                            if event.unicode:
                                 self.new_name_channel += event.unicode
 
     def event_contact(self):
