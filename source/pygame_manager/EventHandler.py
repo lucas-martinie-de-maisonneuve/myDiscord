@@ -220,6 +220,7 @@ class EventHandler():
                         self.register_running = False
                         
                 elif self.sign.collidepoint(event.pos):
+                    self.register_surname, self.register_name, self.register_username, self.register_email, self.register_password, self.register_photo, self.profile_hovered = "", "", "", "", "", 0, None
                     self.register_to_login = True
                     self.register_running = False
 
