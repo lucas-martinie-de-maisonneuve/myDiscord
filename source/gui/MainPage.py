@@ -124,7 +124,6 @@ class MainPage(Gui, Client):
                     position_y += 20
                     channel_rect = pygame.Rect(200, position_y, 150, 20)
                     self.channel_rects.append((channel[0], channel_rect))
-                    print (self.channel_rects)
                     if self.is_mouse_over_button(channel_rect):
                         self.text_not_align(self.font2, 17, channel[1], self.pink, 200, position_y)
                     else:

@@ -242,9 +242,15 @@ class DiscordManager(Database):
         else: 
             return None
 
+    def get_user_role(self, user_status):
+        sql = "SELECT id_role FROM user WHERE id = %s"
+        values = (user_status,)
+        return self.fetch(sql,values)
     
-
-
+    def get_channel_status(self, channel_id):
+        sql = "SELECT status FROM channel WHERE id = %s"
+        values = (channel_id,)
+        return self.fetch(sql,values)
 
 manager = DiscordManager()
 manager.close_connection()

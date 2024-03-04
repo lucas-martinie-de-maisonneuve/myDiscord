@@ -121,12 +121,12 @@ class Client(DiscordManager):
         self.user = self.get_user(self.email, self.hashed_password)
         return self.user
     
-    def  change_role_validate(self, user_id):
+    def change_role_validate(self, user_id):
         self.upgrade_role(user_id)
         self.request = self.display_admin_request()
         return self.request
 
-    def  change_role_denyed(self, user_id):
+    def change_role_denyed(self, user_id):
         self.deny_upgrade_role(user_id)
         self.request = self.display_admin_request()
         return self.request
@@ -136,3 +136,13 @@ class Client(DiscordManager):
         self.delete_channel(id_channel)
         self.channels = self.display_channel()
         return self.channels
+    
+    def channel_private(self, id_channel):
+        user_role = self.get_user_role(self.user_info[0])
+        channel_status = self.get_channel_status(id_channel)
+        user = user_role[0][0]
+        status = channel_status[0][0]
+        if user == 2 and status == 1:
+            return False
+        else:
+            return True

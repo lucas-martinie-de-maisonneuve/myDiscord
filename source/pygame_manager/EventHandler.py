@@ -308,10 +308,13 @@ class EventHandler():
                 elif event.button == 1:
                     for channel_id, rect in self.channel_rects:
                         if rect.collidepoint(event.pos):
-                            self.actual_channel = channel_id
-                            self.emoji_list = []
-                            self.messages = self.get_message(self.actual_channel)
-                            self.scroll = 0
+                            if self.channel_private(channel_id):
+                                self.actual_channel = channel_id
+                                self.emoji_list = []
+                                self.messages = self.get_message(self.actual_channel)
+                                self.scroll = 0
+                            else: 
+                                self.actual_channel = self.actual_channel
 
                 if self.send_button.collidepoint(event.pos):
                     self.add_message()
