@@ -87,24 +87,26 @@ class MainPage(Gui, Client):
             self.img_center("Neon circle", 64, 645, 90, 90,"main_page/main_page4")
 
         # Hover Add Channel
-        logo_add_channel = 'main_page13' if self.user_info[7] == 1 else 'main_page1'
         self.circle4 = pygame.draw.circle(self.Window, self.grey10, (64, 485), 35)
         if self.is_mouse_over_button(self.circle4):
-            self.img_center("Add Channel", 65, 485, 45, 45,f"main_page/{logo_add_channel}")
+            self.img_center("Add Channel", 65, 485, 45, 45,"main_page/main_page13")
             self.img_center("Neon circle", 64, 485, 95 , 95,"main_page/main_page4")   
         else:      
-            self.img_center("Add Channel", 65, 485, 45, 45,f"main_page/{logo_add_channel}")
+            self.img_center("Add Channel", 65, 485, 45, 45,"main_page/main_page13")
             self.img_center("Neon circle", 64, 485, 90, 90,"main_page/main_page4")
+        if self.user_info[7] == 2:
+            self.img_center("NoAccess", 65, 485, 45, 45, "main_page/main_page1")
 
         # Delete Channel
-        logo_delete = 'main_page6' if self.user_info[7] == 1 else 'main_page1'
         self.circle5 = pygame.draw.circle(self.Window, self.grey10, (64, 405), 35)
         if self.is_mouse_over_button(self.circle5):
-            self.img_center("Delete Channel", 65, 405, 45, 45,f"main_page/{logo_delete}")
+            self.img_center("Delete Channel", 65, 405, 45, 45,"main_page/main_page6")
             self.img_center("Neon circle", 64, 405, 95 , 95,"main_page/main_page4")   
         else:      
-            self.img_center("Delete Channel", 65, 405, 45, 45,f"main_page/{logo_delete}")
+            self.img_center("Delete Channel", 65, 405, 45, 45,"main_page/main_page6")
             self.img_center("Neon circle", 64, 405, 90, 90,"main_page/main_page4")
+        if self.user_info[7] == 2:
+            self.img_center("NoAccess", 65, 405, 45, 45, "main_page/main_page1")
 
     def second_section(self):
         self.rect_full(self.grey10, 257, 385, 260, 610, 10)
