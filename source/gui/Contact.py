@@ -62,7 +62,7 @@ class Contact(Gui, Client):
     def design(self):
         
         #--- Background ---#
-        self.img_background_blur("Background",600, 350, 1200, 700, "main_page/main_page8", blur_radius=5)
+        self.img_background("Background", 600, 350, 1200, 800, "main_page/main_page8")
 
         # --- Left rectangle ---#
         

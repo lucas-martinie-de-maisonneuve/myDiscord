@@ -1,7 +1,4 @@
 import pygame
-from PIL import Image, ImageFilter
-from io import BytesIO
-
 
 class Element():
     def __init__(self):
@@ -117,23 +114,6 @@ class Element():
         name = pygame.transform.scale(name, (width, height))
         self.Window.blit(name, (x - name.get_width()//2, y - name.get_height()//2))
 
-    def img_background_blur(self, name, x, y, width, height, image_name, blur_radius=5):
-        name = pygame.image.load(f'assets/image/{image_name}.png').convert_alpha()
-        name = pygame.transform.scale(name, (width, height))
-        self.Window.blit(name, (x - name.get_width()//2, y - name.get_height()//2))
-
-        image_bytes = BytesIO()
-        pygame.image.save(name, image_bytes)
-        image_bytes.seek(0)
-        pillow_image = Image.open(image_bytes)
-        blurred_pillow_image = pillow_image.filter(ImageFilter.GaussianBlur(radius=blur_radius))
-        blurred_image = pygame.image.fromstring(
-            blurred_pillow_image.tobytes(), 
-            blurred_pillow_image.size, 
-            blurred_pillow_image.mode
-        )
-        self.Window.blit(blurred_image, (x - width // 2, y - height // 2))
-
     def hover_image(self, name_rect, name, x, y, width, height, image_name, image_name_hover): 
         name_rect = pygame.Rect( x - width//2, y - height//2, width, height)        
         if self.is_mouse_over_button(name_rect):
@@ -212,20 +192,3 @@ class Element():
         self.alpha_window = pygame.Surface((self.W, self.H), pygame.SRCALPHA)
         pygame.draw.rect(self.alpha_window, color, pygame.Rect(0,0, self.W, self.H))
         self.Window.blit(self.alpha_window, (0,0))
-        
-    def img_background_blur(self, name, x, y, width, height, image_name, blur_radius=5):
-        name = pygame.image.load(f'assets/image/{image_name}.png').convert_alpha()
-        name = pygame.transform.scale(name, (width, height))
-        self.Window.blit(name, (x - name.get_width()//2, y - name.get_height()//2))
-
-        image_bytes = BytesIO()
-        pygame.image.save(name, image_bytes)
-        image_bytes.seek(0)
-        pillow_image = Image.open(image_bytes)
-        blurred_pillow_image = pillow_image.filter(ImageFilter.GaussianBlur(radius=blur_radius))
-        blurred_image = pygame.image.fromstring(
-            blurred_pillow_image.tobytes(), 
-            blurred_pillow_image.size, 
-            blurred_pillow_image.mode
-        )
-        self.Window.blit(blurred_image, (x - width // 2, y - height // 2))

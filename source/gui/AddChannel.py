@@ -10,7 +10,7 @@ class AddChannel(Gui,Client,DiscordManager):
         self.entry_new_name = 0
 
     def background(self): 
-        self.img_background_blur('Background', 600, 350, 1200, 800, 'main_page/main_page8', blur_radius=10)
+        self.img_background("Background", 600, 350, 1200, 800, "main_page/main_page8")
 
     def add_section(self):
         # Background Rectangle
