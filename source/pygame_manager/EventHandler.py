@@ -261,11 +261,39 @@ class EventHandler():
                 elif event.button == 5 and self.scroll >0 :
                     self.scroll -= 15
                 elif event.button == 1:
+                    channel_found = False
+                    # for channel_id, rect in self.channel_rects:
+                    #     if rect.collidepoint(event.pos):
+                    #         for channel in self.channels:
+                    #             print(self.channels)
+                    #             if channel[2] == 1 and self.user_info[7] == 2:
+                    #                 print(channel[2],"channel du if")
+                    #                 print(self.actual_channel)
+                    #                 self.scroll = 0
+                    #                 print("le user",self.user_info[0], "est dans le channel",channel_id,"status est de ", channel[2])
+                    #             else:
+                    #                 self.actual_channel = channel_id
+                    #                 self.scroll = 0
                     for channel_id, rect in self.channel_rects:
                         if rect.collidepoint(event.pos):
-                            self.actual_channel = channel_id
-                            self.scroll = 0
+                            for channel in self.channels:
+                                print(self.channels)
+                                print(channel[3])
+                                if channel[3] == 1 and self.user_info[7] == 2:
+                                    print(channel[3],"channel du if")
+                                    print(self.actual_channel)
+                                    self.scroll = 0
+                                    print("le user",self.user_info[0], "est dans le channel",channel_id,"status est de ", channel[3])
+                                    channel_found = True
+                                else:
+                                    self.actual_channel = channel_id
+                                    self.scroll = 0
 
+                    if not channel_found:
+                        self.actual_channel = 0
+                        
+                        
+                        
                 if self.send_button.collidepoint(event.pos):
                     self.add_message()
                 elif self.entry_message.collidepoint(event.pos): 

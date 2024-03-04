@@ -24,6 +24,7 @@ class MainPage(Gui, Client, DiscordManager):
         self.poweroff_c = pygame.Rect(64-115/2, 635-115/2, 115, 115)
         self.settings_c = pygame.Rect( 64-115/2, 540-115/2, 115, 115)
         self.server_c =  pygame.Rect(64-115/2, 170-115/2, 115, 115)
+        self.private = False
 
     def background(self): 
         self.img_background("Background", 600, 350, 1200, 800, "main_page/main_page8")
@@ -111,6 +112,7 @@ class MainPage(Gui, Client, DiscordManager):
                     else:
                         self.text_not_align(self.font2, 15, channel[1], self.grey1, 200, position_y)
                     if channel[2] == 1:
+                        self.private = True
                         self.img_center("Lock", 150, position_y + 10, 25, 25, "main_page/main_page11")
                         
                     if channel[4] == 1:

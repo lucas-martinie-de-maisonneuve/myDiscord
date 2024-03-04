@@ -119,3 +119,21 @@ CREATE TABLE password (
     password VARCHAR(255),
     id_user INT
 );
+
+CREATE TABLE user (
+    id INT PRIMARY KEY AUTO_INCREMENT,
+    surname VARCHAR(255),
+    name VARCHAR(255),
+    pseudo VARCHAR(255),
+    email VARCHAR(255),
+    password VARCHAR(255),
+    
+    photo INT,
+    id_role INT,
+    change_role BOOLEAN,
+    last_message DATETIME DEFAULT CURRENT_TIMESTAMP
+);
+
+DROP TABLE user;
+INSERT INTO user(surname, name, pseudo, email, password, photo, id_role, change_role) VALUES
+('ILVbis','LLMbis', 'Super Userbis', 'b', 'ca978112ca1bbdcafac231b39a23dc4da786eff8147c4e72b9807785afee48bb', 3, 2, False );
