@@ -166,54 +166,53 @@ class MainPage(Gui, Client):
         pos_y = 610
         
         for message in reversed(self.messages):
-            if message[4] == self.actual_channel:
-                message_content = str(message[3])
-                message_name = message[1]
-                message_time = message[2]
-                self.message_picture = self.get_profile_picture(message_name)
-                if self.message_picture:
-                    self.str_picture = self.message_picture[0][0]
+            message_content = str(message[3])
+            message_name = message[1]
+            message_time = message[2]
+            self.message_picture = self.get_profile_picture(message_name)
+            if self.message_picture:
+                self.str_picture = self.message_picture[0][0]
 
-                chunked_strings = self.split_string(message_content, 101)
-                rectangle_height = len(chunked_strings) * 30  
-                pos_y -= rectangle_height + 40
+            chunked_strings = self.split_string(message_content, 101)
+            rectangle_height = len(chunked_strings) * 30  
+            pos_y -= rectangle_height + 40
 
-                for j, chunk in enumerate(chunked_strings):
-                    self.text_not_align(self.font2, 16, str(chunk), self.grey1, 480, ((30 * j) + pos_y + 20 + self.scroll))
-                self.text_not_align(self.font1, 18, str(message_name), self.pink, 480, pos_y + 5 + self.scroll)
-                self.text_not_align(self.font1, 10, str(message_time), self.grey1, 590, pos_y + 10 + self.scroll)
-                self.img_center("bubble", 460, pos_y + 10 + self.scroll, 40, 40, "main_page/main_page4")
-                self.img_center("ProfilePicture", 460, pos_y + 10 + self.scroll, 35, 35, f'profile/profile{self.str_picture}')
+            for j, chunk in enumerate(chunked_strings):
+                self.text_not_align(self.font2, 16, str(chunk), self.grey1, 480, ((30 * j) + pos_y + 20 + self.scroll))
+            self.text_not_align(self.font1, 18, str(message_name), self.pink, 480, pos_y + 5 + self.scroll)
+            self.text_not_align(self.font1, 10, str(message_time), self.grey1, 590, pos_y + 10 + self.scroll)
+            self.img_center("bubble", 460, pos_y + 10 + self.scroll, 40, 40, "main_page/main_page4")
+            self.img_center("ProfilePicture", 460, pos_y + 10 + self.scroll, 35, 35, f'profile/profile{self.str_picture}')
+            
+            if message[5] is not None:
+                self.img_center("Heart",460, pos_y + 50 + self.scroll, 30, 30, f"main_page/emoji/emoji{message[5]}")
                 
-                if message[5] is not None:
-                    self.img_center("Heart",460, pos_y + 50 + self.scroll, 30, 30, f"main_page/emoji/emoji{message[5]}")
-                    
-                self.emoji_heart = pygame.draw.circle(self.Window, self.grey10, (710, pos_y + 10 + self.scroll), 9)
-                self.emoji_laugh = pygame.draw.circle(self.Window, self.grey10, (740,  pos_y + 10 + self.scroll), 9)
-                self.emoji_cry = pygame.draw.circle(self.Window, self.grey10, (770, pos_y + 10 + self.scroll), 9)
-                self.emoji_angry = pygame.draw.circle(self.Window, self.grey10, (800, pos_y + 10 + self.scroll), 9)
-        
-                # Emoji Choice
-                if self.emoji_choice:
-                    for i,item in enumerate(self.emoji_list):
-                        if item[0] == message[0]:
-                            del self.emoji_list[i]
-                            
-                    self.rect_emoji = pygame.Rect(700,pos_y + self.scroll,110,20)
-                    self.emoji_list.append((message[0],self.rect_emoji))
-                    
-                    self.rect_full_not_centered(self.red,700,pos_y + self.scroll,110,20,0)
-                    self.emoji_heart = pygame.draw.circle(self.Window, self.grey10, (710, pos_y + 10 + self.scroll), 11)
-                    self.img_center("Heart",710, pos_y + 10 + self.scroll, 20, 20, "main_page/emoji/emoji1")
-                    
-                    self.emoji_laugh = pygame.draw.circle(self.Window, self.grey10, (740,  pos_y + 10 + self.scroll), 11)
-                    self.img_center("Laugh",740, pos_y + 10 + self.scroll, 20, 20, "main_page/emoji/emoji2")
-                    
-                    self.emoji_cry = pygame.draw.circle(self.Window, self.grey10, (770, pos_y + 10 + self.scroll), 11)
-                    self.img_center("Cry",770, pos_y + 10 + self.scroll, 20, 20, "main_page/emoji/emoji3")       
-                    
-                    self.emoji_angry = pygame.draw.circle(self.Window, self.grey10, (800, pos_y + 10 + self.scroll), 11)
-                    self.img_center("Angry",800, pos_y + 10 + self.scroll, 20, 20, "main_page/emoji/emoji4")
+            self.emoji_heart = pygame.draw.circle(self.Window, self.grey10, (710, pos_y + 10 + self.scroll), 9)
+            self.emoji_laugh = pygame.draw.circle(self.Window, self.grey10, (740,  pos_y + 10 + self.scroll), 9)
+            self.emoji_cry = pygame.draw.circle(self.Window, self.grey10, (770, pos_y + 10 + self.scroll), 9)
+            self.emoji_angry = pygame.draw.circle(self.Window, self.grey10, (800, pos_y + 10 + self.scroll), 9)
+    
+            # Emoji Choice
+            if self.emoji_choice:
+                for i,item in enumerate(self.emoji_list):
+                    if item[0] == message[0]:
+                        del self.emoji_list[i]
+                        
+                self.rect_emoji = pygame.Rect(700,pos_y + self.scroll,110,20)
+                self.emoji_list.append((message[0],self.rect_emoji))
+                
+                self.rect_full_not_centered(self.red,700,pos_y + self.scroll,110,20,0)
+                self.emoji_heart = pygame.draw.circle(self.Window, self.grey10, (710, pos_y + 10 + self.scroll), 11)
+                self.img_center("Heart",710, pos_y + 10 + self.scroll, 20, 20, "main_page/emoji/emoji1")
+                
+                self.emoji_laugh = pygame.draw.circle(self.Window, self.grey10, (740,  pos_y + 10 + self.scroll), 11)
+                self.img_center("Laugh",740, pos_y + 10 + self.scroll, 20, 20, "main_page/emoji/emoji2")
+                
+                self.emoji_cry = pygame.draw.circle(self.Window, self.grey10, (770, pos_y + 10 + self.scroll), 11)
+                self.img_center("Cry",770, pos_y + 10 + self.scroll, 20, 20, "main_page/emoji/emoji3")       
+                
+                self.emoji_angry = pygame.draw.circle(self.Window, self.grey10, (800, pos_y + 10 + self.scroll), 11)
+                self.img_center("Angry",800, pos_y + 10 + self.scroll, 20, 20, "main_page/emoji/emoji4")
 
         self.img_center("Background",795, 40, 775, 80, "main_page/main_page20")
         self.img_center("Background",795, 660, 775, 80, "main_page/main_page21")

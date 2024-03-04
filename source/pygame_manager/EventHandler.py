@@ -412,5 +412,6 @@ class EventHandler():
                         
                     elif event.button == 1: 
                         for link_rect, url in self.link_data:
+                            if link_rect.collidepoint(event.pos):
                                 webbrowser.open(url)  
 
