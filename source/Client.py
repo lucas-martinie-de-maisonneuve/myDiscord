@@ -131,3 +131,9 @@ class Client(DiscordManager):
         self.deny_upgrade_role(user_id)
         self.request = self.display_admin_request()
         return self.request
+    
+    def channel_deleted(self, id_channel):
+        self.delete_channel_message(id_channel)
+        self.delete_channel(id_channel)
+        self.channels = self.display_channel()
+        return self.channels

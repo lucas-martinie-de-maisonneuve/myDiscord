@@ -22,7 +22,7 @@ class MainPage(Gui, Client):
         self.settings_c = pygame.Rect( 64-115/2, 540-115/2, 115, 115)
         self.server_c =  pygame.Rect(64-115/2, 170-115/2, 115, 115)
         self.notification_c= pygame.Rect(1052, 25, 30, 30)
-        
+        self.deleting_channel = False
         self.emoji_choice = False
         self.emoji_display = 0
         self.emoji_list = []
@@ -96,6 +96,15 @@ class MainPage(Gui, Client):
             self.img_center("Add Channel", 65, 485, 45, 45,f"main_page/{logo_add_channel}")
             self.img_center("Neon circle", 64, 485, 90, 90,"main_page/main_page4")
 
+        # Delete Channel
+        logo_delete = 'main_page6' if self.user_info[7] == 1 else 'main_page1'
+        self.circle5 = pygame.draw.circle(self.Window, self.grey10, (64, 405), 35)
+        if self.is_mouse_over_button(self.circle5):
+            self.img_center("Delete Channel", 65, 405, 45, 45,f"main_page/{logo_delete}")
+            self.img_center("Neon circle", 64, 405, 95 , 95,"main_page/main_page4")   
+        else:      
+            self.img_center("Delete Channel", 65, 405, 45, 45,f"main_page/{logo_delete}")
+            self.img_center("Neon circle", 64, 405, 90, 90,"main_page/main_page4")
 
     def second_section(self):
         self.rect_full(self.grey10, 257, 385, 260, 610, 10)
@@ -126,6 +135,8 @@ class MainPage(Gui, Client):
 
                     else:
                         self.img_center("Hashtags logiciel", 170, position_y + 10, 15, 15, "main_page/main_page14")
+                    if self.user_info[7] == 1 and self.deleting_channel: 
+                        self.img_center("Delete", 365, position_y + 10, 25, 25, "main_page/main_page24")
     
     def third_section(self):
         self.rect_full(self.grey10, 795, 385, 775, 610, 10)

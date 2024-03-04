@@ -20,15 +20,15 @@ class Contact(Gui, Client):
         # Links Ines
         (self.linkedinI, "https://www.linkedin.com/in/ines-lorquet-35b90128b/"),
         (self.githubI, "https://github.com/ines-lorquet"),
-        (self.mailI, " https://mail.google.com/"),
+        (self.mailI, "mailto:ineslorquet@gmail.com"),
         # Links Lucas
         ( self.linkedinL, "https://www.linkedin.com/in/lucas-martinie-de-maisonneuve-2349892b3/"),
         (self.githubL,"https://github.com/lucas-martinie-de-maisonneuve"),
-        (self.mailL, " https://mail.google.com/"),
+        (self.mailL, "mailto:lucas.martinie@gmail.com"),
         #Links Vanny
         (self.linkedinV, "https://www.linkedin.com/in/vanny-lamorte-b4262b129/"),
         (self.githubV,"https://github.com/vanny-laure-lamorte"),
-        (self.mailI, "https://mail.google.com/"),
+        (self.mailV, "mailto:vannylamorte@gmail.com"),
         # Links LaPlateforme
         (self.FacebookP, "https://www.facebook.com/LaPlateformeIO"),
         (self.linkedinP, "https://www.linkedin.com/school/laplateformeio/"),

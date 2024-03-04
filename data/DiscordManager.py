@@ -149,6 +149,11 @@ class DiscordManager(Database):
         values = (id,)
         self.execute_query(sql, values)
 
+    def delete_channel_message(self, id):
+        sql = "DELETE FROM message WHERE id_channel = %s"
+        values = (id,)
+        self.execute_query(sql, values)
+
     def save_message(self, name, message, id_channel):
         actual_time = datetime.now()
         sql = "INSERT INTO message (name, time, message, id_channel) VALUES (%s, %s, %s, %s)"

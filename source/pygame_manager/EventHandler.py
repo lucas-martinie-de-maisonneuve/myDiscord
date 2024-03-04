@@ -304,7 +304,11 @@ class EventHandler():
 
                         elif self.emoji_angry.collidepoint(event.pos):
                             self.add_emoji(id_message,4)
-
+                if self.deleting_channel:
+                    for channel_id, rect in self.channel_rects:
+                        if rect.collidepoint(event.pos):
+                            self.channels = self.channel_deleted(channel_id)
+                            
                 if event.button == 4:
                     self.scroll += 15
                 elif event.button == 5 and self.scroll >0 :
@@ -343,6 +347,10 @@ class EventHandler():
                         self.main_page_to_add_channel = True
                         self.add_channel_running = True
                         self.main_page_running = False
+
+                elif self.circle5.collidepoint(event.pos):
+                    if self.user_info[7] == 1:
+                        self.deleting_channel = not self.deleting_channel
 
                 elif self.notification_c.collidepoint(event.pos): 
                     self.reset_new_message_counter()                   
@@ -393,6 +401,7 @@ class EventHandler():
                         if self.entry_new_name==1:
                             if event.unicode.isalpha():
                                 self.new_name_channel += event.unicode
+
     def event_contact(self):
         for event in pygame.event.get():
                 if event.type == pygame.QUIT:

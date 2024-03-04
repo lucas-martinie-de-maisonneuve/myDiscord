@@ -1,4 +1,3 @@
--- Active: 1706527539532@@127.0.0.1@3306@discord
 CREATE DATABASE discord;
 USE discord;
 
@@ -18,9 +17,10 @@ CREATE TABLE user (
 
 INSERT INTO user(surname, name, pseudo, email, password, photo, id_role, change_role) VALUES
 ('ILV','LLM', 'Super User', 'a', 'ca978112ca1bbdcafac231b39a23dc4da786eff8147c4e72b9807785afee48bb', 3, 1, False ),
+('ILVbis','LLMbis', 'Super Userbis', 'b', 'ca978112ca1bbdcafac231b39a23dc4da786eff8147c4e72b9807785afee48bb', 3, 2, False ),
 ('Ines','Lorquet', 'Inessa', 'ines.lorquet@laplateforme.io', '586447cae9b58ff7e2c0a2b3980caf7f2ac5984bfe92cbb99eb0a5f0a702914d', 1, 1, False),
-('Lucas','Martinie', 'Lucassa', 'lucas.martinie@laplateforme.io', 'fc96020f4fc3fbbe01b03f6c1ef101a57110b6844511567e2cca087e02c0d4bb', 2, 1, False),
-('Vanny','Lamorte', 'Vannyssa', 'vanny.lamorte@laplateforme.io', '5c5bdc4a2ad0deadbd40affb8fe0e359ff6fb3402a38b2a8addbdee2b802d1b5', 3, 1, False),
+('Lucas','Martinie', 'Lulu', 'lucas.martinie@laplateforme.io', 'fc96020f4fc3fbbe01b03f6c1ef101a57110b6844511567e2cca087e02c0d4bb', 2, 1, False),
+('Vanny','Lamorte', 'VanLauLam', 'vanny.lamorte@laplateforme.io', '5c5bdc4a2ad0deadbd40affb8fe0e359ff6fb3402a38b2a8addbdee2b802d1b5', 3, 1, False),
 ('Gerard','Lamorte', 'GegeDeMars', 'gerard.lamorte@laplateforme.io', 'f8e2f219f007cc3d627bd6841ae18c0e3f8e502bb9d3004877d92522924c4f6f', 3, 2, False),
 ('Lucy','Madec', 'Lucyleony', 'lucy.madec@laplateforme.io', 'bb3841631aa4975e6a2458f7def3a3030e17ecd27c0f2aa443fa94de4342a24b', 4, 2, True),
 ('Camille','Martinie', 'CamCamCam', 'camille.martinie@laplateforme.io', '2674f3c9cee0ecaa024b4cbc53ed34e18fc2dd288e56d9b2f5a6f57d29115119', 2, 2, False),
@@ -31,7 +31,6 @@ INSERT INTO user(surname, name, pseudo, email, password, photo, id_role, change_
 ;
 
 INSERT INTO user(surname, name, pseudo, email, password, photo, id_role, change_role) VALUES
-('ILVbis','LLMbis', 'Super Userbis', 'b', 'ca978112ca1bbdcafac231b39a23dc4da786eff8147c4e72b9807785afee48bb', 3, 2, False );
 
 
 CREATE TABLE role (
@@ -105,7 +104,7 @@ INSERT INTO message(name, time, message, id_channel) VALUES
 ('VanLauLam', '2024-02-06 20:12:22',"Oh, that's awesome! What made you choose AI ?", 5),
 ('Inessa', '2024-02-06 20:13:23',"Well, I've always been fascinated by data analysis, and AI seems to be at the forefront of that. Plus, it's such a promising field for the future, you know?", 5),
 ('LuLu','2024-02-06 20:14:24'," Absolutely! The potential of AI is incredible. It's reshaping so many industries and opening up new possibilities.", 5),
-('Inessassa','2024-02-06 20:15:25',"Exactly! I feel like there's so much to explore and innovate within AI. It's both challenging and rewarding.", 5),
+('Inessa','2024-02-06 20:15:25',"Exactly! I feel like there's so much to explore and innovate within AI. It's both challenging and rewarding.", 5),
 ('VanLauLam', '2024-02-06 20:16:26',"I'm really glad you found your passion, Inessa. And you're right, AI is definitely a field that's only going to keep growing.", 5),
 ('LuLu', '2024-02-06 20:17:27',"Totally! You've got our full support, Inessa. If you ever need help or want to bounce ideas off of us, we're here for you.", 5),
 ('Inessa', '2024-02-06 20:18:28',"Thanks, guys! I appreciate your encouragement. It means a lot to me. Together, I know we can accomplish great things in this field.", 5),
@@ -130,13 +129,14 @@ CREATE TABLE password (
 
 INSERT INTO password(password, id_user) VALUES
 ("a", 1),
-("InesLorquet", 2),
-("LucasMartinie2415!",3),
-("VannyLamorte2512!",4),
-("GerardLamorte1234!",5),
-("LucyMadec1234!",6),
-("CamilleMartinie1234!",7),
-("ClaireLamorte1234!",8),
-("EliseMartinie01234!",9),
-("JulienBeaurain01234!",10),
-("AlexPhilipot01234!", 11);
+("b", 2),
+("InesLorquet", 3),
+("LucasMartinie2415!",4),
+("VannyLamorte2512!",5),
+("GerardLamorte1234!",6),
+("LucyMadec1234!",7),
+("CamilleMartinie1234!",8),
+("ClaireLamorte1234!",9),
+("EliseMartinie01234!",10),
+("JulienBeaurain01234!",11),
+("AlexPhilipot01234!", 12);
