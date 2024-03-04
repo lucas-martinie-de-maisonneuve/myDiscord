@@ -2,15 +2,6 @@ import pygame
 import webbrowser
 
 class EventHandler():
-    # def main_event(self):
-    #     for event in pygame.event.get():
-    #         if event.type == pygame.QUIT:
-    #             self.home_running = False
-    #             self.register_running = False
-    #             self.main_page_running = False
-    #             self.profile_running = False
-    #             self.contact_running = False
-    #             self.main_running = False
 
     def event_profile(self):
         for event in pygame.event.get():
@@ -222,7 +213,7 @@ class EventHandler():
                     self.entry = 5
 
                 elif self.sign_up.collidepoint(event.pos):
-                    if self.register_username!="" and self.register_email!="" and self.register_surname != "" and self.register_name != "" and self.register_password != "" and self.register_photo != 0:
+                    if self.register_username!="" and self.register_surname != "" and self.register_name != "" and self.register_photo != 0 and "@" in self.register_email and "." in self.register_email and (len(self.register_password) >= 8 and any(char.isdigit() for char in self.register_password) and any(char.isupper() for char in self.register_password)):
                         self.user_info = self.register_user()
                         self.register_to_main_page = True
                         self.registered = True
