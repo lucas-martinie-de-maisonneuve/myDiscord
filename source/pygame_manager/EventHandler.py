@@ -311,7 +311,7 @@ class EventHandler():
                     self.scroll -= 15
                 elif event.button == 1:
                     for channel_id, rect in self.channel_rects:
-                        if rect.collidepoint(event.pos):
+                        if rect.collidepoint(event.pos) and not self.deleting_channel:
                             if self.channel_private(channel_id):
                                 self.actual_channel = channel_id
                                 self.emoji_list = []

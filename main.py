@@ -53,7 +53,7 @@ class Display_test(Gui):
                         self.main_page = MainPage(self.connexion.user_info)
                         self.main_page.main_page_running = True
                     else:
-                        self.main_page = MainPage(self.connexion.user_info)
+                        self.main_page = MainPage(self.profile.user)
                         self.main_page.main_page_running = True
 
                 else:
