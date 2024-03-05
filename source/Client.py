@@ -1,24 +1,26 @@
 import time
 from data.DiscordManager import DiscordManager
 from hashlib import sha256
+from source.pyaudio.Recorder import Recorder
 
-class Client(DiscordManager):
+class Client(DiscordManager, Recorder):
     def __init__(self):
+        super().__init__()
+        
         self.connected = False
         self.profile_password = ""
         self.home_running = False
         self.user_email = ""
         self.user_password = ""
         self.user_info = (0, '', '', '', '', '', 0, 0)
-        super().__init__()
+
         self.register_username = ""
         self.register_email = ""
         self.register_surname = ""
         self.register_name = ""
         self.register_password = ""
         self.register_photo = 0
-        self.registered = False
-        
+        self.registered = False       
         
         self.new_name_channel = ""
         self.status = None
@@ -103,5 +105,13 @@ class Client(DiscordManager):
     
     def reset_new_message_counter(self):
         self.new_message = 0
+
+        # Audio
+    def audio_table(self): 
+
+        # filename = f"{id_channel}_{datetime.now().strftime('%Y%m%d%H%M%S')}.wav"
+
+        self.create_and_save(self.user_info[3], self.message1, self.actual_channel)
+
 
     

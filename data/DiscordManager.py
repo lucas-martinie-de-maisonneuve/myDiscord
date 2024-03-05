@@ -224,10 +224,13 @@ class DiscordManager(Database):
                 return result[0][0]
         else: 
             return None
-
-    
-
-
+        
+    # Audio 
+    def create_and_save(self, name, message, id_channel, filename):        
+        time = datetime.now()
+        sql = "INSERT INTO message(name, time, message, id_channel, audio_file) VALUES (%s, %s, %s, %s, %s)"      
+        params = (name, time, message, id_channel, filename)
+        self.execute_query(sql, params)
 
 manager = DiscordManager()
 manager.close_connection()

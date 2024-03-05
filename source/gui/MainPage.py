@@ -1,15 +1,24 @@
 import pygame
+
+import wave, os, pyaudio
+
 from datetime import datetime, timedelta
 from data.DiscordManager import DiscordManager
 from source.pygame_manager.Gui import Gui
 from source.Client import Client
 
-class MainPage(Gui, Client, DiscordManager):
+# Audio
+import pyaudio
+import wave
+from source.pyaudio.Recorder import Recorder
+
+class MainPage(Gui, Client, DiscordManager, Recorder):
     
     def __init__(self, user_info):
         Client.__init__(self)
         DiscordManager.__init__(self)  
         Gui.__init__(self)
+        Recorder.__init__(self)
         self.user_info = user_info
         self.last_login_date = ""
         self.input_search = "Search..."
@@ -236,7 +245,16 @@ class MainPage(Gui, Client, DiscordManager):
 
         self.text_center(self.font1, 20, str(self.new_message), self.pink1, 1067, 42)
         self.image_not_center("Circle notification",1052, 25, 30, 30,"main_page/main_page23")
+
+    def audio_section(self): 
+
+        self.record_audio()
         
+        str_name_audio = f"audio_liv.wav"
+        self.save_audio(str_name_audio) 
+
+        self.audio_table()  
+ 
     def mainPage_run(self):
         while self.main_page_running :
             self.update_message()
@@ -249,5 +267,6 @@ class MainPage(Gui, Client, DiscordManager):
             self.event_main_page()
             self.main_page_cursor()
             self.notification()
+            self.audio_section()
             # print(self.emoji_list)
             self.update()
