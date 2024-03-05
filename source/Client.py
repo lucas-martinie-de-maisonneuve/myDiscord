@@ -13,6 +13,7 @@ class Client(DiscordManager, Recorder):
         self.user_email = ""
         self.user_password = ""
         self.user_info = (0, '', '', '', '', '', 0, 0)
+        self.user = (0, '', '', '', '', '', 0, 0)   
 
         self.register_username = ""
         self.register_email = ""
@@ -20,14 +21,14 @@ class Client(DiscordManager, Recorder):
         self.register_name = ""
         self.register_password = ""
         self.register_photo = 0
-        self.registered = False       
-        
+        self.registered = False
+        self.username, self.email, self.picture, self.hashed_password = "", "", 0, ""
+
         self.new_name_channel = ""
         self.status = None
         self.communication = None
         self.category = None
-        self.add = False
-        
+        self.add = False        
         
         self.register_to_login = False 
         self.main_page_to_login = False
@@ -36,13 +37,14 @@ class Client(DiscordManager, Recorder):
         self.login_to_register = False
         self.register_running = False
 
+        self.profile_modified = False
         self.register_to_main_page = False
         self.profile_to_main_page = False
         self.home_to_main_page = False
         self.main_page_running = False
         
         self.main_page_to_profile = False
-        self.creator_to_profile = False
+        self.contact_to_profile = False
         self.profile_running = False
 
         self.profile_to_contact = False
@@ -51,15 +53,16 @@ class Client(DiscordManager, Recorder):
         self.add_channel_running = False
         self.main_page_to_add_channel = False
         self.add_channel_to_main_page = False
-        
-        self.categories = self.display_category()
-        self.channels = self.display_channel()
-        self.messages = self.display_message()
-        
-        # self.emoji_display = self.emoji_react()
 
         self.actual_channel = 1
         self.message = ""
+        
+        self.categories = self.display_category()
+        self.channels = self.display_channel()
+        self.messages = self.get_message(self.actual_channel)
+        self.community_list = self.display_user()  
+        self.request = self.display_admin_request()
+        # self.emoji_display = self.emoji_react()
 
         # Notification
         self.new_message = 0                
@@ -70,11 +73,8 @@ class Client(DiscordManager, Recorder):
         if self.check_credentials(self.user_email, hashed_password):
             self.user_info = self.get_user(self.user_email, hashed_password)
             self.connected = True
-            print("Connexion réussie !")
             return self.user_info
-        else:
-            print("Erreur. Connexion échouée.")
-
+        
     def abc_password(self, user_id): 
         self.profile_password = self.get_password(user_id)
         return self.profile_password[0][0]
@@ -90,14 +90,24 @@ class Client(DiscordManager, Recorder):
         self.add_channel(self.new_name_channel,self.status,self.communication,self.category)
         
     def update_message(self):
-        self.messages = self.display_message()
+        self.messages = self.get_message(self.actual_channel)
 
     def add_message(self):
         if self.message != "":
             self.save_message(self.user_info[3], self.message, self.actual_channel)
-            self.update_message()
+            self.messages = self.get_message(self.actual_channel)
             self.message = ""
 
+    def modify_user(self, pseudo, email, password,photo, id, user):
+
+        hashed_password = sha256(password.encode()).hexdigest()
+
+        self.update_user(pseudo, email, hashed_password, photo, id)
+        self.update_message_author(pseudo, user)
+        self.update_abc_password(password, id)
+        self.user = self.get_user(self.email, hashed_password)
+        return self.user
+        
         # Notification
     def load_info_last_message(self, user): 
         self.last_login_date = self.get_last_message_time(user)
@@ -114,4 +124,33 @@ class Client(DiscordManager, Recorder):
         self.create_and_save(self.user_info[3], self.message1, self.actual_channel)
 
 
+    def change_role_request(self):
+        self.update_role_request(self.email)
+        self.user = self.get_user(self.email, self.hashed_password)
+        return self.user
     
+    def change_role_validate(self, user_id):
+        self.upgrade_role(user_id)
+        self.request = self.display_admin_request()
+        return self.request
+
+    def change_role_denyed(self, user_id):
+        self.deny_upgrade_role(user_id)
+        self.request = self.display_admin_request()
+        return self.request
+    
+    def channel_deleted(self, id_channel):
+        self.delete_channel_message(id_channel)
+        self.delete_channel(id_channel)
+        self.channels = self.display_channel()
+        return self.channels
+    
+    def channel_private(self, id_channel):
+        user_role = self.get_user_role(self.user_info[0])
+        channel_status = self.get_channel_status(id_channel)
+        user = user_role[0][0]
+        status = channel_status[0][0]
+        if user == 2 and status == 1:
+            return False
+        else:
+            return True

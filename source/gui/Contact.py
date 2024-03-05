@@ -8,6 +8,7 @@ class Contact(Gui, Client):
 
         Gui.__init__(self)
         Client.__init__(self)
+        
         self.link_is_clicked = True     
 
         self.linkedinI, self.githubI, self.mailI = pygame.Rect(110-13, 125-13, 25, 25), pygame.Rect(110-13, 160-13, 25, 25), pygame.Rect(110-13, 195-13, 25, 25)
@@ -19,15 +20,15 @@ class Contact(Gui, Client):
         # Links Ines
         (self.linkedinI, "https://www.linkedin.com/in/ines-lorquet-35b90128b/"),
         (self.githubI, "https://github.com/ines-lorquet"),
-        (self.mailI, " https://mail.google.com/"),
+        (self.mailI, "mailto:ineslorquet@gmail.com"),
         # Links Lucas
         ( self.linkedinL, "https://www.linkedin.com/in/lucas-martinie-de-maisonneuve-2349892b3/"),
         (self.githubL,"https://github.com/lucas-martinie-de-maisonneuve"),
-        (self.mailL, " https://mail.google.com/"),
+        (self.mailL, "mailto:lucas.martinie@gmail.com"),
         #Links Vanny
         (self.linkedinV, "https://www.linkedin.com/in/vanny-lamorte-b4262b129/"),
         (self.githubV,"https://github.com/vanny-laure-lamorte"),
-        (self.mailI, "https://mail.google.com/"),
+        (self.mailV, "mailto:vannylamorte@gmail.com"),
         # Links LaPlateforme
         (self.FacebookP, "https://www.facebook.com/LaPlateformeIO"),
         (self.linkedinP, "https://www.linkedin.com/school/laplateformeio/"),
@@ -61,7 +62,7 @@ class Contact(Gui, Client):
     def design(self):
         
         #--- Background ---#
-        self.img_background_blur("Background",600, 350, 1200, 700, "main_page/main_page8", blur_radius=5)
+        self.img_background("Background", 600, 350, 1200, 800, "main_page/main_page8")
 
         # --- Left rectangle ---#
         
@@ -93,14 +94,14 @@ class Contact(Gui, Client):
         self.rect_full(self.grey6, 555, 395, 350, 140, 10) 
         self.rect_border(self.white, 555, 395, 350, 140, 3, 10)
         self.text_not_align(self.font1, 15,"OUR LOCATIONS", self.grey7, 400, 345)
-        self.text_not_align(self.font1, 14,"• Marseille : " , self.grey7, 400, 385)
-        self.address("Marseille", 990-13, 500-13,"8 rue d’Hozier, 13002 Marseille", 495, 380)
-        self.text_not_align(self.font1, 14,"• Martigues : ", self.grey7, 400, 405)
-        self.address("Matigues", 980-13, 495-13,"Place du 8 mai 1945, 13500 Martigues", 495, 400)
-        self.text_not_align(self.font1, 14,"• Toulon : ", self.grey7, 400, 425)
-        self.address("Toulon", 1020-12, 510-12,"131 Av. Franklin Roosevelt, 83100 Toulon",  470, 420)
-        self.text_not_align(self.font1, 14,"• Cannes : ", self.grey7, 400, 445)
-        self.address("Cannes", 1045-12, 495-12,"1 Chemin de l’École, 06150 Cannes", 475, 440)
+        self.text_not_align(self.font1, 14,"• Marseille : " , self.grey7, 388, 385)
+        self.address("Marseille", 990-13, 500-13,"8 rue d’Hozier, 13002 Marseille", 482, 380)
+        self.text_not_align(self.font1, 14,"• Martigues : ", self.grey7, 388, 405)
+        self.address("Matigues", 980-13, 495-13,"Place du 8 mai 1945, 13500 Martigues", 482, 400)
+        self.text_not_align(self.font1, 14,"• Toulon : ", self.grey7, 388, 425)
+        self.address("Toulon", 1020-12, 510-12,"131 Av. Franklin Roosevelt, 83100 Toulon",  460, 420)
+        self.text_not_align(self.font1, 14,"• Cannes : ", self.grey7, 388, 445)
+        self.address("Cannes", 1045-12, 495-12,"1 Chemin de l’École, 06150 Cannes", 460, 440)
     
         # Social Media section
         self.rect_full(self.grey6, 555, 565, 350, 140, 10) 

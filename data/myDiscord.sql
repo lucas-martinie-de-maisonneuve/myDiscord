@@ -9,7 +9,6 @@ CREATE TABLE user (
     pseudo VARCHAR(255),
     email VARCHAR(255),
     password VARCHAR(255),
-    
     photo INT,
     id_role INT,
     change_role BOOLEAN,
@@ -17,31 +16,19 @@ CREATE TABLE user (
 );
 
 INSERT INTO user(surname, name, pseudo, email, password, photo, id_role, change_role) VALUES
-('ILV','LLM', 'Super User', 'a', 'ca978112ca1bbdcafac231b39a23dc4da786eff8147c4e72b9807785afee48bb', 3, 2, False ),
+('ILV','LLM', 'Super User', 'a', 'ca978112ca1bbdcafac231b39a23dc4da786eff8147c4e72b9807785afee48bb', 3, 1, False),
+('ILVbis','LLMbis', 'Super Userbis', 'b', 'ca978112ca1bbdcafac231b39a23dc4da786eff8147c4e72b9807785afee48bb', 3, 2, False ),
 ('Ines','Lorquet', 'Inessa', 'ines.lorquet@laplateforme.io', '586447cae9b58ff7e2c0a2b3980caf7f2ac5984bfe92cbb99eb0a5f0a702914d', 1, 1, False),
-('Lucas','Martinie', 'LuLu', 'lucas.martinie@laplateforme.io', 'fc96020f4fc3fbbe01b03f6c1ef101a57110b6844511567e2cca087e02c0d4bb', 2, 1, False),
-('Vanny','Lamorte', 'VanLauLam', 'vanny.lamorte@laplateforme.io', '5c5bdc4a2ad0deadbd40affb8fe0e359ff6fb3402a38b2a8addbdee2b802d1b5', 3, 2, False),
+('Lucas','Martinie', 'Lucassa', 'lucas.martinie@laplateforme.io', 'fc96020f4fc3fbbe01b03f6c1ef101a57110b6844511567e2cca087e02c0d4bb', 2, 1, False),
+('Vanny','Lamorte', 'Vannyssa', 'vanny.lamorte@laplateforme.io', '5c5bdc4a2ad0deadbd40affb8fe0e359ff6fb3402a38b2a8addbdee2b802d1b5', 3, 1, False),
 ('Gerard','Lamorte', 'GegeDeMars', 'gerard.lamorte@laplateforme.io', 'f8e2f219f007cc3d627bd6841ae18c0e3f8e502bb9d3004877d92522924c4f6f', 3, 2, False),
 ('Lucy','Madec', 'Lucyleony', 'lucy.madec@laplateforme.io', 'bb3841631aa4975e6a2458f7def3a3030e17ecd27c0f2aa443fa94de4342a24b', 4, 1, True),
-('Camille','Martinie', 'CamCamCam', 'camille.martinie@laplateforme.io', '2674f3c9cee0ecaa024b4cbc53ed34e18fc2dd288e56d9b2f5a6f57d29115119', 2, 1, False),
+('Camille','Martinie', 'CamCamCam', 'camille.martinie@laplateforme.io', '2674f3c9cee0ecaa024b4cbc53ed34e18fc2dd288e56d9b2f5a6f57d29115119', 2, 2, True),
 ('Claire','Lamorte', 'Cla Loup', 'claire.lamorte@laplateforme.io', '2fea5bafc5c03e90ffa05ae77fcd7c369f15f041f9da2cbb359b760583f10b86', 3, 2, False),
 ('Elise','Martinie', 'Hey lee02', 'elise.martinie@laplateforme.io', '877dec59269bf577868d0043a673249d3bb544047fdd6bd166ec585b6b67fe7d', 2, 2, False),
-('Julien','Beaurain', 'Ju Bond', 'julien.beaurain@laplateforme.io', 'b69990c682ef8acb1574ab57b656eb997818b0361a4e644b12780bcd09c67839', 1, 2, True),
+('Julien','Beaurain', 'Ju Bond', 'julien.beaurain@laplateforme.io', 'b69990c682ef8acb1574ab57b656eb997818b0361a4e644b12780bcd09c67839', 2, 2, True),
 ('Alex','Philipot', 'Poupinou', 'alexandre.philipot@laplateforme.io', 'ca978112ca1bbdcafac231b39a23dc4da786eff8147c4e72b9807785afee48bb', 4, 2, False)
 ;
-
-INSERT INTO user(surname, name, pseudo, email, password, photo, id_role, change_role) VALUES
-('ILVbis','LLMbis', 'Super Userbis', 'b', 'ca978112ca1bbdcafac231b39a23dc4da786eff8147c4e72b9807785afee48bb', 3, 2, False );
-
-
-CREATE TABLE role (
-    id INT PRIMARY KEY AUTO_INCREMENT,
-    name VARCHAR(255)
-); 
-
-INSERT INTO role(name) VALUES
-('Admin'),
-('Normal');
 
 CREATE TABLE category (
     id INT PRIMARY KEY AUTO_INCREMENT,
@@ -90,9 +77,9 @@ INSERT INTO message(name, time, message, id_channel) VALUES
 ('Inessa', '2024-02-06 18:20:02',"OUR RULES | You must respect all members of the server | Your language must be appropriate for all members | Advertising is prohibited here, whether it be verbal, written, via private message, or even in any other ways | Pornographic, religious, and political content, as well as discriminatory remarks, will result in a permanent ban | Inappropriate usernames and profile pictures (pornography, advertising, offensive material, etc.) are prohibited.", 2),
 #--- News ---#
 ('Vannyssa', '2024-01-25 18:30:03',"Tech Tuesday: Every Tuesday in Marseille, there is a conference on a topic in computer science. See you in the main hall of the school", 3),
-('Inessa', '2024-02-06 18:30:03',"Delayed start for Bachelor IT students on March 11th 2021", 3), 
-('Lucassa', '2024-03-05 18:30:03',"If you live by Cannes, there will be an open day on March 20th. Don't hesitate to drop by !", 3), 
-('Lucassa', '2024-03-20 18:30:03',"The inclusive digital school, La Plateforme, will expand to achieve a goal of training 3,000 students per year by 2026. To this end, the creation of an urban campus spanning 25,000 square meters will take place within the designated Euromed 2 perimeter of the public development establishment Euroméditerranée.", 3),
+('Inessa', '2024-02-01 18:30:03',"Delayed start for Bachelor IT students on March 11th 2021", 3), 
+('Lucassa', '2024-03-02 18:30:03',"If you live by Cannes, there will be an open day on March 20th. Don't hesitate to drop by !", 3), 
+('Lucassa', '2024-03-03 18:30:03',"The inclusive digital school, La Plateforme, will expand to achieve a goal of training 3,000 students per year by 2026. To this end, the creation of an urban campus spanning 25,000 square meters will take place within the designated Euromed 2 perimeter of the public development establishment Euroméditerranée.", 3),
 #--- AI ---#
 ('Inessa', '2024-02-06 19:10:11',"Hey guys, have you heard about the different specialties offered at LaPlateforme school ?", 7),
 ('Vanny', '2024-02-06 19:10:12',"Yeah, I was checking out their website earlier. They've got quite a range: cybersecurity, AI, software, web development, immersive systems and digital imaging.", 7),
@@ -129,14 +116,15 @@ CREATE TABLE password (
 );
 
 INSERT INTO password(password, id_user) VALUES
-("0", 1),
-("InesLorquet", 2),
-("LucasMartinie2415!",3),
-("VannyLamorte2512!",4),
-("GerardLamorte1234!",5),
-("LucyMadec1234!",6),
-("CamilleMartinie1234!",7),
-("ClaireLamorte1234!",8),
-("EliseMartinie01234!",9),
-("JulienBeaurain01234!",10),
-("AlexPhilipot01234!", 11);
+("a", 1),
+("b", 2),
+("InesLorquet", 3),
+("LucasMartinie2415!",4),
+("VannyLamorte2512!",5),
+("GerardLamorte1234!",6),
+("LucyMadec1234!",7),
+("CamilleMartinie1234!",8),
+("ClaireLamorte1234!",9),
+("EliseMartinie01234!",10),
+("JulienBeaurain01234!",11),
+("AlexPhilipot01234!", 12);

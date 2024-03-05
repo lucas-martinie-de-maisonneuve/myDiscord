@@ -1,31 +1,30 @@
 import pygame
 from source.pygame_manager.Gui import Gui
 from source.Client import Client
-
-class Profile( Gui, Client):
+class Profile(Gui, Client):
     
     def __init__(self, user_info):
         Gui.__init__(self)
         Client.__init__(self)
-        self.community_list = self.display_user()  
         self.user = user_info   
         self.edit = 0
         self.password_edit, self.username_edit, self.email_edit, self.picture_edit, self.status_edit = False, False, False, False, False
         self.theme_color = self.purple4
-
+        
         self.show_pass = False
         self.status = "Online"
         self.status_color = self.green
         self.size_username, self.size_email ,self.size_password, self.size_profile_picture= 0, 0, 0, 0
         self.pict = []
+        self.request_rects = []
         self.picture1 = pygame.Rect(0, 0, 0, 0)
         self.picture2 = pygame.Rect(0, 0, 0, 0)
         self.picture3 = pygame.Rect(0, 0, 0, 0)
-        self.username_rect = pygame.Rect(960, 300, 80, 30)
-        self.email_rect = pygame.Rect(960, 360, 80, 30)
-        self.password_rect = pygame.Rect(960, 420, 80, 30)
-        self.role_rect = pygame.Rect(960, 480, 80, 30)
-        self.status_rect = pygame.Rect(960, 540, 80, 30)
+        self.role_rect = pygame.Rect(0, 0, 0, 0)
+        self.save_edit_profile = pygame.Rect(0, 0, 0, 0)
+        self.username_modified, self.password_modified, self.email_modified = False, False, False
+        self.old_password = ""
+        self.display_request = False
 
     def display_user_community(self):
         self.rect_full(self.grey2, 195, 250, 250, 380, 10)
@@ -35,12 +34,31 @@ class Profile( Gui, Client):
         pos_y = 0  
         for i, user_community in enumerate(reversed(self.community_list[-10:])): 
             pos_y = pos_y + 30
-            self.text_not_align(self.font2, 20,str(user_community[3]), self.white, 150, 95 + pos_y)  
-            self.image_not_center("ProfilePicture", 90, pos_y + 90, 35, 35, f'profile/profile{user_community[6]}')
+            self.text_not_align(self.font2, 20,str(user_community[3]), self.white, 150, 95 + pos_y)
+            if user_community[0] == self.user_info[0]:
+                self.image_not_center("ProfilePicture", 90, pos_y + 90, 35, 35, f'profile/profile{self.picture}')
+            else:      
+                self.image_not_center("ProfilePicture", 90, pos_y + 90, 35, 35, f'profile/profile{user_community[6]}')
+
+    def display_user_request(self):
+        self.rect_full(self.grey2, 195, 250, 250, 380, 10)
+        self.rect_border(self.grey4, 195, 250, 250, 380, 1, 10)
+        self.text_not_align(self.font1, 18,"Upgrade request :", self.white, 90, 85)
+        pos_y = 0  
+
+        for i, request in enumerate(self.request): 
+            pos_y = pos_y + 40
+            self.text_not_align(self.font2, 20, str(request[3]), self.white, 100, 95 + pos_y)
+            validate_rect = self.hover_image("validate", "validate", 240, 107 + pos_y, 34, 34, "profile/profile16", "profile/profile16")
+            deny_rect = self.hover_image("deny", "deny", 277, 107 + pos_y, 34, 34, "profile/profile17", "profile/profile17")
+            # Vérification si le rectangle existe déjà dans la liste
+            if (request[0], validate_rect, deny_rect) not in self.request_rects:
+                self.request_rects.append((request[0], validate_rect, deny_rect))                
 
     def design(self):
         # Profile main rectangle
-        self.img_background("Background", 600, 350, 1200, 700, "main_page/main_page8")
+        self.img_background("Background", 600, 350, 1200, 800, "main_page/main_page8")
+
         self.rect_radius_top(self.theme_color, 750, 90, 800, 100, 10)
         self.rect_radius_bot(self.grey5, 750, 400, 800, 520, 10)
         
@@ -56,14 +74,27 @@ class Profile( Gui, Client):
         # Profile info rectangle
         self.rect_full(self.grey2, 750, 445, 700, 350, 10)
         self.rect_border(self.grey4, 750, 445, 700, 350, 1, 10)
-        
+
         # Info profile
-        self.info_profile("Username", self.username, 300)
-        self.info_profile("E-mail", self.email, 360)
-        self.info_profile("Password", self.password_display, 420)
-        self.info_profile("Role", self.role, 480)
-        self.info_profile("Status", self.role, 540)
-     
+        self.username_rect = self.info_profile("Username", "Edit", "Edit username", 300)
+        self.email_rect = self.info_profile("E-mail", "Edit", "Edit email", 360)
+        self.password_rect = self.info_profile("Password", "Edit", "Edit password", 420)
+        self.status_rect = self.info_profile("Status", "Edit", "Change status", 540)
+        if self.user[7] == 2 and self.user[8] == 0:
+            self.role_rect = self.info_profile("Role", "Upgrade", "Request promotion",480)
+        elif self.user[7] == 2 and self.user[8] == 1:
+            self.rect_full(self.grey6, 1000, 495, 80, 30, 4)
+            self.text_not_align(self.font5, 17, "Pending", self.white, 973, 481)
+            self.text_not_align(self.font1, 16, "Role", self.grey6, 430, 480)
+        else:
+            if self.display_request:
+                self.role_rect = self.info_profile("Role", "Request", "Hide pending request", 480)
+            else:
+                self.role_rect = self.info_profile("Role", "Request", "Display pending request", 480)
+
+        self.text_not_align(self.font2, 16, self.role, self.white, 440, 502)
+
+
         # Creators button
         self.contact_button = self.lateral_menu_display(475, "profile/profile6", "profile9", "profile9")        
 
@@ -97,7 +128,8 @@ class Profile( Gui, Client):
             self.picture_cursor = False
             self.circle(self.theme_color, 450, 180, 65)
             self.img_center("profile_picture", 450,180,130,130,f"profile/profile{self.picture}")
-        # Status color 
+
+    # Status color 
     def status_display(self, x, y, texte, texte2, color, color2):
         self.status_edit_rect = pygame.Rect(540, 570, 80, 20)
         self.status_active_rect = pygame.Rect(440, 570, 80, 20)
@@ -122,6 +154,7 @@ class Profile( Gui, Client):
         self.circle(self.grey5, 500, 230, 15)
         self.circle(self.status_color, 500, 230, 9)
 
+    # Animation to display pictures when editing profile pictures
     def profile_picture_edit(self):
         if self.picture == 1: 
             self.pict = [2, 3, 4]
@@ -137,10 +170,10 @@ class Profile( Gui, Client):
             self.theme_color = self.blue3
         if self.picture_edit:
             if self.size_profile_picture < 400:
-                self.size_profile_picture += 10
+                self.size_profile_picture += 30
         else:
             if self.size_profile_picture > 0:
-                self.size_profile_picture -=10
+                self.size_profile_picture -=30
         self.rect_full_not_centered(self.grey3, 440, 120, 0 + self.size_profile_picture, 100, 50)
         if self.size_profile_picture > 170:
             self.picture1 = pygame.draw.circle(self.Window, self.theme_color, (570,170), 45)
@@ -163,6 +196,12 @@ class Profile( Gui, Client):
         self.hover_profile_picture()
         self.status_circle()
 
+    # Modified check and text
+    def modified(self,x, y):
+        self.img_center("Check", x + 60, y + 3, 15, 15, "profile/profile15")
+        self.text_not_align(self.font1, 12, "modified", self.dark_green, x, y)
+
+    # Display show button 
     def password_show(self):
         if not self.password_edit:
             self.show = pygame.Rect(450 + 10 * len(self.profile_password),443,35,15)
@@ -171,24 +210,29 @@ class Profile( Gui, Client):
             else:
                 self.text_not_align(self.font2, 14, f"show",self.grey1,450 + 10 * len(self.profile_password), 438)
 
-    def info_profile(self, title, text_info, y):
+    # Display buttons to modify
+    def info_profile(self, title, text, description,y):
         self.text_not_align(self.font1, 16, title, self.grey6, 430, y)
-        self.button_hover(title, 1000, y + 15, 80, 30, self.pink, self.pink, self.purple2, self.purple2, "Edit", self.font5, self.white, 17, 0, 4)
+        self.text_center_italic(self.font2, 12, description, self.grey11, 885, y + 15)
+        title = self.button_hover(title, 1000, y + 15, 80, 30, self.pink, self.pink, self.purple2, self.purple2, text, self.font5, self.white, 17, 0, 4)
+
+        return title
 
     # White rectangle when 'Edit' is pressed
     def info_profile_edit(self):
         # Username info 
         self.rect_full_not_centered(self.white, 420, 322, 0 + self.size_username, 20, 12)
+
         if self.username_edit:
             if self.size_username < 240:
-                self.size_username += 15
+                self.size_username += 30
             self.text_not_align(self.font2, 16, self.username, self.black, 440, 322)
         else:
-            if self.size_username < 15:
+            if self.size_username < 30:
                 self.size_username = 0
             if self.size_username > 0:
                 self.text_not_align(self.font2, 16, self.username, self.black, 440, 322)
-                self.size_username -= 20
+                self.size_username -= 40
             else: 
                 self.text_not_align(self.font2, 16, self.username, self.white, 440, 322)
 
@@ -196,14 +240,14 @@ class Profile( Gui, Client):
         self.rect_full_not_centered(self.white, 420, 382, 0 + self.size_email, 20, 12)
         if self.email_edit:
             if self.size_email < 240:
-                self.size_email += 15
+                self.size_email += 30
             self.text_not_align(self.font2, 16, self.email, self.black, 440, 382)
         else:
-            if self.size_email < 15:
+            if self.size_email < 30:
                 self.size_email = 0
             if self.size_email > 0:
                 self.text_not_align(self.font2, 16, self.email, self.black, 440, 382)
-                self.size_email -= 20
+                self.size_email -= 40
             else: 
                 self.text_not_align(self.font2, 16, self.email, self.white, 440, 382)
 
@@ -211,13 +255,35 @@ class Profile( Gui, Client):
         self.rect_full_not_centered(self.white, 420, 442, 0 + self.size_password, 20, 12)
         if self.password_edit:
             if self.size_password < 240:
-                self.size_password += 15
+                self.size_password += 30
             self.text_not_align(self.font2, 16, self.profile_password, self.black, 440, 442)
+
+            self.rect_full(self.grey11, 865, 445, 170, 120, 4)
+
+            self.text_not_align(self.font2, 12, "At least 1 Uppercase", self.grey7, 800, 396)
+            if any(char.isupper() for char in self.profile_password):
+                self.img_center("Validate", 790, 404, 16, 16, "profile/profile15")
+
+            self.text_not_align(self.font2, 12, "At least 1 Lowercase", self.grey7, 800, 416)
+            if any(char.islower() for char in self.profile_password):
+                self.img_center("Validate", 790, 424, 16, 16, "profile/profile15")
+                
+            self.text_not_align(self.font2, 12, "At least 8 Characters", self.grey7, 800, 436)
+            if len(self.profile_password) >= 8:
+                self.img_center("Validate", 790, 444, 16, 16, "profile/profile15")
+
+            self.text_not_align(self.font2, 12, "At least 1 Special (_^*%/+.:;=)", self.grey7, 800, 456)
+            if any(char in "_^*%/+.:;=" for char in self.profile_password):
+                self.img_center("Validate", 790, 464, 16, 16, "profile/profile15")
+
+            self.text_not_align(self.font2, 12, "At least 1 Digit", self.grey7, 800, 476)
+            if any(char.isdigit() for char in self.profile_password):
+                self.img_center("Validate", 790, 484, 16, 16, "profile/profile15")  
         else:
-            if self.size_password < 15:
+            if self.size_password < 30:
                 self.size_password = 0
             elif self.size_password > 0:
-                self.size_password -= 20
+                self.size_password -= 40
             if self.size_password < 100:
                 if self.show_pass:                    
         
@@ -229,22 +295,33 @@ class Profile( Gui, Client):
                 self.text_not_align(self.font2, 16, self.profile_password, self.black, 440, 442)
 
         # Quit
-            self.close_profile = self.hover_image("Quit", "Quit", 1120, 70, 50, 50, "profile/profile11", "profile/profile8")
+        self.close_profile = self.hover_image("Quit", "Quit", 1120, 70, 50, 50, "profile/profile11", "profile/profile8")
+
+        # Display save logo if an edit has been made
+        if (self.old_password != self.profile_password and len(self.profile_password) >= 8 and any(char.isdigit() for char in self.profile_password) and any(char.isupper() for char in self.profile_password) and any(char.islower() for char in self.profile_password) and any(char in "_^*%/+.:;=" for char in self.profile_password)) or self.username != self.user[3] or self.email != self.user[4] or self.picture != self.user[6]:
+            self.save_edit_profile = self.hover_image("Logo_save", "Logo_save", 995, 220, 80, 80, "profile/profile13","profile/profile14")
+
+        #Display check and text if informations has been modified
+        if self.username_modified:
+            self.modified(525, 300)
+        if self.email_modified:
+            self.modified(490, 360)
+        if self.password_modified:
+            self.modified(525, 420)
 
     def profile_run(self):
-        if self.profile_password == "":
-            user_id = self.user[0]
-            self.profile_password = self.abc_password(user_id) 
-            
-        self.username, self.email, self.picture, self.role = self.user[3], self.user[4], self.user[6], self.user[7]
-        self.password_display = " *" * len(self.profile_password)
+        if self.old_password == "":
+            self.profile_password = self.abc_password(self.user[0]) 
+            self.username, self.email, self.hashed_password, self.picture = self.user[3], self.user[4], self.user[5], self.user[6]
+            self.old_password, self.old_username, self.old_email = self.profile_password, self.username, self.email
+            self.role = "Regular User" if self.user[7] == 2 else "Administrator"
+            self.password_display = " *" * len(self.profile_password)
 
         if self.profile_running :
             self.design()
-            self.display_user_community()
+            self.display_user_request() if self.display_request else self.display_user_community()
             self.profile_picture_edit()
             self.info_profile_edit()
             self.password_show()
             self.event_profile()
             self.profile_page_cursor()
-            print(self.main_page_running)

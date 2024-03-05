@@ -24,7 +24,7 @@ class Display_test(Gui):
         self.add_channel = AddChannel()
         self.connexion.home_running = True
 
-    def test(self):
+    def discord_run(self):
         while True:
             if self.register.register_to_login or self.main_page.main_page_to_login or self.profile.profile_to_login or self.connexion.home_running:
                 if not self.connexion.home_running:
@@ -39,33 +39,43 @@ class Display_test(Gui):
                 self.connexion.login_to_register = False
                 self.register.register_run()
 
-            elif self.profile.profile_to_main_page or self.main_page.main_page_running or self.connexion.home_to_main_page or self.add_channel.add_channel_to_main_page or self.connexion.home_to_main_page:
+            elif self.profile.profile_to_main_page or self.main_page.main_page_running or self.connexion.home_to_main_page or self.add_channel.add_channel_to_main_page or self.register.register_to_main_page:
                 if not self.main_page.main_page_running:
                     self.normal_cursor()
                     if self.register.registered:
                         self.main_page = MainPage(self.register.user_info)
+                        self.connexion.user_info = self.register.user_info
                         self.main_page.main_page_running = True
-                        self.register.register_running = False
+                    elif self.profile.profile_modified:
+                        self.main_page = MainPage(self.profile.user)
+                        self.main_page.main_page_running = True
+                    elif self.connexion.connected:
+                        self.main_page = MainPage(self.connexion.user_info)
+                        self.main_page.main_page_running = True
                     else:
                         self.main_page = MainPage(self.connexion.user_info)
                         self.main_page.main_page_running = True
+
                 else:
-                    self.profile.profile_to_main_page, self.connexion.home_to_main_page, self.register.registered, self.register.register_to_main_page,self.add_channel.add_channel_to_main_page = False, False, False, False,False
+                    self.profile.profile_to_main_page, self.connexion.home_to_main_page, self.register.registered, self.register.register_to_main_page,self.add_channel.add_channel_to_main_page, self.connexion.connected, self.profile.profile_modified = False, False, False, False,False, False, False
                     self.main_page.mainPage_run()
 
             elif self.main_page.main_page_to_profile or self.contact.contact_to_profile or self.profile.profile_running:
-                if not self.profile.profile_running:
+                if self.main_page.main_page_to_profile:
                     self.profile = Profile(self.main_page.user_info)
                     self.profile.profile_running = True
-                else:
                     self.main_page.main_page_to_profile = False
+                elif self.contact.contact_to_profile : 
+                    self.profile = Profile(self.profile.user)
                     self.contact.contact_to_profile = False
+                    self.profile.profile_running = True
+                else:
                     self.profile.profile_run()
 
             elif self.main_page.main_page_to_add_channel or self.add_channel.add_channel_running:
-                    self.add_channel.add_channel_running = True
-                    self.add_channel.addChannel_run()
-                    self.main_page.main_page_to_add_channel = False
+                self.add_channel.add_channel_running = True
+                self.add_channel.addChannel_run()
+                self.main_page.main_page_to_add_channel = False
 
             elif self.profile.profile_to_contact or self.contact.contact_running:
                 self.contact.contact_running = True
@@ -75,4 +85,4 @@ class Display_test(Gui):
             self.update()
             
 display = Display_test()
-display.test()
+display.discord_run()
