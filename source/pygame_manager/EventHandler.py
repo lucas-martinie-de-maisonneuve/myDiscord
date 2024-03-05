@@ -55,7 +55,8 @@ class EventHandler():
                     self.picture = self.pict[1]
                 elif self.picture3.collidepoint(event.pos):
                     self.picture = self.pict[2]
-                elif self.disconnect_button.collidepoint(event.pos):    
+                elif self.disconnect_button.collidepoint(event.pos):
+                    self.save_last_message(self.user_info[0]) # Save info when disconnect 
                     self.profile_to_login = True
                     self.profile_running = False
                 elif self.contact_button.collidepoint(event.pos):
@@ -65,7 +66,7 @@ class EventHandler():
                     self.profile_to_main_page = True
                     self.profile_running = False
                 elif self.save_edit_profile.collidepoint(event.pos):
-                    if self.old_password != self.profile_password and len(self.profile_password) >= 8 and any(char.isdigit() for char in self.profile_password) and any(char.isupper() for char in self.profile_password) and any(char.islower() for char in self.profile_password) and any(char in "_^*%/+.:;=" for char in self.profile_password):
+                    if self.old_password != self.profile_password and len(self.profile_password) >= 8 and any(char.isdigit() for char in self.profile_password) and any(char.isupper() for char in self.profile_password) and any(char.islower() for char in self.profile_password) and any(char in "_^*%/+!:;=" for char in self.profile_password):
                         self.password_modified = True
                         self.password_edit = False
                     else:
@@ -216,7 +217,7 @@ class EventHandler():
                     self.entry = 5
 
                 elif self.sign_up.collidepoint(event.pos):
-                    if self.register_username!="" and self.register_surname != "" and self.register_name != "" and self.register_photo != 0 and "@" in self.register_email and "." in self.register_email and len(self.register_password) >= 8 and any(char.isdigit() for char in self.register_password) and any(char.isupper() for char in self.register_password) and any(char.islower() for char in self.register_password) and any(char in "_^*%/+.:;=" for char in self.register_password):
+                    if self.register_username!="" and self.register_surname != "" and self.register_name != "" and self.register_photo != 0 and "@" in self.register_email and "." in self.register_email and len(self.register_password) >= 8 and any(char.isdigit() for char in self.register_password) and any(char.isupper() for char in self.register_password) and any(char.islower() for char in self.register_password) and any(char in "_^*%/+!:;=" for char in self.register_password):
 
                         self.user_info = self.register_user()
                         self.register_to_main_page = True
@@ -291,15 +292,20 @@ class EventHandler():
                     for id_message, rect in self.emoji_list:       
                         if self.emoji_heart.collidepoint(event.pos):
                             self.add_emoji(id_message,1)
-                            
+                            # self.messages = self.get_message(self.actual_channel)
+
                         elif self.emoji_laugh.collidepoint(event.pos):
                             self.add_emoji(id_message,2)
+                            # self.messages = self.get_message(self.actual_channel)
 
                         elif self.emoji_cry.collidepoint(event.pos):
                             self.add_emoji(id_message,3)
+                            # self.messages = self.get_message(self.actual_channel)
 
                         elif self.emoji_angry.collidepoint(event.pos):
                             self.add_emoji(id_message,4)
+                            # self.messages = self.get_message(self.actual_channel)
+
                 if self.deleting_channel:
                     for channel_id, rect in self.channel_rects:
                         if rect.collidepoint(event.pos):
@@ -354,7 +360,8 @@ class EventHandler():
                         self.deleting_channel = not self.deleting_channel
 
                 elif self.notification_c.collidepoint(event.pos): 
-                    self.reset_new_message_counter()                   
+                    self.reset_new_message_counter()
+                    self.save_last_message(self.user_info[0]) # Save info when disconnect               
 
             elif event.type == pygame.MOUSEBUTTONUP:
                  if self.link_logo_rect.collidepoint(event.pos):

@@ -32,6 +32,7 @@ class Display_test(Gui):
                     self.connexion.home_running = True
                 else:
                     self.register.register_to_login, self.main_page.main_page_to_login, self.profile.profile_to_login = False, False, False
+                    self.profile.user = None 
                     self.connexion.home_run()
             elif self.connexion.login_to_register or self.register.register_running:
                 self.register.register_running = True
@@ -53,7 +54,11 @@ class Display_test(Gui):
                         self.main_page = MainPage(self.connexion.user_info)
                         self.main_page.main_page_running = True
                     else:
-                        self.main_page = MainPage(self.profile.user)
+                        if self.profile.user != None:
+                            self.main_page = MainPage(self.profile.user)
+                        else:   
+                            self.main_page = MainPage(self.connexion.user_info)
+                        
                         self.main_page.main_page_running = True
 
                 else:

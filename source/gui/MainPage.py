@@ -129,7 +129,10 @@ class MainPage(Gui, Client):
                     else:
                         self.text_not_align(self.font2, 15, channel[1], self.grey1, 200, position_y)
                     if channel[2] == 1:
-                        self.img_center("Lock", 150, position_y + 10, 25, 25, "main_page/main_page11")
+                        if self.user_info[7] == 1:
+                            self.img_center("UnLock", 150, position_y + 10, 25, 25, "profile/logo_public")
+                        else:
+                            self.img_center("Lock", 150, position_y + 10, 25, 25, "main_page/main_page11")
                         
                     if channel[4] == 1:
                         self.img_center("Book about us", 170, position_y + 10, 25, 25, "main_page/main_page12")
