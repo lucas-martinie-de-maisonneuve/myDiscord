@@ -257,6 +257,28 @@ class Profile(Gui, Client):
             if self.size_password < 240:
                 self.size_password += 30
             self.text_not_align(self.font2, 16, self.profile_password, self.black, 440, 442)
+
+            self.rect_full(self.grey11, 865, 445, 170, 120, 4)
+
+            self.text_not_align(self.font2, 12, "At least 1 Uppercase", self.grey7, 800, 396)
+            if any(char.isupper() for char in self.profile_password):
+                self.img_center("Validate", 790, 404, 16, 16, "profile/profile15")
+
+            self.text_not_align(self.font2, 12, "At least 1 Lowercase", self.grey7, 800, 416)
+            if any(char.islower() for char in self.profile_password):
+                self.img_center("Validate", 790, 424, 16, 16, "profile/profile15")
+                
+            self.text_not_align(self.font2, 12, "At least 8 Characters", self.grey7, 800, 436)
+            if len(self.profile_password) >= 8:
+                self.img_center("Validate", 790, 444, 16, 16, "profile/profile15")
+
+            self.text_not_align(self.font2, 12, "At least 1 Special (_^*%/+.:;=)", self.grey7, 800, 456)
+            if any(char in "_^*%/+.:;=" for char in self.profile_password):
+                self.img_center("Validate", 790, 464, 16, 16, "profile/profile15")
+
+            self.text_not_align(self.font2, 12, "At least 1 Digit", self.grey7, 800, 476)
+            if any(char.isdigit() for char in self.profile_password):
+                self.img_center("Validate", 790, 484, 16, 16, "profile/profile15")  
         else:
             if self.size_password < 30:
                 self.size_password = 0
@@ -276,7 +298,7 @@ class Profile(Gui, Client):
         self.close_profile = self.hover_image("Quit", "Quit", 1120, 70, 50, 50, "profile/profile11", "profile/profile8")
 
         # Display save logo if an edit has been made
-        if self.old_password != self.profile_password or self.username != self.user[3] or self.email != self.user[4] or self.picture != self.user[6]:
+        if (self.old_password != self.profile_password and len(self.profile_password) >= 8 and any(char.isdigit() for char in self.profile_password) and any(char.isupper() for char in self.profile_password) and any(char.islower() for char in self.profile_password) and any(char in "_^*%/+.:;=" for char in self.profile_password)) or self.username != self.user[3] or self.email != self.user[4] or self.picture != self.user[6]:
             self.save_edit_profile = self.hover_image("Logo_save", "Logo_save", 995, 220, 80, 80, "profile/profile13","profile/profile14")
 
         #Display check and text if informations has been modified

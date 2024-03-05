@@ -9,7 +9,7 @@ class Register(Gui, Client):
         self.entry = 0
         self.profile_hovered = None
         self.entry = 0
-        
+
     def background(self):
         self.img_background("Background", 600,350,1200,700,"register/background_register")
         self.logo_home(150, 127, 260, 140, 105)
@@ -62,10 +62,33 @@ class Register(Gui, Client):
         self.password_rect = self.rect_full(self.grey2, 600, 480, 400, 40, 5)
         self.button_hover("Password", 600, 480, 400, 40, self.grey2, self.grey2, self.grey2, self.grey2,self.register_password, self.font2, self.white, 15, 4, 5)
         self.text_input(self.password_rect, self.register_password, "Password", 600, 480, 400, 40, id="password")
-        if len(self.register_password) >= 8 and any(char.isdigit() for char in self.register_password) and any(char.isupper() for char in self.register_password):
+        if len(self.register_password) >= 8 and any(char.isdigit() for char in self.register_password) and any(char.isupper() for char in self.register_password) and any(char.islower() for char in self.register_password) and any(char in "_^*%/+.:;=" for char in self.register_password):
             self.img_center("Validate", 865, 480, 30, 30, "profile/profile16")
         else:
             self.img_center("Not", 865, 480, 30, 30, "profile/profile17")
+
+        if self.entry == 5:
+            self.rect_full(self.grey11, 990, 480, 170, 120, 4)
+
+            self.text_not_align(self.font2, 12, "At least 1 Uppercase", self.grey7, 925, 432)
+            if any(char.isupper() for char in self.register_password):
+                self.img_center("Validate", 915, 440, 16, 16, "profile/profile15")
+
+            self.text_not_align(self.font2, 12, "At least 1 Lowercase", self.grey7, 925, 452)
+            if any(char.islower() for char in self.register_password):
+                self.img_center("Validate", 915, 460, 16, 16, "profile/profile15")
+                
+            self.text_not_align(self.font2, 12, "At least 8 Characters", self.grey7, 925, 472)
+            if len(self.register_password) >= 8:
+                self.img_center("Validate", 915, 480, 16, 16, "profile/profile15")
+
+            self.text_not_align(self.font2, 12, "At least 1 Special (_^*%/+.:;=)", self.grey7, 925, 492)
+            if any(char in "_^*%/+.:;=" for char in self.register_password):
+                self.img_center("Validate", 915, 500, 16, 16, "profile/profile15")
+
+            self.text_not_align(self.font2, 12, "At least 1 Digit", self.grey7, 925, 512)
+            if any(char.isdigit() for char in self.register_password):
+                self.img_center("Validate", 915, 520, 16, 16, "profile/profile15")           
 
         # Button Sign Up
         self.sign_up = self.rect_full(self.blue, 600, 560, 350, 50,5)

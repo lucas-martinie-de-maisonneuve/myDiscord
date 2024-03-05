@@ -93,8 +93,6 @@ class Element():
         text_rect = text.get_rect(center=(x, y))
         self.Window.blit(text, text_rect)
 
-
-
 # Def image
 
     def img_center(self, name, x, y, width, height, image_name):

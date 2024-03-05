@@ -65,17 +65,20 @@ class EventHandler():
                     self.profile_to_main_page = True
                     self.profile_running = False
                 elif self.save_edit_profile.collidepoint(event.pos):
-                    self.user = self.modify_user(self.username, self.email, self.profile_password,self.picture, self.user[0],self.user[3])
-                    if self.old_password != self.profile_password:
+                    if self.old_password != self.profile_password and len(self.profile_password) >= 8 and any(char.isdigit() for char in self.profile_password) and any(char.isupper() for char in self.profile_password) and any(char.islower() for char in self.profile_password) and any(char in "_^*%/+.:;=" for char in self.profile_password):
                         self.password_modified = True
                         self.password_edit = False
+                    else:
+                        self.profile_password = self.old_password
                     if self.old_username != self.username:
                         self.username_modified = True
                         self.username_edit = False
                     if self.old_email != self.email:
                         self.email_modified = True
-                        self.email_edit
+                        self.email_edit = False
                     self.profile_modified = True
+                    self.user = self.modify_user(self.username, self.email, self.profile_password,self.picture, self.user[0],self.user[3])
+
                 elif self.role_rect.collidepoint(event.pos):
                     if self.user[7] == 2:
                         self.user = self.change_role_request()
@@ -213,7 +216,8 @@ class EventHandler():
                     self.entry = 5
 
                 elif self.sign_up.collidepoint(event.pos):
-                    if self.register_username!="" and self.register_surname != "" and self.register_name != "" and self.register_photo != 0 and "@" in self.register_email and "." in self.register_email and (len(self.register_password) >= 8 and any(char.isdigit() for char in self.register_password) and any(char.isupper() for char in self.register_password)):
+                    if self.register_username!="" and self.register_surname != "" and self.register_name != "" and self.register_photo != 0 and "@" in self.register_email and "." in self.register_email and len(self.register_password) >= 8 and any(char.isdigit() for char in self.register_password) and any(char.isupper() for char in self.register_password) and any(char.islower() for char in self.register_password) and any(char in "_^*%/+.:;=" for char in self.register_password):
+
                         self.user_info = self.register_user()
                         self.register_to_main_page = True
                         self.registered = True
@@ -414,4 +418,3 @@ class EventHandler():
                         for link_rect, url in self.link_data:
                             if link_rect.collidepoint(event.pos):
                                 webbrowser.open(url)  
-
