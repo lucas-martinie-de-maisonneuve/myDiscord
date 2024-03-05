@@ -1,15 +1,7 @@
 import pygame
 
-import wave, os, pyaudio
-
 from source.pygame_manager.Gui import Gui
 from source.Client import Client
-# from Notification import Notification
-
-class MainPage(Gui, Client):
-# Audio
-import pyaudio
-import wave
 from source.pyaudio.Recorder import Recorder
 
 class MainPage(Gui, Client, Recorder):
