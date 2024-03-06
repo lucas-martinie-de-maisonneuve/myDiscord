@@ -101,6 +101,7 @@ class AddChannel(Gui,Client,DiscordManager):
 
         if self.channel_added:
             self.text_not_align(self.font1, 12, "channel   added", self.dark_green, 740, 630)
+            self.image_not_center("Validate", 715, 625, 20, 20,"profile/profile15")
             if self.new_name_channel != "" or self.status != None or self.communication != None or self.category != None:
                 self.channel_added = False            
         
