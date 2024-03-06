@@ -3,8 +3,8 @@ from data.Database import Database
 
 class DiscordManager(Database):
     def __init__(self):
-        # Database.__init__(self, 'localhost', 'root', '$~Bc4gB9', 'discord')
-        Database.__init__(self, 'localhost', 'root', 'VannyLamorte25!', 'discord')
+        Database.__init__(self, 'localhost', 'root', '$~Bc4gB9', 'discord')
+        # Database.__init__(self, 'localhost', 'root', 'VannyLamorte25!', 'discord')
         # Database.__init__(self, 'localhost', 'root', 'azerty', 'discord')
         self.connect()
 
@@ -212,19 +212,6 @@ class DiscordManager(Database):
         values = (password, id_user)
         self.execute_query(sql, values)
 
-    def save_last_login_date(self): 
-        pass
-
-    def load_last_login_date(self):
-        pass
-
-    # Modifier Role
-    # def modify_role(self, user_id, id_role):
-    #     set_clause = ", ".join([f"{key} = '{value}'" for key, value in new_product.items()])
-    #     sql = f"UPDATE product SET {set_clause} WHERE id = %s"
-    #     self.cursor.execute(sql, (product_id,))
-    #     self.connection.commit() 
-
     # Notification   
     def save_last_message (self, user_id): 
         current_time = datetime.now()
@@ -253,24 +240,13 @@ class DiscordManager(Database):
         
     # Audio 
     def save_to_database (self, name, id_channel):
-        print ("ok")  
-
-        with open("audio_liv.wav", 'rb') as f:
+        with open("source/pyaudio/audio_liv.wav", 'rb') as f:
             audio_blob = f.read()
 
         time = datetime.now()
         sql = "INSERT INTO audio(name, time, audio_blob, id_channel) VALUES (%s, %s, %s, %s)"
         params = (name, time, audio_blob, id_channel)
         self.execute_query(sql, params)
-
-    # def retrieve_audio_database(self, id_channel): 
-    #     try:
-    #         sql = "SELECT audio_blob FROM audio WHERE id_channel = %s"
-    #         values = (id_channel,)
-    #         return self.fetch_one(sql, values)
-    #     except Exception as e:
-    #         print("Erreur with retrieve audio data", e)
-    #         return None      
 
     def retrieve_audio_database(self, id_channel): 
         query = "SELECT audio_blob FROM audio WHERE id = %s"
