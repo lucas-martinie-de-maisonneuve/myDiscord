@@ -136,7 +136,10 @@ class MainPage(Gui, Client, Recorder):
                     else:
                         self.text_not_align(self.font2, 15, channel[1], self.grey1, 200, position_y)
                     if channel[2] == 1:
-                        self.img_center("Lock", 150, position_y + 10, 25, 25, "main_page/main_page11")
+                        if self.user_info[7] == 1:
+                            self.img_center("UnLock", 150, position_y + 10, 25, 25, "profile/logo_public")
+                        else:
+                            self.img_center("Lock", 150, position_y + 10, 25, 25, "main_page/main_page11")
                         
                     if channel[4] == 1:
                         self.img_center("Book about us", 170, position_y + 10, 25, 25, "main_page/main_page12")
@@ -152,7 +155,15 @@ class MainPage(Gui, Client, Recorder):
     def third_section(self):
         self.rect_full(self.grey10, 795, 385, 775, 610, 10)
         self.display_text_chat()
-        self.input_write_user()        
+        self.input_write_user()  
+
+        self.button_hover("record", 520,540, 150,60, self.green, self.grey1, self.red, self.grey1, "record", self.font1, self.white,12, 3,10) 
+
+        # self.button_hover("play", 520,540, 150,60, self.green, self.grey1, self.red, self.grey1, "play", self.font1, self.white,12, 3,10) 
+
+        # self.button_hover("stop", 520,540, 150,60, self.green, self.grey1, self.red, self.grey1, "stop", self.font1, self.white,12, 3,10) 
+   
+      
         
         if self.actual_channel == 4 or self.actual_channel == 6 or self.actual_channel == 9:
            self.image_not_center("audio logo", 470, 500, 310, 80,"main_page/main_page30")
