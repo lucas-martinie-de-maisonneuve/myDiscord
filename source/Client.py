@@ -13,7 +13,7 @@ class Client(DiscordManager, Recorder):
         self.user_email = ""
         self.user_password = ""
         self.user_info = (0, '', '', '', '', '', 0, 0)
-        self.user = (0, '', '', '', '', '', 0, 0)   
+        self.user = None 
 
         self.register_username = ""
         self.register_email = ""
