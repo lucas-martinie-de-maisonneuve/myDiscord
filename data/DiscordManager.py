@@ -276,7 +276,7 @@ class DiscordManager(Database):
         query = "SELECT audio_blob FROM audio WHERE id = %s"
         values = (3,)
         save = self.fetch(query, values)[0][0]
-        with open("output3.wav", 'wb') as f:
+        with open("source/pyaudio/output3.wav", 'wb') as f:
             f.write(save)
 
 

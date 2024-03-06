@@ -154,21 +154,9 @@ class MainPage(Gui, Client, Recorder):
         self.display_text_chat()
         self.input_write_user()  
 
-        self.button_hover("record", 520,540, 150,60, self.green, self.grey1, self.red, self.grey1, "record", self.font1, self.white,12, 3,10) 
-
-        # self.button_hover("play", 520,540, 150,60, self.green, self.grey1, self.red, self.grey1, "play", self.font1, self.white,12, 3,10) 
-
-        # self.button_hover("stop", 520,540, 150,60, self.green, self.grey1, self.red, self.grey1, "stop", self.font1, self.white,12, 3,10) 
-   
-      
-        
         if self.actual_channel == 4 or self.actual_channel == 6 or self.actual_channel == 9:
            self.image_not_center("audio logo", 470, 500, 310, 80,"main_page/main_page30")
            self.audio_play = self.hover_image("audio logo","audio logo", 520, 540, 40, 40, "main_page/main_page29","main_page/main_page29")
-
-    
-
-    
 
     def split_string(self, string, length):
         result = []
