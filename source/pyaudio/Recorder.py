@@ -31,7 +31,7 @@ class Recorder():
         stream.close()
         audio.terminate()
 
-        with wave.open("audio_liv.wav", 'wb') as wf:
+        with wave.open("source/pyaudio/audio_liv.wav", 'wb') as wf:
             wf.setnchannels(channels)
             wf.setsampwidth(audio.get_sample_size(pyaudio.paInt16))
             wf.setframerate(rate)
@@ -39,11 +39,11 @@ class Recorder():
 
     def play_audio_in_channel(self, id_channel):
         if  id_channel == 4:  
-            audio_filename = "output1.wav"
+            audio_filename = "source/pyaudio/output1.wav"
         elif id_channel == 6:  
-            audio_filename = "output2.wav"
+            audio_filename = "source/pyaudio/output2.wav"
         elif id_channel == 9:  
-            audio_filename = "output3.wav"
+            audio_filename = "source/pyaudio/output3.wav"
 
         pygame.mixer.init()
         pygame.mixer.music.load(audio_filename)

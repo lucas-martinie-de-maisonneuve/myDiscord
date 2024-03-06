@@ -240,9 +240,7 @@ class DiscordManager(Database):
         
     # Audio 
     def save_to_database (self, name, id_channel):
-        print ("ok")  
-
-        with open("audio_liv.wav", 'rb') as f:
+        with open("source/pyaudio/audio_liv.wav", 'rb') as f:
             audio_blob = f.read()
 
         time = datetime.now()
@@ -254,7 +252,7 @@ class DiscordManager(Database):
         query = "SELECT audio_blob FROM audio WHERE id = %s"
         values = (3,)
         save = self.fetch(query, values)[0][0]
-        with open(f"output3.wav", 'wb') as f:
+        with open(f"source/pyaudio/output3.wav", 'wb') as f:
             f.write(save)
 
 
