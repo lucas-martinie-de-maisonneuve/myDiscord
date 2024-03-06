@@ -356,9 +356,9 @@ class EventHandler():
                 elif self.notification_c.collidepoint(event.pos): 
                     self.reset_new_message_counter()     
 
-                # elif self.logo_micro.collidepoint(event.pos): 
-                #     self.record_audio(duration=5, chunk=1024, channels=1, rate= 44100)
-                #     self.audio_table()               
+                elif self.audio_play.collidepoint(event.pos): 
+                    self.play_audio_in_channel(self.actual_channel)
+                       
 
             elif event.type == pygame.MOUSEBUTTONUP:
                  if self.link_logo_rect.collidepoint(event.pos):

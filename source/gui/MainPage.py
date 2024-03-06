@@ -30,6 +30,9 @@ class MainPage(Gui, Client, Recorder):
         self.emoji_display = 0
         self.emoji_list = []
 
+        # Audio: 
+        self.audio_play = pygame.Rect(0, 0, 0, 0)
+
     def background(self): 
         self.img_background("Background", 600, 350, 1200, 800, "main_page/main_page8")
    
@@ -142,11 +145,19 @@ class MainPage(Gui, Client, Recorder):
                         self.img_center("Hashtags logiciel", 170, position_y + 10, 15, 15, "main_page/main_page14")
                     if self.user_info[7] == 1 and self.deleting_channel: 
                         self.img_center("Delete", 365, position_y + 10, 25, 25, "main_page/main_page24")
-    
+
     def third_section(self):
         self.rect_full(self.grey10, 795, 385, 775, 610, 10)
         self.display_text_chat()
-        self.input_write_user()
+        self.input_write_user()        
+        
+        if self.actual_channel == 4 or self.actual_channel == 6 or self.actual_channel == 9:
+           self.image_not_center("audio logo", 470, 500, 310, 80,"main_page/main_page30")
+           self.audio_play = self.hover_image("audio logo","audio logo", 520, 540, 40, 40, "main_page/main_page29","main_page/main_page29")
+
+    
+
+    
 
     def split_string(self, string, length):
         result = []
@@ -255,11 +266,13 @@ class MainPage(Gui, Client, Recorder):
 
         self.logo_micro = self.hover_image("logo_micro", "Logo micro", 440, 650, 30, 30, "main_page/main_page28", "main_page/main_page28")
 
-
     def audio_section(self): 
-        self.record_audio (duration=5, chunk=1024, channels=1, rate= 44100)
-        self.audio_table()  
-        self.retrieve_audio_table()
+        # self.record_audio (duration=5, chunk=1024, channels=1, rate= 44100)
+        # self.audio_table()  
+        # self.retrieve_audio_table()
+
+        # self.play_audio_in_channel(self.actual_channel)
+        pass
  
     def mainPage_run(self):
         if self.main_page_running :

@@ -39,10 +39,3 @@ class Database:
         self.disconnect()
         return result
     
-# if __name__ == '__main__':
-#     db = Database('localhost', 'root', 'VannyLamorte25!', 'discord')
-#     query = "SELECT audio_blob FROM audio WHERE id = %s"
-#     values = (14,)
-#     save = db.fetch(query, values)[0][0]
-#     with open("output1.wav", 'wb') as f:
-#         f.write(save)

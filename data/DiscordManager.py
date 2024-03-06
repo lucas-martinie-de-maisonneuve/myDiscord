@@ -252,11 +252,12 @@ class DiscordManager(Database):
         return self.fetch(sql,values)
         
     # Audio 
-    def save_to_database (self, name, id_channel):   
+    def save_to_database (self, name, id_channel):
+        print ("ok")  
 
         with open("audio_liv.wav", 'rb') as f:
             audio_blob = f.read()
-         
+
         time = datetime.now()
         sql = "INSERT INTO audio(name, time, audio_blob, id_channel) VALUES (%s, %s, %s, %s)"
         params = (name, time, audio_blob, id_channel)
@@ -273,13 +274,10 @@ class DiscordManager(Database):
 
     def retrieve_audio_database(self, id_channel): 
         query = "SELECT audio_blob FROM audio WHERE id = %s"
-        values = (14,)
+        values = (3,)
         save = self.fetch(query, values)[0][0]
-        with open("output1.wav", 'wb') as f:
+        with open("output3.wav", 'wb') as f:
             f.write(save)
-
-    def 
-
 
 
 manager = DiscordManager()

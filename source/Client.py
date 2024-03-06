@@ -150,10 +150,10 @@ class Client(DiscordManager, Recorder):
             return True
         
             # Audio
-    def audio_table(self): 
-        self.save_to_database (self.user_info[3], self.actual_channel)
+    def audio_table(self):         
+        self.save_to_database(self.user_info[3], self.actual_channel)
 
     def retrieve_audio_table(self): 
-        self.retrieve_audio_database(self, self.actual_channel)
+        self.retrieve_audio_database(self.actual_channel)
 
 
