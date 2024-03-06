@@ -116,12 +116,6 @@ class Client(DiscordManager, Recorder):
     def reset_new_message_counter(self):
         self.new_message = 0
 
-        # Audio
-    def audio_table(self): 
-
-        # filename = f"{id_channel}_{datetime.now().strftime('%Y%m%d%H%M%S')}.wav"
-
-        self.create_and_save(self.user_info[3], self.message1, self.actual_channel)
 
 
     def change_role_request(self):
@@ -154,3 +148,12 @@ class Client(DiscordManager, Recorder):
             return False
         else:
             return True
+        
+            # Audio
+    def audio_table(self): 
+        self.save_to_database (self.user_info[3], self.actual_channel)
+
+    def retrieve_audio_table(self): 
+        self.retrieve_audio_database(self, self.actual_channel)
+
+

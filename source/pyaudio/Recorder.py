@@ -8,46 +8,44 @@ import time
 class Recorder():
     
     def __init__(self):
-        pygame.init()
+        pygame.init()  
 
-        self.CHUNK = 1024
-        self.FORMAT = pyaudio.paInt16
-        self.CHANNELS = 2
-        self.RATE = 44100
-        self.RECORD_SECONDS = 5
-        self.audio = pyaudio.PyAudio()
-        self.stream = self.audio.open(format=self.FORMAT, channels=self.CHANNELS, rate=self.RATE, input=True, frames_per_buffer=self.CHUNK)
-        self.frames = []       
+    def record_audio (self, duration=1, chunk=1024, channels=1, rate= 44100):
+        audio = pyaudio.PyAudio()
 
-    def record_audio(self):       
-        print("Recording audio...")
-        stream = self.audio.open(format=self.FORMAT, channels=self.CHANNELS, rate=self.RATE, input=True, frames_per_buffer=self.CHUNK)
-        for i in range(0, int(self.RATE / self.CHUNK * self.RECORD_SECONDS)):
-            data = stream.read(self.CHUNK)
-            self.frames.append(data)
-        print("Finished recording")
+        stream = audio.open(format=pyaudio.paInt16,
+                            channels=channels,
+                            rate=rate,
+                            input=True,
+                            frames_per_buffer=chunk)
+        print("Recording...")
+
+        frames = []
+
+        for i in range(0, int(rate / chunk * duration)):
+            data = stream.read(chunk)
+            frames.append(data)
+
+        print("Finished recording.")
+
         stream.stop_stream()
         stream.close()
+        audio.terminate()
 
-    def save_audio(self, filename):
-        wf = wave.open(filename, 'wb')
-        wf.setnchannels(self.CHANNELS)
-        wf.setsampwidth(self.audio.get_sample_size(self.FORMAT))
-        wf.setframerate(self.RATE)
-        wf.writeframes(b''.join(self.frames))
-        wf.close()  
-
-    def message_table(self, filename):
-        self.save_audio(filename)          
-        with open(filename, "rb") as f:
-                message1= f.read()
-                date = time.strftime("%Y-%m-%d %H:%M:%S")
-
-                self.save_audio(message1, date, self.curent_chanel,self.curent_user,'audio')
+        with wave.open("audio_liv.wav", 'wb') as wf:
+            wf.setnchannels(channels)
+            wf.setsampwidth(audio.get_sample_size(pyaudio.paInt16))
+            wf.setframerate(rate)
+            wf.writeframes(b''.join(frames))
 
 
+    def play_audio(filename):
+        pygame.mixer.init()
+        pygame.mixer.music.load("audio_liv.wav")
+        pygame.mixer.music.play()
 
-
+        while pygame.mixer.music.get_busy():
+            pygame.time.Clock().tick(10)
 
   
     def audio_list_window(self):

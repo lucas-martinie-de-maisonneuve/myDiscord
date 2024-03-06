@@ -167,7 +167,7 @@ class MainPage(Gui, Client, Recorder):
         pos_y = 610
         
         for message in reversed(self.messages):
-            message_content = str(message[3])
+            message_content = str(message[3].decode('utf-8'))
             message_name = message[1]
             message_time = message[2]
             self.message_picture = self.get_profile_picture(message_name)
@@ -253,14 +253,13 @@ class MainPage(Gui, Client, Recorder):
         self.text_center(self.font1, 20, str(self.new_message), self.pink1, 1067, 42)
         self.image_not_center("Circle notification",1052, 25, 30, 30,"main_page/main_page23")
 
+        self.logo_micro = self.hover_image("logo_micro", "Logo micro", 440, 650, 30, 30, "main_page/main_page28", "main_page/main_page28")
+
+
     def audio_section(self): 
-
-        self.record_audio()
-        
-        str_name_audio = f"audio_liv.wav"
-        self.save_audio(str_name_audio) 
-
+        self.record_audio (duration=5, chunk=1024, channels=1, rate= 44100)
         self.audio_table()  
+        self.retrieve_audio_table()
  
     def mainPage_run(self):
         if self.main_page_running :
@@ -273,4 +272,4 @@ class MainPage(Gui, Client, Recorder):
             self.event_main_page()
             self.main_page_cursor()
             self.notification()
-            self.audio_section()
+            # self.audio_section()

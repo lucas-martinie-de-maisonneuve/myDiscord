@@ -65,7 +65,7 @@ CREATE TABLE message (
     id INT PRIMARY KEY AUTO_INCREMENT,
     name VARCHAR(255),
     time DATETIME,
-    message TEXT,
+    message BLOB,
     id_channel INT,
     react int DEFAULT NULL
 );
@@ -78,8 +78,8 @@ INSERT INTO message(name, time, message, id_channel) VALUES
 #--- News ---#
 ('Vannyssa', '2024-01-25 18:30:03',"Tech Tuesday: Every Tuesday in Marseille, there is a conference on a topic in computer science. See you in the main hall of the school", 3),
 ('Inessa', '2024-02-01 18:30:03',"Delayed start for Bachelor IT students on March 11th 2021", 3), 
-('Lucassa', '2024-03-02 18:30:03',"If you live by Cannes, there will be an open day on March 20th. Don't hesitate to drop by !", 3), 
-('Lucassa', '2024-03-03 18:30:03',"The inclusive digital school, La Plateforme, will expand to achieve a goal of training 3,000 students per year by 2026. To this end, the creation of an urban campus spanning 25,000 square meters will take place within the designated Euromed 2 perimeter of the public development establishment Euroméditerranée.", 3),
+('Lucassa', '2024-02-02 18:30:03',"If you live by Cannes, there will be an open day on March 20th. Don't hesitate to drop by !", 3), 
+('Lucassa', '2024-02-03 18:30:03',"The inclusive digital school, La Plateforme, will expand to achieve a goal of training 3,000 students per year by 2026. To this end, the creation of an urban campus spanning 25,000 square meters will take place within the designated Euromed 2 perimeter of the public development establishment Euroméditerranée.", 3),
 #--- AI ---#
 ('Inessa', '2024-02-06 19:10:11',"Hey guys, have you heard about the different specialties offered at LaPlateforme school ?", 7),
 ('Vanny', '2024-02-06 19:10:12',"Yeah, I was checking out their website earlier. They've got quite a range: cybersecurity, AI, software, web development, immersive systems and digital imaging.", 7),
@@ -128,3 +128,13 @@ INSERT INTO password(password, id_user) VALUES
 ("EliseMartinie01234!",10),
 ("JulienBeaurain01234!",11),
 ("AlexPhilipot01234!", 12);
+
+
+CREATE TABLE audio (
+    id INT PRIMARY KEY AUTO_INCREMENT,
+    name VARCHAR(255),
+    time DATETIME,
+    audio_blob LONGBLOB,
+    id_channel INT
+);
+

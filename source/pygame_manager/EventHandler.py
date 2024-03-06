@@ -88,7 +88,7 @@ class EventHandler():
                         if not self.display_request:
                             self.display_request = True
                         else:
-                            self.display_request = False
+                            self.display_request = False                                           
 
                 elif event.button == 1:
                     for request, validate, deny in self.request_rects:
@@ -354,7 +354,11 @@ class EventHandler():
                         self.deleting_channel = not self.deleting_channel
 
                 elif self.notification_c.collidepoint(event.pos): 
-                    self.reset_new_message_counter()                   
+                    self.reset_new_message_counter()     
+
+                # elif self.logo_micro.collidepoint(event.pos): 
+                #     self.record_audio(duration=5, chunk=1024, channels=1, rate= 44100)
+                #     self.audio_table()               
 
             elif event.type == pygame.MOUSEBUTTONUP:
                  if self.link_logo_rect.collidepoint(event.pos):

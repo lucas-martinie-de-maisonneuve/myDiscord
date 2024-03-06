@@ -3,8 +3,8 @@ from data.Database import Database
 
 class DiscordManager(Database):
     def __init__(self):
-        Database.__init__(self, 'localhost', 'root', '$~Bc4gB9', 'discord')
-        # Database.__init__(self, 'localhost', 'root', 'VannyLamorte25!', 'discord')
+        # Database.__init__(self, 'localhost', 'root', '$~Bc4gB9', 'discord')
+        Database.__init__(self, 'localhost', 'root', 'VannyLamorte25!', 'discord')
         # Database.__init__(self, 'localhost', 'root', 'azerty', 'discord')
         self.connect()
 
@@ -239,24 +239,48 @@ class DiscordManager(Database):
         if result: 
                 return result[0][0]
         else: 
-            return None
-        
-    # Audio 
-    def create_and_save(self, name, message, id_channel, filename):        
-        time = datetime.now()
-        sql = "INSERT INTO message(name, time, message, id_channel, audio_file) VALUES (%s, %s, %s, %s, %s)"      
-        params = (name, time, message, id_channel, filename)
-        self.execute_query(sql, params)
+            return None        
 
     def get_user_role(self, user_status):
         sql = "SELECT id_role FROM user WHERE id = %s"
         values = (user_status,)
         return self.fetch(sql,values)
-    
+
     def get_channel_status(self, channel_id):
         sql = "SELECT status FROM channel WHERE id = %s"
         values = (channel_id,)
         return self.fetch(sql,values)
+        
+    # Audio 
+    def save_to_database (self, name, id_channel):   
+
+        with open("audio_liv.wav", 'rb') as f:
+            audio_blob = f.read()
+         
+        time = datetime.now()
+        sql = "INSERT INTO audio(name, time, audio_blob, id_channel) VALUES (%s, %s, %s, %s)"
+        params = (name, time, audio_blob, id_channel)
+        self.execute_query(sql, params)
+
+    # def retrieve_audio_database(self, id_channel): 
+    #     try:
+    #         sql = "SELECT audio_blob FROM audio WHERE id_channel = %s"
+    #         values = (id_channel,)
+    #         return self.fetch_one(sql, values)
+    #     except Exception as e:
+    #         print("Erreur with retrieve audio data", e)
+    #         return None      
+
+    def retrieve_audio_database(self, id_channel): 
+        query = "SELECT audio_blob FROM audio WHERE id = %s"
+        values = (14,)
+        save = self.fetch(query, values)[0][0]
+        with open("output1.wav", 'wb') as f:
+            f.write(save)
+
+    def 
+
+
 
 manager = DiscordManager()
 manager.close_connection()
