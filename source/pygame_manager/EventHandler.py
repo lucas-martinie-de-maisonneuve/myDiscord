@@ -3,6 +3,11 @@ import webbrowser
 
 class EventHandler():
 
+    def __init__(self):
+        pygame.scrap.init()
+        pygame.scrap.set_mode(pygame.SCRAP_CLIPBOARD)
+        self.ctrl = False
+
     def event_profile(self):
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
@@ -144,8 +149,13 @@ class EventHandler():
             elif event.type == pygame.MOUSEBUTTONUP:
                 if self.show_pass_rect.collidepoint(event.pos):
                     self.show_pass = False
+            if event.type == pygame.KEYDOWN and event.key == pygame.K_LCTRL:
+                if not self.ctrl:
+                    self.ctrl = True
+                else:
+                    self.ctrl = False
+            if event.type == pygame.KEYDOWN:
 
-            elif event.type == pygame.KEYDOWN: 
                 if event.key == pygame.K_BACKSPACE:
                         if self.entry == 1: 
                             self.input_email = self.input_email[:-1]
@@ -153,31 +163,23 @@ class EventHandler():
                             self.input_password = self.input_password[:-1]                        
                 else:
                     if self.entry == 1:
-                        if event.unicode:
+                        if event.key == pygame.K_v and self.ctrl:
+                            copy = pygame.scrap.get("text/plain;charset=utf-8")
+                            copy_decode = copy.replace(b"\x00", b"").decode("utf-8", errors="ignore")
+                            self.input_email = copy_decode
+                            self.ctrl = False
+                        elif event.unicode:
                             self.input_email= self.input_email + event.unicode             
                     
                     elif self.entry == 2:
-                        if event.unicode:
+                        if event.key == pygame.K_v and self.ctrl:
+                            copy = pygame.scrap.get("text/plain;charset=utf-8")
+                            copy_decode = copy.replace(b"\x00", b"").decode("utf-8", errors="ignore")
+                            self.input_password = copy_decode
+                            self.ctrl = False
+                        elif event.unicode:
                             self.input_password= self.input_password + event.unicode
 
-            elif event.type == pygame.KEYDOWN:
-                if event.key == pygame.K_BACKSPACE:
-                    if self.username_edit:
-                        self.username = self.username[:-1]
-                    if self.email_edit:
-                        self.email = self.email[:-1]
-                    if self.password_edit:
-                        self.password = self.password[:-1]
-                else:
-                    if self.username_edit:
-                        if event.unicode:
-                            self.username += event.unicode
-                    elif self.email_edit:
-                            if event.unicode:
-                                self.email += event.unicode
-                    elif self.password_edit:
-                            if event.unicode:
-                                self.password += event.unicode
 
     def event_register(self):
         for event in pygame.event.get():
