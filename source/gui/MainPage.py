@@ -25,10 +25,13 @@ class MainPage(Gui, Client, Recorder):
         self.settings_c = pygame.Rect( 64-115/2, 540-115/2, 115, 115)
         self.server_c =  pygame.Rect(64-115/2, 170-115/2, 115, 115)
         self.notification_c= pygame.Rect(1052, 25, 30, 30)
+        self.logo_micro = pygame.Rect(0, 0, 0, 0)
         self.deleting_channel = False
         self.emoji_choice = False
         self.emoji_display = 0
         self.emoji_list = []
+
+        self.recording = False
 
         # Audio: 
         self.audio_play = pygame.Rect(0, 0, 0, 0)
@@ -178,7 +181,8 @@ class MainPage(Gui, Client, Recorder):
         pos_y = 610
         
         for message in reversed(self.messages):
-            message_content = str(message[3].decode('utf-8'))
+            message_content = str(message[3])
+            # message_content = str(message[3].decode('utf-8'))
             message_name = message[1]
             message_time = message[2]
             self.message_picture = self.get_profile_picture(message_name)
@@ -257,20 +261,21 @@ class MainPage(Gui, Client, Recorder):
 
         # Save info when connect
             for message in self.messages: 
-                
                 if message[2] > self.last_login_date: 
                     self.new_message = self.new_message + 1
 
         self.text_center(self.font1, 20, str(self.new_message), self.pink1, 1067, 42)
         self.image_not_center("Circle notification",1052, 25, 30, 30,"main_page/main_page23")
 
-        self.logo_micro = self.hover_image("logo_micro", "Logo micro", 440, 650, 30, 30, "main_page/main_page28", "main_page/main_page28")
-
+        if self.actual_channel == 4 or self.actual_channel == 6 or self.actual_channel == 9:
+            if not self.recording:
+                self.logo_micro = self.hover_image("logo_micro", "Logo micro", 440, 650, 30, 30, "main_page/main_page28", "main_page/main_page28")
+            else:
+                self.logo_micro = self.hover_image("logo_micro", "Logo micro", 440, 650, 30, 30, "main_page/main_page31", "main_page/main_page31")
     def audio_section(self): 
         # self.record_audio (duration=5, chunk=1024, channels=1, rate= 44100)
         # self.audio_table()  
         # self.retrieve_audio_table()
-
         # self.play_audio_in_channel(self.actual_channel)
         pass
  

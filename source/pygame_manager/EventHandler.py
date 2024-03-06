@@ -330,8 +330,11 @@ class EventHandler():
                     if self.link_is_clicked:
                         webbrowser.open(self.url)
                         self.link_is_clicked = False
-                        
-
+                elif self.logo_micro.collidepoint(event.pos):
+                    if not self.recording:
+                        self.recording = True
+                    else:
+                        self.recording = False
                 elif self.input_search_rect.collidepoint(event.pos):  
                     self.input_search = ""
                     self.entry = 2   
