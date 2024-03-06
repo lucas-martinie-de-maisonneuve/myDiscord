@@ -4,7 +4,6 @@ import wave
 import os
 import time
 
-
 class Recorder():
     
     def __init__(self):
@@ -52,3 +51,9 @@ class Recorder():
 
         while pygame.mixer.music.get_busy():
             pygame.time.Clock().tick(10)
+
+    def stop_audio(self, id_channel):
+        pygame.mixer.music.stop(id_channel)
+
+    def stop_audio_in_channel(self, id_channel): 
+        pygame.mixer.music.stop(id_channel)
